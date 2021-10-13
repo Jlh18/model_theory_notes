@@ -1,0 +1,34 @@
+\section{Cardinals}
+
+%? Definition (maybe just idea?)
+
+%? Cardinal arithmetic - or just theorems on computation?
+
+\begin{lem}[Infinite union of finite]
+    \link{infinite_union_of_finite}
+    Let $I$ be an infinite set such that each $i \in I$ is finite and 
+    non-empty.
+    Then there exists an injection $\bigcup I to I$.
+\end{lem}
+\begin{proof}
+    Note that $\bigcup I$ injects into 
+    $\bigsqcup I = \set{(i,x) \st x \in i \in I}$ by choice 
+    (using the fact that each $i$ is non-empty).
+    Each $i$ is finite thus bijects with a natural $n$ 
+    by the well-ordering principle.
+    Hence there exists an injective map $f_i : i \to \N$.
+    Hence we have a map $\bigsqcup I \to I \times \N$ by taking 
+    $(i,x) \mapsto (i,f_i(x))$ which is injective since each $f_i$ is injective.
+    Hence 
+    \[\abs{\bigcup I} \leq \abs{\bigsqcup I} \leq I \times \N \leq 
+    I \times I = I\]
+    The last two equalities are because $I$ is infinite.
+    %?Infinite \times infinite is infinite
+    %?\N injects into infinite
+    %?product respects injection
+  \end{proof}
+
+\begin{lem}[Well ordering theorem]
+  \link{well_ordering_thm}
+  Any set can be well ordered.
+\end{lem}

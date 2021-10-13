@@ -1,0 +1,982 @@
+\section{Quantifier elimination and model completeness}
+Written whilst following section on algebraically closed fields.
+\subsection{Quantifier elimination}
+
+\begin{dfn}[Quantifier elimination]
+    Let $T$ be a $\Si$-theory and $\phi$ a $\Si$-formula.
+    We say the quantifiers of $\phi$ can be eliminated if there exists a
+    quantifier free $\Si$-formula $\psi$ that is equivalent to $\phi$ 
+    \linkto{dfn_modulo_theory}{modulo} $T$.
+    We say $\phi$ is reduced to $\psi$.
+
+    We say $T$ has quantifier elimination if the quantifiers of any 
+    $\Si$-formula can be eliminated.
+\end{dfn}
+
+\begin{lem}[Deduction]
+    \link{deduction}
+    Let $T$ be a $\Si$-theory, $\De$ a finite $\Si$-theory and 
+    $\psi$ a $\Si$-sentence.
+    Then $T \cup \De \model{\Si} \psi$ if and only if 
+    \[T \model{\Si} \brkt{\bigand{\phi \in \De}{} \phi} \to \psi\]
+\end{lem}
+\begin{proof}
+    We first case on if $\De$ is empty or not.
+    If it is empty then $T \cup \De \model{\Si} \psi$ if and only if
+    $T \model{\Si} \psi$ if and only if $T \model{\Si} \top \to \psi$
+    if and only if 
+    \[T \model{\Si} \brkt{\bigand{\phi \in \De}{} \phi} \to \psi\]
+    \begin{forward}
+        Suppose $\MM \model{\Si} T$ then we need to show 
+        $\MM \model{\Si} \brkt{\bigand{\phi \in \De}{} \phi} \to \psi$. 
+        Indeed, suppose $\MM \model{\Si} \brkt{\bigand{\phi \in \De}{} \phi}$ 
+        then by induction $\MM \model{\Si} T \cup \De$ and so by assumption
+        that $T \cup \De \model{\Si} \psi$ we have 
+        $\MM \model{\Si} \psi$. 
+        Hence $\MM \model{\Si} \brkt{\bigand{\phi \in \De}{} \phi} \to \psi$.
+    \end{forward}
+
+    \begin{backward}
+        Suppose $\MM \model{\Si} T \cup \De$ then 
+        $\MM \model{\Si} T$ thus by assumption that 
+        $T \model{\Si} \brkt{\bigand{\phi \in \De}{} \phi} \to \psi$
+        we have $\MM \model{\Si} \brkt{\bigand{\phi \in \De}{} \phi} \to \psi$.
+        By induction $\MM \model{\Si} \brkt{\bigand{\phi \in \De}{} \phi}$ 
+        thus we have $\MM \model{\Si} \psi$.
+    \end{backward}
+\end{proof}
+
+\begin{lem}[Proofs are finite]
+    \link{proofs_are_finite}
+    Suppose $T$ is a $\Si$-theory and $\phi$ a $\Si$-sentence such that 
+    $T \model{\Si} \phi$. 
+    Then there exists a finite subset $\De$ of $T$ such that 
+    $\De \model{\Si} \phi$.
+\end{lem}
+\begin{proof}
+    We show the contrapositive.
+    Suppose for all finite subsets $\De$ of $T$, $\De \nodel{\Si} \phi$,
+    then \linkto{not_consequence}{$\De \cup \set{\phi}$ is consistent} and
+    by \linkto{compactness}{compactness} $T \cup \set{\phi}$ is consistent.
+    Hence \linkto{not_consequence}{$T \nodel{\Si} \phi$}.
+\end{proof}
+
+\begin{prop}[Eliminating quantifiers of a formula]
+    \link{elim_quant_of_form}
+    Let $\Si$ be a signature such that $\const{\Si} \ne \nothing$.
+    Suppose $T$ is a $\Si$-theory and $\phi$ is a $\Si$-formula
+    with free-variables $v = (v_1,\dots,v_n)$.
+    Then the quantifiers of $\phi$ 
+    can be eliminated if and only if the following holds:
+    for any two $\Si$-models $\MM,\NN $ of $T$ and any 
+    $\Si$-structure $\AA$ that with $\Si$-embeddings into both $\MM$ and $\NN$ 
+    ($\io_\MM, \io_\NN$),
+    if $a \in \AA^n$ then 
+    \[\MM \model{\Si} \phi(\io_\MM (a)) 
+    \iff \NN \model{\Si} \phi(\io_\NN (a))\]
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        Let $a \in \AA^n$.
+        By assumption there exists $\psi \in \form{\Si}$ such that 
+        $T \model{\Si} \forall v, \brkt{\phi(v) \IFF \psi(v)}$
+        Then $\MM \model{\Si} \phi(\io_\MM(a))$ if and only if 
+        $\MM \model{\Si} \psi(\io_\MM(a))$ if and only if 
+        $\AA \model{\Si} \psi(a)$, 
+        since \linkto{emb_preserve_sat_of_quan_free}{
+            embeddings preserve the satisfaction of quantifier free formulas}.
+        Similarly, this is if and only if $\NN \model{\Si} \phi(\io_\NN(a))$.
+    \end{forward}
+
+    \begin{backward}
+        Let 
+        \[
+            \Ga := \set{\psi \text{ quantifier free } \form{\Si} \st
+            T \model{\Si} \forall v, (\phi \to \psi)}
+        \]
+        and let $\Si(*)$ be such that 
+        $\const{\Si(*)} = \const{\Si} \cup \set{d_1,\dots,d_n}$
+        for some new constant symbols $d_i$ 
+        (indexed according to the free-variables of $\phi$).
+        We claim that 
+        $T \cup \set{\psi(d) \st \psi \in \Ga} \model{\Si(*)} \phi(d)$.
+        We first look at how this would complete the proof.
+        If it is true then as 
+        \linkto{proofs_are_finite}{proofs are finite}
+        we have a finite subsets $\De \subs \Ga$ such that
+        $T \cup \set{\psi(d) \st \psi \in \De} \model{\Si(*)} \phi(d)$.
+        By \linkto{deduction}{deduction} we have
+        \[T \model{\Si(*)} \brkt{\bigand{\psi \in \De}{} \psi(d)} \to \phi(d)\]
+        and by the \linkto{lemma_on_const}{lemma on constants}
+        \[
+            T \model{\Si} \forall v, 
+            \brkt{\bigand{\psi \in \De}{} \psi(v)} \to \phi(v) 
+        \]
+        where $\brkt{\bigand{\psi \in \De}{} \psi(v)}$ is quantifier free.
+        By the definition of $\De$ we have the other implication as well:
+        \[
+            T \model{\Si} \forall v, 
+            \brkt{\bigand{\psi \in \De}{} \psi(v)} \IFF \phi(v) 
+        \]
+        hence the result.
+
+        Suppose for a contradiction 
+        $T \cup \set{\psi(d) \st \psi \in \Ga} \nodel{\Si(*)} \phi(d)$.
+        Then there exists a model
+        $\MM$ of $T \cup \set{\psi(d) \st \psi \in \Ga}$ such that 
+        $\MM \nodel{\Si} \phi(d)$.
+
+        Suppose for a second contradiction that the $\Si(*)(\MM)$-theory
+        $T \cup \atdiag{\Si(*)}{\MM} \cup \set{\phi(d)}$ is inconsistent.
+        Then by \linkto{compactness}{compactness} 
+        some subset
+        $T \cup \De \cup \set{\phi(d)}$ is inconsistent, 
+        where $\De \subs \atdiag{\Si(*)}{\MM}$ is finite.
+        \linkto{not_a_consequence}{This implies}
+            $T \cup \De \model{\Si(*)(\MM)} \NOT \phi(d)$.
+        Hence by \linkto{deduction}{deduction} we have 
+        \[T \model{\Si(*)(\MM)} 
+            \brkt{\bigand{\psi(d) \in \De}{} \psi(d)} \to \NOT \phi(d)\]
+        By the \linkto{lemma_on_const}{lemma on constants
+        applied to $\const{\Si} \subs \const{\Si(*)(\MM)}$}
+        \[T \model{\Si} 
+            \forall v, 
+            \sqbrkt{\brkt{\bigand{\psi(d) \in \De}{}\psi(v)} 
+            \to \NOT \phi(v)}\]
+        Taking the contrapositive, 
+        \[T \model{\Si} 
+            \forall v, 
+            \sqbrkt{\phi(v) 
+            \to \brkt{\bigor{\psi(d) \in \De}{}\NOT \psi(v)}}\]
+        Hence $\bigor{\psi(d) \in \De}{}\NOT \psi(v) \in \Ga$
+        and so $\MM \model{\Si(*)} \bigor{\psi(d) \in \De}{}\NOT \psi(v)$
+        by definition of $\MM$.
+        However each $\De \subs \atdiag{\Si(*)}{\MM}$ and so
+        $\MM \model{\Si(*)} \bigand{\psi(d) \in \De}{}\psi(v)$, 
+        a contradiction.
+        Thus there exists a model
+        \[\NN \model{\Si(*)(\MM)} T \cup 
+            \atdiag{\Si(*)}{\MM} \cup \set{\phi(d)}\]
+        Since $\NN \model{\Si(*)(\MM)} \atdiag{\Si(*)}{\MM}$ there exists a 
+        $\Si(*)(\MM)$ morphism $\io : \MM \to \NN$.
+        \linkto{move_down_morph}{Move this morphism down to $\Si$}, then
+        by assumption with $\AA := \MM$, for any sentence $\chi$
+        \[\MM \model{\Si} \chi
+            \iff \NN \model{\Si} \chi\]
+        Since $\NN \model{\Si(*)(\MM)} \phi(d)$ by the 
+        \linkto{lemma_on_const}{lemma on constants} 
+        $\NN \model{\Si} \forall v, \phi(v)$
+        and so $\MM \model{\Si} \forall v, \phi(v)$.
+        Which is a contradiction because
+        $\MM \model{\Si(*)} \NOT \phi(d)$ and so 
+        by the \linkto{lemma_on_const}{lemma on constants} 
+        $\MM \model{\Si} \forall v, \NOT \phi(v)$.
+        (We have
+        $\MM \model{\Si} \phi(\modintp{\MM}{c}, \dots \modintp{\MM}{c})$
+        and $\MM \nodel{\Si} \phi(\modintp{\MM}{c}, \dots \modintp{\MM}{c})$.)
+    \end{backward}
+\end{proof}
+
+\begin{lem}[Sufficient condition for quantifier elimination]
+    \link{condition_for_q_e}
+    Let $T$ be a $\Si$-theory and suppose for any quantifier free $\Si$-formula
+    $\psi$ with at least one free variable $w$, the quantifier of 
+    $\forall w, \psi (w)$ can be eliminated.
+    Then $T$ has quantifier elimination.
+\end{lem}
+\begin{proof}
+    Induct on what $\phi$ is.
+    \begin{itemize}
+        \item If $\phi$ is $\top$, an equality or a relation then it is already 
+            quantifier free.
+        \item If $\phi$ is $\NOT \chi$ and there exists a quantifier free 
+            $\Si$-formula $\psi$ such that 
+            $T \model{\Si} \forall v, \chi \IFF \psi$.
+            Then $T \model{\Si} \forall v, \NOT \chi \IFF \NOT \psi$.
+            Hence $\phi$ can be reduced to $\NOT \psi$ which is quantifier free.
+        \item If $\phi$ is $\chi_0 \OR \chi_1$ and there exist respective 
+            reductions of these $\psi_0$ and $\psi_1$ then
+            $\phi$ reduces to $\psi_0 \OR \psi_1$ which is quantifier free.
+        \item If $\phi$ is $\forall w, \chi(w)$ and there exists quantifier free
+            $\psi$ such that 
+            \[T \model{\Si} \forall w, \bigforall{v \in S}{} v, 
+                \brkt{\chi \IFF \psi}\]
+            where $S$ indexes the rest of the free variables in 
+            $\chi$ and $\psi$.
+            Then we can show that 
+            \[
+                T \model{\Si} \bigforall{v \in S}{}
+                \brkt{\phi \IFF (\forall w, \psi)}
+            \]
+            By assumption there exists $\om$ a quantifier free $\Si$-formula
+            such that 
+            \[
+                T \model{\Si} \bigforall{v \in S}{}
+                \brkt{\om \IFF (\forall w, \psi)}
+            \]
+            Hence $\phi$ can be reduced to $\om$.
+    \end{itemize}
+\end{proof}
+
+\begin{cor}[Improvement: Sufficient condition for quantifier elimination]
+    \link{improved_condition_for_q_e}
+    If $T$ be a $\Si$-theory if
+    for any quanfier free $\Si$-formula $\phi$ with at least one free variable
+    $w$ (index the rest by $S$),
+    for any $\MM, \NN$ $\Si$-models of $T$, for any $\Si$-structure $\AA$ 
+    that embeds into $\MM$ and $\NN$ (via $\io_\MM,\io_\NN$) and 
+    any $a \in ({\AA})^S$,
+    \[\MM \model{\Si} \forall w, \phi(\io_{\MM}(a)) \implies 
+    \NN \model{\Si} \forall w, \phi(\io_\NN (a))\]
+    then $T$ has quantifier elimination.
+
+    Equivalently we can use the statement 
+    \[\MM \model{\Si} \exists w, \phi(\io_{\MM}(a)) \implies 
+    \NN \model{\Si} \exists w, \phi(\io_\NN (a))\]
+    by negating $\phi$.
+\end{cor}
+\begin{proof}
+    To show that $T$ has quantifier elimination
+    \linkto{condition_for_q_e}{it suffices to show that} 
+    for any quanfier free $\Si$-formula $\phi$ with at least one free variable
+    $w$ (index the rest by $S$), 
+    the quantifiers of $\forall w, \phi$ can be eliminated.
+    This is true \linkto{elim_quant_of_form}{if and only if} for any 
+    $\MM, \NN$ $\Si$-models of $T$, 
+    for any $\Si$-structure $\AA$ 
+    that injects into $\MM$ and $\NN$ (via $\io_\MM,\io_\NN$) and 
+    any $a \in (\AA)^S$,
+    \[\MM \model{\Si} \forall w, \phi(\io_{\MM}(a)) \implies 
+    \NN \model{\Si} \forall w, \phi(\io_\NN (a))\]
+    By symmetry of $\MM$ and $\NN$ we only require one implication.
+    Hence the proposition.
+\end{proof}
+\begin{rmk}
+    For quantifier elimination it also suffices to show that for any 
+    $\Si$-models $\MM$ of $T$, for any $\Si$-structure $\AA$ 
+    that embeds into $\MM$ (via $\io_\MM$) and 
+    any $a \in ({\AA})^S$,
+    \[\MM \model{\Si} \forall w, \phi(\io(a)) \implies 
+    \AA \model{\Si} \forall w, \phi(a)\]
+    since \linkto{emb_preserve_sat_of_forall_down}{
+        embeddings preserve satisfaction of universal formulas downwards}.
+    Equivalently we can use
+    \[\AA \model{\Si} \exists w, \phi(a) \implies 
+    \MM \model{\Si} \exists w, \phi(\io(a))\]
+\end{rmk}
+
+\subsection{Back and Forth}
+`Back and forth' is a technique used to determine 
+elementary equivalence of models,
+quantifier elimination of theories
+and completeness of theories.
+This section draws together work from Poizat \cite{poizat}, 
+OLP \cite{openlogicproject},
+and Pillay \cite{pillay}.
+It is motivated by the \linkto{infinite_infinite_classes}{example at the end}, 
+which should be looked at first.
+
+\begin{prop}[Image of generators are generators of the image]
+    \link{im_of_gen_are_gen_of_im_substructures}
+    The image of a 
+    \linkto{substructure_gen_by_subset}{substructure generated by a subset} 
+    is a substructure 
+    generated by the image of a set.
+    In particular,
+    a finitely generated substructure has finitely generated image under a 
+    $\Si$-morphism given by the image of the generators.
+\end{prop}
+\begin{proof}
+    Let $\io : \<A\> \to \NN$ be a $\Si$-morphism.
+    We show that $\<\io(A)\> = \io(\<A\>)$.
+    If $b \in \<\io(A)\>$ then $b = \nnintp{c}$ or $b = \nnintp{f}(\io(\al))$ 
+    for $al \in \<A\>$.
+    Hence $b = \nnintp{c} = \io(\mmintp{c}) \in \io(\<A\>)$
+    or 
+    \[b = \nnintp{f}(\io(\al)) = \io(\mmintp{f}(\al)) \in \io(\<A\>)\]
+    Thus $\<\io(A)\> \subs \io(\<A\>)$.
+    The other direction is similar.
+\end{proof}
+
+\begin{dfn}[Partial isomorphisms]
+    Let $\MM$ and $\NN$ be $\Si$-structures.
+    A partial isomorphism from $\MM$ to $\NN$ is a $\Si$-isomorphism $p$
+    with finitely generated domain in of $\MM$ 
+    and codomain in $\NN$.
+\end{dfn}
+
+\begin{prop}[Equivalent definition of partial isomorphism]
+    \link{equiv_def_partial_iso}
+    Let $\MM$ and $\NN$ be $\Si$-structures. 
+    Let $a \in \MM^n$ and $b \in \NN^n$.
+    The following are equivalent:
+    \begin{itemize}
+        \item There exists a partial isomorphism $p : \<a\> \to \<b\>$ 
+            such that $p(a) = b$.
+        \item $\subintp{\nothing}{\MM}{\qftp}(a) = 
+            \subintp{\nothing}{\NN}{\qftp}(b)$
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        We induct on terms to show that $\mmintp{t}(a) = \modintp{\<a\>}{t}(a)$
+        for each term $t$:
+        \begin{itemize}
+            \item If $t$ is a constant symbol or a variable 
+                then by definition of the 
+                the substructure interpretation they are equal.
+            \item If $t$ is $f(s)$ and we have the inductive hypothesis 
+                $\mmintp{s}(a) = \modintp{\<a\>}{s}(a)$
+                then by definition of the substructure interpretation
+                \[
+                    \mmintp{t}(a) = \mmintp{f}(\mmintp{s}(a))
+                    = \mmintp{f}(\modintp{\<a\>}{s}(a))
+                    = \modintp{\<a\>}{f}(\modintp{\<a\>}{s}(a))
+                    = \modintp{\<a\>}{t}(a)
+                \]
+        \end{itemize}
+    
+    Let $\phi$ be a quantifier free $\Si$-formula with up to $n$ variables.
+    We show by induction on $\phi$ that 
+    \[
+        \MM \model{\Si} \phi(a)
+        \iff \<a\> \model{\Si} \phi(a)
+    \]
+    \begin{itemize}
+        \item If $\phi$ is $\top$ it is trivial.
+        \item If $\phi$ is $t = s$ then it is clear that
+            \[
+                \mmintp{t}(a) = \mmintp{s}(a)
+                \iff \modintp{\<a\>}{t}(a) = \modintp{\<a\>}{s}(a)
+            \]
+            by what we showed for terms.
+        \item If $\phi$ is $r(t)$ then 
+            \[  
+                (a_{i_1},\dots, a_{i_m}) \in \mmintp{r}
+                \iff (a_{i_1},\dots, a_{i_m}) \in 
+                \mmintp{r} \cap \<a\> = \modintp{\<a\>}{r}
+            \]
+        \item If $\phi$ is $\NOT \psi$ or $\psi \OR \chi$ then it is 
+            clear by induction.
+    \end{itemize}
+    As $p$ is an $\Si$-isomorphism, for any quantifier free $\Si$-formula
+    with up to $n$ variables,
+    \[\MM \model{\Si} \phi(a) \iff \<a\> \model{\Si} \phi(a)
+    \iff \<b\> \model{\Si} \phi(b)
+    \NN \model{\Si} \phi(b)\]
+    \end{forward}
+
+    \begin{backward}
+        Suppose $\subintp{\nothing}{\MM}{\qftp}(a) = 
+        \subintp{\nothing}{\NN}{\qftp}(b)$.
+        We define $p : \<a\> \to \NN$ by the following:
+        if $\al \in \<a\>$ then one can write $\al$ as a term $t$ evaluated
+        at $a$: $\al = \mmintp{t}(a)$; $p$ maps $a$ to $\nnintp{t}(b)$.
+        To show that $p$ is well-defined, note that if two terms $t$ and $s$
+        are such that $\mmintp{t}(a) = \mmintp{s}(a)$ then 
+        $t = s$ is a formula in $\subintp{\nothing}{\MM}{\qftp}(a) = 
+        \subintp{\nothing}{\NN}{\qftp}(b)$ and so 
+        $\nnintp{t}(b) = \nnintp{s}(b)$.
+        it is injective because if two terms $t$ and $s$
+        are such that $\nnintp{t}(b) = \nnintp{s}(b)$ then 
+        $t = s$ is a formula in $\subintp{\nothing}{\NN}{\qftp}(b) = 
+        \subintp{\nothing}{\MM}{\qftp}(a)$ and so 
+        $\mmintp{t}(a) = \mmintp{s}(a)$.
+
+        By definition $p$ commutes with the interpretation of constant symbols,
+        function symbols, and relations.
+        Furthermore, for each $i$, $p(a_i) = b_i$ by taking the term to be a 
+        variable and evaluating at $a_i$. 
+        \linkto{im_of_gen_are_gen_of_im_substructures}{The 
+            image of $p$ is $\<b\>$ as the image of $a$ is $b$}.
+        Hence it is a partial isomorphism $\<a\> \to \<b\>$ 
+        such that $p(a) = b$.
+    \end{backward}
+\end{proof}
+
+\begin{prop}[Basic facts about partial isomorphisms]
+    \link{basic_facts_partial_isomorphisms}
+    Let $\MM$ and $\NN$ be $\Si$-structures.
+    \begin{itemize}
+        \item The inverse of a partial isomorphism is a partial isomorphism.
+        \item The restriction of a partial isomorphism is a partial isomorphism.
+        \item The composition of partial isomorphisms is a partial isomorphism.
+    \end{itemize}
+\end{prop}
+
+\begin{dfn}[Partially isomorphic structures]
+    Let $\MM$ and $\NN$ be $\Si$-structures.
+    A partial isomorphism from $\MM$ to $\NN$ is said to have 
+    the back and forth property if 
+    \begin{itemize}
+        \item (Forth) For each $a \in \MM$
+            there exists a partial isomorphism $q$ such that 
+            $q$ extends $p$ and $a \in \dom{p}$.
+        \item (Back) For each $p \in I$ 
+            there exists a partial isomorphism $q$ such that 
+            $q$ extends $p$ and $b \in \codom{q}$.
+    \end{itemize}
+
+    We say $\MM$ and $\NN$ are back and forth equivalent 
+    when all partial isomorphisms from $\MM$ to $\NN$ 
+    have the back and forth property.
+\end{dfn}
+
+\begin{prop}[Equivalent definition of back and forth property]
+    \link{equiv_def_back_and_forth}
+    Let $\MM$ and $\NN$ be $\Si$-structures.
+    Let $p : \<a\> \to \<b\>$ for $a \in \MM^n$ and $b \in \NN^n$
+    be a partial isomorphism such that $p(a) = b$.
+    It has the back and forth property if and only if the two conditions hold
+    \begin{itemize}
+        \item (Forth) For any $\al \in \MM$, 
+            there exists $\be \in \NN$ such that 
+            $\subintp{\nothing}{\MM}{\qftp}(a,\al) = 
+            \subintp{\nothing}{\NN}{\qftp}(b,\be)$
+        \item (Back) For any $\be \in \NN$, 
+        there exists $\al \in \MM$ such that 
+        $\subintp{\nothing}{\MM}{\qftp}(a,\al) = 
+        \subintp{\nothing}{\NN}{\qftp}(b,\be)$
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        Suppose $p$ has the back and forth property.
+        We only show `forth' as the `back' case is similar.
+        Let $\al \in \MM$.
+        By `forth' there exists $q$ 
+        a partial isomorphism extending $p$ such that 
+        $\al \in \dom(q)$.
+        By \linkto{basic_facts_partial_isomorphisms}{restriction}
+        and the fact that \linkto{image_of_generators}{the image of 
+        generators generates the image},
+        there exists $\be \in \NN$ such that 
+        \[\res{q}{\<a,\al\> \to \<b,\be\>}\]
+        is a local isomorphism.
+        Using the \linkto{equiv_def_of_partial_iso}{the equivalent definition}
+        we obtain ${\qftp}(a,\al) = {\qftp}(b,\be)$.
+    \end{forward}
+
+    \begin{backward}
+        We show that $p$ has the `forth' property.
+        Let $\al \in \MM$.
+        By assumption there exists $\be \in \MM$ such that 
+        \[\subintp{\nothing}{\MM}{\qftp}(a,\al) = 
+        \subintp{\nothing}{\NN}{\qftp}(b,\be)\]
+        Thus \linkto{equiv_def_of_partial_iso}{there exists 
+        $q : \<a,\al\> \to \<b,\be\>$} such that $q(a) = b$ and $q(\al) = \be$.
+        Hence $p$ is extended by $q$ with $\al$ in its domain.
+    \end{backward}
+\end{proof}
+
+\begin{prop}[Quantifier elimination for types]
+    \link{quant_elim_for_types}
+    Let $T$ be a $\Si$-theory.
+    $T$ has quantifier elimination if and only if for any $n \in \N$,
+    any two $\Si$-models of $T$ and any $a \in \MM^n, b \in \NN^n$,
+    if \[\subintp{\nothing}{\MM}{\qftp}(a) = 
+    \subintp{\nothing}{\NN}{\qftp}(b)\]
+    then \[\subintp{\nothing}{\MM}{\tp}(a) = 
+    \subintp{\nothing}{\NN}{\tp}(b)\]
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        Let $\phi \in {\tp}(a)$.
+        By quantifier elimination there exists quantifier free $\psi$
+        such that they are equivalent modulo $T$.
+        Then $\MM \model{\Si} \psi(a)$ and 
+        $\psi \in {\qftp}(a) = {\qftp}(b)$.
+        Thus $\NN \model{\Si} \psi(b)$ and by equivalence modulo $T$
+        $\NN \model{\Si} \phi(b)$.
+        Hence $\phi \in {\tp}(b)$.
+        The other inclusion is similar.
+    \end{forward}
+
+    \begin{backward}
+        Let $n \in \N$. Define a map $f : S_n(T) \to S_n^{\qf}(T)$ 
+        that takes a maximal $n$-type $p$ to $p \cap QFF(\Si,n)$.
+        It is well-defined as the image is indeed a maximal $n$-type.
+        It is a surjection as any quantifier free maximal 
+        $n$ type is an $n$-type 
+        and therefore 
+        \linkto{extend_to_maximal_type_zorn}{can be extended to a maximal 
+        $n$-type.}
+        To show injectivity we note that
+        \linkto{elems_of_stone_space_are_types_of_elements}{any two elements 
+        of $S_n(T)$ can be written as types of elements}
+        $\subintp{\nothing}{\MM}{\tp}(a)$ and  
+        $\subintp{\nothing}{\NN}{\tp}(b)$.
+        If their images are equal then 
+        \[\subintp{\nothing}{\MM}{\qftp}(a) = 
+        \subintp{\nothing}{\NN}{\qftp}(b)\]
+        thus by assumption they are equal.
+
+        To show that $f$ is continuous we show that elements of 
+        the clopen basis have clopen preimage.
+        Let $[\phi]_T^{\qf}$ be in the clopen basis of $S_n^{\qf}(T)$.
+        Then $p \in [\phi]_T$ if and only if $\phi \in p$ if and only if 
+        $\phi \in f(p)$ if and only if $f(p) \in [\phi]_T^{\qf}$.
+        Hence the preimage is $[\phi]_T$ which is clopen.
+
+        A continuous bijection between Hausdorff compact spaces is a 
+        homeomorphism. 
+        Hence for any $\phi \in F(\Si,n)$ the image of the clopen set generated
+        by $\phi$ is clopen: there exists $\psi \in QFF(\Si,n)$
+        such that $[\phi]_T = f^{-1}[\psi]_T^{\qf} = [\psi]_T$.
+        $[\phi]_T = [\psi]_T$ \linkto{basic_facts_basis_elems}{if and only if} 
+        they are equivalent modulo $T$.
+        Thus we can eliminate quantifiers for any 
+        $\phi \in F(\Si,n)$ for any $n$.
+        Thus $T$ has quantifier elimination.
+    \end{backward}
+\end{proof}
+
+\begin{lem}[Back and forth equivalence implies quantifier elimination for types]
+    \link{back_and_forth_gives_quantifier_elimination_lem}
+    Let $\MM$ and $\NN$ be $\Si$-structures.
+    If $\MM$ and $\NN$ are back and forth equivalent and
+    $a \in \MM^n$ and $b \in \NN^n$ are such that
+    \[\subintp{\nothing}{\MM}{\qftp}(a) = 
+    \subintp{\nothing}{\NN}{\qftp}(b)\]
+    then \[\subintp{\nothing}{\MM}{\tp}(a) = 
+    \subintp{\nothing}{\NN}{\tp}(b)\]
+\end{lem}
+\begin{proof}
+    Let $\phi \in F(\Si,n)$.
+    If $\phi$ is quantifier free then 
+    $\MM \modelsi \phi(a) \iff \NN \modelsi \phi(b)$.
+    By induction on formulas it suffices to show that if 
+    $\phi$ is the formula $\forall v, \psi$ and 
+    for any $\al \in \MM$ there exists $\be \in \NN$ such that 
+    $\MM \modelsi \psi(a,\al) \iff \NN \modelsi \psi(b,\be)$, 
+    then we have 
+    $\MM \modelsi \forall v, \psi(a) \iff \NN \modelsi \forall v, \psi(b)$.
+
+    By the \linkto{equiv_def_partial_iso}{
+        equivalent definition of partial isomorphisms,}
+    there exists $p : \<a\> \to \<b\>$ 
+    a partial isomorphism in $p$ such that $p(a) = b$.
+    Suppose $\MM \modelsi \forall v, \psi(a)$ and let $\be \in \NN$, 
+    then $\MM \modelsi \forall v, \psi(a,\al)$.
+    By `back' in 
+    \linkto{equiv_def_back_and_forth}{
+        the equivalent definition of the back and forth property}
+    there exists $\al \in \MM$ such that 
+        $\subintp{\nothing}{\MM}{\qftp}(a,\al) = 
+        \subintp{\nothing}{\NN}{\qftp}(b,\be)$
+    Hence $\NN \modelsi \forall v, \psi(a,\al)$.
+    The other direction is similar.
+\end{proof}
+
+\begin{cor}[Back and forth implies elementary equivalence]
+    \link{back_and_forth_implies_elem_equiv}
+    Let $\MM$ and $\NN$ be $\Si$-structures.
+    If $\MM$ and $\NN$ are back and forth equivalent
+    then they are elementarily equivalent.
+\end{cor}
+\begin{proof}
+    Let $\phi$ be a quantifier free $\Si$-formula with $0$ variables,
+    i.e. a quantifier free sentence.
+    As the empty set is a partial isomorphism.
+    Thus by the \linkto{equiv_def_partial_iso}{equivalent 
+        definition of a partial isomorphism,}
+    \[\subintp{\nothing,0}{\MM}{\qftp}(\nothing) = 
+    \subintp{\nothing,0}{\NN}{\qftp}(\nothing)\]
+    By the fact that 
+    \linkto{back_and_forth_gives_quantifier_elimination_lem}{back 
+        and forth equivalence implies quantifier elimination for types},
+    \[\subintp{\nothing,0}{\MM}{\tp}(\nothing) = 
+    \subintp{\nothing,0}{\NN}{\tp}(\nothing)\]
+    
+    Thus for any $\Si$-sentence $\phi$, $\MM \modelsi \phi$ if and only if 
+    $\phi \in \subintp{\nothing,0}{\MM}{\tp}(\nothing) = 
+    \subintp{\nothing,0}{\NN}{\tp}(\nothing)$
+    if and only if $\NN \modelsi \phi$.
+\end{proof}
+
+\begin{dfn}[$\om$-saturation]
+    \link{om_saturation_dfn}
+    Let $\MM$ be a $\Si$-structure. 
+    $\MM$ is $\om$-saturated if for every finite subset $A \subs \MM$, 
+    every $n \in \N$ and every $p \in S_n(\Theory_\MM(A))$,
+    $p$ is realised in $\MM$.
+
+    See the general version $\ka$-saturated \linkto{ka_saturation_dfn}{here}.
+\end{dfn}
+
+\begin{prop}[$\infty$-equivalence]
+    \link{infty_equivalence_01}
+    Let $\MM$ and $\NN$ be $\om$-saturated $\Si$-structures.
+    If $a \in \MM^n$ and $b \in \NN^n$ satisfy
+    \[\subintp{\nothing,n}{\MM}{\tp}(a) = 
+    \subintp{\nothing,n}{\NN}{\tp}(b)\]
+    then 
+    \begin{itemize}
+        \item (Forth) For any $\al \in \MM$ there exists $\be \in \NN$ such that
+        \[\subintp{\nothing,n+1}{\MM}{\tp}(a,\al) = 
+        \subintp{\nothing,n+1}{\NN}{\tp}(b,\be)\]
+        \item (Back) For any $\be \in \NN$ there exists $\al \in \MM$ such that
+        \[\subintp{\nothing,n+1}{\MM}{\tp}(a,\al) = 
+        \subintp{\nothing,n+1}{\NN}{\tp}(b,\be)\]
+    \end{itemize}
+    If this property holds for any pair $a,b$ related by a partial isomorphism
+    we say $\MM$ and $\NN$ are $\infty$-equivalent.
+\end{prop}
+\begin{proof}
+    Let $\al \in \MM$ and consider 
+    \[p(a,v) := \subintp{a,1}{\MM}{\tp}(\al) \in S_1(\Theory_\MM(a))\]
+    Any formula in $p(a,v)$ can be written as a 
+    $\Si$-formula $\phi(w,v)$ with variables $w$
+    replaced with elements of $a$ 
+    ($v$ represents a single variable to be replaced by $\al$). 
+    Let 
+    \[p(w,v) := \set{\phi(w,v) \st \phi(a,v) \in p(a,v)}\]
+    We claim that 
+    \[p(b,v) := \set{\phi(b,v) \st \phi \in p(w,v)} \in S_1(\Theory_\NN(b))\]
+    To this end, we note that it is indeed 
+    a maximal subset of $F(\Si(b),1)$ since for any $\phi(b) \in F(\Si(b),1)$
+    \[\phi(a) \in p(a,v) \text{ or } \NOT \phi(a) \in p(a) \implies 
+    \phi(b) \in p(b,v) \text{ or } \NOT \phi(b) \in p(b)\]
+    We just need to show that it is consistent with $\Theory_\NN(b)$.
+
+    By \linkto{compactness_for_types}{compactness for types} 
+    and noting that $\NN$ is a $\Si(b)$-model of $\Theory_\NN(b)$,
+    it suffices to show
+    that for any finite subset $\De(w,v) \subs p(w,v)$ 
+    there exists $\be \in \NN^m$ such that 
+    $\NN \model{\Si(b)} \De(b,\be)$.
+    \begin{align*}
+        &\MM \model{\Si(a)} \bigand{\phi \in \De}{} \phi(a,\al)\\
+        \implies &\MM \model{\Si} \exists v, \bigand{\phi \in \De}{} \phi(a,v)\\
+        \implies &\brkt{\exists v, \bigand{\phi \in \De}{} \phi(a,v)} \in 
+        \subintp{\nothing}{\MM}{\tp}(a) = 
+        \subintp{\nothing}{\NN}{\tp}(b)\\
+        \implies &\NN \modelsi \exists v, \bigand{\phi \in \De}{} \phi(b,v)\\
+        \implies &\exists \be \in \NN, 
+        \NN \modelsi \bigand{\phi \in \De}{} \phi(b,\be)\\
+        \implies &\exists \be \in \NN, \NN \model{\Si(b)} \De(b,\be)
+    \end{align*}
+    Thus $p(b,v)\in S_1(\Theory_\NN(b))$ and since $\NN$ is $\om$-saturated
+    $p(b,v)$ is realised in $\NN$ by some $\be$.
+    Thus by maximality, $p(b,v) = \subintp{b,1}{\NN}{\tp}(\be)$.
+
+    Finally, for $\phi(v,w) \in F(\Si,n+1)$
+    \begin{align*}
+        &\phi(v,w) \in \subintp{\nothing}{\MM}{\tp}(a,\al)
+        \iff &\MM \model{\Si} \phi(a,\al) \iff \MM \model{\Si(a)} \phi(a,\al)\\
+        \iff &\phi(a,v) \in \subintp{a,1}{\MM}{\tp}(\al) = p(a,v)\\
+        \iff &\phi(b,v) \in p(b,v) = \subintp{b,1}{\MM}{\tp}(\be)\\
+        \iff &\NN \model{\Si(b)} \phi(b,\be) \iff \NN \modelsi \phi(b,\be)\\
+        \iff &\phi(w,v) \in \subintp{\nothing}{\NN}{\tp}(b,\be)
+    \end{align*}
+\end{proof}
+
+\begin{prop}[Back and forth method for showing quantifier elimination]
+    \link{om_sat_models_and_quantifier_elimination}
+    Let $T$ be a $\Si$-theory.
+    If $T$ has quantifier elimination then
+    for any two $\om$-saturated $\Si$-models of $T$
+    are back and forth equivalent.
+
+    If any two $\Si$-models of $T$
+    are back and forth equivalent then $T$ has quantifier 
+    elimination.
+    \footnote{We could also phrase this as $T$ has 
+    quantifier elimination if and only if
+    any two $\om$-saturated $\Si$-models of $T$
+    are back and forth equivalent, but the saturation requirement becomes 
+    redundant in one direction.}
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        Let $p$ be a partial isomorphism from $\MM$ to $\NN$.
+        By the \linkto{equiv_def_partial_iso}{
+            equivalent definition of partial isomorphisms}
+        there exists $a \in \MM^n$ and $b \in \NN^n$ such that 
+        $p(a) = b$ and 
+        \[\subintp{\nothing}{\MM}{\qftp}(a) = 
+        \subintp{\nothing}{\NN}{\qftp}(b)\]
+        By \linkto{quant_elim_for_types}{
+            quantifier elimination for types}
+        \[\subintp{\nothing}{\MM}{\tp}(a) = 
+        \subintp{\nothing}{\NN}{\tp}(b)\]
+        The models are $\om$-saturated, hence  
+        \linkto{infty_equivalence_01}{by $\infty$-equivalence}
+        for any $\al \in \MM$ there exists $\be \in \NN$ such that 
+        \[\subintp{\nothing}{\MM}{\tp}(a,\al) = 
+        \subintp{\nothing}{\NN}{\tp}(b,\be)\]
+        Taking only the quantifier free elements,
+        we obtain 
+        \[\subintp{\nothing}{\MM}{\qftp}(a,\al) = 
+        \subintp{\nothing}{\NN}{\qftp}(b,\be)\]
+        and by the
+        \linkto{equiv_def_back_and_forth}{
+            equivalent definition of the back and forth property}
+        we have that $p$ has the back and forth property.
+    \end{forward}
+
+    \begin{backward}
+        Let $n \in \N$, $\MM$ and $\NN$ be models of $T$,
+        $a \in \MM^n$ and $b \in \NN^n$.
+        By \linkto{quant_elim_for_types}{
+            quantifier elimination for types} it suffices to show that 
+        if \[\subintp{\nothing}{\MM}{\qftp}(a) = 
+        \subintp{\nothing}{\NN}{\qftp}(b)\]
+        then \[\subintp{\nothing}{\MM}{\tp}(a) = 
+        \subintp{\nothing}{\NN}{\tp}(b)\]
+
+        This is satisfied as
+        \linkto{back_and_forth_gives_quantifier_elimination_lem}{any 
+        two models of $T$ are back and forth equivalent}.
+    \end{backward}
+\end{proof}
+
+\begin{cor}[Back and forth condition for completeness]
+    \link{back_and_forth_implies_completeness}
+    Let $T$ be a $\Si$-theory.
+    If any two models of $T$ are back and forth equivalent then 
+    $T$ is complete.
+\end{cor}
+\begin{proof}
+    If any two models are back and forth equivalent 
+    \linkto{back_and_forth_implies_elem_equiv}{then any two non-empty models 
+        are elementarily equivalent} (the non-empty is redundant information).
+    Hence \linkto{equiv_def_completeness_0}{$T$ is complete}.
+\end{proof}
+
+We end this section with a nice example of all of this in action.
+\begin{eg}[Infinite infinite equivalence classes]
+    \link{infinite_infinite_classes}
+    \[\Si_E := (\nothing,\nothing,n_f,\set{E},m_r)\]
+    where $m_E = 2$ and $n_f$ is the empty function, 
+    defines the signature of binary relations.
+    We write for variables $x$ and $y$, 
+    we write $x \sim y$ as notation for $E(x,y)$
+    The theory of equivalence relations $\ER$ 
+    is set set containing the following formulas:
+    \begin{align*}
+        &\text{Reflexivity - } \forall x, x \sim x\\
+        &\text{Symmetry - } \forall x \forall y, x \sim y \to y \sim x\\
+        &\text{Transitivity - } 
+        \forall x \forall y \forall z, (x \sim y \AND y \sim z) \to x \sim z
+    \end{align*}
+    For $n \in \N_{>1}$ define 
+    \begin{align*}
+        &\phi_n := \bigexists{i = 1}{n} x_i, \bigand{i < j}{} x_i \nsim x_j\\
+        &\psi_n := \forall x, \bigexists{i = 1}{n} x_i, 
+            \bigand{i = 1}{n} \brkt{x \sim x_i} \AND 
+            \bigand{i < j}{} \brkt{x_i \ne x_j}
+    \end{align*}
+    Show that the theory $T = \ER \cup {\phi_n, \psi_n}_{1 < i}$ has 
+    quantifier elimination and is complete.
+    (You may wonder if it is indeed a theory
+    and what nasty induction must be done to 
+    show that its formulas can be constructed.)
+\end{eg}
+\begin{proof}
+    We first define the projection into the quotient:
+    if $\MM \model{\Si_E} T$ and $a \in {\MM}$ then 
+    \[\pi_\MM(a) := \set{b \in {\MM} \st \MM \model{\Si_E} a \sim b}\]
+    If $A \subs \MM$ we write $\pi_\MM(A)$ to be the image
+    \[\set{\pi_\MM(a) \st \exists a \in A}\]
+    Note that the quotient is $\pi_\MM(\MM)$.
+
+    Let $\MM, \NN$ be $\Si_E$-models of $T$
+    and let $p$ be a partial isomorphism from $\MM$ to $\NN$.
+    By \linkto{om_sat_models_and_quantifier_elimination}{the back and forth
+        condition for quantifier elimination} and 
+        \linkto{back_and_forth_implies_completeness}{the 
+        back and forth condition for completeness}
+    it suffices to show that $p$ has the back and forth property.
+    
+    We only show `forth'.
+    Let $\al \in \MM$.
+    Suppose $\pi_\MM(\al) \cap \dom p$ is empty.
+    We can show that $\pi_\NN(\NN)$ is infinite whilst 
+    $\pi_\NN(\codom p)$ is finite, 
+    hence there exists $\be \in \NN$ such that 
+    $\pi(\be) \in \pi_\NN(\NN) \setminus \pi_\NN(\codom p)$ is non-empty.
+    Then define $q : \dom p \cup \set{\al} \to \codom p \cup \set{\be}$
+    to agree with $p$ on its domain and send $\al$ to $\be$.
+    Note that the domain and codomain of $q$ are substructures
+    as the language only contains a relation symbol 
+    (thus all subsets are substructures).
+    We show that $q$ is an isomorphism.
+    It is clearly bijective, and to be an embedding it just needs to preserve
+    interpretation of the relation.
+    Let $a,b \in \dom q$, if 
+    both are in $\dom p$ then as $p$ is a partial isomorphism
+    \[a \modintp{\MM}{\sim} b \iff p(a) \modintp{\NN}{\sim} p(b) \iff 
+    q(a) \nnintp{\sim} q(b)\]
+    Otherwise WLOG $a = \al$.
+    If $b = \al$ then it is clear.
+    If $b \in \dom p$ then by assumption $b \notin \pi_\MM(\al) = \pi(a)$
+    hence $\NOT a \mmintp{\sim} b$.
+    By construction 
+    \[q(a) = q(\al) = \be \implies 
+    \pi_\NN(q(a)) \notin \pi_\NN(\codom p) \quad \text{ and } \quad
+    q(b) = p(b) \in \codom p\]
+    hence $\NOT q(a) \nnintp{\sim} q(b)$.
+    Thus $q$ is a local isomorphism extending $p$.
+
+    Suppose $\pi_\MM(\al) \cap \dom p$ is non-empty,
+    i.e. there exists $a \in \dom p$ such that $\al \mmintp{\sim} a$
+    We can show that 
+    $\pi_\NN(p(a))$ is infinite and $\codom p$ is finite
+    hence there exists $\be \in \pi_\NN(p(a)) \setminus \codom p$.
+    Then define $q : \dom p \cup \set{\al} \to \codom p \cup \set{\be}$
+    to agree with $p$ on its domain and send $\al$ to $\be$.
+    Again $p$ is clearly a bijection on substructures, 
+    and we show that the relation is preserved.
+    Let $b,c \in \dom q$. 
+    If $b,c \in \dom p$ then it is clear as $p$ is an isomorphism,
+    it is also clear if $b,c = \al$.
+    Otherwise WLOG $c = \al$ and $b \in \dom p$.
+    Then $c = \al \mmintp{\sim} a$ and
+    by construction of $\be$ 
+    \[q(c) = q(\al) = \be \nnintp{\sim} p(a)\]
+    Noting $a \mmintp{\sim} b$ if and only if $p(a) \nnintp{\sim} p(b)$
+    as $p$ is a partial isomorphism
+    thus $c \mmintp{\sim} a \mmintp{\sim} b$ 
+    if and only if $q(c) \nnintp{\sim} p(a) \nnintp{\sim} p(b) = q(b)$.
+    Hence $q$ is a local isomorphism extending $p$.
+    Thus $p$ has the `forth' property (and similarly the `back' property).
+\end{proof} 
+
+\begin{prop}[Countable back and forth equivalent structures are isomorphic]
+    %? Where to put this?
+    Let $\MM$ and $\NN$ be countably infinite $\Si$-structures.
+    If $\MM$ and $\NN$ are back and forth equivalent then 
+    $\MM$ and $\NN$ are isomorphic. 
+\end{prop}
+\begin{proof}
+    Write $\MM = \set{a_i}_{i \in \N}$ and $\NN = \set{b_i}_{i \in \N}$.
+    Inductively define partial isomorphisms $p_n$ for $n \in \N$:
+    \begin{itemize}
+        \item Take $p_0$ to be the empty function.
+        \item If $n + 1$ is odd then ensure $a_{n/2}$ 
+            is in the domain:
+            by the `forth' property of $p$ there exists $p_{n+1}$ 
+            extending $p_n$ such that $a_{n/2} \in \dom(p_{n+1})$.
+        \item If $n + 1$ is even then ensure $b_{(n+1)/2}$ is in the codomain:
+            by the `back' property of $p$ there exists $p_{n+1}$ 
+            extending $p_n$ such that $b_{(n-1)/2} \in \codom(p_{n+1})$.
+    \end{itemize}
+    We claim that $p$, the union of the partial isomorphisms 
+    $p_n$ for each $n \in \N$, is an isomorphism.
+    Note that it is well-defined and has image $\NN$ as the $p_i$ are nested and
+    for any $a_i \in \MM$ and $b_i \in \NN$, 
+    $a_i \in \dom(p_{2i+1})$ and $b_i \in \dom(p_{2i+2})$.
+    It is injective: if $a_i, a_j \in \MM$ and $p(a_i) = p(a_j)$ then 
+    $p_{2i+2}(a_i) = p_{2i+2}(a_j)$ and so $a_i = a_j$ as $p_{2i+2}$ is a 
+    partial isomorphism.
+    One can show that it is an $\Si$-embedding.
+\end{proof}
+
+\subsection{Model completeness}%where to put this?
+\begin{dfn}[Model Completeness]
+    We say a $\Si$-theory $T$ is model complete when given two $\Si$-models
+    of $T$ and a $\Si$-embedding $\io : \MM \to \NN$,
+    the embedding is elementary.
+\end{dfn}
+\begin{rmk}
+    \link{quantifier_elimination_implies_model_completeness}
+    Any $\Si$-theory $T$ with quantifier elimination is model complete.
+    If $\phi$ is a $\Si$-formula and $a \in ({\MM})^S$.
+    Then given two $\Si$-models
+    of $T$ and a $\Si$-embedding $\io : \MM \to \NN$ we can take
+    $\psi$ a quantifier free formula such that 
+    $T \modelsi \forall v, \phi \IFF \psi$.
+    Since \linkto{emb_preserve_sat_of_quan_free}{embeddings preserve
+    satisfaction of quantifier free formulas}
+    \[
+        \MM \modelsi \phi(a) \iff \MM \modelsi \psi(a)
+        \iff \NN \modelsi \psi(\io (a)) \iff \NN \modelsi \phi(\io(a))
+    \]
+    Thus the extension is elementary.
+\end{rmk}
+
+\subsection{Quantifier free types}
+Quantifier free types become important when we start making 
+back and forth constructions.
+All the results carry through, 
+thus there isn't much to say until they are relevant.
+Thus this section is worth skipping for now.
+\begin{dfn}[$QFF(\Si,n)$ and formulas consistent with a theory]
+    We define $QFF(\Si,n)$ to be the subset of $F(\Si,n)$ 
+    of quantifier free formulas.
+
+    For subsets $p \subs QFF(\Si,n) \subs F(\Si,n)$ 
+    the definitions of consistency carry through and 
+    we can apply compactness for types on these subsets too.
+    The definition of maximality is the same but restricted to $QFF(\Si,n)$.
+
+    Let $T$ be a $\Si$-theory.
+    Any subset $p \subs QFF(\Si,n)$ that is consistent with $T$
+    is called a quantifier free $n$-type on $T$.
+    Note that any quantifier free $n$-type is an $n$-type.
+\end{dfn}
+
+\begin{dfn}[Quantifier free Stone space of a theory]
+    Let $T$ be a $\Si$-theory.
+    Let the stone space of $T$, 
+    $S_n^{\qf}(T)$ be the set of all maximal quantifier free $n$-types on $T$.
+    We give the same topology:
+    $U \subs S_n(T)$ is an element of the basis when there exists 
+    $\phi \in QFF(\Si,n)$ such that 
+    \[U = [\phi]_T^{\qf} := \set{p \in S_n^{\qf}(T) \st \phi \in p}\]
+\end{dfn}
+
+\begin{prop}[Extending to maximal quantifier free $n$-types]
+    Any quantifier free $n$-type on a theory 
+    can be extended to a maximal quantifier free 
+    $n$-type.
+\end{prop}
+\begin{proof}
+    Any quantifier free $n$-type is an $n$-type, 
+    hence \link{extend_to_maximal_type_zorn}{can be extended 
+        to a maximal $n$-type}.
+    The intersection of a maximal $n$-type with $QFF$ is a maximal 
+    quantifier free $n$-type. 
+    This intersection extends the quantifier free $n$-type and we are done.
+\end{proof}
+
+\begin{prop}[Properties of the Stone space]
+    Let $T$ be a $\Si$-theory, $\phi, \psi \in QFF(\Si,n)$.
+    Elementary properties:
+    \begin{itemize}
+        \item $(\NOT \phi) \in p$ if and only if $p \notin [\psi]_T^{\qf}$.
+        \item $[\phi]_T = [\psi]_T^{\qf}$ if and only if $\phi$ and $\psi$ are 
+            equivalent modulo $T$.
+        \item $[\top]_T^{\qf} = S_n^{\qf}(T)$
+        \item $[\NOT \phi]_T^{\qf} = S_n(T) \setminus [\phi]_T^{\qf}$
+        \item $[\phi \OR \psi]_T^{\qf} = [\phi]_T^{\qf} \cup [\psi]_T^{\qf}$
+        \item $[\bot]_T^{\qf} = \nothing$
+        \item $[\phi \AND \psi]_T^{\qf} = [\phi]_T^{\qf} \cap [\psi]_T^{\qf}$
+    \end{itemize}
+    Topological properties:
+    \begin{itemize}
+        \item Elements of the basis of $S_n^{\qf}(T)$ are clopen.
+        \item $S_n^{\qf}(T)$ is Hausdorff.
+        \item $S_n^{\qf}(T)$ is compact.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    The proofs of these are exactly the same as before, 
+    some of them can even be bypassed by using the previous results.
+\end{proof}
+
+\begin{dfn}[Quantifier free type of an element]
+    Let $\MM$ be a $\Si$-structure, 
+    $A \subs {\MM}$ and $a \in {\MM}^n$
+    Then 
+    \[\subintp{A,n}{\MM}{\qftp}(a) := 
+    \set{\phi \in QFF(\Si(A),n) \st \MM \model{\Si(A)} \phi(a)}\]
+    is the quantifier free type of $a$ in $\MM$ over $A$.
+    One can verify that this is a maximal quantifier free $n$-type on $T$
+    if $\MM$ is a model of $T$.
+    We will often drop parts of the subscripts and superscripts when it is
+    clear. 
+    In fact the $n$ can be deduced by the length of $a$ 
+    and serves only to explicitely spell things out.
+\end{dfn}

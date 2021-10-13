@@ -1,0 +1,179 @@
+\subsection{Stone Duality}
+This section of the appendix gives a more algebraic way of 
+constructing Stone spaces.
+
+\begin{dfn}[A Boolean algebra on $F(\Si,n)$]
+    Let $T$ be a $\Si$-theory.
+    We quotient out $F(\Si,n)$ by the equivalence relation
+    \[  
+        \phi \sim \psi \quad := 
+        \quad \phi \text{ and } \psi \text{ equivalent modulo } T
+        := T \model{\Si} \forall v, (\phi \IFF \psi)
+    \]
+    Call the projection into the quotient $\pi$
+    and the quotient $F(\Si,n) / T$.
+    We make $F(\Si,n) / T$ into a Boolean algebra by 
+    interpreting $0$ as $\pi(\bot)$, $1$ as $\pi(\top)$, 
+    $\pi(\phi) \sqcap \pi(\psi)$ as $\pi(\phi \AND \psi)$,
+    $\pi(\phi) \sqcup \pi(\psi)$ as $\pi(\phi \OR \psi)$,
+    $- \pi(\phi)$ as $\pi(\NOT \phi)$ and 
+    $\pi(\phi) \leq \pi(\psi)$ as 
+    \[\set{(\pi(\phi),\pi(\psi)) \st T \model{\Si} \forall v, (\phi \to \psi)}\]
+    One can verify that these are well-defined and satisfy the axioms of 
+    a Boolean algebra.
+    Notice we need $T$ (potentially chosen to be the empty set) 
+    to make $\to$ look like $\leq$ and that we had to quotient modulo $T$ 
+    to make $\leq$ satisfy antisymmetry. 
+    Antisymmetry in this context looks very much like 
+    `propositional extensionality'.
+    Thus it makes sense to consider the Stone space of this Boolean algebra 
+    $S(F(\Si,n) / T)$.
+\end{dfn}
+
+\begin{lem}
+    \link{technical_lem_max_subs_pullback}
+    If $p \subs F(\Si,n)$ is a maximal subset 
+    ($\forall \phi \in F(\Si,n), \phi \in p$ or $\NOT \phi \in p$) then 
+    $\pi(\phi) \in \pi(p)$ in the quotient implies $\phi \in p$.
+\end{lem}
+\begin{proof}
+    If $\pi(\phi) \in \pi(p)$ then there exists $\psi \in p$ such that 
+    $\psi$ is equivalent to $\phi$ modulo $T$.
+    By consistency with $T$ there exists a non-empty $\Si$-model $\MM$ of $T$
+    and $b \in {\MM}^n$ 
+    such that $\MM \model{\Si} p(b)$, 
+    in particular $\MM \model{\Si} \psi(b)$.
+    Equivalence modulo $T$ then gives us that $\MM \model{\Si} \phi(b)$.
+    By maximality of $p$, 
+    $\phi$ or $\NOT \phi$ is in $p$ but the latter would lead to 
+    $\MM \nodel{\Si} \phi(b)$, 
+    a contradiction.
+\end{proof}
+
+\begin{prop}[The Stone space is a set of ultrafilters]
+    The Stone space of a $\Si$-theory $T$ is homeomorphic 
+    to the set of ultrafilters from $S(F(\Si,n) / T)$ 
+    that have preimage consistent with $T$ with the subspace topology.
+    In other words, if $\pi$ is the projection to the quotient then
+    $S_n(T) \iso X$, where
+    \[X := 
+    \set{\FF \in S(F(\Si,n) / T) \st \pi^{-1}(\FF) \text{ consistent with } T}\]
+\end{prop}
+\begin{proof}
+    Warning: this proof uses $\pi$ to be three different things,
+    the quotient $F(\Si,n) \to F(\Si,n) / T$, 
+    the image map (of the quotient) $S_n(T) \to X$, 
+    and the map of clopen sets (the image map of the image map) 
+    $\PP(S_n(T)) \to \PP(X)$.
+    The second will be a homeomorphism and the third will be a map between
+    subsets of the topologies (in particular the clopen subsets).
+
+    We show that sending $p \in S_n(T)$ to its image under the projection 
+    to the quotient $\pi(p)$ is a homeomorphism.
+    To show that it is well-defined it suffices to show that for any $p$, a 
+    maximal $n$-type over $T$, $\pi(p)$ is an ultrafilter of $F(\Si,n) / T$
+    with preimage consistent with $T$.
+    Preimage being consistent with $T$ 
+    follows from the definition of $n$-types over theories.
+    To show that it is a proper filter:
+    \begin{itemize}
+        \item $\top \in p$ by consistency and maximality. 
+            Hence $\pi(\top) \in \pi(p)$.
+        \item If $\pi(\bot) \in \pi(p)$ then
+            \linkto{technical_lem_max_subs_pullback}{$\bot \in p$} 
+            which is a contradiction with consistency.
+        \item If $\pi(\phi), \pi(\psi) \in \pi(p)$ then 
+            \linkto{technical_lem_max_subs_pullback}{$\phi,\psi \in p$} and so
+            $\phi \AND \psi \in p$ thus by definition of the Boolean algebra 
+            $F(\Si,n) / T$, 
+            \[\pi(\phi) \sqcap \pi(\psi) = \pi(\phi \AND \psi) \in \pi(p)\]
+        \item If $\pi(\phi) \in \pi(p)$ and $\pi(\phi) \leq \pi(\psi)$ then 
+            \linkto{technical_lem_max_subs_pullback}{$\phi \in p$} 
+            and by definition of $\leq$,
+            \[T \model{\Si} \forall v, (\phi \to \psi)\]
+            Since $p$ is consistent with $T$ there exists a non-empty
+            $\Si$-structure $\MM$ and $b \in {\MM}^n$ such that 
+            $\MM \model{\Si} \phi(b) \to \psi(b)$ and $\MM \model{\Si} \phi(b)$.
+            Hence $\MM \model{\Si} \psi(b)$ and by maximality of $p$ we have 
+            $\psi \in p$ and $\pi(\psi) \in \pi(p)$.
+    \end{itemize}
+    The image $\pi(p)$ is an ultrafilter by the 
+    \linkto{negation_is_in_ultrafilter}{equivalent definition}:
+    if $\pi(\phi) \in F(\Si,n) / T$ then either 
+    $\phi \in p$ or $\NOT \phi \in p$ by maximality of $p$, 
+    hence $\pi(\phi) \in \pi(p)$ or $\pi(\NOT \phi) \in \pi(p)$.
+    Thus we have $\pi$ is a map into \[
+    \set{\FF \in S(F(\Si,n) / T) \st \pi^{-1}(\FF) \text{ consistent with } T}\]
+
+    Injectivity: if $p,q \in S_n(T)$ and $\pi(p) = \pi(q)$ then 
+    if $\phi \in p$, we have $\pi(\phi) \in \pi(p) = \pi(q)$ and by our 
+    claim above $\phi \in q$.
+    Surjectivity: let $\FF \in S(F(\Si,n) / T)$ 
+    have its preimage consistent with $T$.
+    Then its preimage is an $n$-type.
+    If its preimage is a maximal $n$-type then we have surjectivity.
+    Indeed since $\FF$ is an ultrafilter if $\phi \in F(\Si,n)$ then 
+    $\pi(\phi) \in \FF$ or $\pi(\NOT \phi) = - \pi(\phi) \in \FF$,
+    hence $\phi \in \pi^{-1}(\FF)$ or $\NOT \phi \in \pi^{-1}(\FF)$.
+
+    To show that the map is continuous in both directions,
+    it suffices to show that images of clopen sets are clopen and preimages of 
+    clopen sets are clopen,
+    as each topology is generated by their clopen sets.
+    For $\phi \in F(\Si,n)$ since 
+    $\pi : S_n(T) \to X$ is a bijection we have that
+    \[\pi([\phi]_T) = \set{\FF \in X \st \phi \in \pi^{-1}(\FF)} =
+    \set{\FF \in F(\Si,n) / T \st \pi(\phi) \in \FF \text{ and } \FF \in X} = 
+    [\pi(\phi)] \sqcap X\]
+    and similarly $\pi^{-1}([\pi(\phi)] \sqcap X) = [\phi]_T$.
+    Hence there is a correspondence between clopen sets.
+\end{proof}
+
+\begin{lem}[Topological consistency]
+    \link{topological_consistency}
+    Let $\FF \in S(F(\Si,n) / T)$ and $T$ be a $\Si$-theory.
+    $\pi^{-1}(\FF)$ is consistent with $T$ if and only if 
+    \[\pi^{-1}(\FF) \in \bigcap_{\phi \in \pi^{-1}(\FF)} [\phi]_T\]
+    if and only if 
+    \[\bigcap_{\phi \in \pi^{-1}(\FF)} [\phi]_T \text{ is non empty}\]
+\end{lem}
+\begin{proof}
+    ($1. \implies 2. \implies 3.$)
+        Suppose $\pi^{-1}(\FF)$ is consistent with $T$.
+        Then $\pi^{-1}(\FF) \in S_n(T)$ thus for any $\phi \in \pi^{-1}(\FF)$, 
+        $\pi^{-1}(\FF) \in [\phi]_T$. 
+        Hence 
+        \[\pi^{-1}(\FF) \in \bigcap_{\phi \in \pi^{-1}(\FF)} [\phi]_T\]
+        and it is non-empty.
+
+    ($3. \implies 1.$)
+        Suppose 
+        \[p \in \bigcap_{\phi \in \pi^{-1}(\FF)} [\phi]_T\]
+        then $\forall \phi \in \pi^{-1}(\FF), \phi \in p$.
+        As $\FF$ is an ultrafilter, for any $\phi \in p$, 
+        \[\phi \notin \pi^{-1}(\FF) \implies \NOT \phi \in \pi^{-1}(\FF) 
+        \implies \NOT \phi \in p \text{ a contradiction}\]
+        Hence $p = \pi^{-1}(\FF)$.
+        Hence $\pi^{-1}(\FF) \in S_n(T)$ and thus is consistent with $T$.
+\end{proof}
+
+\begin{prop}[Topological compactness implies compactness for types]
+    \link{compactness_for_types_2}
+    Let $\FF \in S(F(\Si,n)/T)$ and $T$ be a $\Si$-theory.
+    Then $\pi^{-1}(\FF)$ is consistent with $T$ 
+    if and only if $\pi^{-1}(\FF)$ if finitely consistent
+    with $T$.
+\end{prop}
+\begin{proof}
+    By definition $\pi^{-1}(\FF)$ is finitely consistent with $T$ if and only if 
+    any finite subset of $\pi^{-1}(\FF)$ is consistent with $T$.
+    Translating this to the topology, this is
+    \linkto{topological_consistency}{if and only if} 
+    for any finite subset $\De \subs \pi^{-1}(\FF)$,
+    \[\bigcap_{\phi \in \De} [\phi]_T \text{ is non empty}\]
+    By \linkto{stone_of_theo_compact}{topological compactness of $S_n(T)$} 
+    this is if and only if 
+    \[\bigcap_{\phi \in \pi^{-1}(\FF)} [\phi]_T \text{ is non empty}\]
+    \linkto{topological_consistency}{Translating this back to model theory}
+    this is if and only if $\pi^{-1}(\FF)$ is consistent with $T$.
+\end{proof}

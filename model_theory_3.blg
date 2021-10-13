@@ -1,0 +1,76 @@
+This is BibTeX, Version 0.99d (TeX Live 2021/Arch Linux)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: model_theory_3.aux
+The style file: abbrv.bst
+Database file #1: refs.bib
+Warning--entry type for "openlogicproject" isn't style-file defined
+--line 25 of file refs.bib
+Warning--entry type for "stack0" isn't style-file defined
+--line 53 of file refs.bib
+Warning--entry type for "wiki0" isn't style-file defined
+--line 59 of file refs.bib
+Warning--entry type for "fandom0" isn't style-file defined
+--line 71 of file refs.bib
+Warning--entry type for "henson" isn't style-file defined
+--line 77 of file refs.bib
+I was expecting a `,' or a `}'---line 79 of file refs.bib
+ :   
+ :   title = {Model Theory, Spring 2008},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "wiki1" isn't style-file defined
+--line 97 of file refs.bib
+Warning--to sort, need author or key in openlogicproject
+Warning--to sort, need author or key in wiki1
+Warning--to sort, need author or key in wiki0
+Warning--to sort, need author or key in fandom0
+Warning--to sort, need author or key in stack0
+Warning--empty year in buechler
+Warning--empty year in hungerford
+Warning--empty year in jech
+Warning--empty year in tent
+Warning--empty year in marker
+Warning--empty journal in pillay
+Warning--empty year in poizat
+You've used 14 entries,
+            2118 wiz_defined-function locations,
+            543 strings with 4715 characters,
+and the built_in function-call counts, 2756 in all, are:
+= -- 238
+> -- 74
+< -- 0
++ -- 36
+- -- 20
+* -- 113
+:= -- 429
+add.period$ -- 35
+call.type$ -- 14
+change.case$ -- 44
+chr.to.int$ -- 0
+cite$ -- 26
+duplicate$ -- 136
+empty$ -- 309
+format.name$ -- 20
+if$ -- 604
+int.to.chr$ -- 0
+int.to.str$ -- 14
+missing$ -- 15
+newline$ -- 66
+num.names$ -- 18
+pop$ -- 122
+preamble$ -- 1
+purify$ -- 38
+quote$ -- 0
+skip$ -- 95
+stack$ -- 0
+substring$ -- 72
+swap$ -- 13
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 42
+warning$ -- 12
+while$ -- 18
+width$ -- 16
+write$ -- 116
+(There was 1 error message)

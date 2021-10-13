@@ -1,0 +1,1025 @@
+\subsection{Ultraproducts and Łos's Theorem}
+This section introduces ultrafilters and ultraproducts and uses Łos's Theorem
+to prove the compactness theorem.
+\begin{dfn}[Partially ordered set]
+    The signature of partially ordred sets $\Si_\PO$ consists of 
+    $(\nothing,\nothing ,n_f,\set{\leq},m_f)$,
+    where $n_\leq = 2$.
+    The theory of partially ordered sets $\PO$ consists of 
+    \begin{itemize}
+        \item[$\vert$] Reflexivity: 
+            $\forall x, 
+            x \leq x$ (this is just notation for $\leq(x,x)$)
+        \item[$\vert$] Antisymmetry: 
+            $\forall x \forall y, 
+            (x \leq y \AND y \leq x) \to x = y$
+        \item[$\vert$] Transitivity:
+            $\forall x \forall y \forall z, 
+            (x \leq y \AND y \leq z) \to x \leq z$
+    \end{itemize}
+\end{dfn}
+
+\begin{dfn}[Boolean algebra]
+    The signature of Boolean algebras $\Si_\BLN$ consists of 
+    $(\set{1,0},\set{\leq,\cap,\cup,\NEG},n_f,\nothing,m_f)$,
+    where $n_\leq = 2$, $n_\cap = n_\cup = 2$ and $n_\NEG = 1$.
+    The theory of Boolean algebras $\BLN$ consists of the theory of 
+    partially ordered sets $\PO$ together with the formulas
+    \begin{itemize}
+        \item[$\vert$] Assosiativity of adjunction: 
+            $\forall x \forall y \forall z, 
+            (x \cap y) \cap z = x \cap (y \cap z)$
+        \item[$\vert$] Assosiativity of disjunction: 
+            $\forall x \forall y \forall z, 
+            (x \cup y) \cup z = x \cup (y \cup z)$
+        \item[$\vert$] Identity for adjunction:
+            $\forall x, x \cap 1 = x$ 
+        \item[$\vert$] Identity for disjunction:
+            $\forall x, x \cup 0 = x$ 
+        \item[$\vert$] Commutativity of adjunction: 
+            $\forall x \forall y, x \cap y = y \cap x$
+        \item[$\vert$] Commutativity of disjunction: 
+            $\forall x \forall y, x \cup y = y \cup x$
+        \item[$\vert$] Distributivity of adjunction:
+            $\forall x \forall y \forall z, 
+            x \cap (y \cup z) = (x \cap y) \cup (x \cap z)$
+        \item[$\vert$] Distributivity of disjunction:
+            $\forall x \forall y \forall z, 
+            x \cup (y \cap z) = (x \cup y) \cap x (\cup z)$
+        \item[$\vert$] Negation on adjunction: 
+            $\forall x, x \cap \NEG x = 0$ 
+        \item[$\vert$] Negation on disjunction: 
+            $\forall x, x \cup \NEG x = 1$ 
+        \item[$\vert$] Order on adjunction:
+            $\forall x \forall y, (x \cap y) \leq x$
+        \item[$\vert$] Maximal property of adjunction:
+            $\forall x \forall y \forall z, 
+            (x \leq y) \AND (x \leq z) \to (x \leq y \cap z)$ 
+        \item[$\vert$] Order on disjunction:
+            $\forall x \forall y, x \leq (x \cup y)$ 
+        \item[$\vert$] Minimal property of disjunction:
+            $\forall x \forall y \forall z, 
+            (x \leq z) \AND (y \leq z) \to (x \cup y \leq z)$ 
+        \end{itemize}
+    Often `absorption' is also included, 
+    but it can be deduced from the other axioms.
+    I have not used the usual logical symbols due to obvious clashes with 
+    our notation, 
+    and we will be using this in the context of sets anyway.
+    If $B$ is a $\Si_\BLN$-model of $\BLN$ we call it a Boolean algebra.
+\end{dfn}
+\begin{dfn}[Filters and ultrafilters on Boolean algebras]
+    Let $B$ be a Boolean algebra.
+    A subset $\FF$ of $B$ is an filter on $B$ if
+    \begin{itemize}
+        \item $1 \in \FF$.
+        \item For any two members $a,b \in \FF$ the adjunction
+            $a \cap b$ is in $\FF$. (Closure under finite intersection.)
+        \item If $a \in \FF$ then any $b \in B$ 
+            such that $a \leq b$ is also a member of $\FF$. 
+            (Closure under superset.)
+    \end{itemize}
+    We say a filter on $B$ is proper if it does not contain $0$.
+    A proper filter $\FF$ on $B$ is an ultrafilter (maximal filter) when
+    for any filter $\GG$ on $B$, if $\FF \subs \GG$ then $\GG = \FF$ 
+    or $\GG = B$.
+\end{dfn}
+
+\begin{dfn}[Filters on sets]
+    Let $X$ be a set. 
+    The power set of $X$ is a Boolean algebra with $0$ interpreted as 
+    $\nothing$, 
+    $1$ interpreted as $X$ and $\leq$ interpreted as $\subs$.
+    We say $\FF$ is an filter on $X$ if it is filter on the power set
+    as this Boolean algebra.
+    The definition translates to:
+    \begin{itemize}
+        \item $X \in \FF$.
+        \item For any two members of $\FF$ their intersection is in $\FF$.
+        \item If $a \in \FF$ then any $b$ in the power set of $X$ 
+            such that $a \subs b$ is also a member of $\FF$.
+    \end{itemize}
+    A filter on $X$ is proper if and only if it does not contain the empty set,
+    if and only if the filter is not equal to the power set.
+    A proper filter $\FF$ is an ultrafilter if and only if
+    for any filter $\GG$, 
+    if $\FF \subs \GG$ then $\FF = \GG$ 
+    or $\GG$ is the power set of $X$.
+\end{dfn}
+
+\begin{dfn}[Ultraproduct]
+    Let $\FF$ be an ultrafilter on $X$.
+    We define a relation on $\prod_{x \in X} x$ by 
+    \[
+        (a_x)_{x \in X} \sim (b_x)_{x \in X} 
+        := \set{x \in X \st a_x = b_x} \in \FF
+    \]
+    This is an equivalence relation as 
+    \begin{itemize}
+        \item $(a_x)_{x \in X} \sim (a_x)_{x \in X} \iff 
+            \set{x \in X \st a_x = a_x} = X \in \FF$ 
+        \item Symmetry is due to symmetry of $=$.
+        \item If $\set{x \in X \st a_x = b_x} \in \FF$ and 
+            $\set{x \in X \st b_x = c_x} \in \FF$ then 
+            $\set{x \in X \st a_x = b_x = c_x}$ is their intersection
+            and so is in $\FF$.
+            Thus its superset $\set{x \in X \st a_x = c_x}$ is in $\FF$.
+    \end{itemize}
+    We define the ultraproduct of $X$ over $\FF$:
+    \[\prod X / \FF := \prod_{x \in X} x / \sim\]
+\end{dfn}
+
+%\begin{dfn}[Filter basis]
+%    
+%    Let $X$ be a set and $\BB$ a subset of its power set. 
+%    We say $\BB$ is a proper filter basis on $X$ if 
+%    $\nothing \notin \BB, \nothing \ne \BB$ and for any two elements 
+%    $V_0,V_1 \in \BB$ there exists $U \in \BB$ such that $U \subs V_0 \cap V_1$.
+%
+%    Let \[\FF = V \subs X \st \exists U \in \BB, U \subs V\]
+%    then 
+%    \[\FF \text{ is a proper fiter on }X \iff 
+%    \BB \text{ is a proper filter basis on }X\]
+%
+%    Clearly any filter that contains $\BB$ contains the filter $\FF$.
+%\end{dfn}
+%\begin{proof}
+%    \begin{forward}
+%        Suppose $\nothing \in \BB$ then $\FF$ is the power set of $X$, 
+%        which is false.
+%        Suppose $\nothing = \BB$ then $\FF$ is empty which is also false.
+%        Let $V_0,V_1 \in \BB$ then each of them are in $\FF$ 
+%        by taking themselves as the subsets from $\BB$.
+%        Thus their intersection is in $\FF$, 
+%        but then by definition of $\FF$
+%        \[\exists U \in B, U \subs V_0 \cap V_1\]
+%    \end{forward}
+%    \begin{backward}
+%        $\BB$ is non-empty and so $X \in \FF$.
+%        Finite intersection: if $V_0,V_1 \in \FF$ then respectively there
+%        exist $U_0,U_1 \in \BB$ that are subsets of $V_0,V_1$.
+%        By the property of $\BB$ there exists a $U \in \BB$ such that 
+%        $U \subs U_0 \cap U_1 \subs V_0 \cap V_1$ 
+%        hence the intersection is in $\FF$.
+%        Closure in superset is trivial.
+%        Lastly it is proper since $\nothing \notin \BB$.
+%    \end{backward}
+%\end{proof}
+
+\begin{lem}[Technical detail]
+    \link{technical_lemma_w_le_neg_u}
+    Let $B$ be a boolean algebra.
+    If $a,b \in B$ are such that $a \cap b = 0$ then $b \leq \NEG a$.
+\end{lem}
+\begin{proof}
+    \begin{align*}
+        &a \cup \NEG a = 1\\
+        \implies & b \cap (a \cup \NEG a) = b \cap 1 = b\\
+        \implies & (b \cap a) \cup (b \cap \NEG a) = b\\
+        \implies & 0 \cup (b \cap \NEG a) = b\\
+        \implies & b = b \cap \NEG a \leq \NEG a
+    \end{align*}
+\end{proof}
+
+\begin{prop}[Equivalent definition of ultrafilter]
+    \link{negation_is_in_ultrafilter}
+    Let $B$ be a boolean algebra. 
+    Let $\FF$ be a proper filter on $B$.
+    $\FF$ is an ultrafilter over $B$ if and only if for every element 
+    $a$ of $B$,
+    \emph{either} $a \in \FF$ or $(\NEG a) \in \FF$.
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        Let $a \in B$ then take 
+        \[\GG_a = \set{b \in B \st \exists c \in \FF, c \cap a \leq b}\]
+        Then clearly $\GG_a$ is a filter containing $a$.
+        Since $\FF$ is an ultrafilter, 
+        we can case on whether $\GG_a$ is $\FF$ or $B$.
+        If $\GG_a = B$ set then it contains $0$ and so 
+        there exists $c \in \FF$ such that 
+        $c \cap a = 0$.
+        \linkto{technical_lemma_w_le_neg_u}{Hence $c \leq \neg a$,}
+        and so $(\NEG a) \in \FF$.
+        If $\GG_a$ is $\FF$ then $a \in \FF$.
+
+        This is an `exclusive or' since if both $a$ 
+        and its negation were in $\FF$ then $\FF$ would not be proper.
+    \end{forward}
+    \begin{backward}
+        Let $\GG$ be a proper filter such that $\FF \subs \GG$.
+        It suffices to show that $\GG = \FF$.
+        Then let $a \in \GG$.
+        Suppose $a \notin \FF$.
+        Then $\NEG a \in \FF$ and so $\NEG a \in \GG$.
+        Thus $0 = (a \cap \NEG a) \in \GG$ 
+        thus $\GG = \FF$, a contradiction.
+    \end{backward}
+\end{proof}
+
+\begin{prop}[Equivalent definition of ultrafilter (translated to the power set)]
+    \link{complement_is_in_ultrafilter}
+    Let $X$ be a set. 
+    Let $\FF$ be a proper filter on $X$.
+    $\FF$ is an ultrafilter over $X$ if and only if for every subset 
+    $U \subs X$, 
+    \emph{either} $U \in \FF$ or $X \setminus U \in \FF$.
+\end{prop}
+\begin{proof}
+    Follows immediately from \linkto{negation_is_in_ultrafilter}{the 
+    equivalent definition of ultrafilter}.
+\end{proof}
+
+\begin{prop}[Łos's Theorem]
+    \link{los_theorem}
+    Let $\f{M} \subs \struc{\Si}$ where $\Si$ is a signature
+    such that \emph{each carrier set is non-empty}.
+    Let \[X = \set{{\MM} \st \MM \in \f{M}}\]
+    Write $\MM = {\MM}$ and $\f{M} = X$ to make things look nicer.
+    Suppose $\FF$ is an ultrafilter on $\f{M}$ 
+    (i.e. an ultrafilter on the Boolean algebra $P(\f{M})$).
+    Then we want to make $\NN := \prod \f{M} / \FF$ into a $\Si$-structure.
+    Let $\pi$ be the natural surjection 
+    $\prod_{\MM \in \f{M}} \MM \to \prod \f{M} / \FF$.
+    If $a = (a_1, \dots, a_n) \in \prod_{\MM \in \f{M}} \MM$ then
+    write $a_\MM := ((a_1)_\MM, \dots, (a_n)_\MM)$.
+    \begin{itemize}
+        \item Constant symbols $c \in \const{\Si}$ are interpreted as 
+            \[\modintp{\NN}{c} := \pi(\modintp{\MM}{c})_{\MM \in \f{M}}\]
+        \item Any function symbol $f \in \func{\Si}$ is interpreted as the 
+            function
+            \[\modintp{\NN}{f} : 
+            \brkt{\prod \f{M} / \FF}^n \to \prod \f{M} / \FF
+            := \pi\brkt{(a_\MM)_{\MM \in \f{M}}} \mapsto 
+            \pi(f^\MM (a_\MM))_{\MM \in \f{M}}\]
+            where $\pi\brkt{(a_\MM)_{\MM \in \f{M}}} = 
+            \brkt{\pi((a_i)_\MM)_{\MM \in \f{M}}}_{i=1}^n$.
+        \item Any relation symbols 
+            $r \in \rel{\Si}$ is interpreted as the subset such that 
+            \[\pi(a) \in \modintp{\NN}{r}
+            \iff \set{\MM \in \f{M} \st 
+            a_\MM \in \modintp{\MM}{r}} \in \FF\]
+            where $a = a_1,\dots, a_m$ and $\pi(a) = \brkt{\pi(a_i)}_{i=1}^m$.
+    \end{itemize}
+    Then for any $\Si$-formula $\phi$ with free variables indexed by $S$,
+    If $a = (a_1, \dots, a_n) \in \prod_{\MM \in \f{M}} \MM$ then 
+    \[\NN \model{\Si} \phi(\pi(a)) \iff 
+    \set{\MM \in \f{M} \st \MM \model{\Si} \phi(a_\MM)} \in \FF\]
+\end{prop}
+\begin{proof}
+    We show that the interpretation of functions is well defined.
+    Let $a, b \in \brkt{\prod_{\MM \in \f{M}}}^{n_f}$.
+    Suppose for each $i \in \set{1,\dots,n_f}$, 
+    $a_i \sim b_i \in \prod_{\MM \in \f{M}} \MM$.
+    Then 
+    \begin{align*}
+        &\text{for each } i, 
+        \set{\MM \in \f{M} \st (a_i)_\MM = (b_i)_\MM} \in \FF \\
+        &\implies
+        \set{\MM \in \f{M} \st \bigand{i = 1}{n} (a_i)_\MM = (b_i)_\MM} \in \FF
+        \text{ by closure under finite adjunction}\\
+        &\implies
+        \set{\MM \in \f{M} \st a_\MM = b_\MM} \in \FF\\
+        &\implies
+        \set{\MM \in \f{M} \st 
+            \modintp{\MM}{f}(a_\MM) = \modintp{\MM}{f}(b_\MM)} \in \FF
+        \text{ by closure under superset}\\
+        &\implies \pi(\mmintp{f}(a_\MM)) = \pi(\mmintp{f}(b_\MM))
+        \text{ by definition of the quotient}
+    \end{align*}
+
+    We use the following claim:
+    If $t$ is a term with variables $S$ and 
+    $a \in (\prod_{\MM \in \f{M}} \MM)^S$
+    then there exists $b \in \prod_{\MM \in \f{M}} \MM$ such that 
+    \[\modintp{\NN}{t}\circ \pi(a) = \pi(b) \text{ and } 
+    \forall \MM \in \f{M}, \modintp{\MM}{t}(a_\MM) = b_\MM\]
+    We prove this by induction on $t$:
+    \begin{itemize}
+        \item If $t$ is a constant symbol $c$ then pick 
+            $b := (\modintp{\MM}{c})_{\M \in \f{M}}$.
+        \item If $t$ is a variable then let 
+            $a \in \prod_{\MM \in \f{M}} \MM$ (only one varible), 
+            pick $b := a$.
+        \item If $t$ is a $f(s)$ then let $a \in (\prod_{\MM \in \f{M}} \MM)^S$
+            by the inducition hypothesis there exists 
+            $c \in \prod_{\MM \in \f{M}} \MM$ such that 
+            \[\modintp{\NN}{s} \circ \pi(a) = \pi(c) \text{ and } 
+            \forall \MM \in \f{M}, \modintp{\MM}{s}(a_\MM) = c_\MM\]
+            Then we can take 
+            $b = \brkt{\modintp{\MM}{f}(c_\MM)}_{\MM \in \f{M}}$. 
+            Thus 
+            \[\nnintp{t}\circ \pi(a) = \nnintp{f}(\nnintp{s}\circ (\pi(a)))
+            = \nnintp{f}(\pi(c)) = \pi(\mmintp{f}(c_\MM))_{\MM \in \f{M}}
+            = \pi(b)\]
+            and for any $\MM \in \f{M}$,
+            \[\mmintp{t}(a_\MM) = \mmintp{f} \circ \mmintp{s} (a_\MM)
+            = \mmintp{f}(c_\MM) = b_\MM\]
+    \end{itemize}
+    We now induct on $\phi$ to show that for any appropriate $a$,
+    \[\NN \model{\Si} \phi(\pi(a)) \iff 
+    \set{\MM \in \f{M} \st \MM \model{\Si} \phi(a_\MM)} \in \FF\]
+    \begin{itemize}
+        \item The case where $\phi$ is $\top$ is trivial 
+            (noting that anything models $\top$ and $\f{M} \in \FF$).
+        \item If $\phi$ is $s = t$ then it suffices to show that 
+        \[  
+            \modintp{\NN}{s}\circ \pi(a) = \modintp{\NN}{t}\circ \pi(a)
+            \iff 
+            \set{\MM \in \f{M} \st \MM \model{\Si} \modintp{\MM}{t}(a_\MM) = 
+            \modintp{\MM}{s}(a_\MM)} \in \FF
+        \]
+        \begin{forward}
+            If for two terms $s,t$ we have
+            $\modintp{\NN}{s}\circ \pi(a) = \modintp{\NN}{t}\circ \pi(a)$
+            then by the claim
+            there exists $b \in \prod_{\MM \in \f{M}} \MM$ such that
+            \[  
+                \f{M} = 
+                \set{\MM \in \f{M} \st 
+                \modintp{\MM}{s}(a_\MM) = b_\MM = \modintp{\MM}{t}(a_\MM)} 
+                = 
+                \set{\MM \in \f{M} \st 
+                    \modintp{\MM}{t}(a_\MM) = \modintp{\MM}{s}(a_\MM)} 
+            \]
+            which is therefore in the filter $\FF$.
+        \end{forward}
+        \begin{backward}
+            If for two terms $s,t$ we have
+            $\modintp{\NN}{s}\circ \pi(a) \ne \modintp{\NN}{t}\circ \pi(a)$
+            then by the claim there exist 
+            $b \ne c \in \prod_{\MM \in \f{M}} \MM$ such that
+            \[  
+                \set{\MM \in \f{M} \st 
+                    \modintp{\MM}{t}(a_\MM) = \modintp{\MM}{s}(a_\MM)} =
+                \set{\MM \in \f{M} \st b_\MM = c_\MM} = 
+                \nothing
+            \]
+            which is not in the filter $\FF$ as it is proper.
+        \end{backward}
+        \item If $\phi$ is $r(t)$ then by the claim we have 
+            $b \in \prod_{\MM \in \f{M}} \MM$ with the desired properties.
+            It suffices to show that 
+            \[\pi(b) \in \nnintp{r} \iff 
+            \set{\MM \in \f{\MM} \st b_\MM \in \mmintp{r}} \in \FF\]
+            This follows from our definition of 
+            interpretation of relation symbols.
+        \item If $\phi$ is $\NOT \psi$ then 
+            $\NN \model{\Si} \phi(\pi(a))$ if and only if 
+            $\set{\MM \in \f{M} \st \MM \model{\Si} \psi(a_\MM)} \notin \FF$
+            by induction.
+            This holds if and only if its 
+            \linkto{complement_is_in_ultrafilter}{complement is in the filter}:
+            $\set{\MM \in \f{M} \st \MM \nodel{\Si} \psi(a_\MM)} \in \FF$
+            which is if and only if 
+            $\set{\MM \in \f{M} \st \MM \model{\Si} \phi(a_\MM)} \notin \FF$
+        \item Without loss of generality we can use $\AND$ instead of $\OR$
+            to make things simpler 
+            (replacing this comes down to dealing with a couple of $\NOT$
+            statements).
+            If $\phi$ is $\psi \AND \chi$ then one direction 
+            follows filters being closed under intersection:
+            \begin{align*}
+                &\NN \model{\Si} \phi(\pi(a))\\
+                &\iff 
+                \set{\MM \in \f{M} \st \MM \model{\Si} \psi(a_\MM)} \in \FF
+                \text{ and }
+                \set{\MM \in \f{M} \st \MM \model{\Si} \chi(a_\MM)}\in \FF\\
+                &\implies 
+                \set{\MM \in \f{M} \st \MM \model{\Si} \psi(a_\MM)}
+                \cap 
+                \set{\MM \in \f{M} \st \MM \model{\Si} \chi(a_\MM)}\in \FF\\
+                &\iff
+                \set{\MM \in \f{M} \st \MM \model{\Si} 
+                \psi(a_\MM) \AND \chi(a_\MM)}\in \FF
+            \end{align*}
+            To make second implication a double implication we note that 
+            each of the two sets 
+            \[\set{\MM \in \f{M} \st \MM \model{\Si} \psi(a_\MM)} \in \FF
+            \text{ and }
+            \set{\MM \in \f{M} \st \MM \model{\Si} \chi(a_\MM)}\in \FF\]
+            are supersets of the intersection which is in $\FF$.
+        \item Without loss of generality we can use $\exists$ instead of 
+            $\forall$ to make things simpler.
+            \begin{forward}
+                Suppose $\NN \model{\Si} \exists v, \psi(\pi(a),v)$.
+                Then there exists $b \in \prod_{\MM \in \f{M}} \MM$ such that 
+                $\NN \model{\Si} \psi(\pi(a),\pi(b))$.
+                Then by induction 
+                \[\set{\MM \in \f{M} \st \MM \model{\Si} \psi(a_\MM,b_\MM)}
+                \in \FF\]
+                This is a subset of 
+                \[  
+                    \set{\MM \in \f{M} \st \exists c \in \MM, \MM \model{\Si} 
+                    \psi(a_\MM,c)} = 
+                    \set{\MM \in \f{M} \st \MM \model{\Si} 
+                    \exists v, \psi(a_\MM,v)}
+                \]
+            \end{forward}
+            \begin{backward}
+                Suppose $Y:=\set{\MM \in \f{M} \st \MM \model{\Si} 
+                \exists v, \psi(a_\MM,v)} \in \FF$.
+                Then by the axiom of choice we have for each $\MM$
+                \[\begin{cases}
+                    b_\MM \in \MM, \MM \model{\Si} &\text{if } \MM \in Y\\
+                    b_\MM \in \MM   &\MM \notin Y
+                \end{cases}\]
+                since each $\MM$ is non-empty.
+                By induction we have 
+                $\NN \model{\Si} \psi(\pi(a),\pi(b))$
+                and so $\NN \model{\Si} \exists v, \psi(\pi(a),v)$
+            \end{backward}
+    \end{itemize}
+\end{proof}
+
+\begin{cor}[The Compactness Theorem]
+    A $\Si$-theory is consistent if and only if it is finitely consistent.
+\end{cor}
+\begin{proof}
+    Suppose $T$ is finitely consistent.
+    For each finite subset $\De \subs T$ we let $\MM_\De$ be the given 
+    non-empty model of $\De$,
+    which exists by finite consistency.
+    We generate an ultrafilter $\FF$ on 
+    $\f{M} := \set{\MM_\De \st \De \in I}$ and use 
+    \linkto{los_theorem}{Łos's Theorem} to show that
+    $\prod \f{M} / \FF$ is a model of $T$.
+    Let
+    \[I = \set{\De \subs T \st \De \text{ finite}}
+    \quad \text{ and } [\star] : I \to \PP(I) := 
+    \De \mapsto \set{\Ga \in I \st \De \subs \Ga}\]
+    Writing $[I]$ for the image of I,
+    we claim that $\FF := \set{U \in \PP(I) \st \exists V \in [I], V \subs U}$
+    forms an ultrafilter on $I$ 
+    (i.e. an ultrafilter on the Boolean algebra $\PP(I)$).
+    Indeed 
+    \begin{itemize}
+        \item $\nothing \in I$ thus $I = \set{[\nothing]  \in [I] \subs \FF}$.
+        \item Suppose $\nothing \in \FF$ then $\nothing \in [I]$ and so there 
+            exists $\De \in I$ such that $[\De] = \nothing$.
+            This is a contradiction as $\De \in [\De]$.
+        \item If $U, V \in \FF$ then there exist $\De_U, \De_V \in I$ 
+            such that $[\De_U] \subs U$ and $[\De_V] \subs V$. 
+            \begin{align*}
+                [\De_U] \cap [\De_V] &
+                = \set{\Ga \in I \st \De_0 \subs \Ga 
+                \text{ and } \De_1 \subs \Ga}\\
+                &= \set{\Ga \in I \st \De_0 \cup \De_1 \subs \Ga}\\
+                &= [\De_0 \cup \De_1] \in [I] \subs \FF
+            \end{align*}
+        \item Closure under superset is clear.
+    \end{itemize}
+    We identify each $\MM_\De \in \f{M}$ with $\De \in I$ and generate
+    the same filter (which we will still call $\FF$) on $\f{M}$ 
+    (this is okay as the power sets are isomorphic as Boolean algebras.)
+    By \linkto{los_theorem}{Łos's Theorem} $\prod \f{M} / \FF$ is 
+    a well-defined $\Si$-structure such that for any $\Si$-sentence $\phi$
+    \[\prod \f{M} / \FF \model{\Si} \phi \iff 
+    \set{\MM \in \f{M} \st \MM \model{\Si} \phi} \in \FF\]
+    Let $\phi \in T$, 
+    then $\set{\De \in I \st \set{\phi} \subs \De} \in \FF$ and so
+    \[
+        \set{\De \in I \st \set{\phi} \subs \De} \subs 
+        \set{\De \in I \st \phi \in \De} \subs
+        \set{\De \in I \st \MM \model{\Si} \phi} \in \FF
+    \]
+    The image of this under the isomorphism is 
+    $\set{\MM_\De \in X \st \MM \model{\Si} \phi}$ thus is in $\FF$ and so 
+    $\prod \f{M} / \FF \model{\Si} \phi$.
+\end{proof}
+
+\subsection{Boolean algebras and Stone Duality}
+\begin{dfn}
+    The category of Boolean algebras consists of Boolean algebras as the objects
+    and for any two Boolean algebras $B, C$ morphisms $f:B \to C$ such that
+    for any $a,b \in B$
+    \[f(0) = 0, f(1) = 1, f(a \cup b) = f(a) \cup f(b), 
+    f(a \cap b) = f(a) \cap f(b)\] 
+\end{dfn}
+
+\begin{lem}[Facts about Boolean algebras]
+    \link{bare_boolean_facts}
+    Let $B$ be a Boolean algebra, let $\FF$ be an ultrafilter
+    on $B$, let $a,b \in B$ and let $f : B \to C$ be a morphism.
+    \begin{itemize}
+        \item $a \cap a = a$ and $a \cup a = a$.
+        \item $a \cup 1 = 1$ and $a \cap 0 = 0$.
+        \item If $a \cap b = 0$ and $a \cup b = 1$ then $a = \NEG b$
+            (negations are unique.)
+        \item $\NEG (a \cup b) = (\NEG a) \cap (\NEG b)$ and its dual. 
+            (De Morgan)
+        \item ($a \in \FF$ or $b \in \FF$) if and only if $a \cup b \in \FF$.
+        \item Morphisms are order preserving.
+        \item Morphisms commute with negation.
+        \item $a \cap b = 1$ if and only if $a = 1$ and $b = 1$.
+            Similarly for $\cup$ with $0$.
+    \end{itemize}
+\end{lem}
+\begin{proof}~
+    \begin{itemize}
+        \item We prove only $a \cap a = a$ as the other has the same proof.
+            \[a \cap a = (a \cap a) \cup 0 = (a \cap a) \cup (a \cap \NEG a)
+            = a \cap (a \cup \NEG a) = a \cap 1 = a\]
+        \item Again, we prove only $a \cup 1 = 1$. Using the previous part,
+            \[a \cup 1 = a \cup (a \cup \NEG a) = (a \cup a) \cup \NEG a
+            = a \cup \NEG a = 1\]
+        \item \begin{align*}
+            a &= a \cup 0 = a \cup (b \cap \NEG b) = 
+            (a \cup b) \cap (a \cup \NEG b) = 1 \cap (a \cup \NEG b)\\
+            &= 0 \cup (a \cup \NEG b) = (b \cap \NEG b) \cup (a \cup \NEG b)
+            = (b \cup a) \cup \NEG b = 0 \cup \NEG b \\
+            &= \NEG b
+        \end{align*} 
+        \item By the previous part it suffices to show that 
+            \[\brkt{(\NEG a) \cap (\NEG b)} \cap (a \cup b) = 0 \text{ and }
+            \brkt{(\NEG a) \cup (\NEG b) } \cup (a \cup b) = 1\]
+            These are clear.
+        \item \begin{forward}
+            In the case that $a \in \FF$ we have $a \leq a \cup b \in \FF$ 
+            as $\FF$ is under superset. 
+            The other case is the same.
+        \end{forward}
+        \begin{backward}
+            Suppose $a \notin \FF$ and $b \notin \FF$ then
+            \linkto{negation_is_in_ultrafilter}{$\NEG a \in \FF$ and 
+                $\NEG b \in \FF$} hence $\NEG a \cap \NEG b \in \FF$
+                by closure under intersection. 
+                By the previous part this is equal to $\NEG (a \cup b)$,
+                which implies $(a \cup b) \notin \FF$ as $\FF$ 
+                is an \linkto{negation_is_in_ultrafilter}{ultrafilter}.
+        \end{backward}
+        \item Suppose $b \leq a$. 
+            We show that $f(a) \leq f(b)$.
+            By the minimal property of disjunction,
+            \[b \leq a \AND a \leq a \implies b \cup a \leq a\]
+            Clearly $a \leq b \cup a$ and so $a = b \cup a$
+            Hence $f(b) \leq f(b) \cup f(a) = f(b \cup a) = f(a)$.
+        \item Suppose $f(a) = b$.
+            Then $f(a) \AND f(\NEG a) = f(a \AND \NEG a) = f(0) = 0$
+            and $f(a) \OR f(\NEG a) = f(a \OR \NEG a) = f(1) = 1$.
+            As negations are unique (shown above) 
+            this gives us that $f(\NEG a) = \NEG f(a)$.
+        \item Suppose $a \cap b = 1$ then $1 \leq a \cap b \leq a$ hence $1 = a$
+            and similarly $1 = b$.
+    \end{itemize}
+\end{proof}
+
+\begin{dfn}
+    The category of Stone spaces has
+    $0$-dimensional, 
+    compact and Hausdorff topological spaces as objects and 
+    continuous maps as morphisms.
+\end{dfn}
+
+\begin{prop}[Contravariant functor from Boolean algebras to Stone spaces]
+    \link{bool_alg_to_stone_functor}
+    The map
+    $S(\star)$ that sends a Boolean algebra $B$ to the Stone space
+    \[S(B) := \set{\FF \subs B \st \FF \text{ is an ultrafilter}}\]
+    and a Boolean algebra morphism
+    $f: A \to B$ to a continuous map of Stone spaces:
+    \[S(f) := f^-1(\star) : S(B) \to S(A)\]
+    is a contravariant functor from Boolean algebras to the category of Stone
+    spaces.
+\end{prop}
+\begin{proof}
+    We give the topology on $S(B)$ the topology generated by the clopen sets:
+    Let $b \in B$, 
+    then an element of the clopen basis is given by
+    \[[b] := \set{\FF \subs B \st b \in \FF}\]
+    Thus $S(B)$ is $0$-dimensional by definition.
+    It is Hausdorff because if $\FF, \GG \in S(B)$ are not equal then 
+    without loss of generality there exists $b \in \FF$ such that 
+    $b \notin \GG$. 
+    As ultrafilters are proper, $[b] \cap [\NEG b] = \nothing$ and so
+    we have obtained disjoint open sets such that 
+    $\FF \in [b]$ and $\GG \in [\NEG b]$.
+    
+    Next we show that it is compact. 
+    To do this, 
+    we will look at $S(B)$ as a subspace of the power set of $B$
+    which is isomorphic to
+    $2^B$, 
+    the set of functions from $B$ to $2$.
+    We endow $2 = \set{0,1}$ with the discrete topology and note that it is 
+    compact.
+    Then $2^B = \prod_{a \in B} 2$ has an induced product topology which is 
+    compact by Tychonoff's Theorem.
+    The isomorphism from $2^B$ to the power set of $B$ is given by 
+    \[2^B \to \PP(B) := f \mapsto f^{-1}(1)\]
+    We take the topology on $\PP(B)$ induced by this isomorphism.
+    We must show that 
+    \begin{itemize}
+        \item $S(B)$ is the image of 
+            $\mor{B}{2}{} := 
+            \set{f \in 2^B \st f \text{ is a Boolean algebra morphism}}$
+            under this isomorphism.
+        \item $\mor{B}{2}{}$ is a closed subset of $2^B$ and therefore
+            compact.
+        \item The induced topology on $S(B)$ 
+            is the same as its original topology.
+    \end{itemize}
+    With these facts we see that $S(B)$ is also compact.
+
+    Let $f : B \to 2$ be a Boolean algebra morphism. 
+    We must show that $\FF := f^{-1}(1)$ is an ultrafilter.
+    Since $f(1) = 1$, $1 \in \FF$. 
+    If $a,b \in \FF$ then $f(a) = f(b) = 1$ so 
+    $f(a \cap b) = f(a) \cap f(b) = 1$ thus $\FF$ is closed under intersection.
+    If $a \subs b$ and $a \in \FF$ then as $f$ is 
+    \linkto{bare_boolean_facts}{order preserving} $f(a) \subs f(b)$.
+    It is a proper filter as $f(0) = 0 \ne 1$.
+    To show it is an ultrafilter we use the
+    \linkto{negation_is_in_ultrafilter}{equivalent definition}:
+    let $a \in \PP(B)$. 
+    If $f(a) = 1$ then we are done,
+    otherwise
+    \[f(\neg a) = \neg f(a) = \neg 0 = 1 \implies \neg a \in \FF\]
+    and we are done.
+    To show that this is a surjection we use the inverse:
+    \[\FF \mapsto \brkt{a \to \begin{cases}
+        1, a \in \FF\\
+        0, a \notin \FF
+    \end{cases}}\] 
+    To show that this is a morphism we note that $\FF$ 
+    is proper and contains $1$ thus $f(0) = 0$ and $f(1) = 1$. 
+    Also 
+    \begin{align*}
+        & f(a \cap b) = 1 \iff a \cap b \in \FF\\ 
+        &\iff a \in \FF \text{ and } b \in \FF 
+        \quad \text{ by closure under finite intersection and superset}\\
+        &\iff f(a) = 1 \text{ and } f(b) = 1 \\
+        &\iff f(a) \cap f(b) = 1 
+        \quad \text{ \linkto{bare_boolean_facts}{ as proven before}}
+    \end{align*}
+    Hence $f(a \cap b) = f(a) \cap f(b)$.
+    Lastly since 
+    \[\NEG f(a) = 1 \iff f(a) = 0 \iff a \notin \FF \iff \NEG a \in \FF 
+    \iff f(\NEG a) = 1\]
+    thus by \linkto{bare_boolean_facts}{De Morgan} and 
+    \linkto{bare_boolean_facts}{uniqueness of negations} we have
+    \[f(a \cup b) = f(\NEG(\NEG a \cap \NEG b)) = 
+    \NEG \sqbrkt{\NEG f(a) \cap \NEG f(b)} = 
+    \brkt{\NEG \NEG f(a)} \cup \NEG \NEG f(b) = f(a) \cup f(b)\]
+    Thus the inverse map gives back a Boolean algebra morphism and 
+    $\mor{B}{2}{} \iso S(B)$ under the isomorphism.
+
+    To show that $\mor{B}{2}{}$ is a closed subset we write it as 
+    \[\mor{B}{2}{} = \set{f \st f(0) = 0} \cap \set{f \st f(1) = 1}
+        \cap \set{f \st f \text{ commutes with $\cap$}} \cap 
+        \set{f \st f \text{ commutes with $\cup$}}\]
+    and show that all of these four sets are closed.
+    Call them $\min,\max,C_{\cap},C_\cup$ respectively and for each $a \in B$
+    call the projection map $\pi_a : 2^B \to 2$ (these send $f \mapsto f(a)$
+    such that $\pi_a(f) = f(a)$)
+    and note that by definition of the product topology each 
+    $\pi_a$ is continuous; 
+    the closed sets of the product are generated by preimages of closed sets.
+    \[f(0) = 0 \iff \pi_0(f) = 0 \iff f \in \pi_0^{-1}(0)\]
+    Hence $\min = \pi_0^{-1}(0)$ is closed as $\set{0}$ 
+    is closed in the discrete topology on $2$.
+    Similarly $\max = \pi_1^{-1}(1)$ is closed.
+    \[C_\cap = \bigcap_{a,b \in B} \set{f \st f(a \cap b) = f(a) \cap f(b)}
+    = \bigcap_{a,b \in B} \set{f \st \pi_{a \cap b}^{-1}(f(a) \cap f(b))}\]
+    Thus $C_\cap$ is an arbitrary intersection of preimages of closed sets 
+    since each ${f(a) \cap f(b)}$ is closed in the discrete toipology on $2$,
+    hence $C_\cap$ is closed. 
+    Similarly 
+    \[C_\cup = \bigcap_{a,b \in B} 
+    \set{f \st \pi_{a \cup b}^{-1}(f(a) \cup f(b))}\]
+    is closed and so $\mor{B}{2}{}$ is closed.
+
+    With regards to compactness it remains to show that the topologies 
+    on $S(B)$ are the same.
+    It suffices to show that any (closed) basis element of each can be written 
+    as a closed set in the other.
+    Let $[b]$ be an element of the basis for $S(B)$ under the Stone topology.
+    Then this is the image of the closed subset 
+    $\pi_b^{-1}(1) \subs \mor{B}{2}{}$ under the isomorphism:
+    \[\mathrm{iso}(\pi_b^{-1}(1)) = \set{f^{-1}(1) \st f(b) = 1}
+    = \set{\FF \text{ ultrafilter} \st b \in \FF}\]
+    Conversely, 
+    any element of the closed basis for $\mor{B}{2}{}$ is of the form 
+    $\pi_b^{-1}(X)$ where $b \in B$ and $X \subs 2$.
+    Hence 
+    \[\mathrm{iso}(\pi_b^{-1}(X)) = \set{f^{-1}(1) \st f(b) \in X}\]
+    We can case on if $X = \nothing, \set{0}, \set{1}, 2$ and deduce that 
+    respectively $\mathrm{iso}(\pi_b^{-1}(X))$ 
+    becomes $\nothing, [\NEG b], [b], S(B)$, 
+    all of which are closed in the Stone topology.
+    Thus the topologies are the same under this isomorphism and hence 
+    $S(B)$ is compact.
+
+    To show that $S(\star)$ 
+    is a contravariant functor we need to check that the morphism map
+    \[S(f) := f^-1(\star) : S(B) \to S(A)\]
+    is a well-defined, respects the identity and composition. 
+    We show that $S(f)$ is continuous: 
+    it suffices that preimages of clopen elements are clopen.
+    Let $[b] \subs S(A)$ be clopen. 
+    \begin{align*}
+        & S(f)^{-1}[b]\\
+        =& \set{\FF \in S(B) \st f^{-1}(\FF) \in [b]}\\
+        =& \set{\FF \in S(B) \st f(b) \in \FF}\\
+        =& [f(b)]
+    \end{align*}
+    which is clopen.
+\end{proof}
+
+\begin{prop}[Stone Duality]
+    There is an equivalence between the category of Stone
+    spaces and the category of Boolean algebras.
+    Given by the functor $\BB_\star$ 
+    sending any topological space $X$ to the set of 
+    its clopen subsets (this is a basis of $X$ as it is $0$ dimensional):
+    \[\BB_X := \set{a \subs X \st a \text{ is clopen}}\]
+    and its inverse \linkto{bool_alg_to_stone_functor}{$S(\star)$} .
+\end{prop}
+\begin{proof}
+    Let $X$ be a $0$-dimensional compact Hausdorff topological space.
+    There is an obvious Boolean algebra to take on 
+    \[\BB_X := \set{a \subs X \st a \text{ is clopen}}\]
+    which is interpreting $0$ to be $\nothing$, $1$ to be $X$, 
+    $\leq$ as $\subs$,
+    adjunction as intersection, disjunction as union and negation to be 
+    taking the complement in $X$.
+    One can check that this is a Boolean algebra.
+
+    We make this a contravariant functor by taking any continuous map 
+    $f : X \to Y$
+    to an induced map $f^{\diamond}:= f^{-1}(\star):\BB_Y \to \BB_X$.
+    One can check that this is a well-defined functor.
+
+    Lastly we prove the equivalence of categories by giving 
+    natural transformations $S(\BB_{\star}) \to \id{\star}$ in
+    the category of topological spaces
+    and $\id{\star} \to \BB_{S(\star)}$ in the category of Stone spaces.
+    %?incomplete
+\end{proof}
+
+%?This end this section by using this general version of Stone spaces 
+%?to provide an alternative way of proving the compactness theorem.
+
+\begin{dfn}[A Boolean algebra on $F(\Si,n)$]
+    Let $T$ be a $\Si$-theory.
+    We quotient out $F(\Si,n)$ by the equivalence relation
+    \[  
+        \phi \sim \psi \quad := 
+        \quad \phi \text{ and } \psi \text{ equivalent modulo } T
+        := T \model{\Si} \forall v, (\phi \IFF \psi)
+    \]
+    Call the projection into the quotient $\pi$
+    and the quotient $F(\Si,n) / T$.
+    We make $F(\Si,n) / T$ into a Boolean algebra by 
+    interpreting $0$ as $\pi(\bot)$, $1$ as $\pi(\top)$, 
+    $\pi(\phi) \cap \pi(\psi)$ as $\pi(\phi \AND \psi)$,
+    $\pi(\phi) \cup \pi(\psi)$ as $\pi(\phi \OR \psi)$,
+    $\NEG \pi(\phi)$ as $\pi(\NOT \phi)$ and 
+    $\pi(\phi) \leq \pi(\psi)$ as 
+    \[\set{(\pi(\phi),\pi(\psi)) \st T \model{\Si} \forall v, (\phi \to \psi)}\]
+    One can verify that these are well-defined and satisfy the axioms of 
+    a Boolean algebra.
+    Notice we need $T$ (potentially chosen to be the empty set) 
+    to make $\to$ look like $\leq$ and that we had to quotient modulo $T$ 
+    to make $\leq$ satisfy antisymmetry. 
+    Antisymmetry in this context looks very much like 
+    `propositional extensionality'.
+    Thus it makes sense to consider the Stone space of this Boolean algebra 
+    $S(F(\Si,n) / T)$.
+\end{dfn}
+
+\begin{nttn}
+    To avoid confusion, 
+    we denote the clopen sets in the Stone space of a theory $S_n(T)$ as
+    \[[\phi]_T = \set{p \in S_n(T) \st \phi \in p}\]
+    We look for a way to assosiate $[\phi]_T$ with $[\pi(\phi)]$,
+    where the second is the clopen subset of $S(F(\Si,n) / T)$.
+\end{nttn}
+
+\begin{lem}
+    \link{technical_lem_max_subs_pullback}
+    If $p \subs F(\Si,n)$ is a maximal subset 
+    ($\forall \phi \in F(\Si,n), \phi \in p$ or $\NOT \phi \in p$) then 
+    $\pi(\phi) \in \pi(p)$ in the quotient implies $\phi \in p$.
+\end{lem}
+\begin{proof}
+    If $\pi(\phi) \in \pi(p)$ then there exists $\psi \in p$ such that 
+    $\psi$ is equivalent to $\phi$ modulo $T$.
+    By consistency with $T$ there exists a non-empty $\Si$-model $\MM$ of $T$
+    and $b \in {\MM}^n$ 
+    such that $\MM \model{\Si} p(b)$, 
+    in particular $\MM \model{\Si} \psi(b)$.
+    Equivalence modulo $T$ then gives us that $\MM \model{\Si} \phi(b)$.
+    By maximality of $p$, 
+    $\phi$ or $\NOT \phi$ is in $p$ but the latter would lead to 
+    $\MM \nodel{\Si} \phi(b)$, 
+    a contradiction.
+\end{proof}
+
+\begin{lem}
+    Let $\FF \in S(F(\Si,n) / T)$.
+    Then $\pi^{-1}(\FF)$ is consistent with $T$ if and only if 
+    $T \subs \pi^{-1}(\FF)$. 
+\end{lem}
+\begin{proof}
+    If $\pi^{-1}(\FF)$ is consistent with $T$ then as $\FF$ is an ultrafilter
+    $\pi^{-1}$ is maximal and thus contains $T$.
+    On the other hand suppose $T \subs \pi^{-1}(\FF)$.
+    To show that $\pi^{-1}(\FF)$ is consistent it suffices that 
+    \linkto{equiv_def_of_consistent_with_theory}{$\pi^{-1}(\FF(c) \cup T)$
+        is consistent as a $\Si(c)$-theory}, 
+    where $c$ is an $n$-tuple of constant symbols.
+    This holds \linkto{inconsistent}{if and only if} 
+    for any $\Si(c)$-sentence $\phi(c)$,
+    \[\pi^{-1}(\FF)(c) \cup T \nodel{\Si(c)} \phi 
+    \quad \text{ or } \quad
+    \pi^{-1}(\FF)(c) \cup T \nodel{\Si(c)} \NOT \phi\]
+    Let $\phi(c)$ be a $\Si(c)$-sentence and suppose 
+    \[\pi^{-1}(\FF)(c) \cup T \model{\Si(c)} \phi 
+    \quad \text{ and } \quad
+    \pi^{-1}(\FF)(c) \cup T \model{\Si(c)} \NOT \phi\]
+    As $T \subs \pi^{-1}(\FF)$ this implies 
+    \[\pi^{-1}(\FF)(c) \model{\Si(c)} \phi 
+    \quad \text{ and } \quad
+    \pi^{-1}(\FF)(c) \model{\Si(c)} \NOT \phi\]
+    Since $\FF$ is a proper filter, 
+\end{proof}
+
+\begin{prop}[The Stone space of a theory is compact]
+    This theorem has problems!!!%?Wrong!!!
+    \link{stone_of_theo_compact}
+    The Stone space of a $\Si$-theory $T$ is homeomorphic 
+    to the set of ultrafilters from $S(F(\Si,n) / T)$ 
+    that have preimage consistent with $T$ with the subspace topology.
+    In other words, if $\pi$ is the projection to the quotient then
+    $S_n(T) \iso X$, where
+    \[X := 
+    \set{\FF \in S(F(\Si,n) / T) \st \pi^{-1}(\FF) \text{ consistent with } T}\]
+    $X$ is a closed subspace of $S(F(\Si,n) / T)$ hence it is compact,
+    giving us topological compactness for $S_n(T)$.
+\end{prop}
+\begin{proof}
+    Warning: this proof uses $\pi$ to be three different things,
+    the quotient $F(\Si,n) \to F(\Si,n) / T$, 
+    the image map (of the quotient) $S_n(T) \to X$, 
+    and the map of clopen sets (the image map of the image map) 
+    $\PP(S_n(T)) \to \PP(X)$.
+    The second will be a homeomorphism and the third will be a map between
+    subsets of the topologies (in particular the clopen subsets).
+
+    We show that sending $p \in S_n(T)$ to its image under the projection 
+    to the quotient $\pi(p)$ is a homeomorphism.
+    To show that it is well-defined it suffices to show that for any $p$, a 
+    maximal $n$-type over $T$, $\pi(p)$ is an ultrafilter of $F(\Si,n) / T$
+    with preimage consistent with $T$.
+    Preimage being consistent with $T$ 
+    follows from the definition of $n$-types over theories.
+    To show that it is a proper filter:
+    \begin{itemize}
+        \item $\top \in p$ by consistency and maximality. 
+            Hence $\pi(\top) \in \pi(p)$.
+        \item If $\pi(\bot) \in \pi(p)$ then
+            \linkto{technical_lem_max_subs_pullback}{$\bot \in p$} 
+            which is a contradiction with consistency.
+        \item If $\pi(\phi), \pi(\psi) \in \pi(p)$ then 
+            \linkto{technical_lem_max_subs_pullback}{$\phi,\psi \in p$} and so
+            $\phi \AND \psi \in p$ thus by definition of the Boolean algebra 
+            $F(\Si,n) / T$, 
+            \[\pi(\phi) \cap \pi(\psi) = \pi(\phi \AND \psi) \in \pi(p)\]
+        \item If $\pi(\phi) \in \pi(p)$ and $\pi(\phi) \leq \pi(\psi)$ then 
+            \linkto{technical_lem_max_subs_pullback}{$\phi \in p$} 
+            and by definition of $\leq$,
+            \[T \model{\Si} \forall v, (\phi \to \psi)\]
+            Since $p$ is consistent with $T$ there exists a non-empty
+            $\Si$-structure $\MM$ and $b \in {\MM}^n$ such that 
+            $\MM \model{\Si} \phi(b) \to \psi(b)$ and $\MM \model{\Si} \phi(b)$.
+            Hence $\MM \model{\Si} \psi(b)$ and by maximality of $p$ we have 
+            $\psi \in p$ and $\pi(\psi) \in \pi(p)$.
+    \end{itemize}
+    The image $\pi(p)$ is an ultrafilter by the 
+    \linkto{negation_is_in_ultrafilter}{equivalent definition}:
+    if $\pi(\phi) \in F(\Si,n) / T$ then either 
+    $\phi \in p$ or $\NEG \phi \in p$ by maximality of $p$, 
+    hence $\pi(\phi) \in \pi(p)$ or $\pi(\NEG \phi) \in \pi(p)$.
+    Thus we have $\pi$ is a map into \[
+    \set{\FF \in S(F(\Si,n) / T) \st \pi^{-1}(\FF) \text{ consistent with } T}\]
+
+    Injectivity: if $p,q \in S_n(T)$ and $\pi(p) = \pi(q)$ then 
+    if $\phi \in p$, we have $\pi(\phi) \in \pi(p) = \pi(q)$ and by our 
+    claim above $\phi \in q$.
+    Surjectivity: let $\FF \in S(F(\Si,n) / T)$ 
+    have its preimage consistent with $T$.
+    Then its preimage is an $n$-type.
+    If its preimage is a maximal $n$-type then we have surjectivity.
+    Indeed since $\FF$ is an ultrafilter if $\phi \in F(\Si,n)$ then 
+    $\pi(\phi) \in \FF$ or $\pi(\NOT \phi) = \NEG \pi(\phi) \in \FF$,
+    hence $\phi \in \pi^{-1}(\FF)$ or $\NOT \phi \in \pi^{-1}(\FF)$.
+
+    To show that the map is continuous in both directions,
+    it suffices to show that images of clopen sets are clopen and preimages of 
+    clopen sets are clopen,
+    as each topology is generated by their clopen sets.
+    For $\phi \in F(\Si,n)$ since 
+    $\pi : S_n(T) \to X$ is a bijection we have that
+    \[\pi([\phi]_T) = \set{\FF \in X \st \phi \in \pi^{-1}(\FF)} =
+    \set{\FF \in F(\Si,n) / T \st \pi(\phi) \in \FF \text{ and } \FF \in X} = 
+    [\pi(\phi)] \cap X\]
+    and similarly $\pi^{-1}([\pi(\phi)] \cap X) = [\phi]_T$.
+    Hence there is a correspondence between clopen sets.
+
+    To show that $X$ is a closed subspace: 
+    (the second equality is where the problem in this theorem lies)%?
+    \begin{align*}
+        X &= 
+        \set{\FF \in S(F(\Si,n) / T) \st \pi^{-1}(\FF) 
+            \text{ consistent with $T$}}\\
+        &= \set{\FF \in S(F(\Si,n) / T) \st \forall \phi \in T, 
+        \phi \in \pi^{-1}(\FF)} \quad \text{ as } \pi^{-1}(\FF) 
+        \text{ is a maximal $n$-type}\\%? This is wrong!!!
+        &= \bigcap_{\phi \in T}\set{\FF \in S(F(\Si,n) / T) 
+        \st \pi(\phi) \in \FF}\\
+        &= \bigcap_{\phi \in T}[\pi(\phi)]
+    \end{align*}
+    and an intersection of clopen sets is closed. 
+    \linkto{bool_alg_to_stone_functor}{$S(F(\Si,n) / T)$} is compact and 
+    closed in compact is compact so $X$ is compact.
+    By the homeomorphism we have that $S_n(T)$ is compact.
+\end{proof}
+
+\begin{lem}[Topological consistency]
+    \link{topological_consistency}
+    Let $\FF \in S(F(\Si,n) / T)$ and $T$ be a $\Si$-theory.
+    $\pi^{-1}(\FF)$ is consistent with $T$ if and only if 
+    \[\pi^{-1}(\FF) \in \bigcap_{\phi \in \pi^{-1}(\FF)} [\phi]_T\]
+    if and only if 
+    \[\bigcap_{\phi \in \pi^{-1}(\FF)} [\phi]_T \text{ is non empty}\]
+\end{lem}
+\begin{proof}
+    ($1. \implies 2. \implies 3.$)
+        Suppose $\pi^{-1}(\FF)$ is consistent with $T$.
+        Then $\pi^{-1}(\FF) \in S_n(T)$ thus for any $\phi \in \pi^{-1}(\FF)$, 
+        $\pi^{-1}(\FF) \in [\phi]_T$. 
+        Hence 
+        \[\pi^{-1}(\FF) \in \bigcap_{\phi \in \pi^{-1}(\FF)} [\phi]_T\]
+        and it is non-empty.
+
+    ($3. \implies 1.$)
+        Suppose 
+        \[p \in \bigcap_{\phi \in \pi^{-1}(\FF)} [\phi]_T\]
+        then $\forall \phi \in \pi^{-1}(\FF), \phi \in p$.
+        As $\FF$ is an ultrafilter, for any $\phi \in p$, 
+        \[\phi \notin \pi^{-1}(\FF) \implies \NOT \phi \in \pi^{-1}(\FF) 
+        \implies \NOT \phi \in p \text{ a contradiction}\]
+        Hence $p = \pi^{-1}(\FF)$.
+        Hence $\pi^{-1}(\FF) \in S_n(T)$ and thus is consistent with $T$.
+\end{proof}
+
+\begin{prop}[Compactness theorem for types]
+    \link{compactness_for_types_2}
+    Let $\FF \in S(F(\Si,n)/T)$ and $T$ be a $\Si$-theory.
+    Then $\pi^{-1}(\FF)$ is consistent with $T$ 
+    if and only if $\pi^{-1}(\FF)$ if finitely consistent
+    with $T$.
+\end{prop}
+\begin{proof}
+    By definition $\pi^{-1}(\FF)$ is finitely consistent with $T$ if and only if 
+    any finite subset of $\pi^{-1}(\FF)$ is consistent with $T$.
+    Translating this to the topology, this is
+    \linkto{topological_consistency}{if and only if} 
+    for any finite subset $\De \subs \pi^{-1}(\FF)$,
+    \[\bigcap_{\phi \in \De} [\phi]_T \text{ is non empty}\]
+    By \linkto{stone_of_theo_compact}{topological compactness of $S_n(T)$} 
+    this is if and only if 
+    \[\bigcap_{\phi \in \pi^{-1}(\FF)} [\phi]_T \text{ is non empty}\]
+    \linkto{topological_consistency}{Translating this back to model theory}
+    this is if and only if $\pi^{-1}(\FF)$ is consistent with $T$.
+\end{proof}
+
+Notice that here we have by the fact that $\FF$ is an ultrafilter that
+$\pi^{-1}(\FF)$ is maximal.
+We can remove weaken this hypothesis via Zorn's lemma.
+
+\begin{prop}[The Compactness Theorem]
+    A $\Si$-theory is consistent if and only if it is finitely consistent.
+\end{prop}
+\begin{proof}
+    Suppose $T$ is a finitely consistent $\Si$-theory.
+    Then we can \linkto{make_max}{extend $T$} to $p$, 
+    a maximal and finitely consistent 
+    $\Si$-theory.
+    Then the image of the quotient 
+    $\pi(p)$ is an ultrafilter on $F(\Si,n) / T$,
+    i.e. $\pi(p) \in S(F(\Si,n)/T)$ and
+    \linkto{technical_lem_max_subs_pullback}{$\pi^{-1}\pi(p) = p$} 
+    is finitely consistent.
+    By \linkto{compactness_for_types_2}{compactness for types} we have that 
+    $p = \pi^{-1}(\pi(p))$ is consistent.
+    Hence $T \subs p$ is consistent.
+\end{proof}
+\begin{rmk}
+    We can even extend this to consistency of arbitrary subsets of 
+    $S(F(\Si,n) / T)$
+    with respect to a theory via the 
+    \linkto{equiv_def_of_consistent_with_theory}{equivalent definition} 
+    of being consistent with a theory.
+\end{rmk}

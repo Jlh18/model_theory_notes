@@ -1,0 +1,142 @@
+\section{Algebraic closure}
+\begin{dfn}
+    Let $K$ be a field.
+    $L$ is an algebraic closure of $K$ 
+    if there exists an algebraic field extension 
+    $\io : K \to L$ and $L$ is algebraically closed.
+\end{dfn}
+
+\begin{prop}[Existence of algebraic closure of fields \cite{atiyah}]
+    \link{algebraic_closure_of_fields}
+    Let $K$ be a field. 
+    Then there exists an algebraic closure of $K$.
+\end{prop}
+\begin{proof}
+    We build $L$ by induction, 
+    at each step making an algebraic extension to a greater field
+    containing roots of irreducible polynomials in the previous field.
+    Without loss of generality we just do this for $K$.
+
+    Let $F$ be the set of irreducible polynomials $f \in K[x]$.
+    Consider $K[x_f]_{f \in F}$, 
+    where each $x_f$ is a variable and the ideal 
+    $\f{a} = \sum_{f \in F} K f(x_f) $.
+    We want to quotient by this ideal,
+    but we also want this to result in a field.
+    Thus we try to find a maximal ideal containing it.
+    By an application of Zorn, all proper ideals are 
+    contained in a maximal ideal, 
+    hence it suffices to show it is proper.
+    Clearly it is non-trivial 
+    (it contains $x_f - 1$ for $f = x - 1$).
+    Assume for a contradiction that it is the whole ring,
+    then there is a finite set $S$ such that
+    \[1 = \sum_{f \in S} c_f f(x_f)\]
+    where $S$ is finite and each $c_f \in K$.
+    By the existance of splitting fields over base field $K$, 
+    we take the splitting field $K'$ of $\prod_{f \in S} f$.
+    Then from $K'[x_f]_{f \in S}$ 
+    we can evaluate at the roots $r_f$ for each $f$:
+    \[1 = \sum_{f \in S} c_f f(r_f) = \sum_{f \in S} 0 = 0\]
+    a contradiction.
+
+    Let $\f{m}$ be the maximal ideal containing $\f{a}$ and let 
+    $K(1) = K[x_f]_{f \in F} / \f{m}$.
+    There is an obvious ring morphism $K \to K(1)$. 
+    If $f \in K[x]$ is irreducible then $f(x_f) \in \f{m}$ so
+    $0 = \bar{f(x_f)} = f(\bar{x_f})$ in $K(1)$.
+    Hence $f$ has a root $x_f$ in $K(1)$.
+
+    By the above construction, 
+    we have a chain $K : \N \to \Mod{\Si_\RNG}$ and so we can take 
+    \linkto{direct_limit_of_chains}{the direct limit}; 
+    call this $L$.
+    We obtain for free that $L$ is a field and there is a ring morphism 
+    $K \to L$ that commutes with all the morphisms in the chain.
+    If $f \in L[x]$ then there exists a $\be \in \N$ and 
+    $b \in K(\be)[x]$ such that $b \mapsto f$ 
+    in the map $K(\be)[x] \to L[x]$.
+    Then $b$ has finite degree $n$, 
+    thus completely splits in $K(\be + n)$.
+    Hence $b$ splits in $L$, 
+    $f$ splits in $L$ so $L$ is algebraically closed.
+
+    To show that $L$ is an algebraic extension let $a \in L$.
+    Then there exists a $\be \in \N$ and $b \in K(\be)$ such that 
+    $b \mapsto a$ in the map $K(\be) \to L$. 
+    Since $b$ is algebraic over $K$ 
+    (each extension is finite hence algebraic)
+    $a$ is algebraic over $K$.
+\end{proof}
+
+\begin{prop}[Property of algebraic closures]
+    \link{alg_closures_props}
+    Suppose $K$ has an algebraic closure $\Om$. 
+    Then 
+    \begin{enumerate}
+        \item If $M$ is an algebraically closed field extending $K$ then 
+        there exists a field extension $\Om \to M$ 
+        such that the diagram commutes
+        \begin{cd}
+            K \ar[r] \ar[dr]&\Om \ar[d, dashed]\\
+            &M
+        \end{cd}
+        \item If $K \to L$ is an algebraic field extension then 
+        there exists a field extension $L \to \Om$ 
+        such that the diagram commutes
+        \begin{cd}
+            K \ar[r] \ar[d]&\Om\\
+            L \ar[ru, dashed]
+        \end{cd}
+    \end{enumerate}
+\end{prop}
+\begin{proof}~
+    \begin{enumerate}
+        \item The map $K \to \Om$ is algebraic and so we can consider $\Om$ as 
+        $K(S)$ for some minimal generating set $S \subs \Om$.
+        $M$ is algebraically closed thus it splits all minimal polynomials of 
+        $a \in S$ over $K$, thus by the embedding theorem (Galois theory), %
+        we have an embedding 
+        $\Om \to M$ that commutes with the diagram.
+        \item If $K \to L$ is algebraic then we can find a generating set 
+        $S \subs L$ such that $K(S) = L$.
+        $\Om$ is algebraically closed thus it splits all minimal polynomials of 
+        $a \in S$ over $K$, thus by the embedding theorem (Galois theory), %
+        we have an embedding 
+        $L \to \Om$ that commutes with the diagram.
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}[Algebraic closures of isomorphic fields are isomorphic]
+    \link{alg_closures_of_iso_are_iso}
+    Suppose $K_0 \iso K_1$. 
+    Then any algebraic closures of these fields are (non-canonically) isomorphic.
+\end{prop}
+\begin{proof}
+    Call the algebraic closures $\Om_0$ and $\Om_1$:
+    \begin{cd}
+        K_0 \ar[r, "\io_0"] \ar[d, "\si", "\sim"{swap}]     & \Om_0\\
+        K_1 \ar[r, "\io_1"]                                 & \Om_1
+    \end{cd}
+    By the \linkto{alg_closures_props}{properties of algebraic closures}
+    there exist
+    $f : \Om_0 \to \Om_1$ and $g : \Om_1 \to \Om_0$ 
+    that individually commute with the above diagram.
+    We claim that the composition $g \circ f$ is a surjection.
+
+    The composition fixes $K_0$ because 
+    $\io_0 = g \circ \io_1 \circ \si = g \circ f \circ \io_0$.
+    Fix $a \in \Om_0$.
+    Let $\La$ be the set of roots of the minimal polynomial $\min(a,K_0)$.
+    $g \circ f$ is a bijection on $\La$: let $\la \in \La$, then
+    $g \circ f (\min(a,K_0))(\la) = \min(a, K_0)(g \circ f(\la))$ because 
+    $g \circ f$ fixes $K_0$.
+    Thus $g \circ f (\La) \subs \La$. 
+    It is a therefore a bijection on $\La$ as 
+    $\La$ is finite and $g \circ f$ is injective (it is a field embedding).
+    Thus there exists an element that maps to $a$ under the composition.
+    Hence
+    \[\Om_1 = g \circ f (\Om_1) \subs f(\Om_0)\]
+    Thus $f$ is surjective and injective (as it is a field embedding).
+    Hence $f$ is an isomorphism.
+\end{proof}

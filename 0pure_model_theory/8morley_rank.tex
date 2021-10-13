@@ -1,0 +1,1505 @@
+\section{Morley Rank}
+\subsection{Saturation}
+
+\begin{prop}[Elementarily equivalent structures have a common extension 
+        \cite{poizat}]
+    \link{elem_equiv_struc_has_common_ext}
+    Let $\NN_i$ be $\Si$-structures, 
+    for each $i \in I$ a non-empty set.
+    Suppose that for each $i, j \in I$, 
+    $\NN_i$ is elementarily equivalent to $\NN_j$.
+    Then there exists $\MM$ a $\Si$-structure and elementary $\Si$-embeddings 
+    $\io_i : \NN_i \to \MM$ for each $i \in I$.
+\end{prop}
+\begin{proof}
+    We show that 
+    $\bigcup_{i \in I} \eldiag{\Si}{\NN_i}$ is consistent
+    as a $\Si(*):=\Si(\bigcup_{i \in I} ({\NN_i}))$ theory.
+    This would give us 
+    \linkto{elem_ext_equiv_eldiag_model}{elementary $\Si(*)$-embeddings}
+    from each $\NN_i$ into some non-empty model $\MM$,
+    and we would then be done (by moving this embedding down to $\Si$).
+
+    By \linkto{compactness}{compactness} it suffices to show that 
+    each finite subset of $\bigcup_{i \in I} \eldiag{\Si}{\NN_i}$ is consistent.
+    The finite subset can be written in the form
+    \[\bigcup_{i \in S} \De_i\]
+    where $S \subs I$ is a finite subset 
+    and each $\De_i \subs \eldiag{\Si}{\NN_i}$ is finite.
+    Let $0$ denote the element of $I$ (non-empty). 
+    We show that 
+    \[\NN_0 \model{\Si(*)} \bigcup_{i \in S} \De_i\]
+    By definition of the elementary diagram,
+    each $\NN_i$ is a $\Si(\NN_i)$-model of $\De_i$. 
+    We can write $\De_i$ as $\Ga_i(a_i)$ 
+    where $\Ga_i$ is a set of $\Si$-formulas
+    with at most $n$ variables and $a_i \in {\NN_i}^n$.
+    Then using elementary equivalence
+    \begin{align*}
+        &\NN_i \model{\Si(\NN_i)} \bigand{\phi \in \De_i}{} \phi
+        \implies \NN_i \model{\Si} \bigand{\phi \in \Ga_i}{} \phi(a_i)\\
+        \implies &\NN_i \model{\Si} \bigexists{j = 1}{n} v_j, 
+        \bigand{\phi \in \Ga_i}{} \phi(v)
+        \implies \NN_0 \model{\Si} \bigexists{j = 1}{n} v_j, 
+        \bigand{\phi \in \Ga_i}{} \phi(v)\\
+        \implies &\exists b_i \in {\NN_0}^n, \NN_0 \model{\Si} 
+        \bigand{\phi \in \Ga_i}{} \phi(b_i)
+    \end{align*}
+    We proceed to use this fact to define interpretation on $\NN_0$ as 
+    a $\Si(*)$ structure.
+
+    If $\NN_0$ were empty then any sentence is satisfied by it, 
+    hence by elementary equivalence every $\NN_i$ satisfies all sentences.
+    Hence all the structures are empty and we can find a common extension,
+    namely the empty set.
+    Otherwise let $c \in {\NN_0}$.
+    We only need to update interpretation of constant symbols from 
+    ${\NN_i}$ for $i \ne 0$.
+    Let $d \in {\NN_i}$.
+    If $d$ appears in the tuple $a_i$ from above, 
+    we interpret it as the corresponding term in the tuple $b_i$ such that 
+    $\modintp{\NN_0}{a_i} = b_i$.
+    Otherwise intperpret $d$ as $c$.
+    Clearly for each $i \in S$ and each $\phi \in \Ga_i$
+    \[\NN_0 \model{\Si} \phi(b_i) \implies 
+    \NN_0 \model{\Si(*)} \phi(b_i) \implies 
+    \NN_0 \model{\Si(*)} \phi(a_i)\]
+    and so 
+    \[\NN_0 \model{\Si(*)} \bigcup_{i \in S} \Ga_i(a_i)
+    \implies \NN_0 \model{\Si(*)} \bigcup_{i \in S} \De_i\]
+\end{proof}
+
+\begin{lem}[Types over $\Theory_\MM(A)$ are realised in extensions]
+    \link{types_of_models_realised_in_extensions}
+    Let $\MM$ be a $\Si$-structure, 
+    $A \subs \MM$ and $p \in S_n(\Theory_\MM(A))$.
+    Then there exists an elementary $\Si(A)$-embedding $\MM \to \NN$ such that 
+    $p$ is realised in $\NN$.
+\end{lem}
+\begin{proof}
+    By definition of the Stone space, 
+    $p$ is consistent with $\Theory_\MM(A)$ and so there exists $\RR$
+    a $\Si(A)$-model of $\Theory_\MM(A)$ that realises $p$.
+    Since $\Theory_\MM(A)$ is complete, 
+    and both $\MM$ and $\RR$ are $\Si(A)$-models of it,
+    $\MM$ and $\RR$ are elementarily equivalent.
+    \linkto{elem_equiv_struc_has_common_ext}{Hence they have a common
+        elementary extension $\NN$.}
+    Since $\RR$ realises $p$ and the extension $\RR \to \NN$ is elementary 
+    $\NN$ realises $p$.
+    Hence we have an elementary $\Si(A)$-extension of $\MM$ that realises $p$.
+\end{proof}
+
+\begin{lem}[Types are preserved downwards in elementary embeddings]
+    \link{technical_lemma_types_preserved_downwards}
+    Suppose $\io : \MM \to \NN$ is an elementary $\Si$-embedding
+    and $A \subs \MM$ is a finite subset.
+    Consider $p \in F(\Si(\io(A)),n)$.
+    For convinience we write this as $q(A)$, 
+    where $q \in F(\Si, n + m)$,
+    $m$ is the cardinality of $A$.
+    Then 
+    \[q(\io(A)) \in S_n(\Theory_{\NN}(\io(A)))
+    \implies q(A) \in S_n(\Theory_{\MM}(A))\]
+\end{lem}
+\begin{proof}
+    Suppose $q(\io(A)) \in S_n(\Theory_{\NN}(\io(A)))$.
+    Then there exists $\RR$ a $\Si(\io(A))$-model of $\Theory_\NN(\io(A))$ 
+    that realises $q(\io(A))$. 
+    It suffices to show that $\RR \model{\Si(A)} \Theory_\MM(A)$ and 
+    realises $q(A)$.
+    Take the interpretation of a constant symbol $a \in A$ as the 
+    $\modintp{\RR}{\io(a)}$, 
+    the interpretation in $\Si(\io(A))$.
+    Then for any $\phi \in \form{\Si}$ (with $m$ free variables) 
+    and $a \in \RR^m$
+    \[\RR \model{\Si(A)} \phi(A)(a) \iff 
+    \RR \model{\Si(\io(A))} \phi(\io(A))(a)\]
+
+    Let $\phi(A) \in \Theory_\MM(A)$ such that $\phi \in \form{\Si}$.
+    Then $\MM \model{\Si(A)} \phi(A)$ hence $\MM \model{\Si} \phi(A)$
+    and as the embedding is elementary $\NN \model{\Si} \phi(\io(A))$
+    and $\NN \model{\Si(\io(A))} \phi(\io(A))$.
+    Hence $\phi(\io(A)) \in \Theory_\NN(A)$ and 
+    $\RR \model{\Si(\io(A))} \phi(\io(A))$ and 
+    $\RR \model{\Si(A)} \phi(A)$.
+    Thus $\RR \model{\Si(A)} \Theory_\MM(A)$
+    
+    There exists $a \in \RR^n$ such that $\RR \model{\Si(\io(A))} q(\io(A))(a)$.
+    If $\phi \in q$ then $\RR \model{\Si(\io(A))} \phi(\io(A))(a)$
+    and $\RR \model{\Si(A)} q(A)(a)$.
+\end{proof}
+
+\begin{dfn}[Embedding Chain, Elementary Chain \cite{marker}]
+    Given $(I,\leq)$ a non-empty linear order and a functor $M: I \to \Mod{\Si}$
+    that sends each $\al \in I$ to a $\Si$-structure $\MM(\al)$
+    and each $\al \leq \be$ in $I$ to a 
+    $\Si$-embedding $\lift{\al}{\be} : \MM(\al) \to \MM(\be)$, called a lift.
+    Then we call the functor $M$ an embedding chain of $\Si$-structures.
+
+    Furthermore if $M$ only results in elementary $\Si$-embeddings
+    then $M$ is an elementary chain.
+\end{dfn}
+
+\begin{prop}[$\om$-saturated elementary extensions \cite{poizat}]
+    \link{om_sat_elem_ext_of_models}
+    Every $\Si$-structure $\MM$ has an 
+    \linkto{om_saturation_dfn}{$\om$-saturated} elementary extension.
+\end{prop}
+\begin{proof}
+    Let $\MM$ be a $\Si$-structure.
+    We will inductively create an elementary chain of $\Si$-structures
+    $\MM = \MM(0) \to \MM(1) \to \cdots$ such that for each $\al \in \N$,
+    every finite subset $A \subs \MM(\al)$, 
+    every $n \in \N$ and every $p(A) \in S_n(\Theory_{\MM(\al)}(A))$,
+    $p(\lift{\al}{\al + 1} A)$ is realised in $\MM(\al + 1)$.
+    \linkto{direct_limit_of_chains}{Taking the direct limit} 
+    gives us a $\Si$-structure $\NN$ and elementary $\Si$-embeddings 
+    $\io_\al : \MM(\al) \to \NN$ for each $\al \in \N$ that commute with 
+    the lifts from the chain.
+    In particular we will have that $\NN$ is an elementary $\Si$-extension
+    of $\MM$.
+    For any finite subset $A \subs \NN$, 
+    any $n \in \N$ and any $p(A) \in S_n(\Theory_{\NN}(A))$,
+    since $A$ is finite there exists $\al \in \N$ such that 
+    ${\io_\al}^{-1}(A) \subs \MM(\al)$ bijects with $A$.
+    \linkto{technical_lemma_types_preserved_downwards}{As types are preserved
+        downwards in elementary embeddings} 
+    $p(A) \in S_n(\Theory_{\NN}(A))$ implies 
+    $p(\io_\al^{-1} A) \in S_n(\Theory_{\MM(\al)}(\io_\al^{-1} A))$.
+    By construction we see that
+    $p$ is realised in $\MM(\al + 1)$
+    thus $p$ is realised in $\NN$ as $\io_{\al + 1}$ is elementary.
+    This $\NN$ is $\om$-saturated.
+
+    Furthermore, 
+    if $A \subs \MM$, $n \in \N$ and $p(A) \in S_n(\Theory_{\MM})(A)$,
+    then $p(\lift{0}{1} A)$ is realised in $\MM(1)$.
+    Hence $p(\io_0 A)$ is realised in $\NN$ as $\io_{1}$ is elementary.
+
+    It suffices to build $\MM(1)$ from $\MM$.
+    Let $A \subs \MM$, $n \in \N$ and $p_{A,n} \in S_n(\Theory_\MM (A))$.
+    \linkto{types_of_models_realised_in_extensions}{$p_{A,n}$ 
+        is realised in some $\Si(A)$-extension $\MM(p_{A,n})$.}
+    As $\MM(p_{A,n})$ extends $\MM$, 
+    it is naturally a $\Si(\MM)$-model of $\eldiag{\Si}{\MM}$.
+    We create such a $\Si(\MM)$-structure for each $A$, $n$ and $p_{A_n}$.
+    Consider the set 
+    \[\set{\MM(p_{A,n}) \st A \subs \MM, 
+    n \in \N, p_{A,n} \in S_n(\Theory_\MM (A))}\]
+    Any two structures in the set are elementarily equivalent since 
+    they would both model $\eldiag{\Si}{\MM} = \Theory_\MM(\MM)$ 
+    which is a complete $\Si(\MM)$-theory.
+    Thus \linkto{elem_equiv_struc_has_common_ext}{there 
+        exists a common $\Si(\MM)$-extension $\MM(1)$}
+    of all the structures in the set. 
+    In particular there exists 
+    an elementary $\Si(\MM)$-embedding $\lift{0}{1} : \MM \to \MM(1)$
+    (for the existance of one intermediate structure take 
+    $A = \nothing, n = 0$ and \linkto{make_max}{extend 
+    $\Theory_\MM(\nothing)$ to a maximal $\Si$-theory}).
+
+    \begin{cd}
+        &&&\MM(1)&&&\\
+        \MM(\dots)\ar[urrr, shorten >= 10pt]&\MM(\dots)
+        \ar[urr, shorten >= 5pt]&\MM(\dots)\ar[ur]
+        &\MM(p_{A,n})\ar[u]
+        &\MM(\dots)\ar[ul]&\MM(\dots)
+        \ar[ull, shorten >= 5pt]&\MM(\dots)
+        \ar[ulll, shorten >= 10pt]\\
+        &&&\MM \ar[ulll]\ar[ull]\ar[ul]\ar[u]\ar[ur]\ar[urr]\ar[urrr]&&&
+    \end{cd}
+
+    To show that $\MM(1)$ has the desired property let
+    $A \subs \MM$, 
+    $n \in \N$ and $p \in S_n(\Theory_{\MM}(A))$.
+    By design there exists $\MM(p)$ that realises $p$.
+    Since $\MM(1)$ is an elementary $\Si(\MM)$-extension of $\MM(p)$
+    (we can turn this into a $\Si(A)$-embedding for things to make sense)
+    we have that 
+    $p$ is realised in $\MM(1)$.
+\end{proof}
+
+\begin{lem}[Disjunctive normal form]
+    \link{disjunctive_normal_form_0}
+    Let $\phi$ be a quantifier free $\Si$-formula with variables indexed
+    by $S$.
+    Then there exist atomic $\Si$-formulas
+    $f_{ij}$ such that
+    for any $\Si$-structure $\MM$
+    \[ 
+        \MM \model{\Si} \bigforall{s \in S}{}v_s, \phi(v) 
+        \IFF \bigor{i \in I}{} 
+        \bigand{j \in J_{i}}{} f_{ij}(v)
+    \]
+    An immediate improvement to this is that there exist $\Si$-formulas
+    $f_{ij}, g_{ij}$ of the form $s = t$ or $r(t)$ 
+    (equality of terms or a relation) such that
+    for any $\Si$-structure $\MM$
+    \[ 
+        \MM \model{\Si} \bigforall{s \in S}{}v_s, \phi(v) 
+        \IFF \bigor{i \in I}{} 
+        \brkt{\bigand{j \in J_{i0}}{} f_{ij}(v)\AND 
+        \bigand{j \in J_{i1}}{} \NOT g_{ij}(v)}
+    \]
+\end{lem}
+\begin{proof}
+    We induct on $\phi$:
+    \begin{itemize}
+        \item If $\phi$ is $\top$ 
+            then we take a single `or' $I = \set{0}$ and the empty `and' for 
+            $J_{0}$.
+        \item If $\phi$ is $t = s$ then
+            let $I = J_{0} = \set{0}$ and take $f_{00}$ to be $t = s$.
+        \item If $\phi$ is $r(t)$ then 
+            let $I = J_{0} = \set{0}$ and take $f_{00}$ to be $r(t)$.
+        \item If $\phi$ is $\NOT \psi$ and there exist the relevant things for 
+            $\psi$ that satisfy
+            \[ 
+                \MM \model{\Si} \bigforall{s \in S}{}v_s, \psi(v) 
+                \IFF \bigor{i \in I}{} 
+                \bigand{j \in J_{i}}{} f_{ij}(v)
+            \]
+            for all $\Si$-structures $\MM$ and for all $a \in {\MM}^S$.
+            We can negate and rearrange this statement to give us what we 
+            want for $\phi$.
+            The gist of the induction goes as follows:
+            \begin{align*}
+                &\NOT \bigor{i \in I}{} 
+                \bigand{j \in J_{i}}{} f_{ij}(v) \IFF 
+                \bigand{i \in I}{} 
+                \bigor{j \in J_{i}}{} \NOT f_{ij}(v)\\
+                \IFF &\brkt{\bigor{j \in J_0}{} \NOT f_{0j}} \AND
+                \brkt{\bigand{0 \ne i \in I}{} 
+                \bigor{j \in J_{i}}{} \NOT f_{ij}(v)} \\
+                 \IFF 
+                &\bigor{k_0 \in J_0}{} 
+                \sqbrkt{\NOT f_{0k_0} \AND \bigand{0 \ne i \in I}{} 
+                \bigor{j \in J_{i}}{} \NOT f_{ij}(v)}
+                \text{ (induction on $J_0$)}\\
+                \IFF & \bigor{k_0 \in J_0}{} 
+                \sqbrkt{\NOT f_{0k_0} \AND \bigor{k_1 \in J_1}{} 
+                \brkt{\NOT f_{1k_1} \AND \bigand{i \ne 0, 1}{} 
+                \bigor{j \in J_{i}}{} \NOT f_{ij}(v)}} \\
+                \IFF & \bigor{k_0 \in J_0}{} 
+                \bigor{k_1 \in J_1}{} 
+                \brkt{\NOT f_{0k_0} \AND \NOT f_{1k_1} 
+                \AND \bigand{i \ne 0, 1}{} 
+                \bigor{j \in J_{i}}{} \NOT f_{ij}(v)} \\
+                \IFF & \dots \text{ induction on $I$} 
+                \IFF \bigor{k_0 \in J_0}{} \dots \bigor{}{}
+                \sqbrkt{\bigand{}{}g_{ij}}
+            \end{align*}
+        \item If $\phi$ is $\chi_0 \OR \chi_1$ 
+            and there exist the relevant things 
+            for $\chi_0$ and $\chi_1$, then we can simply take the or of
+            the two formulas found and obtain what we want.
+    \end{itemize}
+\end{proof}
+
+\begin{lem}[Type of an element from the model is isolated]
+    \link{type_of_an_element_from_the_model}
+    Let $T$ be a complete $\Si$-theory
+    and $\MM$ be a non-empty $\Si$-model of $T$. 
+    \linkto{elems_of_stone_space_are_types_of_elements}{Any 
+        type over $\MM$ is of the form}\footnote{Here we have $\nothing$ in 
+            $\subintp{\nothing,1}{\NN}{\tp}(a)$ as we are working in the theory 
+            $\eldiag{\Si}{\MM}$, 
+            which is in the language $\Si_E(\MM)$,
+            thus we don't need to add symbols from $\MM$.}
+        $\subintp{\nothing,1}{\NN}{\tp}(a)$, 
+    where $\NN$ is an
+    \linkto{om_sat_elem_ext_of_models}{$\om$-saturated elementary extension} 
+        of $\MM$ and $a \in \NN$.
+    Then $a$ is in the image of $\MM$ if and only if 
+    $\tp(a)$ is an \linkto{dfn_isolated_point}{isolated point} 
+    in $S_1(\MM)$.
+    Thus $\MM$ bijects with the isolated points of $S_1(\MM)$
+    by taking $c \mapsto \set{\tp(io(c))}$ and the 
+    \linkto{dfn_derived_set}{derived set} is
+    \[  
+        S_1(\MM)' = S_1(\MM) \setminus \bigcup_{c \in \MM} [x = c]
+        = \bigcap_{c \in \MM} [x \ne c] 
+    \]
+\end{lem}
+\begin{proof}
+    \begin{forward}
+        Suppose $a$ is in the image of $\MM$.
+        Then we have $c \in \MM$ such that $a = \nnintp{c}$.
+        Hence $x = c$ is an element of $\tp(a)$ and so $\tp(a) \in [x = c]$.
+        If $q \in [x = c]$ then as $q$ is realised by some $b \in \NN$, 
+        $b = \nnintp{c} = a$, 
+        which implies $q = \tp(a)$.
+        Thus the open set $[x = c]$ is a singleton and the point is isolated.
+        Thus $c \mapsto \tp(\io(c))$ has image a subset of the isolated points.
+        It is injective since for $c, d \in \MM$, 
+        if $\tp(\io(c)) = \tp(\io(d))$ then 
+        $x = c \in \tp(\io(c)) = \tp(\io(d))$
+        and so $\io(d) = \io(c)$ which implies $c = d$ as $\io$ is injective.
+    \end{forward}
+    \begin{backward}
+        On the other hand, suppose there is an isolated point $p$ in $S_1(\MM)$,
+        then $\set{p}$ is open. 
+        This open set is equal to $\bigcup_{\phi \in I} [\phi]$
+        as a finite intersection of clopen sets is clopen,
+        hence $\psi \in I$ such that $p \in [\psi]$, 
+        whence $[\psi] = \set{p}$.
+        As $\psi \in p$ (which is consistent with $T$) we have that 
+        $\exists x, \psi(x)$ is realised in some model of $T$ 
+        (any elementary extension of $\MM$ is a model of $T$). 
+        Since $T$ is complete
+        this implies $T \model{\Si_E} \exists x, \psi(x)$
+        In particular $\MM$ is a model of $T$ and so there exists 
+        $a \in \MM$ such that $\MM \model{\Si_E} \psi(a)$.
+        Thus $\NN \model{\Si_E} \psi(\io(a))$ so $\psi \in \tp(\io(a))$
+        and $\tp(\io(a)) \in [\psi]$.
+        Since there is only one element in this set $p = \tp(\io(a))$.
+        Thus $c \mapsto \set{\tp(\io(c))}$ is surjective.
+    \end{backward}
+\end{proof}
+
+\begin{eg}[Infinite infinite equivalence classes revisited]
+    \link{infinite_infinite_classes1}
+    Consider again the theory $T$ of 
+    \linkto{infinite_infinite_classes}{infinite infinite equivalence classes},
+    and $\MM$ a non-empty $\Si_E$-model of $T$. 
+    We wish to classify all the types over $\MM$, i.e. the elements of 
+    $S_1(\MM) := S_1(\eldiag{\Si}{\MM})$.
+    We know that
+    \linkto{elems_of_stone_space_are_types_of_elements}{
+        any type over $\MM$ is of the form}
+        $\subintp{\nothing,1}{\NN}{\tp}(a)$, 
+    where $\NN$ is the 
+    \linkto{om_sat_elem_ext_of_models}{$\om$-saturated elementary extension} 
+        of $\MM$ and $a \in \NN$.
+    We show that there are three cases:
+    \begin{enumerate}
+        \item The element $a$ is in the image of $\MM$ if and only if 
+            $\tp(a)$ is an \linkto{dfn_isolated_point}{isolated point} 
+            in $S_1(\MM)$.
+            Thus $\MM$ bijects with the isolated points of $S_1(\MM)$
+            by taking $c \mapsto \set{\tp(io(c))}$.
+        \item The element $a$ is not in the image but it equivalent under the 
+            relation to something
+            in the image if and only if $\tp(a)$ is isolated in $S_1(\MM)'$,
+            the \linkto{dfn_derived_set}{derived set} of the Stone space.
+        \item Otherwise it is an isolated point 
+            in $S_1(\MM)''$ the second derived set. 
+            There is exactly one such type.
+    \end{enumerate}
+    \[  
+        S_1(\MM) = \set{\tp(a) \st a \in \MM} \sqcup 
+        \set{\tp(a) \st a \notin \MM \AND \exists c \in \MM, a \sim c} \sqcup
+        \set{\tp(a) \st \forall c \in \MM, a \nsim c}
+    \]
+    Hence $\abs{\MM} \leq \abs{\MM} + \abs{\MM} + 1 \leq \abs{S_1(\MM)}$.
+    By $(1.)$, $\MM$ bijects with a subset of $S_1(\MM)$ and so 
+    $\abs{\MM} = \abs{S_1(\MM)}$.
+\end{eg}
+\begin{proof}
+    (1.) This is covered in \linkto{type_of_an_element_from_the_model}{the 
+        lemma}.
+    
+    (2.)
+    Suppose $a$ is not in the image of $\MM$ but is equivalent to 
+    an element of $c \in \MM$.
+    Then 
+    \[\tp(a) \in \bigcap_{d \in \MM} [x \ne d] \cap [x \sim c]\]
+    Notice that we cannot make the intersection a formula because 
+    this would then be quantifying over $\NN$ instead of $\MM$,
+    also this intersection is infinite as $\MM$ is infinite.
+    To show that this is the only element of this set, 
+    suppose $\tp(b)$ also satisfies 
+    \[(\forall d \in \MM, x \ne d \in \tp(b)) \text{ and } x \sim c \in \tp(b)\]
+    then let $\phi \in QFF(\Si(\MM),1)$.
+    We case on $\phi$ to show that $\phi \in \tp(a) \iff \phi \in \tp(b)$.
+    By \linkto{infinite_infinite_classes}{quantifier elimination of $T$} and the 
+    \linkto{quant_elim_for_types}{types version of quantifier elimination}
+    it suffices to show that $\qftp(a) = \qftp(b)$.
+    (for each step we only show $\phi \in \qftp(a) \implies \phi \in \qftp(b)$
+    the other direction is the same)
+    \begin{itemize}
+        \item If $\phi = \top$ then it is trivial.
+        \item If $\phi$ is $r = s$ then as the only $\Si_E(\MM)$-terms 
+            that exist are constants $d_i \in \MM$ or variables $x_i$, 
+            we case on $r$ and $s$.
+            If both are constants $d_0, d_1$ then since $\phi$ is in $\qftp(a)$,
+            $\nnintp{d_0} = \nnintp{d_1}$ and so $\phi$ is in $\qftp(b)$.
+            If one is a constant $d$ and the other a variable $x$ then 
+            $\nnintp{d} = \nnintp{x}(a) = a$ which is a contradiction as 
+            $x \ne d \in \qftp(a)$.
+            If both are variables then as $\phi$ has at most one variable it 
+            is $x = x$ which is clearly in $\tp(b)$.
+        \item If $\phi$ is $r \sim s$ then we again case on what the terms are.
+            If they are constants $d_0,d_1$ 
+            we have $\nnintp{d_0} \nnintp{\sim} \nnintp{d_1}$ 
+            and so $\phi$ is in $\tp(b)$.
+            If one is a constant $d$ and the other a variable $x$ then by 
+            the fact that $x \ne d \in \qftp(a) \cap \qftp(b)$ 
+            \[\nnintp{d} \nnintp{\sim} \nnintp{x}(a) = a 
+            \nnintp{\sim} c \nnintp{\sim} b\]
+            Hence $d \sim x \in \qftp(b)$.
+            If both are variables then as above it is $x \sim x$ which is in 
+            $\tp(b)$.
+        \item If $\phi$ is $\NEG \psi$ then $\NN \model{\Si_E(\MM)} \phi(a)$
+            implies $\NN \nodel{\Si_E(\MM)} \psi(a)$ which by the induction 
+            hypothesis tells us $\NN \nodel{\Si_E(\MM)} \psi(b)$, 
+            whence $\phi(b) \in \qftp(b)$.
+        \item If $\phi$ is $\psi \OR \chi$ then 
+            $\NN \model{\Si_E(\MM)} \psi(a)$ or 
+                $\NN \model{\Si_E(\MM)} \chi(a)$
+            and by the induction hypothesis 
+            $\NN \model{\Si_E(\MM)} \psi(b)$ or 
+            $\NN \model{\Si_E(\MM)} \chi(b)$
+            hence $\phi \in \qftp(b)$.
+    \end{itemize}
+    Thus (though $a$ is not unique) $\tp(a)$ is the unique type satisfying 
+    this characterisation.
+    Hence the intersection of the derived set and 
+    $[x \sim c]$ is $\set{\tp(a)}$,
+    as any $p$ in the derived set is (as we proved above) \emph{not} due 
+    to some element from $\MM$.
+    Thus these are isolated in the derived set.
+
+    We prove a lemma:
+    if $\psi$ is a formula of one variable
+    then $[\psi] \cap S_1(\MM)' = [x \sim d] \cap S_1(\MM)'$ for some 
+    $d \in \MM$ or 
+    $S_1(\MM)' \subs [\psi]$.
+    As $T$ has \linkto{infinite_infinite_classes}{quantifier elimination} 
+    we can assume $\psi$ is quantifier free.
+    The \linkto{disjunctive_normal_form_0}{disjunctive normal form} of $\psi$
+    gives us 
+    \[[\psi] = \bigcup_{i \in I} \bigcap_{j \in J_{i}} [f_{ij}(v)]\]
+    There exists an $i$ such that $\bigcap_{j \in J_{i}} [f_{ij}(v)]$ 
+    contains $p$ hence 
+    \[  
+        [\psi] \cap S_1(\MM)' =  \bigcap_{j \in J_{i}} [f_{ij}(v)] 
+            \cap \bigcap_{c \in \MM} [x \ne c]
+    \]
+    If $f_{ij}$ is of the form $r = s$ then if $r$ and $s$ are both constant
+    symbols or both variable symbols it is true and we can remove it,
+    otherwise it is $x = c$ for some $c \in \MM$, which implies that $p$
+    contains $x = c$ and $x \ne c$, a contradiction.
+    If $f_{ij}$ is of the form $r \ne s$ then if $r$ and $s$ are both constant
+    symbols or both variable symbols it is either true and we can remove it,
+    or false and we have a contradiction;
+    otherwise it is $x \ne c$ for some $c \in \MM$, 
+    which is already given in the second intersection and we can remove it.
+    If $f_{ij}$ is $r \nsim s$ then $r \ne s$ is also in $p$ so by the previous
+    point we can remove it.
+    Thus the only remaining case is when the $f_{ij}$ are $r \sim s$,
+    again we can remove the cases where $r$ and $s$ are both constants or 
+    variables and we are left with $x \sim c$ for some $c \in \MM$.
+    If there is more than one of these we can remove them as they either 
+    contradict one another (via transitivity) or they are redundant information
+    and can be removed.
+    Hence we are left with either $[\psi] \cap S_1(\MM)' = [x \sim d] 
+    \cap S_1(\MM)'$ for some $d \in \MM$ or 
+    $[\psi] \cap S_1(\MM)' = S_1(\MM)'$.
+    In the second case $S_1(\MM)' \subs [\psi]$.
+
+    Using the lemma we show that for any isolated point 
+    $\tp(a)$ in the derived set $S_1(\MM)'$,
+    there exists $d \in \MM$ such that $a \sim d$.
+    If it is isolated
+    \[\set{\tp(a)} = \bigcup_{\phi \in I} [\phi] \cap S_1(\MM)'\] 
+    which implies 
+    there is some $\psi$ such that 
+    \[  
+        \set{\tp(a)} = [\psi] \cap S_1(\MM)'
+    \]
+    By the lemma, either $\set{\tp(a)} = [x \sim d] 
+    \cap \bigcap_{c \in \MM} [x \ne c]$ for some $d \in \MM$ or 
+    $\set{\tp(a)} = \bigcap_{c \in \MM} [x \ne c]$.
+    In the second case we have a contradiction as for two elements $d, e$in 
+    distinct equivalence classes of $\MM$
+    $\bigcap_{d \in \MM} [x \ne d] \cap [x \sim c]$ and 
+    $\bigcap_{e \in \MM} [x \ne e] \cap [x \sim c]$ contain distinct types
+    and are both subsets of $\bigcap_{c \in \MM} [x \ne c]$, 
+    which is a singleton set.
+    Thus there exists $d \in \MM$ such that $x \sim d \in \tp(a)$.
+
+    (3.) There is the final case where $a$ is 
+    not equivalent to anything from $\MM$ (therefore not in the image). 
+    By the above two cases 
+    we have that $\tp(a)$ is not isolated in $S_1(\MM)$ or $S_1(\MM)'$.
+    We show that there is exactly one such type, 
+    which implies $S_1(\MM)''$ consists of one isolated point.
+    $\MM$ has infinitely many equivalence classes 
+    and so the set $\Ga := \set{ x \nsim c \st c \in \MM}$ is finitely 
+    realised in $\MM$, 
+    \linkto{finite_realisation_and_embeddings}{hence consistent}
+    with the elementary diagram of $\MM$, 
+    which implies it can be 
+    \linkto{extend_to_maximal_type_zorn}{extended to a maximal type}.
+    Hence there exists a type $\tp(a)$ such that 
+    $a$ is not equivalent to any thing from $\MM$.
+    There is only one:
+    Suppose $\tp(a)$ and $\tp(b)$ both satisfy the above.
+    Let $\phi \in \tp(a)$.
+    By the lemma $[\psi] \cap S_1(\MM)' = [x \sim d] \cap S_1(\MM)'$ 
+    for some $d \in \MM$
+    or $S_1(\MM)' \subs [\psi]$.
+    The first case is false since it implies 
+    $\tp(a) \in [\psi] \cap S_1(\MM)' \subs [x \sim d]$ 
+    but $x \nsim d$ is in $\tp(a)$ by assumption.
+    Thus $\tp(b) \in S_1(\MM)' \subs [\psi]$ and so $\psi \in \tp(b)$.
+    The other direction is the same and so $\tp(a) = \tp(b)$ and 
+    this point is unique.
+\end{proof}
+
+\subsection{Morley Rank}
+This subsection follows Marker's \cite{marker} material again.
+
+\begin{dfn}[Definable]
+    \link{definable_set}
+    Let $\MM$ be a $\Si$-structure and $A \subs \MM$.
+    We say $X \subs \MM^0$ is $\Si(A)$-definable if $X$ is non-empty.
+    In the non-degenerate case:
+    $X \subs {\MM}^n$ is $\Si(A)$-definable over $\MM$ if there exists a 
+    $\Si(A)$-formula in $n$ free variables such that 
+    \[X = \set{a \in {\MM}^n \st \MM \model{\Si} \phi(a)}\]
+
+    For a $\Si(A)$-formula $\phi$ with $n$ free variables we use $\phi(\MM)$ 
+    to denote $\set{a \in \MM^n \st \MM \model{\Si(\MM)} \phi(a)}$,
+    the set defined by $\phi$.
+    
+    Note that if $\phi$ is a sentence then 
+    $\phi(\MM) := \set{\nothing}$ when $\phi$ is 
+    satisfied by $\MM$ and it is empty otherwise.
+    For now we only concern outselves with the case where $A = \MM$.
+\end{dfn}
+
+%? Example: definable subsets of a model of ZFC are precisely `classes' of ZFC!
+
+\begin{dfn}[Morley rank with respect to a structure (not necessarily saturated)]
+    Let $\MM$ be a $\Si$-structure, 
+    let $\al$ be an ordinal.
+    By transfinite induction of $\al$
+    we define what it means for any $\Si(\MM)$-formula $\phi$ to satisfy 
+    $\al \leq \MR{\MM}{\phi}$:
+    \begin{itemize}
+        \item If $\phi(\MM)$ is non-empty then $0$ is in $R$.
+        \item If $\al$ is a non-zero limit ordinal and for each $\be < \al$
+            and $\phi$, 
+            $\be \leq \MR{\MM}{\phi}$ then $\al \leq \MR{\MM}{\phi}$.
+        \item Suppose $\al + 1$ is a successor ordinal. 
+            If there exists for each 
+            $n \in \N$ a $\Si(\MM)$-formula $\psi_n$ satisfying 
+            $\al \leq \MR{\MM}{\psi_n}$ such that the $\psi_n(\MM)$
+            are pairwise disjoint subsets of $\phi(\MM)$, 
+            then $\al \leq \MR{\MM}{\phi}$.
+            \footnote{The relations $\al \leq \MR{\MM}{\psi_n}$ 
+            is already defined by induction.
+            Each $\psi_n$ has the same number of variables as $\phi$
+            since we require $\psi_n(\MM) \subs \phi(\MM)$.}
+    \end{itemize}
+
+    We then define $\MR{\MM}{\phi} \in \set{-\infty,\infty} \cup \ord$, 
+    the Morley rank of $\phi$:
+    \begin{itemize}
+        \item If for each ordinal $\al$, 
+            $\al \nleq \MR{\MM}{\phi}$ then we take 
+            $\MR{\MM}{\phi} := -\infty$.
+        \item If for all ordinals $\al$, 
+            $\al \leq \MR{\MM}{\phi}$ then we take $\MR{\MM}{\phi} := \infty$.
+        \item If there exists an ordinal $\al$ 
+            such that $\al \leq \MR{\MM}{\phi}$ but 
+            $\al + 1 \nleq \MR{\MM}{\phi}$, 
+            then $\MR{\MM}{\phi} := \al$.
+    \end{itemize}
+\end{dfn}
+\begin{proof}
+    To show that the second part of the definition is well-defined
+    we need a lemma:
+    By induction on $\al$ we show that if $\be \leq \al$,
+    then for any $\Si(\MM)$-formula $\phi$,
+    $\al \leq \MR{\MM}{\phi}$ implies $\be \leq \MR{\MM}{\phi}$.
+    \begin{itemize}
+        \item If $\al = 0$ then it is vaccuously true.
+        \item Suppose $\al$ is a non-zero limit ordinal.
+            If $\al \leq \MR{\MM}{\phi}$, $\be < \al$ and 
+            $\phi \in \form{\Si(\MM)}$ then by definition of 
+            $\al \leq \MR{\MM}{\phi}$ for non-zero limit ordinals
+            we have $\be \leq \MR{\MM}{\phi}$.
+        \item Suppose $\al$ satisfies the condition. 
+            We show that $\al + 1$ satisfies the condition as well.
+            Let $\phi$ be a $\Si(\MM)$-formula.
+            Suppose $\al + 1 \leq \MR{\MM}{\phi}$.
+            If $\be \leq \al + 1$ then either $\be = \al$ or $\be < \al$.
+            It suffices to show the first case - $\al \leq \MR{\MM}{\phi}$ - 
+            as by the induction hypothesis this implies that for any $\be < \al$
+            we also have $\be \leq \MR{\MM}{\phi}$, 
+            which covers the second case.
+            By definition we have $\Si(\MM)$-formulas $\psi_n$ for each natural
+            $n$ with $\psi_n(\MM)$ disjoint subset of $\phi(\MM)$ and 
+            $\al \leq \MR{\MM}{\psi_n}$.
+            This is not quite what we want so we 
+            show $\al \leq \MR{\MM}{\phi}$ by induction on $\al$ once again.
+            \begin{itemize}
+                \item If $\al = 0$ then since $\psi_0(\MM) \subs \phi(\MM)$
+                    and $\psi_0(\MM) \ne \nothing$ by the fact that 
+                    $0 \leq \MR{\MM}{\psi_n}$, 
+                    we have that $\phi(\MM) \ne \nothing$ and so 
+                    $0 \leq \MR{\MM}{\phi}$.
+                \item If $\al$ is a non-zero ordinal and all $\be < \al$
+                    satisfy $\be \leq \MR{\MM}{\phi}$ then clearly 
+                    $\al \leq \MR{\MM}{\phi}$.
+                \item If $\al = \be + 1$ 
+                    then by the original induction hypothesis, 
+                    we have for each $n \in \N$, 
+                    \[\al \leq \MR{\MM}{\psi_n} \implies 
+                    \be \leq \MR{\MM}{\psi_n}\]
+                    Thus $\al \leq \MR{\MM}{\phi}$.
+            \end{itemize}
+    \end{itemize}
+
+    To show then that Morley rank is well-defined: 
+    if the first and second cases don't hold,
+    we can find the minimal element $\al \in \ord$ such that 
+    $\al \nleq \MR{\MM}{\phi}$
+    as \linkto{basic_facts_ordinals}{$\ord$ is well-ordered}.
+    This is not a limit ordinal, since if $\be$ less than it satisfy
+    $\be \leq \MR{\MM}{\phi}$ and it it a limit ordinal then 
+    $\al \leq \MR{\MM}{\phi}$, a contradiction.
+    Thus it must be a successor and so we can find its predecessor.
+    This is unique: suppose for a contradiction that $\al < \be$ satisfy 
+    \[\al \leq \MR{\MM}{\phi}, \al + 1 \nleq \MR{\MM}{\phi}, 
+    \be \leq \MR{\MM}{\phi}, \be + 1 \nleq \MR{\MM}{\phi}\] 
+    then \linkto{less_than_and_succ_of_ord}{$\al + 1 < \be$ or $\al + 1 = \be$},
+    so using the lemma above for the first case,
+    we have in either case $\al + 1 \leq \MR{\MM}{\phi}$,
+    which is a contradiction.
+    Thus $\al = \be$ and this ordinal is unique.
+\end{proof}
+\begin{rmk}
+    We tacitely order $\set{-\infty,\infty} \cup \ord$ by the usual ordering on 
+    $\ord$ together with $-\infty \leq$ everything $\leq \infty$.
+    We can then compare the Morley rank of two formulas by $\leq$.
+\end{rmk}
+
+\begin{lem}[Morley rank for elementary extensions between saturated structures]
+    \link{Morley_rank_elem_ext_lem}
+    If $\MM$ and $\NN$ are both $\om$ saturated $\Si$-structures and 
+    $\MM \to \NN$ is an elementary $\Si$-extension, 
+    then for any $\Si(\MM)$-formula $\phi$,
+    \[\MR{\MM}{\phi} = \MR{\NN}{\phi}\]
+    (where in the second case $\phi$ is considered to be a $\Si(\NN)$-formula).
+\end{lem}
+\begin{proof}
+    Again it suffices to show by induction that for each $\al \in \ord$, 
+    given $\MM$ and $\NN$ and $\phi$ as above, we have
+    \[\al \leq \MR{\MM}{\phi} \quad \iff \quad \al \leq \MR{\NN}{\phi}\]
+
+    The $0$ case: \begin{align*}
+        & 0 \leq \MR{\MM}{\phi}\\
+        \iff & \MM \model{\Si(\MM)} \exists v, \phi(v)\\
+        \iff & \NN \model{\Si(\MM)} \exists v, \phi(v)\\
+        \iff & 0 \leq \MR{\NN}{\phi}
+    \end{align*} 
+
+    The non-zero limit ordinal case is standard.
+
+    Successor:
+    With the induction hypothesis for $\al$, 
+    suppose $\al + 1 \leq \MR{\MM}{\phi}$
+    then there exist $\psi_n$ for each $n \in \N$ such that 
+    $\al \leq \MR{\MM}{\psi_n}$, 
+    $\psi_n(\MM) \subs \phi(\MM)$ and these sets are pairwise disjoint.
+    By the induction hypothesis we have for each $n$ that 
+    $\al \leq \MR{\NN}{\psi_n}$. 
+    Since the embedding is elementary
+    \begin{align*}
+        &\psi_n(\MM) \subs \phi(\MM)\\
+        \implies & \MM \model{\Si} \forall v, \psi_n \to \phi\\
+        \implies & \NN \model{\Si} \forall v, \psi_n \to \phi\\
+        \implies & \psi_n(\NN) \subs \phi(\NN)
+    \end{align*}
+    Similarly 
+    \begin{align*}
+        &\psi_n(\MM) \cap \psi_{l}(\MM) = \nothing\\
+        \implies & \MM \model{\Si} \forall v, \NOT (\psi_n \AND \phi_{n+1})\\
+        \implies & \NN \model{\Si} \forall v, \NOT (\psi_n \AND \phi_{n+1})\\
+        \implies & \psi_n(\NN) \cap \psi_{l}(\NN) = \nothing
+    \end{align*}
+    Hence $\al + 1 \leq \MR{\NN}{\phi}$.
+
+    For the other direction assume the induction hypothesis and suppose 
+    $\al + 1 \leq \MR{\NN}{\phi}$.
+    First replace $\phi$ with a $\Si$-formula $\phi(v,a)$ at some 
+    $a \in \MM^{i}$.
+    For each $n \in \N$
+    there exist $\Si$-formulas $\psi_n$ and $c_n \in \N^{i_n}$
+    such that $\al \leq \MR{\NN}{\psi_n(v,c_n)}$ and $\psi_n(\NN, c_n)$
+    are disjoint subset of $\phi(\NN,a)$.
+    Since the extension is elementary $\mmintp{\tp}(a) = \nnintp{\tp}(a)$
+    and by \linkto{infty_equivalence_01}{$\infty$-equivalence} for each $n$
+    there exist $d_0 \in \MM^{i_0},\dots,d_n \in \MM^{i_n}$ such that 
+    \[
+        \nnintp{\tp}(a,c_0,\dots,c_n) = \mmintp{\tp}(a,d_0,\dots,d_n)
+        = \nnintp{\tp}(a, d_0,\dots,d_n)
+    \]
+    Similarly to before, for each $n \in \N$
+    \begin{align*}
+        &\psi_n(\NN,c_n) \subs \phi(\NN,a)\\
+        \iff & \NN \model{\Si} \forall v, \psi_n(v,c_n) \to \phi(v,a)\\
+        \iff & \forall v, \psi_n(v,c_n) \to \phi(v,a) \in 
+        \nnintp{\tp}(a,c_n) = \mmintp{\tp}(a,d_n)\\
+        \iff & \MM \model{\Si} \forall v, \psi_n(v,d_n) \to \phi(v,a)\\
+        \iff & \psi_n(\MM,d_n) \subs \phi(\MM,a)
+    \end{align*}
+    They are disjoint:
+    \begin{align*}
+        &\psi_n(\NN,c_n) \cap \psi_l(\NN,c_l) = \nothing\\
+        \iff & \NN \nodel{\Si} \exists v, \psi_n(v,c_n) \AND \psi_l(v,c_l)\\
+        \iff & \exists v, \psi_n(v,w_n) \AND \psi_l(v,w_l) \notin 
+        \tp(a,c_n,c_l) = 
+        \tp(b,d_n,d_l)\\
+        \iff & \MM \nodel{\Si} \exists v, \psi_n(v,d_n) \AND \psi_l(v,d_l)\\
+        \iff & \psi_n(\MM,d_n) \cap \psi_l(\MM,d_l) = \nothing
+    \end{align*}
+    Thus the induction is complete.
+\end{proof}
+
+\begin{cor}[Saturated elementary extensions give equal Morley rank]
+    \link{sat_elem_ext_give_eq_Morley}
+    Let $\AA,\MM,\NN$ be $\Si$-structures such that $\MM$ and $\NN$ are 
+    $\om$-saturated elementary $\Si$-extensions of $\AA$. 
+    Then for any $\Si(\AA)$-formula $\phi$, 
+    \[\MR{\MM}{\phi} = \MR{\NN}{\phi}\]
+\end{cor}
+\begin{proof}
+    Let $\LL$ be the \linkto{amalgamation}{amalgamation} of $\MM$ and $\NN$,
+    and let $\Om$ be an 
+    \linkto{om_sat_elem_ext_of_models}{$\om$-saturated elementary extension} 
+    of $\LL$.
+    The \linkto{category_of_structures}{composition} 
+    of elementary extensions is elementary and so 
+    $\MM \to \Om$ and $\NN \to \Om$ is elementary.
+    Hence by the \linkto{Morley_rank_elem_ext_lem}{previous lemma}
+    we have that 
+    \[\MR{\MM}{\phi} = \MR{\Om}{\phi} = \MR{\NN}{\phi}\]
+\end{proof}
+
+\begin{prop}[Subset implies inequality of Morley rank]%?
+    \link{implication_subset_inequality}
+    Let $\phi$ and $\psi$ be two $\Si(\MM)$-formulas
+    and $\NN$ be an elementary extension of $\MM$.
+    If $\psi(\NN) \subs \phi(\NN)$ then
+    \[\MR{\NN}{\psi} \leq \MR{\NN}{\phi}\]
+
+    Hence if $X$ is defined by two formulas then the Morley 
+    rank of the two formulas in some $\NN$ is the same.
+    \[
+        \phi(\NN) = X = \psi(\NN) 
+        \quad \implies \quad 
+        \MR{\NN}{\phi} = \MR{\NN}{\psi}
+    \]
+\end{prop}
+\begin{proof}
+    %Note that $\psi(\NN) \subs \phi(\NN)$ (see important footnote\footnote{
+    %    $\psi(\NN) \subs \phi(\NN)$
+    %    is not true when the sets of free variables differ.
+    %    For example if $\psi$ is a sentence then it defines a point but if 
+    %    $\phi$ were $x = x$ then it would define all of $\NN$.)
+    %    }).
+    Induct on $\al \in \set{-\infty} \cup \ord$ to show that 
+    \[\al \leq \MR{\NN}{\psi} \implies \al \leq \MR{\NN}{\phi}\]
+
+    The $-\infty$ case is clear.
+    The $0$ case follows from noting that if 
+    $0 \leq \MR{\NN}{\psi}$ then $\nothing \ne \psi(\NN) \subs \phi(\NN)$.
+    The non-zero limit case is the same as usual.
+    The successor case follows from noting that the
+    $\psi_i$ given for each $i \in \N$ define subsets of $\psi(\NN)$ and 
+    therefore subsets of $\phi(\NN)$.
+
+    Now that we have that it is true for all ordinals the $\infty$ case also
+    follows.
+
+    The `hence' uses anti-symmetry of the ordering on 
+    $\set{-\infty,\infty} \cup \ord$.
+\end{proof}
+
+\begin{dfn}[Morley rank in saturated extensions]
+    Let $\MM$ be a $\Si$-structure and $\phi$ a $\Si(\MM)$-formula.
+    Then $\MR{}{\phi} := \MR{\NN}{\phi}$ for $\NN$ any $\om$-saturated extension 
+    of $\MM$.
+    This is unique with respect to the choice of $\NN$ since 
+    \linkto{sat_elem_ext_give_eq_Morley}{saturated elementary extensions 
+    give equal Morley rank}.
+    Suppose $X = \phi(\MM)$ is the subset of $\MM^n$ defined by $\phi$.
+    Then we write $\MR{}{X} = \MR{}{\phi}$ to be the Morley rank of the
+    $\Si(\MM)$-definable set.
+    It is unique with respect to the choice of $\phi$ since
+    \linkto{implication_subset_inequality}{equal 
+        $\Si(\MM)$-definable sets implies equal Morley rank}.
+\end{dfn}
+Note that for an $\om$-saturated structure $\MM$ and $\phi$ a $\Si(\MM)$-formula
+\[\MR{}{\phi} = \MR{\MM}{\phi}\]
+since $\MM$ is an $\om$-saturated extension of itself.
+
+\begin{prop}[Basic facts about Morley rank of a definable set]
+    \link{basic_facts_morley_rank_of_dfnbl_set}
+    Let $X$ and $Y$ be $\Si(\MM)$-definable sets in $\MM^n$ a $\Si$-structure.
+    \begin{enumerate}
+        \item If $X \subs Y$ then $\MR{}{X} \leq \MR{}{Y}$.
+        \item $\MR{}{X} = 0$ if and only if $X$ is finite and non-empty.
+        \item $\MR{}{X \cup Y} = \max \set{\MR{}{X}, \MR{}{Y}}$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    $(1.)$ Follows from the \linkto{implication_subset_inequality}{
+        previous lemma}.
+
+    $(2.)$ First note that $0 \leq \MR{}{X}$ if and only if the 
+    formula defining $X$ is satisfied if and only if $X$ is non-empty.
+    It remains to show that $1 \nleq \MR{}{X}$ if and only if 
+    $X$ is finite.
+    \begin{forward}
+        If $X$ were infinite, we can let $\phi$ be the formula defining $X$ and 
+        define formulas $\phi \AND x = a$ for each $a \in X$,
+        hence having infinitely many satisfiable formulas corresponding to
+        disjoint subsets of $X$.
+        Hence $1 \leq \MR{}{X}$, a contradiction.
+    \end{forward}
+
+    \begin{backward}
+        If $1 \leq \MR{}{X}$ then we would have infinitely many disjoint
+        subsets of $X$, which implies $X$ is infinite, a contradiction.
+    \end{backward}
+
+    $(3.)$ It suffices to show that for all $X$ and $Y$ 
+    $\Si(\MM)$-definable subsets of $\MM$
+    if $\MR{}{X} \leq \MR{}{Y}$ then $\MR{}{Y} = \MR{}{X \cup Y}$.
+    By the first part we have that $\MR{}{Y} \leq \MR{}{X \cup Y}$,
+    thus we need only to show the other inequality by induction on 
+    $\al \in \set{-\infty} \cup \ord$:
+    \[\al \leq \MR{}{X \cup Y} \implies \al \leq \MR{}{Y}\]
+    For $\al = - \infty$ then it is clear.
+    For $\al = 0$ suppose $0 \leq \MR{}{X \cup Y}$. 
+    Then $X \cup Y$ is non empty.
+    Suppose for a contradiction $Y$ is empty then $X$ must be non-empty
+    and we have that $\MR{}{Y} < \MR{}{X}$, a contradiction.
+    Hence $0 \leq \MR{}{Y}$.
+
+    The non-zero limit ordinal case is trivial as usual.
+    Suppose it is true for $\al$ and suppose $\al + 1 \leq \MR{}{X \cup Y}$.
+    Then there exist disjoint subsets $S_i \subs X \cup Y$ such that 
+    $\al \leq \MR{}{S_i}$.
+    Consider the subsets $S_i \cap X \subs X$ and $S_i \cap Y \subs Y$.
+    If infinitely many $S_i \cap Y$ satisfy $\al \leq \MR{}{S_i \cap Y}$
+    then we are done.
+    On the other hand if only finitely many do so then by induction
+    \[\al \leq \MR{}{S_i} = \max \set{\MR{}{S_i \cap X}, \MR{}{S_i \cap Y}}\]
+    Hence infinitely many satisfy $\al \leq \MR{}{S_i \cap X}$.
+    Thus $\al + 1 \leq \MR{}{X} \leq \MR{}{Y}$ and the induction is complete.
+    
+    As usual the $\infty$ case follows from the result given by the induction.
+\end{proof}
+Naturally parts $2.$ and $3.$ also have analogues in the formula version of 
+Morley rank.
+
+\subsection{Morley degree}
+\begin{nttn}
+    Let $A$ be a set.
+    Then $A^{<\om}$ is the set 
+    \[A^{<\om} := \bigsqcup_{n \in \N} A^n\]
+    To be explicit we mean a disjoint union of the sets of maps 
+    (a.k.a $n$-tuples) $n \to A$.
+
+    For $a = (a_1,\dots,a_n) \in A^n \subs A^{<\om}$ 
+    and $b \in A$ we write $a;b$ to mean
+    $a$ with $b$ appended to it: 
+    \[(a_1,\dots,a_n,b) \in A^{n+1} \subs A^{<\om}\]
+\end{nttn}
+
+The following lemma has been adapted to be suitable without pre-requisites.
+For the general version see Proof Wiki \cite{wiki1}.
+\begin{lem}[K\"{o}nig's Tree]
+    \link{konigs_tree}
+    Partially order $2^{<\om}$ by $t \leq s$ 
+    if and only if $s$ restricts to the map
+    $t$ on the domain domain of $t$.
+    Let $T \subs 2^{<\om}$ be such that 
+    \begin{itemize}
+        \item For any $s \in T$ and $t \in 2^{<\om}$ if $t \leq s$ 
+            then $t \in T$. 
+            We call this property $T$ being a `binary tree'.
+        \item $T$ is countably infinite.
+    \end{itemize}
+    Then there exists an `infinite branch' $b \in 2^\N$ 
+    (i.e. $b : \N \to 2$) such that 
+    for each $n \in \N$ the restriction $\res{b}{n}$ is in $T$.
+\end{lem}
+\begin{proof}
+    By induction we construct for each $n \in \N$, $t_n \in 2^n$ such that 
+    \begin{itemize}
+        \item $t_n \in T$
+        \item for each $i < n$, $t_{i + 1} \in D(t_i)$
+        \item for each $i \leq n$, $D(t_i)$ is infinite
+    \end{itemize}
+    We take $t_0$ to be the empty map. 
+    $T$ is non-empty (it is countably infinite), 
+    the empty map is in $2^\nothing$, 
+    and anything is equal to the empty map upon restriction to $\nothing$.
+    Thus applying the binary tree property we have $t_0 \in T$.
+    For the same reason $D(t_0) = T$ is infinite.
+
+    Assuming by induction that we have defined $t_0, \dots, t_n$
+    we assume for a contradiction that both $D(t_n;0)$ and $D(t_n;1)$ are
+    finite.
+    Then clearly 
+    \[D(t_n) \subs \set{t_n;0\,,\, t_n;1} \cup D(t_n;0) \cup D(t_n;1)\]
+    and so $D(t_n)$ is finite, a contradiction.
+    Hence we pick one that has infinitely many descendents to be $t_{n+1}$.
+    Taking any descendent and restricting its domain to $2^{n+1}$ we see that 
+    $t_{n+1} \in T$; restricting $t_{n+1}$ to $2^{n}$ we obtain $t_{n}$.
+    Hence the induction is complete.
+
+    We take $b = \bigcup_{n \in \N} t_n$ to be the infinite branch.
+    By construction each finite restriction lies in $T$.
+\end{proof}
+
+\begin{dfn}[$\al$-minimality]
+    \link{al_minimality_dfn}
+    Let $\M$ be an $\om$-saturated $\Si$-structure and $\al$ an ordinal.
+    We say a $\Si(\M)$-formula $\phi$ is $\al$-minimal if 
+    \[\MR{}{\phi} = \al \text{ and there does not exist } 
+    \psi \in \form{\Si(\M)} \text{ such that } 
+    \MR{}{\phi \AND \psi} = \MR{}{\phi \AND \NOT \psi} = \al\]
+\end{dfn}
+
+The following lemma gives us the existence of Morley degree,
+a way to specify how many disjoint subsets of a definable set we can produce.
+This also gives us a way to split up any formula into $\al$-minimal formulas
+which are easier to work with.
+\begin{lem}[Morley degree decomposition \cite{marker}]
+    \link{morley_degree_lem}
+    Let $\M$ be an $\om$-saturated $\Si$-structure.
+    Let $\phi$ be a $\Si(\M)$-formula.
+    Suppose that $\MR{}{\phi} = \al \in \ord$.
+    Then there exist $\al$-minimal formulas $\psi_1,\dots,\psi_d$ 
+    defining disjoint subsets of $\phi(\M)$
+    each with $\MR{}{X_i} = \al$.
+    Futhermore if $X_1,\dots,X_n$ are 
+    pairwise disjoint subsets of $\phi(\M)$ 
+    each with $\MR{}{X_i} = \al$ then $n \le d$.
+\end{lem}
+\begin{proof}
+    We build a binary tree $T \subs 2^{<\om}$ and apply 
+    \linkto{konigs_tree}{K\"{o}nig's tree lemma}.
+    Inductively we define for each $n \in \N$ a finite `binary tree' 
+    $T_n \subs 2^{\leq n}$ and $\Phi_n : T_n \to \form{\Si(\M)}$
+    such that \begin{itemize}
+        \item for each $i < n$, $T_{i+1} \cap 2^{\leq i} = T_i$
+        \item for each $i < n$, $\res{\Phi_{i+1}}{2^{\leq i}} = \Phi_i$
+        \item for each $t \in T_n$, $\MR{}{\Phi_n(t)} = \al$
+    \end{itemize}
+    We take $T_0 = \set{\nothing}$ and have $\Phi_n : \nothing \mapsto \phi$.
+
+    By induction, supposing that we have defined $T_i$ and $\Phi_i$ for 
+    each $i \leq n$, we define $T_{n+1}$ as
+    \begin{align*}
+        T_{n+1} = T_n &\cup 
+        \set{t;0 \st t \in T_n \text{ is } \al-\text{minimal}}\\
+        &\cup \set{t;1 \st t \in T_n \text{ is } \al-\text{minimal}}
+    \end{align*}
+    Then we find (using the axiom of choice) for each $t;0 \in T_{n+1}$
+    a $\Si(\M)$-formula $\chi_{n+1}$ such that 
+    \[
+        \MR{}{\Phi_n(t) \AND \chi_{n+1}} = 
+        \MR{}{\Phi_n(t) \AND \NOT \chi_{n+1}} = \al
+    \]
+    We define $\Phi_{n+1}$ such that it agrees upon restriction with $\Phi_n$
+    and for each $t \in T_n \cap 2^{n}$,
+    \[t;0 \mapsto \Phi_{n+1}(t) \AND \chi_{n+1}
+    \text{ and } t;1 \mapsto \Phi_{n+1}(t) \AND \NOT \chi_{n+1}\]
+    By assumption
+    \[\MR{}{\Phi_{n+1}(t;0)} = \MR{}{\Phi_{n}(t) \AND \chi_{n+1}} = \al\]
+    Hence $\Phi_{n+1}$ satisfies the conditions we required.
+    It then makes sense to define 
+    \[  
+        T := \bigcup_{n \in \N} T_n \quad \text{ and } \quad
+        \Phi := \bigcup_{n \in \N} \Phi_n : T \to \form{\Si(\M)} 
+    \]
+    $T$ is a binary tree:
+    if $s \in T \cap 2^{n}$ and we have $t < s \in T$ then $0 < n$
+    and so it must be that $s$ is created due to the induction step.
+    Thus we have $\res{s}{s^{n-1}} \in T$ and by induction 
+    $t = \res{s}{s^m} \in T$, where $m$ is power of $2$ which $t$ lies in.
+
+    Suppose for a contradiction $T$ is infinite.
+    Then 
+    \[\abs{T} \leq \abs{2^{<\om}} = \abs{\bigsqcup_{n \in \N} 2^n} 
+    \linkto{infinite_union_of_finite}{= \aleph_0}\]
+    Hence $T$ is countably infinite and we can apply 
+    \linkto{konigs_tree}{K\"{o}nig's tree lemma},
+    giving us an `infinite brach' $b : \N \to 2$ such that for each $n \in \N$
+    we have $\res{b}{n} \in T_n \subs T$.
+    From this we obtain for each $n \in \N$ a formula $\Phi_n(\res{b}{n})$
+    and define a $\Si(\M)$-formula
+    \[\psi_n := \Phi_n(\res{b}{n}) \AND \NOT \Phi_{n+1}(\res{b}{n+1})\]
+    These will define infinitely many disjoint subsets of $\phi(\M)$
+    with Morley rank $\al$.
+    Without loss of generality $\res{b}{n+1} = \res{b}{n};0$, 
+    hence for each $n$:
+    \begin{align*}
+        \psi_n(\M) &
+        = \brkt{\Phi_n(\res{b}{n}) \AND \NOT \Phi_{n+1}(\res{b}{n+1})}(\M)\\
+        &= \brkt{\Phi_n(\res{b}{n}) \AND 
+        (\NOT \Phi_{n}(\res{b}{n}) \OR \NOT \chi_{n+1})}(\M)\\
+        &= \brkt{\Phi_n(\res{b}{n}) \AND \NOT \chi_{n+1}}(\M)
+    \end{align*}
+    \linkto{basic_facts_morley_rank_of_dfnbl_set}{Computing} 
+    the Morley rank is then straightforward:
+    \[\MR{}{\psi_n} = \MR{}{\Phi_n(\res{b}{n}) \AND \NOT \chi_{n+1}} = \al\]
+    which follows from the definition of $\chi_{n+1}$.
+    Furthermore to see that any two distinct $\psi_n$ define disjoint 
+    subsets of $\phi$, let $n < m$, then 
+    \[\Phi_{n}(\res{b}{n})(\M) \subs \Phi_{n+1}(\res{b}{n+1})(\M) \subs 
+    \dots \Phi_{m}(\res{b}{m})(\M)\]
+    Hence 
+    $\NOT \Phi_{m}(\res{b}{m})(\M) \subs \NOT \Phi_n(\res{b}{n})(\M)$ and
+    \[
+        \psi_m(\M) \subs (\NOT \Phi_{m+1}(\res{b}{m+1}))(\M)
+        \subs (\NOT \Phi_{n}(\res{b}{n}))(\M)
+    \]
+    the last of which does not intersect with $\psi_n(\M)$.
+    Hence they are disjoint.
+    They are subsets of $\phi(\M)$ since they are subset of 
+    $\Phi_n(\res{b}{n})$ which by induction are subset of $\phi(\M)$.
+    Hence $\phi$ has Morley rank $\al + 1$ which is a contradiction.
+    Thus $T$ is finite.
+
+    We consider the set of terminal nodes 
+    $N = \set{t \in T \st \forall s \in T, t \nless s}$.
+    Since $T$ is finite $N$ is also finite;
+    we take $d$ to be the cardinality of $N$.
+    Consider $\Phi(N)$, the image of $N$.
+    There are three points to note about this: 
+    \begin{itemize}
+        \item For each $t \in N$, $\Phi(t)$ is $\al$-minimal.
+        \item The members of $\Phi(N)$ define pairwise disjoint subsets of 
+            $\phi(\M)$.
+        \item Thus $\phi(\M)$ is equal to a disjoint union
+            $\brkt{\bigor{t \in N}{} \Phi(t)}(\M) = 
+            \bigsqcup_{t \in \N} \Phi(t)(\M)$
+    \end{itemize}
+    We complete the proof using these points first, 
+    then come back and prove them.
+
+    Let $\Si(\M)$-formulas 
+    $\om_1,\dots,\om_n$ have Morley rank $\al$ and 
+    define pairwise disjoint subsets of $\phi(\M)$.
+    We need to show that $n \leq d$.
+    Suppose for a contradiction $d < n$.
+    Suppose for another contradiction 
+    that for all $i \leq n$ there exists $t \in N$ such that 
+    $\al \leq \MR{}{\Phi(t) \AND \om_i}$ 
+    (hence $\al = \MR{}{\Phi(t) \AND \om_i}$).
+    Then there exist $1 \leq i < j \leq n$ such that 
+    \[\MR{}{\om_i \AND \Phi(t)} = \MR{}{\om_j \AND \Phi(t)} = \al\]
+    Then 
+    \[\al = \MR{}{\om_j \AND \Phi(t)} 
+    \leq \MR{}{(\NOT \om_i) \AND \Phi(t)} \leq \MR{}{\Phi(t)} = \al\]
+    This implies $\Phi(t) \notin N$, a contradiction.
+    Then there must be some $i \leq n$ such that for all $t \in N$
+    $\MR{}{\Phi(t) \AND \om_i} < \al$.
+    However 
+    \[
+        \om_i(\M) = (\om_i \AND \phi)(\M) = 
+        \brkt{\om_i \AND \bigor{t \in N}{} \Phi(t)}(\M)
+        = \brkt{\bigor{t \in N}{} \om_i \AND \Phi(t)}(\M)
+    \]
+    Hence $\MR{}{\om_i} \linkto{basic_facts_morley_rank_of_dfnbl_set}{=} 
+    \max_{t \in \N} \MR{}{\om_i \AND \Phi(t)} < \al$, a contradiction.
+    Hence $n \leq d$.
+
+    We show the three facts from before.
+    The first is clear from the definition of $\N$.
+    Let $s$ and $t$ be distinct elements of $N$. 
+    Let $n \in \N$ be the maximal natural such that $\res{s}{n} = \res{t}{n}$.
+    If $s \in 2^n$ then $s < t$ which is a contradiction.
+    Thus $s, t \notin 2^n$.
+    As $n$ is maximal, $\res{s}{n+1} \ne \res{t}{n+1}$ and so 
+    $\Phi(\res{s}{n+1})(\M)$ is disjoint with $\Phi(\res{t}{n+1})(\M)$.
+    $\Phi(s)(\M) \subs \Phi(\res{s}{n+1})(\M)$ and similarly with $t$ hence 
+    $\Phi(s)(\M)$ and $\Phi(t)(\M)$ are disjoint.
+
+    Clearly $\brkt{\bigor{t \in N}{} \Phi(t)}(\M) \subs \phi(\M)$.
+    For the other direction note that for any $t \in T$ such that 
+    $\exists s \in T, t < s$, 
+    \[\Phi(t)(\M) = \Phi(t;0)(\M) \sqcup \Phi(t;1)(\M)\]
+    Hence each element of $T$ (in $2^n$) 
+    is either in $N$ or defines a set that is 
+    a disjoint union due two elements in $2^{n+1} \cap T$.%
+    As $T$ is finite we can find the maximal $n \in \N$ such that 
+    $\exists t \in 2^n \cap T, a \in \Phi(t)(\M)$.
+    If $t \in N$ then we are done.
+    Suppose $t \notin N$ then $a \in \Phi(t;0)(\M) \sqcup \Phi(t;1)(\M)$
+    and so $\exists s \in 2^{n+1} \cap T, a \in \Phi(s)(\M)$,
+    contradicting maximality of $t$.
+    Hence $a \in \bigsqcup_{t \in N} \Phi(t)(\M)$ and 
+    \[\phi(\M) = \brkt{\bigor{t \in N}{} \Phi(t)}(\M) = 
+    \bigsqcup_{t \in \N} \Phi(t)(\M)\]
+\end{proof}
+
+\begin{dfn}[Morley degree]
+    Let $\phi$ be a $\Si(\MM)$-formula for a $\Si$-structure $\MM$.
+    We natually interpret $\phi$ as a $\Si(\M)$-formula
+    where $\M$ is an \linkto{om_sat_elem_ext_of_models}{
+        $\om$-saturated elementary $\Si$-extension} of $\MM$.
+    We define the Morley degree of $\phi$, which we write as $\mdeg (\phi)$:
+    If $\MR{}{\phi} \in \ord$ then
+    $\MR{}{\phi}$ is the minimal $d \in \N$ such that 
+    if $X_1,\dots,X_n$ are 
+    pairwise disjoint subsets of $\phi(\M)$ 
+    each with $\MR{}{X_i} = \MR{}{\phi}$ then $n \le d$.
+    The existence of such a $d$ comes from the \link{morley_degree_lem}{lemma}.
+    If $\MR{}{\phi} = - \infty$ then $\mdeg(\phi) := -\infty$.
+    If $\MR{}{\phi} = \infty$ then $\mdeg(\phi) := \infty$.
+
+    We also write $\mdeg(\phi(\MM)):= \mdeg{(\phi)}$ for the Morley degree of 
+    a $\Si(\MM)$-definable subset of $\MM$.
+\end{dfn}
+Note that Morley degree for formulas with ordinal Morley rank will always 
+be natural numbers greater than $0$, 
+since the formula itself defines a (trivially pairwise disjoint) subset.
+
+\subsection{Morley rank and degree for types}
+\begin{dfn}[Morley rank and degree for types]
+    \link{morley_rank_for_types_dfn}
+    Let $\MM$ be a $\Si$-structure with $A \subs \MM$.
+    Let $p \in S_n(\Theory_\MM(A))$.
+    Then we define the Morley rank of $p$ to be 
+    \[\MR{}{p} := \min \set{\MR{}{\phi} \st \phi \in p 
+    \text{ with exactly $n$ free variables}}\]
+    which is well-defined since ordinals are 
+    \linkto{basic_facts_ordinals}{well-ordered}.
+
+    Note that for any $p$ (by choice) there exists $\phi \in p$ with exactly $n$ 
+    free variables such that $\MR{}{\phi} = \MR{}{p}$,
+    we call $\phi$ the rank representative.
+
+    We also define Morley degree of $p$:
+    If $\MR{}{p} = -\infty$ then $\mdeg(p) = -\infty$
+    and if $\MR{}{p} = \infty$ then $\mdeg(p) = \infty$.
+    Otherwise we take 
+    \[
+        \mdeg(p) := 
+        \min \set{\mdeg(\phi) \st \phi \in p 
+        \text{ and } \MR{}{\phi} = \MR{}{p} \text{ and } 
+        \phi \text{ has exactly $n$ free variables}}
+    \]
+\end{dfn}
+
+\begin{lem}[$\al$-minimal rank representative of a type]
+    \link{smallest_rank_rep}
+    Suppose $\M$ is an $\om$-saturated strongly minimal $\Si$-structure,
+    $A \subs \M$ and $p \in S_n(\Theory_\M(A))$.
+    Let $\al = \MR{}{p}$.
+    Then there exists an $\al$-minimal rank representative $\phi$ of $p$.
+\end{lem}
+\begin{proof}
+    Suppose no such $\phi$ exists, then starting with any rank representative 
+    $\phi_0$ and using maximality of $p$
+    there exists $\psi_0 \in p$ such that 
+    \[\MR{}{\phi_0 \AND \psi_0} = \MR{}{\phi_0 \AND \NOT \psi_0} = \al\]
+    We define $\phi_1$ as $\phi_0 \AND \psi_0$ 
+    which by assumption is not $\al$-minimal and proceed by induction 
+    to create $\phi_i$ and $\psi_i$.
+    Now $\phi_i \AND \NOT \psi_i$ are infinitely 
+    many formulas with Morley rank $\al$ defining disjoint subsets of $\phi_0$,
+    so $\al + 1 \leq \MR{}{\phi_0}$, a contradiction.
+\end{proof}
+
+The following lemma tells us we can also go the other way.
+Given a formula we can find a type with equal Morley rank 
+containing the formula.
+This uses the Morley degree decomposition of a formula.
+\begin{lem}[Formulas are represented by types \cite{tent}]
+    \link{formulas_rep_by_types}
+    Let $A \subs \M$, for $\M$ an $\om$-saturated $\Si$-structure.
+    If $\phi$ is a $\Si(A)$-formula with $\MR{}{\phi} \in \ord$, 
+    then there exists a type $p \in S_n(\Theory_\M(A))$ such that 
+    $\MR{}{\phi} = \MR{}{p}$ and $\phi \in p$.
+
+    Hence 
+    \[\MR{}{\phi} = \max \set{\MR{}{q} \st \phi \in q \in S_n(\Theory_\M(A))}\]
+\end{lem}
+\begin{proof}
+    We first show that this holds when $\phi$ is $\al$-minimal,
+    where $\al := \MR{}{\phi}$.
+    We take 
+    \[
+        p := \set{\psi \in \linkto{dfn_types_on_theories}{F(\Si(A),n)} 
+        \st \MR{}{\phi \AND \NOT \psi}} < \al
+    \]
+    as our $n$-type.
+    To show that it is finitely consistent with $\Theory_\M(A)$
+    let $\De$ be a finite subset of $p$,
+    it suffices to show that the conjunction 
+    $\Psi := \bigand{\psi \in \De}{} \psi$
+    has Morley rank at least $\al$.
+    \[
+        \MR{}{\phi \AND \NOT \Psi} = 
+        \MR{}{\bigor{\psi \in \De}{} \phi \AND \NOT \psi} 
+        \linkto{basic_facts_morley_rank_of_dfnbl_set}{=} 
+        \max_{\psi \in \De} (\MR{}{\phi \AND \NOT \psi} ) < \al
+    \]
+    Hence the conjunction $\Phi$ is in $p$.
+    Supposing $\MR{}{\Psi} < \al$ implies
+    $\MR{}{\phi \AND \Psi} < \al$ and 
+    \[
+        \MR{}{\phi} \linkto{basic_facts_morley_rank_of_dfnbl_set}{=} 
+        \max (\MR{}{\phi \AND \Psi}, \MR{}{\phi \AND \NOT \Psi})
+        < \al
+    \]
+    which is a contradiction.
+    Hence $\al \leq \MR{}{\Psi}$ and so $p$ is finitely consistent.
+    To show that it is maximal, suppose $\psi \notin p$. Then 
+    \[\al \leq \MR{}{\phi \AND \NOT \psi} \leq \MR{}{\phi} = \al\]
+    and by $\al$-minimality of $\phi$ we cannot have 
+    $\al \leq \MR{}{\phi \AND \psi}$.
+    Hence $\NOT \psi \in p$.
+
+    Clearly $\phi \in p$, hence $\MR{}{p} \leq \MR{}{\phi}$.
+    Furthermore if $\psi \in p$ then $\al \nleq \MR{}{\phi \AND \NOT \psi}$
+    hence 
+    \[
+        \MR{}{\phi} \linkto{basic_facts_morley_rank_of_dfnbl_set}{=} 
+        \max (\MR{}{\phi \AND \psi}, \MR{}{\phi \AND \NOT \psi})
+        = \MR{}{\phi \AND \psi} \leq \MR{}{\psi}
+    \]
+    hence $\MR{}{p} = \MR{}{\psi}$.
+
+    Now we can do the case without the $\al$-minimal hypothesis.
+    Write $\al \in \ord$ for the Morley rank and 
+    $d \in \N$ the Morley degree of $\phi$.
+    \linkto{morley_degree_lem}{There exist $\al$-minimal formulas}
+    $\psi_1,\dots,\psi_d$ that partition $\phi(\M)$,
+    each with $\MR{}{\psi_i} = \al$.
+    By the first part we have for $\psi_1$ a maximal type 
+    $p \in S_n(\Theory_\M(A))$ such that $\psi_1 \in p$ and 
+    $\MR{}{p} = \MR{}{\psi_1} = \al$.
+    In fact $\phi \in p$ as well since $\psi_1(\M) \subs \phi(\M)$
+    so we have found the type that we required.
+
+    The `hence' follows immediately.
+\end{proof}
+
+%? Where to put?
+\subsection{Constructable sets}
+\begin{dfn}[Constructable]
+    Let $\MM$ be a $\Si$-structure.
+    The set of constructable subsets of $\MM^n$ are defined by:
+    \begin{itemize}
+        \item[$\vert$] If $\phi$ is an atomic $\Si(\MM)$-formula with up to 
+            $n$ free variables then $\phi(\MM) \subs K^n$ is constructable.
+        \item[$\vert$] If $X \subs \MM^n$ is constructable 
+            then $\MM^n \setminus X$ is constructable. 
+        \item[$\vert$] If $X,Y \subs \MM^n$ are constructable then $X \cup Y$
+            is constructable. 
+    \end{itemize}
+    Thus these are `finite boolean combinations' of sets 
+    $\Si(\MM)$-definable by atomic 
+    formulas, i.e. sets $\Si(\MM)$-definable by a quantifier free formula.
+\end{dfn}
+
+\begin{prop}[Constructable is definable]
+    \link{definable_is_constructable_01}
+    Let $T$ be a $\Si$-theory with quantifier elimination and 
+    $\MM$ be a $\Si$-model of $T$.
+    Then subsets of $\MM^n$ are constructable if and only if they are 
+    $\Si(\MM)$-definable by a quantifier free formula if and only if they 
+    are $\Si(\MM)$-definable.
+\end{prop}
+\begin{proof}
+    We only show the first equivalence as the second is trivial.
+    \begin{forward}
+        Suppose $X \subs \MM^n$ is constructable.
+        Then we induct on $X$:
+        \begin{itemize}
+            \item If $X$ is defined by an atomic formula then 
+                there is nothing to show.
+            \item If $X$ is $\MM^n \setminus Y$ and $Y$ is constructable and 
+                by induction $Y$ is $\Si(\MM)$-definable 
+                then we take the negation of its defining formula.
+            \item If $X$ is $Y \cup Z$, both constructable and 
+                by induction $Y,Z$ are both $\Si(\MM)$-definable 
+                then we take the `or' of their defining formulas.
+        \end{itemize}
+    \end{forward}
+    \begin{backward}
+        Suppose $X$ is $\Si(\MM)$-definable by the quantifier free formula 
+        $\phi(v,b)$ with $b \in \MM^m$ for some $m$.
+        We induct on what $\phi$ is:
+        \begin{itemize}
+            \item If $\phi$ is atomic then $X$ is constructable.
+            \item If $\phi$ is $\NOT \psi$ and $\psi(\MM,b)$
+                is constructable then $X = \MM^n \setminus \psi(\MM,b)$
+                hence it is constructable.
+            \item If $\phi$ is $\psi \OR \chi$ then $X$ is the union of 
+                the sets $\psi(\MM,b)$ and $\chi(\MM,b)$ which are 
+                constructable by induction. 
+                The union of constructable is constructable.
+        \end{itemize}
+    \end{backward}
+\end{proof}
+
+%\begin{eg}[Infinite infinite equivalence classes re-revisited]
+%    \link{infinite_infinite_classes2}
+%    Consider again again the theory $T$ of 
+%    \linkto{infinite_infinite_classes}{infinite infinite equivalence classes},
+%    and $\MM$ a non-empty $\Si_E$-model of $T$. 
+%    As an exercise we try to compute the Morley rank of some 
+%    $\Si_E(\MM)$-formulas.
+%
+%    Say we are interested in computing the Morley rank of $x=x$.
+%    We shown that $2 \leq \MR{\MM}{x = x}$ by first taking 
+%    $\psi_i$ to be $x \sim a_i$ such that the $a_i$ are mutually dissimilar
+%    (for each $i \ne k$, $a_i \nsim a_k$).
+%    These $\psi_i$ should have Morley rank $1$ or greater: take 
+%    $\psi_{ij}$ to be $x = b_{ij}$ where the $b_{ij}$ are all similar to $a$
+%    but mutually distinct ($b_{ij} \sim a_i$ and $b_{ij} \ne b_{ik}$).
+%    These formulas define singleton sets, hence they have Morley rank $0$.
+%    Hence the $1 \leq \MR{\MM}{\psi_i}$ and $2 \leq \MR{\MM}{x = x}$.
+%
+%    I conjecture that $3 \nleq \MR{\MM}{x = x}$.
+%    This requires some knowledge of the disjoint 
+%    non-empty $\Si(\MM)$-definable subsets of $\MM$.
+%    By quantifier elimination%?
+%    $\Si(\MM)$-definable 
+%    is constructable so we first consider sets defined by atomic
+%    formulas (the `generators').%?%?
+%
+%    If the atomic formula is true regardless of what we evaluate at:
+%    $x = x, c = c, x \sim x, c \sim c, c \sim d$ 
+%    ($c$ and $d$ represent constants that are interpreted distinct but similar 
+%    in $\MM$,
+%    $c$ and $e$ represent constants that are dissimilar.)
+%    then the set they define is $\MM$.
+%    If the atomic formula is false regardless of what we pick:
+%    $c = d, c \sim e$
+%    then they define the empty set.
+%    The remaining cases are $x = c$ which corresponds to a singleton set
+%    and $x \sim c$ which gives an infinite equivalence class.
+%
+%    Now suppose $3 \leq \MR{\MM}{x = x}$.
+%    We then have for each $i \in \N$, $\psi_i$ such that 
+%    $\psi_i(\MM)$ are disjoint subsets of $\MM$
+%    and $2 \leq \MR{\MM}{\psi_i}$.
+%    Each $\psi_i(\MM)$ then has disjoint subsets $\chi_{ij}(\MM)$ such that 
+%    $1 \leq \MR{\MM}{\chi_{ij}}$.
+%    By disjunctive normal form%?
+%    we have that each $\chi_{ij}(\MM)$ is a finite union of intersections of 
+%    atomically defined sets and their negations.
+%    We can ignore all instances of `true' and `false' atomic formulas 
+%    since 
+%    \[X \cap \nothing = \nothing, X \cup \nothing = X, X \cap \MM = X,
+%    X \cup \MM = \MM\]
+%    and $\chi_{ij}$ must be non-empty and a proper subset of $\MM$.
+%    Hence it is a finite union of intersections of 
+%    singleton sets, equivalence classes and their complements. 
+%    \[\chi_{ij}(\MM) = \bigcup_{\al \in I} \bigcap_{\be \in J_i} \om_{\al\be}\]
+%    Since $1 \leq \MR{\MM}{\chi_{ij}}$, $\chi_{ij}(\MM)$ 
+%    \linkto{basic_facts_morley_rank_of_dfnbl_set}{must be infinite},
+%    thus there exists $\al \in I$ such that 
+%    $\bigcap_{\be \in J_i} \om_{\al\be}$ is infinite,
+%    ruling out the presence of singleton sets (but not their complements).
+%    What does this all mean??%?
+%\end{eg}
+%
+%%?Where to put?
+%\begin{lem}[Morley rank for formulas at elements of the same type]
+%    Let $\MM$ be a $\om$-saturated $\Si$-structure.
+%    Let $\phi(v,w)$ be a $\Si$-formula.
+%    Let $a, b \in \MM^m$ satisfy 
+%    \[\subintp{\nothing}{\MM}{\tp}(a) = \subintp{\nothing}{\MM}{\tp}(b)\]
+%    then $\MR{\MM}{\phi(v,a)} = \MR{\MM}{\phi(v,b)}$, 
+%    where $\phi(v,a),\phi(v,b)$ 
+%    are seen as $\Si(\MM)$-formulas with $n$ variables.
+%\end{lem}
+%\begin{proof}
+%    It suffices to show by induction on $\al$ that for all $\al \in \ord$,
+%    for any $\Si$-formula $\phi(v,w)$, if $a, b \in \MM^m$ satisfy 
+%    \[\subintp{\nothing}{\MM}{\tp}(a) = \subintp{\nothing}{\MM}{\tp}(b)\]
+%    then 
+%    $\al \leq \MR{\MM}{\phi(v,a)} \iff \al \leq \MR{\MM}{\phi(v,b)}$.
+%
+%    If $\al = 0$ then since 
+%    $\subintp{\nothing}{\MM}{\tp}(a) = \subintp{\nothing}{\MM}{\tp}(b)$
+%    we have 
+%    \[\MM \model{\Si} \exists v, \phi(v,a) 
+%        \iff \MM \model{\Si} \exists v, \phi(v,b)\]
+%    Hence 
+%    \begin{align*}
+%        &0 \leq \MR{\MM}{\phi(v,a)} \quad \iff \quad 
+%        \phi(v,a)(\MM) \ne \nothing\\
+%        \iff \quad & \MM \model{\Si} \exists v, \phi(v,a) \quad \iff \quad
+%        \MM \model{\Si} \exists v, \phi(v,b) \\
+%        \iff \quad & \phi(v,b)(\MM) \ne \nothing \quad \iff 
+%        \quad 0 \leq \MR{\MM}{\phi(v,a)}
+%    \end{align*}
+%    
+%    If $\al$ is a non-zero limit ordinal and all $\be$ less than $\al$ satisfy
+%    the condition then 
+%    \begin{align*}
+%        &\al \leq \MR{\MM}{\phi(v,a)}\\
+%         \iff 
+%        &\forall \be < \al, \be \leq \MR{\MM}{\phi(v,a)}\\
+%        \iff & \forall \be < \al, \be \leq \MR{\MM}{\phi(v,b)}\\
+%        \iff & \al \leq \MR{\MM}{\phi(v,b)}
+%    \end{align*}
+%
+%    For the succesor ordinal case by symmetry it suffices to show that if 
+%    $\al$ satisfies the condition and $\al + 1 \leq \MR{\MM}{\phi(v,a)}$
+%    then $\al + 1 \leq \MR{\MM}{\phi(v,b)}$.
+%    As $\al + 1 \leq \MR{\MM}{\phi(v,a)}$, 
+%    we have for each $n \in \N$ a $\Si(\MM)$-formula $\psi_n(v,c_n)$ 
+%    (where $\psi_n \in \form{\Si}$ and $c_n \in \MM^{i_n}$) satisfying 
+%    $\al \leq \MR{\MM}{\psi_n(v,c_n)}$ such that the $\psi_n(\MM,c_n)$
+%    are pairwise disjoint subsets of $\phi(\MM)$.
+%    For $n \in \N$, since $\MM$ is $\om$-sturated we can apply 
+%    the `forth' property of 
+%    \linkto{infty_equivalence_01}{$\infty$-equivalence} for 
+%    $\MM$ with itself $i_0 + \dots + i_n$ times, 
+%    using the fact that the types of $a$ and $b$ are equal in the first step:
+%    \[\exists d_0 \in \MM^{i_n},\dots,
+%    \exists d_n \in \MM^{i_n}, 
+%    \subintp{\nothing}{\MM}{\tp}(a,c_0,\dots,c_n) = 
+%    \subintp{\nothing}{\MM}{\tp}(b,d_0,\dots,d_n)\]
+%    In particular we have for each $n$
+%    \[
+%        \subintp{\nothing}{\MM}{\tp}(c_n) = 
+%        \subintp{\nothing}{\MM}{\tp}(d_n)
+%    \]
+%    and by the induction hypothesis 
+%    \[\al \leq \MR{\MM}{\psi_n(v,c_n)} \text{ if and only if }
+%    \al \leq \MR{\MM}{\psi_n(v,d_n)}\]
+%    It remains to show that the $\psi_n(\MM,d_n)$ 
+%    are disjoint subsets of $\phi(\MM,b)$.
+%    Indeed, for each $n \in \N$
+%    \begin{align*}
+%        &\psi_n(\MM,c_n) \subs \phi(\MM,a)\\
+%        \iff & \MM \model{\Si} \forall v, \psi_n(v,c_n) \to \phi(v,a)\\
+%        \iff & \forall v, \psi_n(v,c_n) \to \phi(v,a) \in 
+%        \subintp{\nothing}{\MM}{\tp}(a,c_n) = 
+%        \subintp{\nothing}{\MM}{\tp}(b,d_n)\\
+%        \iff & \MM \model{\Si} \forall v, \psi_n(v,d_n) \to \phi(v,b)\\
+%        \iff & \psi_n(\MM,d_n) \subs \phi(\MM,b)
+%    \end{align*}
+%    To show that they are disjoint:
+%    \begin{align*}
+%        &\psi_n(\MM,c_n) \cap \psi_l(\MM,c_l) = \nothing\\
+%        \iff & \MM \nodel{\Si} \exists v, \psi_n(v,c_n) \AND \psi_l(v,c_l)\\
+%        \iff & \exists v, \psi_n(v,w_n) \AND \psi_l(v,w_l) \notin 
+%        \tp(a,c_n,c_l) = \tp(b,d_n,d_l)\\
+%        \iff & \MM \nodel{\Si} \exists v, \psi_n(v,d_n) \AND \psi_l(v,d_l)\\
+%        \iff &\psi_n(\MM,d_n) \cap \psi_l(\MM,d_l) = \nothing
+%    \end{align*}
+%    Thus the induction is complete.
+%\end{proof}
+%

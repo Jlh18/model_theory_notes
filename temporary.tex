@@ -1,0 +1,961 @@
+\documentclass{book}
+\usepackage[left=1in,right=1in,tmargin = 25mm,bmargin = 25mm]{geometry}
+\usepackage[left=1in,right=1in]{geometry}
+\usepackage{subfiles}
+\usepackage{amsmath, amssymb, stmaryrd, verbatim} % math symbols
+\usepackage{amsthm} % thm environment
+\usepackage{mdframed} % Customizable Boxes
+\usepackage{hyperref,nameref,cleveref,enumitem} % for references, hyperlinks
+\usepackage[dvipsnames]{xcolor} % Fancy Colours
+\usepackage{mathrsfs} % Fancy font
+\usepackage{tikz, tikz-cd, float} % Commutative Diagrams
+\usepackage{perpage}
+\usepackage{parskip} % So that paragraphs look nice
+\usepackage{ifthen,xargs} % For defining better commands
+\usepackage{anyfontsize}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tgpagella}
+
+% Bibliography 
+\usepackage{url}
+\usepackage{biblatex}
+
+\addbibresource{refs.bib}
+
+% % Misc
+\newcommand{\brkt}[1]{\left(#1\right)}
+\newcommand{\sqbrkt}[1]{\left[#1\right]}
+\newcommand{\dash}{\text{-}}
+
+% % Logic
+\renewcommand{\implies}{\Rightarrow}
+\renewcommand{\iff}{\Leftrightarrow}
+\newcommand{\IFF}{\leftrightarrow}
+\newcommand{\limplies}{\Leftarrow}
+\newcommand{\NOT}{\neg\,}
+\newcommand{\AND}{\, \land \,}
+\newcommand{\OR}{\, \lor \,}
+\newenvironment{forward}{($\implies$)}{}
+\newenvironment{backward}{($\limplies$)}{}
+% General way of making larger symbols with limits above and below
+\makeatletter
+\DeclareRobustCommand\bigop[1]{%
+  \mathop{\vphantom{\sum}\mathpalette\bigop@{#1}}\slimits@
+}
+\newcommand{\bigop@}[2]{%
+  \vcenter{%
+    \sbox\z@{$#1\sum$}%
+    \hbox{\resizebox{
+      \ifx#1\displaystyle.7\fi\dimexpr\ht\z@+\dp\z@}{!}{$\m@th#2$}}% symbol size
+  }%
+}
+\makeatother
+\newcommand{\bigforall}[2]{\DOTSB\bigop{\forall}_{#1}^{#2}}
+\newcommand{\bigexists}[2]{\DOTSB\bigop{\exists}_{#1}^{#2}}
+\newcommand{\bigand}[2]{\DOTSB\bigop{\mbox{\Large$\land$}}_{#1}^{#2}}
+\newcommand{\bigor}[2]{\DOTSB\bigop{\mbox{\Large$\lor$}}_{#1}^{#2}}
+
+% % Sets
+\DeclareMathOperator{\supp}{supp}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\st}{\,|\,}
+\newcommand{\minus}{\setminus}
+\newcommand{\subs}{\subseteq}
+\newcommand{\ssubs}{\subsetneq}
+\DeclareMathOperator{\im}{Im}
+\newcommand{\nothing}{\varnothing}
+\newcommand\res[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace 
+  % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} 
+  % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+
+% % Greek 
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\io}{\iota}
+\newcommand{\ka}{\kappa}
+\newcommand{\la}{\lambda}
+\newcommand{\om}{\omega}
+\newcommand{\si}{\sigma}
+
+\newcommand{\Ga}{\Gamma}
+\newcommand{\De}{\Delta}
+\newcommand{\Th}{\Theta}
+\newcommand{\La}{\Lambda}
+\newcommand{\Si}{\Sigma}
+\newcommand{\Om}{\Omega}
+
+% % Mathbb
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\M}{\mathbb{M}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\U}{\mathbb{U}}
+
+% % Mathcal
+\renewcommand{\AA}{\mathcal{A}}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\EE}{\mathcal{E}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\GG}{\mathcal{G}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\II}{\mathcal{I}}
+\newcommand{\JJ}{\mathcal{J}}
+\newcommand{\KK}{\mathcal{K}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\PP}{\mathcal{P}}
+\newcommand{\QQ}{\mathcal{Q}}
+\newcommand{\RR}{\mathcal{R}}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\UU}{\mathcal{U}}
+\newcommand{\VV}{\mathcal{V}}
+\newcommand{\WW}{\mathcal{W}}
+\newcommand{\XX}{\mathcal{X}}
+\newcommand{\YY}{\mathcal{Y}}
+\newcommand{\ZZ}{\mathcal{Z}}
+
+% % Mathfrak
+\newcommand{\f}[1]{\mathfrak{#1}}
+
+% % Mathrsfs
+\newcommand{\s}[1]{\mathscr{#1}}
+
+% % Category Theory
+\newcommand{\obj}[1]{\mathrm{Obj}\left(#1\right)}
+\newcommand{\Hom}[3]{\mathrm{Hom}_{#3}(#1, #2)\,}
+\newcommand{\mor}[3]{\mathrm{Mor}_{#3}(#1, #2)\,}
+\newcommand{\End}[2]{\mathrm{End}_{#2}#1\,}
+\newcommand{\aut}[2]{\mathrm{Aut}_{#2}#1\,}
+\newcommand{\CAT}{\mathbf{Cat}}
+\newcommand{\SET}{\mathbf{Set}}
+\newcommand{\TOP}{\mathbf{Top}}
+%\newcommand{\GRP}{\mathbf{Grp}}
+\newcommand{\RING}{\mathbf{Ring}}
+\newcommand{\MOD}[1][R]{#1\text{-}\mathbf{Mod}}
+\newcommand{\VEC}[1][K]{#1\text{-}\mathbf{Vec}}
+\newcommand{\ALG}[1][R]{#1\text{-}\mathbf{Alg}}
+\newcommand{\PSH}[1]{\mathbf{PSh}\brkt{#1}}
+\newcommand{\map}[2]{ \yrightarrow[#2][2.5pt]{#1}[-1pt] }
+\newcommand{\op}{^{op}}
+\newcommand{\darrow}{\downarrow}
+\newcommand{\LIM}[2]{\varprojlim_{#2}#1}
+\newcommand{\COLIM}[2]{\varinjlim_{#2}#1}
+
+% % Algebra
+\newcommand{\iso}{\cong}
+\newcommand{\nsub}{\trianglelefteq}
+\newcommand{\id}[1]{\mathrm{id}_{#1}}
+\newcommand{\inv}{^{-1}}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\codom}{codom}
+\DeclareMathOperator{\coker}{Coker}
+\DeclareMathOperator{\spec}{Spec}
+
+% % Analysis
+\newcommand{\abs}[1]{\left\vert #1 \right\vert}
+\newcommand{\norm}[1]{\left\Vert #1 \right\Vert}
+\renewcommand{\bar}[1]{\overline{#1}}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\renewcommand{\check}[1]{\widecheck{#1}}
+
+% % Galois
+\newcommand{\Gal}[2]{\mathrm{Gal}_{#1}(#2)}
+\DeclareMathOperator{\Orb}{Orb}
+\DeclareMathOperator{\Stab}{Stab}
+\newcommand{\emb}[3]{\mathrm{Emb}_{#1}(#2, #3)}
+\newcommand{\Char}[1]{\mathrm{Char}#1}
+
+% % Model Theory
+\newcommand{\intp}[2]{
+    \star_{\text{\scalebox{0.7}{$#1$}}}^{
+    \text{\scalebox{0.7}{$#2$}}}}
+\newcommand{\subintp}[3]{
+    {#3}_{\text{\scalebox{0.7}{$#1$}}}^{
+    \text{\scalebox{0.7}{$#2$}}}}
+\newcommand{\modintp}[2]{#2^\text{\scalebox{0.7}{$#1$}}}
+\newcommand{\mmintp}[1]{\modintp{\MM}{#1}}
+\newcommand{\nnintp}[1]{\modintp{\NN}{#1}}
+\newcommand{\const}[1]{{#1}_\mathrm{con}}
+\newcommand{\func}[1]{{#1}_\mathrm{fun}}
+\newcommand{\rel}[1]{{#1}_\mathrm{rel}}
+\newcommand{\term}[1]{{#1}_\mathrm{ter}}
+\newcommand{\struc}[1]{{#1}_\mathrm{str}}
+\newcommand{\form}[1]{{#1}_\mathrm{for}}
+\newcommand{\var}[1]{{#1}_\mathrm{var}}
+\newcommand{\theory}[1]{{#1}_\mathrm{the}}
+\newcommand{\carrier}[1]{{#1}_\mathrm{car}}
+\newcommand{\model}[1]{\vDash_{#1}}
+\newcommand{\nodel}[1]{\nvDash_{#1}}
+\newcommand{\modelsi}{\model{\Si}}
+\newcommand{\eldiag}[2]{\mathrm{ElDiag}(#1,#2)}
+\newcommand{\atdiag}[2]{\mathrm{AtDiag}(#1,#2)}
+\newcommand{\Theory}{\mathrm{Th}}
+\newcommand{\unisen}[1]{{#1}_\mathrm{uni}}
+\newcommand{\lift}[2]{\uparrow_{#1}^{#2}}
+\newcommand{\fall}[2]{\downarrow_{#1}^{#2}}
+\newcommand{\Mod}[1]{\M \mathbf{od}(#1)}
+\DeclareMathOperator{\GRP}{GRP}
+\newcommand{\RNG}{\mathrm{RNG}}
+\newcommand{\ER}{\mathrm{ER}}
+\DeclareMathOperator{\FLD}{FLD}
+\DeclareMathOperator{\ID}{ID}
+\DeclareMathOperator{\ZFC}{ZFC}
+\DeclareMathOperator{\ACF}{ACF}
+\newcommand{\BLN}{\mathrm{BLN}}
+\newcommand{\PO}{\mathrm{PO}}
+\DeclareMathOperator{\tp}{tp}
+\DeclareMathOperator{\qftp}{qftp}
+\DeclareMathOperator{\qf}{qf}
+\DeclareMathOperator{\eqzero}{eqzero}
+\newcommand{\MR}[2]{\mathrm{MR}^{#1}(#2)}
+\DeclareMathOperator{\acl}{\mathrm{acl}}
+\DeclareMathOperator{\cl}{\mathrm{cl}}
+
+% % Set theory
+\DeclareMathOperator{\ord}{\mathrm{Ord}}
+
+% % Boolean algebra
+\newcommand{\NEG}{\smallsetminus}
+\newcommand{\upa}[1]{#1^{\uparrow}}
+
+% % Field theory
+\DeclareMathOperator{\tdeg}{t.deg}
+\newcommand{\zmo}[2][p]{\Z/#1^{#2}\Z}
+
+%% code from mathabx.sty and mathabx.dcl to get some symbols from mathabx
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
+
+% Arrows with text above and below with adjustable displacement
+% (Stolen from Stackexchange)
+\newcommandx{\yaHelper}[2][1=\empty]{
+\ifthenelse{\equal{#1}{\empty}}
+  % no offset
+  { \ensuremath{ \scriptstyle{ #2 } } } 
+  % with offset
+  { \raisebox{ #1 }[0pt][0pt]{ \ensuremath{ \scriptstyle{ #2 } } } }  
+}
+
+\newcommandx{\yrightarrow}[4][1=\empty, 2=\empty, 4=\empty, usedefault=@]{
+  \ifthenelse{\equal{#2}{\empty}}
+  % there's no text below
+  { \xrightarrow{ \protect{ \yaHelper[ #4 ]{ #3 } } } } 
+  % there's text below
+  {
+    \xrightarrow[ \protect{ \yaHelper[ #2 ]{ #1 } } ]
+    { \protect{ \yaHelper[ #4 ]{ #3 } } } 
+  } 
+}
+
+% xcolor
+\definecolor{darkgrey}{gray}{0.10}
+\definecolor{lightgrey}{gray}{0.30}
+\definecolor{slightgrey}{gray}{0.80}
+\definecolor{softblue}{RGB}{30,100,200}
+
+% hyperref
+\hypersetup{
+      colorlinks = true,
+      linkcolor = {softblue},
+      citecolor = {blue}
+}
+
+\newcommand{\link}[1]{\hypertarget{#1}{}}
+\newcommand{\linkto}[2]{\hyperlink{#1}{#2}}
+
+% Theorems
+
+% % custom theoremstyles
+\newtheoremstyle{definitionstyle}
+{5pt}% above thm
+{0pt}% below thm
+{}% body font
+{}% space to indent
+{\bf}% head font
+{\vspace{1mm}}% punctuation between head and body
+{\newline}% space after head
+{\thmname{#1}\thmnote{\,\,--\,\,#3}}
+
+% % custom theoremstyles
+\newtheoremstyle{propositionstyle}
+{5pt}% above thm
+{0pt}% below thm
+{}% body font
+{}% space to indent
+{\bf}% head font
+{\vspace{1mm}}% punctuation between head and body
+{\newline}% space after head
+{\thmname{#1}\thmnote{\,\,--\,\,#3}}
+
+\newtheoremstyle{exercisestyle}%
+{5pt}% above thm
+{0pt}% below thm
+{\it}% body font
+{}% space to indent
+{\scshape}% head font
+{.}% punctuation between head and body
+{ }% space after head
+{\thmname{#1}\thmnote{ (#3)}}
+
+\newtheoremstyle{remarkstyle}%
+{5pt}% above thm
+{0pt}% below thm
+{}% body font
+{}% space to indent
+{\it}% head font
+{.}% punctuation between head and body
+{ }% space after head
+{\thmname{#1}\thmnote{\,\,--\,\,#3}}
+
+% % Theorem environments
+
+\theoremstyle{definitionstyle}
+\newmdtheoremenv[
+    linewidth = 2pt,
+    leftmargin = 20pt,
+    rightmargin = 0pt,
+    linecolor = darkgrey,
+    topline = false,
+    bottomline = false,
+    rightline = false,
+    footnoteinside = true
+]{dfn}{Definition}
+\newmdtheoremenv[
+    linewidth = 2 pt,
+    leftmargin = 20pt,
+    rightmargin = 0pt,
+    linecolor = darkgrey,
+    topline = false,
+    bottomline = false,
+    rightline = false,
+    footnoteinside = true
+]{prop}{Proposition}
+\newmdtheoremenv[
+    linewidth = 2 pt,
+    leftmargin = 20pt,
+    rightmargin = 0pt,
+    linecolor = darkgrey,
+    topline = false,
+    bottomline = false,
+    rightline = false,
+    footnoteinside = true
+]{cor}{Corollary}
+\newmdtheoremenv[
+    linewidth = 2 pt,
+    leftmargin = 20pt,
+    rightmargin = 0pt,
+    linecolor = darkgrey,
+    topline = false,
+    bottomline = false,
+    rightline = false,
+    footnoteinside = true
+]{lem}{Lemma}
+
+
+\theoremstyle{exercisestyle}
+\newmdtheoremenv[
+    linewidth = 0.7 pt,
+    leftmargin = 20pt,
+    rightmargin = 0pt,
+    linecolor = darkgrey,
+    topline = false,
+    bottomline = false,
+    rightline = false,
+    footnoteinside = true
+]{ex}{Exercise}
+\newmdtheoremenv[
+    linewidth = 0.7 pt,
+    leftmargin = 20pt,
+    rightmargin = 0pt,
+    linecolor = darkgrey,
+    topline = false,
+    bottomline = false,
+    rightline = false,
+    footnoteinside = true
+]{eg}{Example}
+\newmdtheoremenv[
+    linewidth = 0.7 pt,
+    leftmargin = 20pt,
+    rightmargin = 0pt,
+    linecolor = darkgrey,
+    topline = false,
+    bottomline = false,
+    rightline = false,
+    footnoteinside = true
+]{nttn}{Notation}
+
+\theoremstyle{remarkstyle}
+\newtheorem{rmk}{Remark}
+
+% % footnotes
+\renewcommand{\thempfootnote}{$\dagger$}
+\MakePerPage{footnote}
+
+% % tikzcd diagram 
+\newenvironment{cd}{
+    \begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+}{
+    \end{tikzcd}
+    \end{figure}
+}
+
+% tikzcd
+% % Substituting symbols for arrows in tikz comm-diagrams.
+\tikzset{
+  symbol/.style={
+    draw=none,
+    every to/.append style={
+      edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+  }
+}
+
+
+\begin{document}
+\title{Model Theory}
+\author{JLH}
+\maketitle
+
+
+
+
+
+
+\subsection{Monster model}
+\begin{nttn}
+    We write $\Si(\dots,r)$ to mean the signature 
+    with an extra relation symbol thrown in with the rest.
+\end{nttn}
+
+\begin{dfn}[$\ka$-monster \cite{hodges}]
+    Let $\ka$ be a cardinal and $r$ 
+    a relation symbol not in the signature $\Si$.
+    We say a $\Si$-structure $\MM$ is a $\ka$-monster
+    (also called big or splendid by Hodges) if it satisfies:
+    for any subset $A \subs \MM$ 
+    of cardinality $< \ka$ and any $\Si(A,r)$ structure $\NN$ that 
+    such that $\NN$ and $\MM$ are elementarily equivalent \emph{in $\Si$}, 
+    there is an interpretation of $\MM$ as a $\Si(A,r)$-structure 
+    such that $\NN$ and $\MM$ are elementarily equivalent \emph{in $\Si(r)$}.
+    \[\MM \equiv_\Si \NN \rightsquigarrow \MM \equiv_{\Si(r)} \NN\]
+\end{dfn}
+
+We want monsters to have the properties of being saturated, 
+homogeneous and universal, 
+which we define soon.
+We show that monsters are 
+saturated and that saturated structures are homogeneous and universal.
+
+\begin{cd}
+    & & \text{homogeneous}\\
+    \text{monster} \ar[r]& \text{saturated} \ar[ur] \ar[dr]& \\
+    & & \text{universal}\\
+\end{cd}
+
+\begin{ex}
+    Let $\phi$ be a $\Si$-formula with $n$ free variables.
+    There exists a $\Si$-formula that means 
+    `there exists a unique tuple $x = (x_1,\dots,x_n)$ such that $\phi(x)$'.
+    We write this as 
+    \[\exists ! x, \phi(x)\]
+\end{ex}
+
+\begin{lem}[Monsters are saturated]
+    Let the $\Si$-structure $\MM$ be a $\ka$-monster.
+    Then it is $\ka$-saturated.
+\end{lem}
+\begin{proof}
+    Let $A$ be a subset of $\MM$ with cardinality $< \ka$.
+    Let $p \in S_n(\Th_\MM(A))$ be a maximal $n$-type.
+    Since \linkto{finite_realisation_and_embeddings}{$p$ 
+        is realised by $b \in \NN^n$ in some elementary 
+        $\Si(A)$-extension $\NN$}
+    we can make $\NN$ a $\Si(A,r)$-structure that interprets 
+    $r$ as the singleton set $\set{b}$.
+    We have $\MM \equiv_\Si \NN$ as $\NN$ is an elementary extension.
+    Since $\MM$ is a $\ka$-monster and $\MM \equiv_\Si \NN$ 
+    we have an interpretation of $r$ in $\MM$
+    such that $\MM \equiv_{\Si(A,r)} \NN$.
+    Hence 
+    \[\NN \model{\Si(A,r)} \exists ! x, r(x) \implies 
+    \MM \model{\Si(A,r)} \exists ! x, r(x) \]
+    Taking this unique element $a \in \MM^n$ we see that 
+    \[  
+        p = \subintp{A}{\NN}{\tp}(b) = 
+        \subintp{A}{\NN}{\tp}(\io(a)) 
+        = \subintp{A}{\MM}{a}
+    \]
+    The last equality using the fact that $\NN$ is an elementary 
+    $\Si(A)$-extension of $\MM$. 
+    (Note that we might not have that it is an elementary 
+    $\Si(A,r)$-extension)
+    Hence $p$ is realised in $\MM$ and $\MM$ is $\ka$-saturated.
+\end{proof}
+
+\begin{dfn}[$\ka$-saturation (strong $\ka$-homogeneity)]
+    \link{ka_saturation_dfn}
+    Let $\ka$ be a cardinal and $\MM$ be a $\Si$-structure. 
+    $\MM$ is $\ka$-saturated if for subset $A \subs \MM$
+    such that $\abs{A} < \ka$
+    every $n \in \N$ and every $p \in S_n(\Theory_\MM(A))$,
+    $p$ is realised in $\MM$.
+
+    Equivalently $\MM$ is $\ka$-saturated
+    if for any $A \subs \NN$ in any $\Si$-structure $\NN$ 
+    satisfying $\abs{A} < \ka$ either of the equivalent
+    following hold:
+    \begin{itemize}
+        \item For any partial elementary embedding $f : A \to \MM$ and 
+            any $b \in \NN$, 
+            $f$ can be extended to a partial elementary $\Si$-embedding 
+            $A \cup \set{b} \to \MM$.
+        \item If $\MM \equiv_{\Si(A)} \NN$ then for any $b \in \NN$ we have 
+            $\MM \equiv_{\Si(A,c)} \NN$ for some constant symbol $c$ that 
+            is interpreted as $b$ in $\NN$.
+    \end{itemize}
+
+    The latter two definitions are equivalent due to the fact that 
+    $\MM \equiv_{\Si(A)} \NN$ if and only if 
+    there is a way to interpret symbols from $A$ in $\MM$ such that 
+    \[\MM \model{\Si(A)} \phi \iff \NN \model{\Si(A)} \phi\] 
+    for any $\Si(A)$-sentence $\phi$, 
+    which is equivalent to the existance of a partial embedding $A \to \MM$. 
+    The strong version implies the weak version by taking $\NN$ to be 
+    $\MM$. 
+    It remains to prove the equivalence with the first definition:
+\end{dfn}
+\begin{proof}
+    \begin{forward}
+        Let $f : A \to \MM$ be a partial elementary embedding,
+        where $A \subs \NN$ and $\abs{A} < \ka$; let $b \in \NN$.
+        We show that $\MM \equiv_{\Si(A,c)} \NN$
+        for a constant symbol $c$ that is interpreted as $b$ in $\NN$
+        which gives a way to extend $f$ over $A \cup \set{b}$.
+
+        By \linkto{amalgamation}{amalgamation} there exists $\LL$ and 
+        commuting elementary $\Si(A)$-embeddings $\io_\MM,\io_\NN$into 
+        $\LL$ from $\MM$ and $\NN$.
+        First we show that $\subintp{A}{\LL}{\tp}(\io_\NN(b))$ is consistent 
+        with $\Theory_\MM(A)$.
+        It suffices to show \linkto{compactness_for_types}{finite consistency:} 
+        let $\De$ be a finite subset of $\Theory_\MM(A)$. 
+        The formula
+        \[\exists x, \bigand{\psi \in \De}{} \psi(x)\]
+        is satisfied in $\LL$ by taking $\io_\NN(b)$ hence is satisfied in 
+        $\MM$ as $\io_\MM$ is $\Si(A)$-elementary.
+        Thus $\subintp{A}{\LL}{\tp}(\io_\NN(b))$ is consistent 
+        with $\Theory_\MM(A)$.
+
+        Hence, as $\MM$ is $\ka$-saturated we can find $a \in \MM$ such that 
+        \[
+            \subintp{A}{\LL}{\tp}(\io_\NN(b)) = 
+            \subintp{A}{\MM}{\tp}(a)
+        \]
+
+        Add a constant symbol $c$ to the signature such that 
+        $\nnintp{c} = b$ and $\mmintp{c} = a$.
+        Then $x = c$ is in both types and so $\io_\NN(b) = \io_\MM (a)$.
+        Finally we have 
+        \[\NN \equiv_{\Si(A,c)} \LL \equiv_{\Si(A,c)} \MM\]
+        since $\NN \to \LL$ and $\MM \to \MM$ are elementary.
+    \end{forward}
+
+    \begin{backward}
+        If $p \in S_n(\Theory_\MM(A))$ then \linkto{}{it is realised 
+        in some elementary $\Si$-extension} $\io : \MM \to \NN$
+        by $b \in \NN$.
+        Hence we have a partial elementary $\Si$-embedding 
+        $\io^{-1} : \io(\MM) \to \MM$ that can be extended to have domain 
+        $\io^{-1} \cup \set{b}$ by assumption.
+        Hence we have the image of $b$ under this map as the element of $\MM$ 
+        realising the type $p$.
+    \end{backward}
+\end{proof}
+
+A special case of the second definition of 
+saturation comes in the form of homogeneity.
+\begin{dfn}[$\ka$-homogeneity]
+    Let $\ka$ be a cardinal and $\MM$ a $\Si$-structure.
+    $\MM$ is $\ka$-homogeneous 
+    if for any $A \subs \MM$, 
+    any \linkto{partial_morph_dfn}{partial elementary embedding} 
+    $f : A \to \MM$ and any $b \in \MM$, 
+    if $\abs{A} < \ka$ then 
+    $f$ can be extended to a partial elementary embedding 
+    $A \cup \set{b} \to \MM$.
+\end{dfn}
+
+\begin{dfn}[$\ka$-universality]
+    Let $T$ be a $\Si$-theory and let $\MM \model{\Si} T$.
+    Then $\MM$ is a $\ka$-universal $\Si$-model of $T$ if 
+    any $\NN \model{\Si} T$ such that $\abs{\NN} < \ka$ has an elementary 
+    embedding into $\MM$.
+
+    We replace $\ka$ with $\ka^+$ when the $<$ is improved to $\leq$.
+    %?Maybe for each of them
+\end{dfn}
+
+\begin{lem}[Saturated structures are universal \cite{marker}]
+    Let $\MM$ be a $\ka$-saturated $\Si$-structure.
+    Then $\MM$ is a $\ka^+$-universal $\Si$-structure.
+\end{lem}
+\begin{proof}
+    Let $\NN_\be$ be a $\Si$-structure such that 
+    $\abs{\NN_\be} = \be \leq \ka$.
+    Then enumerate $\NN_\be = \set{n_\ga \st \ga \leq \be}$
+    and define nested subsets $\NN_\al := \set{n_\ga \st \ga \leq \al}$
+    for each $\al \leq \be$.
+    We then use \linkto{transfinite_induction}{transfinite induction} to define 
+    partial elementary embeddings $f_\al : \NN_\al \to \MM$ 
+    for $\al \leq \be$ such that they mutually agree upon restriction.
+
+    If $\al$ is a limit ordinal and for each $\ga \leq \al$ we have 
+    a well-defined partial elementary embedding $f_\ga : \NN_\ga \to \MM$ 
+    that agree upon restriction
+    then $f_\al := \bigcup_{\ga < \al} f_\ga$ is well-defined.
+
+    To define $f_{\al+1}$ using $f_\al$ we first define 
+    \[\Ga = \set{\phi(v,f_\al(a)) \in \form{\Si(f_\al(\NN_\al))} \st
+    \exists a \in \NN^\star, \NN \model{\Si} \phi(n_\al,a))}\]
+    $\Ga$ is finitely consistent with $\Theory_\MM(f_\al(\NN_\al))$:
+    Gor any finite subset $\De \subs \Ga$,
+    we can take the conjuction,
+    \[\exists v, \bigand{\phi(v,f_\al(a)) \in \De}{} \phi(v,a)\]
+    Note that this is satisfied by $\NN$ therefore by the partial elementary 
+    $\Si$-embedding $f_\al$:
+    \[\MM \model{\Si} \exists v, 
+    \bigand{\phi(v,f_\al(a)) \in \De}{} \phi(v,f_\al(a))\]
+    Hence $\MM \model{\Si} \De(b)$ for some $b \in \MM$.
+    By \linkto{compactness_for_types}{compactness for types}
+    $\Ga$ is consistent with $\Theory_\MM(f_\al(\NN_\al))$.
+    This implies that it 
+    \linkto{extend_to_maximal_type_zorn}{can be extended} to a maximal $1$-type 
+    $p \in S_1(\Theory_\MM(\NN_\al))$.
+    By $\ka$-saturation, $\Ga(v)$ is realised by some 
+    $b \in \MM$.
+    Define $f_{\al + 1} : n_\al \mapsto b$ and agreeing with $f_\al$ otherwise.
+    By definition $f_{\al + 1}$ is a partial elementary $\Si$-embedding.
+
+    Hence $f_\be : \NN_\be \to \MM$ is an elementary $\Si$-embedding.
+\end{proof}
+
+\begin{dfn}[Monster model]
+    Let $T$ be an infinitely modelled $\Si$-theory.
+    Then for any infinite cardinal $\ka$ there exists a `Monster model' of $T$: 
+    a $\Si$-model $\M_{\ka^+}$ such that 
+    \begin{itemize}
+        \item $\ka \leq \abs{\M_{\ka^+}}$
+        \item $\M_{\ka^+}$ is $\ka$-saturated
+        \item For any $\NN \model{\Si} T$ such that $\abs{\NN} < \ka$ there is 
+            an elementary $\Si$-embedding $\NN \to \M_{\ka^+}$.
+            For any model $\MM$ of $T$ and elementary $\Si$-embeddings 
+            $\MM \to \M$ and $\MM \to \NN$ the following commutes 
+            \begin{cd}
+                \MM \ar[r] \ar[dr] &\NN \ar[d]\\
+                &\M
+            \end{cd}
+    \end{itemize}
+\end{dfn}
+\begin{proof}
+    %?
+\end{proof}
+
+
+
+%? Strongly minimal, algebraic closure
+\begin{dfn}[Algebraic, algebraic closure]
+    Let $\MM$ be a $\Si$-structure and let $D$ be a subset of $\MM$
+    (often \linkto{strongly_minimal}{strongly minimal}strongly minimal).
+    Let $A$ be a subset of $D$, 
+    $a \in \MM$ is algebraic over $A$ if $a$ belongs to a finite 
+    $\Si(A)$-definable set .
+    Define the algebraic closure of $A$ over $D$ to be
+    \[\acl_D(A) := \set{a \in D \st a \text{ is algebraic over } A}\]
+    We drop the subscript $D$ when it is sufficiently obvious.
+\end{dfn}
+
+\begin{lem}[Some definable sets]
+    \link{some_definable_sets}
+    Let $\MM$ be a $\Si$-structure and let $B,C \subs \MM$ be a $\Si$-definable
+    set.
+    Let $\phi(x)$ be a $\Si$-formula with $n$ free variables.
+    For $b \in B^n$, let $\psi(x,b)$ be a $\Si(B)$-formula 
+    with $m$ free variables ($\psi(x,y)$
+    is a $\Si$-formula with $n+m$ free variables).
+
+    Then the following sets are definable by a $\Si$-formula:
+    \begin{itemize}
+        \item The intersection of $B$ and $C$, the union of $B$ and $C$
+            the complement of $B$.
+        \item The set of $b \in B^n$ that satisfy $\phi(x)$:
+            \[\set{b \in B^n \st \MM \model{\Si} \phi(b)}\]
+        \item The elements $b \in \MM^n$ such that $\psi(x,b)$ defines a set of 
+            at most $k$ elements.
+        \item The elements of $\MM^n$ such that $\psi(x,b)$ defines a set of 
+            at least $k$ elements.
+        \item The elements of $\MM^n$ such that $\psi(x,b)$ defines a set of 
+            cardinality $k$.
+            \[\set{b \in \MM^n \st \abs{\psi(\MM,b)} = k}\]
+            and even $\set{b \in B^n \st \abs{\psi(\MM,b)} = k}$ by 
+            taking the intersection of two definable sets.
+    \end{itemize}
+    We will become lazier when dealing with definable sets as we gain an idea 
+    of what should and should not be definable.
+\end{lem}
+\begin{proof}
+    \begin{itemize}
+        \item This is clear.
+        \item 
+        Since $B$ is $\Si$-definable we can take $\chi(x)$ as the 
+        $\Si$-formula defining $B$
+        and consider the $\Si$-formula 
+        \[\phi(x_1,\dots,x_n) \AND \bigand{i = 1}{n} \chi(x_i)\]
+        Clearly this defines $\set{b \in B^n \st \MM \model{\Si} \phi(b)}$.
+        \item 
+        To make $\set{b \in \MM^n \st \abs{\psi(\MM,b)} \leq k}$
+        we take the $\Si$-formula $\chi(x)$:
+        \[
+            \chi(x) = \bigforall{i = 1}{k + 1} x_i,
+            \bigand{i = 1}{k + 1} \psi(x_i,y) \to \bigor{i \ne j}{x_i = x_j}
+        \]
+        where potentially $x_i$ represents $m$ variables, which we can 
+        quantify over as it is finite.
+        \item 
+        To make $\set{b \in \MM^n \st k \leq \abs{\psi(\MM,b)}}$
+        we take the $\Si$-formula $\chi(x)$:
+        \[
+            \chi(x) = \bigexists{i = 1}{k} x_i, {x_i \ne x_j}
+        \]
+    \end{itemize}
+\end{proof}
+
+\begin{dfn}[Minimal, strongly minimal \cite{marker}]
+    \link{strongly_minimal}
+    Let $\MM$ be a $\Si$-structure.
+    Let $D$ be an infinite $\Si$-definable subset of $\MM^n$.
+    $D$ is minimal in $\MM$ if any $\Si$-definable subset of $D$
+    if finite or cofinite.
+    $D$ is strongly minimal if it is minimal in 
+    $\NN$ for any elementary extension $\NN$ of $\MM$.
+    A $\Si$-theory $T$ is strongly minimal if any $\Si$model of $T$
+    is strongly minimal 
+    (note that any $\Si$-structure is definable by the formula $v = v$).
+\end{dfn}
+
+\begin{prop}[Algebraic closure is a \linkto{pregeometry_dfn}{pregeometry}]
+    \link{acl_d_is_pregeometry}
+    Let $\MM$ be a $\Si$-structure. 
+    Let $D$ be a minimal subset of $\MM$.
+    Then $(D,\acl_D(\star)$ is almost a pregeometry.
+\end{prop}
+\begin{proof}[\cite{fandom}]
+    Preserves order: 
+    \emph{if $A \subs B \subs D$ then $\acl_D(A) \subs \acl_D(B)$.}
+    Let $a \in \acl_D(A)$. 
+    Then there exists a finite $\Si(A)$-definable set containing $a$.
+    Any $\Si(A)$-formula is naturally a $\Si(B)$-formula thus $a \in \acl_D(B)$.
+
+    Idempotence: \emph{for any $A \subs D$, $\acl_D(A) = \acl_D(\acl_D(A))$.}
+    \begin{forward}
+        We first show that for any subset $A \subs D$, $A \subs \acl_D(A)$.
+        Let $a \in A$ then $a = x$ is a $\Si(A)$-formula that is defines a 
+        finite set. 
+        Thus $a \in \acl_D(A)$.
+        Directly we have the corollary $\acl_D(A) \subs \acl_D(\acl_D(A))$.
+    \end{forward}
+
+    \begin{backward}
+        We show that $\acl_D(\acl_D(A)) \subs \acl_D(A)$.
+        Let $a \in \acl_D(\acl_D(A))$.
+        Then there exists $\phi(x,v) = \phi(x,v_0,\dots,v_n)$ a $\Si$-formula 
+        and $b_0,\dots, b_n \in \acl_D(A)$ such that $\phi(x,b)$
+        defines a finite subset of $\MM$ containing $a$.
+        Let $k$ be the finite cardinality of $\phi(\MM,b)$.
+        \linkto{some_definable_sets}{There exists a $\Si$-formula $\psi(v)$} 
+        that defines the set 
+        $\set{b \in B \st \abs{\phi(\MM,b)} \leq n}$
+        \[
+            \phi'(x,v) := \phi(x,v) \AND \psi(v)
+        \]
+        We have that $a \in \phi(\MM,b) = \phi'(\MM,b)$
+        and for any $c \in \MM^n$, $\phi'(\MM,c)$ is finite.
+    
+        For each $b_i$ appearing in $b$
+        there exists a $\Si(A)$-formula $\psi_i(v_i)$ such that 
+        $b_i \in \psi_i(\MM)$ and this definable set is finite.
+        Define the $\Si(A)$-formula
+        \[
+            \phi''(x) := \bigexists{i = 1}{n} v_i,
+            \phi'(x,v_0,\dots,v_n) \AND \bigand{i = 1}{n} \psi_i(v_i)
+        \]
+        Then $a \in \phi''(\MM)$ by taking the $v_i$ to be $b_i$ and 
+        \begin{align*}
+            d \in \phi''(\MM) 
+            &\implies \exists c \in \MM^n, \MM \model{\Si}\phi'(d,c) 
+            \text{ and for each $i$,} \MM \model{\Si}\psi_i(c_i)\\
+            &\implies \text{there exist for each $i$ } c_i \in \psi_i(\MM),
+            \MM \model{\Si}\phi'(d,c) \\
+            &\implies d \in 
+            \bigcup_{i = 0}^n \bigcup_{c_i \in \psi_i(\MM)} \phi'(\MM,c)
+        \end{align*}
+        The last expression is a finite union of finite sets which is finite.
+        Hence $\phi''(\MM)$ is finite and $a \in \acl_D(A)$
+    \end{backward}
+    
+    Finite character: \emph{if $A \subs D$ and $a \in \acl_D(A)$ then 
+    there exists a finite subset $F \subs A$ such that $a \in \acl_D(F)$.}
+    Take the $\Si(A)$-formula defining the finite set containing $a$.
+    Pick out the (finitely many) constant symbols from $A$, 
+    forming a finite subset $F \subs A$.
+    Then $a \in \acl_D(F)$.
+
+    Exchange: \emph{if $A \subs D$ and $a,b \in D$ such that 
+    $a \in \acl_D(A,b)$ (shorthand for $A,\set{a}$)
+    then $a \in \acl_D(A)$ or $b \in \acl_D(A,a)$.}
+    Since $a \in \acl(A,b)$ there exists a $\Si(A)$-formula $\phi(v,w)$ such 
+    that $a \in \phi(\MM,b)$ and $\phi(\MM,b)$ is finite - 
+    say it has cardinality $n$ 
+    (if $b$ does not appear in the formula then we immediately have 
+    $a \in \acl(A)$).
+    \linkto{some_definable_sets}{There exists a $\Si(A)$-formula} $\psi(w)$
+    defining the set
+    \[\psi(\MM) = \set{b' \in D \st n = \abs{\phi(\MM,b')}}\]
+    As $\psi(\MM) \subs D$ and $D$ is minimal, 
+    $\psi(\MM)$ is finite or cofinite.
+    If it is finite then $b \in \psi(\MM)$ and so 
+    $b \in \acl(A) \linkto{acl_d_is_pregeometry}{\subs} \acl(A,a)$.
+
+    If it is $\psi(\MM)$ then consider the $\Si(A)$-formula 
+    $\phi(v,w) \AND \psi(w)$.
+    For each $a' \in D$ let $X(a')$ be the subset of $D$ defined by 
+    $\phi(a',w) \AND \psi(w)$.
+    Consider $b \in X(a)$, and case on whether it is finite or cofinite.
+    If it is finite then $b \in \acl(A,a)$ as $\phi(a,w) \AND \psi(w)$
+    is a $\Si(A)$-formula defining a finite set.
+
+    If $X(a)$ is cofinite then let $m = \abs{D \setminus X(a)} \in \N$.
+    \linkto{some_definable_sets}{There exists a $\Si(A)$-formula} $\chi(v)$
+    defining the set
+    \[\chi(\MM) = \set{a' \in D \st m = \abs{D \setminus X(a')}}\]
+    If $\chi(\MM)$ is finite then $a \in \chi(\MM)$ and so $a \in \acl(A)$.
+    If $\chi(\MM)$ is confinite then there exist $n + 1$ distinct elements 
+    $a_i \in \chi(\MM)$ since $D$ is infinite by definition.
+    Take the (finite) intersection of the cofinite $X(a_i)$,
+    producing a non-empty (infinite) set.
+    Take 
+    \[b' \in \bigcap_{i = 1}^{n+1} X(a_i) = 
+    \bigcap_{i = 1}^{n+1} \phi(a_i,\MM) \cap \psi(\MM)\] 
+    Then for each $i$, $\MM \model{\Si} \phi(a_i,b')$, 
+    hence $n + 1 \leq \abs{\phi(\MM,b')}$.
+    However $\MM \model{\Si} \psi(b')$ implies $n = \abs{\phi(\MM,b')}$,
+    a contradiction.
+\end{proof}
+\begin{rmk}
+    The definition of \linkto{dimension_dfn}{dimension} 
+    for pregeometries thus carries through for 
+    subsets of $D$.
+\end{rmk}
+
+We begin by looking at $1$-types, 
+as done in \linkto{infinite_infinite_classes1}{the example} 
+with infinite infinite equivalence classes.
+
+\begin{prop}[Classification of $1$-types on a model of $\ACF_p$]
+    Let $\NN$ be an \linkto{om_sat_elem_ext_of_models}{
+        $\om$-saturated extension of $\MM$}, 
+    a $\Si_\RNG$-model of $\ACF_p$.
+    \linkto{elems_of_stone_space_are_types_of_elements}{
+        Any element of the Stone space $S_1(\eldiag(\Si_\RNG,\MM))$
+        is of the form}
+        $\subintp{\nothing,1}{\NN}{\tp}(a)$.
+    There are two cases for what the types over $\MM$ can be:
+    \begin{itemize}
+        \item $a$ is in the image of $\MM$; 
+            equivalently the type is an isolated point.
+        \item $a$ is not in the image of $\MM$;
+            equivalently its type is the unique non-isolated type.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    The first part is covered in 
+    \linkto{type_of_an_element_from_the_model}{the lemma}.
+
+    For the second part suppose $a$ is not in the image of $\MM$.
+    It is not isolated by the first part.
+    Note that for any $p \in \MM[x] \setminus {0}$, 
+    $\io(p)(a) \ne 0$ because $\MM$ is algebraically closed. 
+    (If $\io(p)(a) = 0$ then we can keep factoring roots of the polynomial
+    from $\MM$ to find one that corresponds to $a$.)
+    We show that any $b$ not in the image gives rise to the same type as $a$.
+
+    Let $\phi \in \tp(a)$.
+    As \linkto{ACF_has_quantifier_elimination}{
+        $\ACF_p$ has quantifier elimination}
+    we have \linkto{quant_elim_for_types}{equivalently}
+    $\phi \in \qftp(a)$.
+    Then \linkto{disjunctive_normal_form}{by the disjunctive normal form} 
+    for formulas in $\Si_\RNG$ we have that 
+    \[ 
+        \NN \model{\Si_\RNG} \forall v, \phi(v) 
+        \IFF \bigor{i \in I}{} 
+        \brkt{\bigand{j \in J_{i0}}{} p_{ij}(v) = 0 \AND 
+        \bigand{j \in J_{i1}}{} q_{ij}(v) \ne 0}
+    \]
+    Thus there exists $i \in I$ such that 
+    \[ 
+        \NN \model{\Si_\RNG} \forall v, \phi(v) \iff
+        \bigand{j \in J_{i0}}{} p_{ij}(v) = 0 \AND 
+        \bigand{j \in J_{i1}}{} q_{ij}(v) \ne 0
+    \]
+    If $J_{i0}$ contains a non-zero polynomial $p_{ij}$ then we would have a 
+    contradiction by the above remark.
+    Thus 
+    \[ 
+        \NN \model{\Si_\RNG} \forall v, \phi(v) \iff
+        \bigand{j \in J_{i1}}{} q_{ij}(v) \ne 0
+    \]
+    Suppose for a contradiction
+    that $\phi$ is not in $\tp(b)$, 
+    in which case $\NN \nodel{\Si_\RNG} \phi(b)$
+    and $\NN \model{\Si_\RNG} \bigor{j \in J_{i1}}{} q_{ij}(b) = 0$.
+    Hence either $\NN \model{\Si_\RNG} \bot$, which is a contradiction,
+    or $\NN \model{\Si_\RNG} q_{ij}(b) = 0$ for some $j \in J_{i1}$.
+    By the above remark $q_{ij}$ must therefore be the zero polynomial,
+    which also leads to a contradiction as 
+    \[ 
+        \NN \model{\Si_\RNG} q_{ij}(a) \ne 0
+    \]
+    Hence $\tp(a) = \tp(b)$.
+\end{proof}
+
+\printbibliography
+
+\end{document} 

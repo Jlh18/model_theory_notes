@@ -1,0 +1,192 @@
+\section{Noetherian Modules}
+All of the following material is from Atiyah and McDonald's book \cite{atiyah}.
+\begin{dfn}[Ascending chain]
+    If $(\Si,\leq)$ is a partially ordered set then an ascending chain 
+    is a functor $F : (\N,\leq) \to (\Si,\leq)$.
+
+    A chain is stationary if there exists a $m \in \N$ such that
+    for any $n \in \N_{\ge m}$, $F(m) = F(n)$.
+\end{dfn}
+
+\begin{prop}[Noetherian chains]
+    \link{noeth_chain}
+    Let $\Si$ be a partially ordered set. 
+    Then every non-empty subset has a maximal element
+    if and only if every ascending chain is stationary.
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        If $F$ is a chain then $I = \set{F(i) \st i \in \N}$
+        has a maximal element $F(m)$. 
+        Hence for any $n$ greater than or equal to $m$, 
+        $F(m) = F(n)$.
+    \end{forward}
+    \begin{backward}
+        Let $\nothing \ne I \subs \Si$ and
+        suppose for a contradiction that for each $m \in I$
+        there exists $a \in I$ such that $m < a$.
+        Then create a chain by recursively taking such an $a$,
+        starting with the non-empty element:
+        $a_0 < a_1 < \dots$.
+        This chain is not stationary.
+    \end{backward}
+\end{proof}
+
+\begin{dfn}[Noetherian Module]
+    \link{noetherian_definition}
+    Order the submodules of an $A$-module $M$ by $\subs$.
+    $M$ is Noetherian if it satisfies on one of the following
+    equivalent definitions:
+    \begin{itemize}
+        \item Every non-empty set of submodules has a maximal element.
+        \item Every ascending chain of submodules is stationary.
+        \item Any submodule of $M$ is finitely generated.
+    \end{itemize}
+\end{dfn}
+\begin{proof}
+    $1. \iff 2.$ follows from \linkto{noeth_chain}{Noetherian chains}.
+    $1. \implies 3.$: Let $N \leq M$ and take the set 
+    \[I = \set{S \leq N \st S \text{ finitely generated}}\]
+    Then $0 \in I$ hence it is non-empty hence has a maximal element,
+    which we call $N_0$.
+    Suppose for a contradiction that $N_0 < N$. 
+    Then there exists $x \in N \setminus N_0$ such that $N_0 < N_0 + Ax \leq N$.
+    This is finitely generated hence belongs to $I$, 
+    contradicting with the maximality of $N_0$.
+    $3. \implies 2.$: Let $N_0 \leq N_1 \leq \dots$ 
+    be a chain of submodules.
+    Their union $N$ is a submodule of $M$ hence is finitely generated.
+    There exists $N_m$ such that all the generators are in $N_m$.
+    At $m$ the chain becomes stationary.
+\end{proof}
+
+\begin{prop}[Exactness and Noetherian modules]
+    \link{exact_noeth}
+    If 
+    \[0 \to N \to M \to P \to 0\]
+    is exact then 
+    $M$ is Noetherian if and only if both $N$ and $P$ are Noetherian.
+\end{prop}
+\begin{proof}
+    Without loss of generality $N \subs M$ and $P = M / N$.
+    \begin{forward}
+        Any ascending chain of ideals in $N$ 
+        is a chain in $M$ hence is stationary.
+        By the third isomorphism theorem, ideals in $P$ 
+        biject with ideals in $M$ containing $N$.
+        Hence any ascending chain of ideals in $P$ is 
+        stationary when sent back to $M$,
+        thus is stationary.
+    \end{forward}
+    
+    \begin{backward}
+        Let $(M_i)_{i \in \N}$ be an ascending chain of submodules in $M$.
+        Their preimages $(N_i)$ in $N$ - i.e. $(M_i \cap N)$ - and images
+        $(P_i)$ in $P$ become stationary at $m_n, m_p$.
+        We claim that $(M_i)$ becomes stationary at the maximum of the two.
+        We first show that 
+        \[0 \to N_i \to M_i \to P_i \to 0\]
+        is exact.
+        The map $M_i \to P_i$ is the restriction of the map $M \to P$ 
+        on $M_i$, hence 
+        \begin{align*}
+            &\ker (M_i \to P_i) \\
+            &= M_i \cap \ker (M \to P)\\
+            &= M_i \cap N &\text{ by exactness}\\
+            &= N_i
+        \end{align*}
+        Suppose $\max(m_n,m_p) \leq i$, then
+        We apply the snake lemma to
+        \begin{cd}
+            N_i \ar[r]\ar[d] &M_i \ar[r] \ar[d]&P_i\ar[d]\\
+            N_{i+1} \ar[r]  &M_{i+1} \ar[r]  &P_{i+1}
+        \end{cd}
+        Obtaining the exact sequences
+        \[0 = \coker (N_i \to N_{i+1}) \to \coker (M_i \to M_{i+1}) 
+        \to \coker (P_i \to P_{i+1}) = 0\]
+        Noting that by stability the end points are $0$.
+        This says that $\coker (M_i \to M_{i+1}) = 0$ and so 
+        $M_i \to M_{i+1}$ is an isomorphism 
+        (via $\subs$ which is already injective)
+        so $M_i = M_{i+1}$.
+    \end{backward}
+\end{proof}
+
+\begin{prop}[Direct sum of Noetherian is Noetherian]
+    \link{direct_sum_of_noeth}
+    If $M_i$ are Noetherian $A$-modules then the direct sum 
+    $\bigoplus_{i = 1}^n M_i$ is Noetherian.
+\end{prop}
+\begin{proof}
+    Induction. Consider the exact sequence
+    \[0 \to M_{n+1} \to \bigoplus_{i = 1}^{n+1} M_i \to 
+    \bigoplus_{i = 1}^{n} M_i \to 0\]
+    Apply \linkto{exact_noeth}{the proposition on exact sequences}.
+\end{proof}
+
+\begin{dfn}[Noetherian ring]
+    A ring is Noetherian if it is a Noetherian module over itself.
+\end{dfn}
+
+\begin{prop}[Finitely generated modules over Noetherian rings are Noetherian]
+    \link{fin_gen_mod_over_noeth}
+    If $A$ is a Noetherian ring then any finitely generated $A$-module is 
+    Noetherian.
+\end{prop}
+\begin{proof}
+    $M$ is the image of a projection of $A^n$ for some $n$.
+    \linkto{exact_noeth}{It suffices that $A^n$ is Noetherian} by considering
+    the exact sequence
+    \[0 \to \ker \to A^n \to M \to 0\]
+    \linkto{direct_sum_of_noeth}{$A^n$ is a direct sum of Noetherian
+        modules hence is Noetherian.}
+\end{proof}
+
+\begin{prop}[Hilbert basis theorem]
+    \link{hilbert_basis}
+    If $A$ is Noetherian then the polynomial ring $A[x_1, \dots, x_n]$ 
+    is Noetherian.
+    In particular for any field $K$, $K[x_1, \dots, x_n]$ 
+    is Noetherian.
+\end{prop}
+\begin{proof}
+    By induction it suffices to show that $A[x]$ is Noetherian.
+    Let $\f{a}$ be an ideal of $A[x]$;
+    we show that it is finitely generated.
+    The ideal $I$ of $A$ 
+    formed by the leading coefficients of polynomials in $\f{a}$
+    is finitely generated as $A$ is Noetherian.
+    Hence there exists a finite subset of polynomials $S \subs \f{a}$
+    such that the leading coefficients $a_f$ generate $I$.
+    We consider the ideal $\sum_{f \in S}A[x]f$.
+    Let $d$ denote $\max_{f \in S} \deg f$.
+
+    Consider the $A$-module $M$ finitely generated by $\set{x_i}_{i = 0}^d$
+    (\linkto{fin_gen_mod_over_noeth}{hence Noetherian}).
+    Then $M \cap \f{a}$ (viewing $\f{a}$ as an $A$-module) is finitely generated
+    as an $A$-module.
+    We show that $\f{a} = \sum_{f \in S} A[x]f + M \cap \f{a}$.
+    Hence any element of $\f{a}$ can be written as a sum 
+    \[\sum_{f \in S} p_f f + \sum_{i = 0}^{d} a_i x^i\] 
+    where $p_f$ are in $A[x]$ and $a_i$ are in $A \subs A[x]$.
+    Hence $\f{a}$ is finitely generated.
+
+    Indeed let $p \in \f{a}$.
+    If $\deg p \leq d$ then $p$ is in $M$ hence in $M \cap \f{a}$.
+    Otherwise $d < \deg p$ 
+    and we write $a$ the leading coefficient of $p$ as a sum 
+    $\sum_{f \in S} \la_f a_f$ (for $\la_f \in A$).
+    So 
+    \[
+        q := \sum_{f \in S} \la_f f x^{\deg p - \deg f}
+    \]
+    is a polynomial in the finitely generated ideal 
+    with the same degree and first coefficient as $p$
+    such that $p - q \in \f{a}$ has degree strictly less than before.
+    By induction on the degree of $p$ (base case covered by $\deg p \leq d$) 
+    we have that $p$ is also in the finitely generated ideal,
+    so we are done.
+
+    For the `in particular' we note that fields only have two ideals,
+    hence trivially satisfy the ascending chain condition.
+\end{proof}

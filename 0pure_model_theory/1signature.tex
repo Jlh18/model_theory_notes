@@ -1,0 +1,640 @@
+\section{Basics}
+This section follows Marker's book on Model Theory 
+\cite{marker} but with more 
+emphasis on where things are happening, i.e. what signature we are working in,
+and also working with many-sorted signatures.
+For a quick introduction to model theory we recommend reading up to where 
+morphisms are introduced.
+Then it is worth following routes to particular results such as quantifier
+elimination in algebraically closed fields or Morley Rank being Krull dimension,
+which may help to motivate the rest of the theory.
+
+\subsection{Signatures}
+\begin{dfn}[Signature]
+    A signature \footnote{
+        Many authors call $\Si$ a \textit{language} instead.
+    }$\Si = (S,F,R)$ consists of 
+    \begin{itemize}
+        \item $S$ a set of \textit{sort} symbols.
+        \item $F$ a set of \textit{function} symbols.
+            Each function symbol $f \in F$ has \textit{arity} 
+            $(A_1,\dots,A_n,B)$, a tuple of sort symbols in $S$.
+            We write $f : A_1 \times \dots \times A_n \to B$
+            to denote $f$ with its arity.
+        \item $R$ a set of \textit{relation} symbols.
+            Each relation symbol $r \in R$ has \textit{arity}
+            $(A_1,\dots,A_n)$, a tuple of sort symbols in $S$.
+            We write $r \hookr A_1 \times \dots \times A_n$ 
+            to denote $r$ with its arity.
+    \end{itemize}
+    Given a signature $\Si$, we may refer to its sort, 
+    function and relation symbol sets as $\sort{\Si},\func{\Si},\rel{\Si}$.
+    We should think of function arity as the source and target of a function
+    and the relation arity as the product that the relation is a subset of.
+    
+    For convenience we single out $0$-ary functions  
+    - $c \in F$ with arity $(B)$ - and
+    call them \textit{constant} symbols.
+    For each sort $B$ we label the set of such constant symbols
+    $\const{B}$ and
+    think of these as 'elements' of the sort $B$ and write $c : B$.
+    We denote the set of all constant symbols in a signature by
+    \[\const{\Si} := \bigcup_{A \in \sort{\Si}} \const{A}\]
+\end{dfn}
+
+    Our signatures are multi-sorted, meaning we can have elements and 
+    variables living in different spaces. 
+    For example the 'universe of all sets', 
+    groups, rings and partial orders are all 1-sorted with just one
+    underlying set, whereas group actions and modules are 2-sorted.
+    If we are working in the 1-sorted case we will not mention the sort at all,
+    because there is only one.
+    
+\begin{eg}
+    The \linkto{dfn_rings}{signature of rings} 
+    will be used to define the theory of rings, 
+    the theory of integral domains, the theory of fields, and so on.
+    The signature with 
+    \linkto{sig_just_one_bin_rel}{just a single binary relation} 
+    will be used to define the \linkto{order_theories}{theory of partial orders}
+    with the interpretation of the relation as $<$, 
+    to define the theory of equivalence relations with the 
+    interpretation of the relation as $\sim$,
+    and to define the theory $\ZFC$ with the relation interpreted as $\in$.
+    The \linkto{dfn_modules}{signature of modules} %% Missing link
+    will be used to define the theory of modules,
+    the theory of vector spaces, and so on.
+\end{eg}
+
+\begin{dfn}[$\Si$-terms]
+    Let $\Si$ be a signature. 
+    For each sort $A \in \sort{\Si}$ we create 
+    $\var{A}$, a countable set of \textit{variable symbols} of type $A$, 
+    ($\var{A}$ and $\var{B}$ are disjoint for distinct sorts).
+    
+    We inductively define the set of terms
+    $\term{\Si}$ with their types and their 
+    associated set of typed variables $\tv{\star}$. 
+    We write $t : A$ to mean $t$ is a $\Si$-term of type $A$.
+    \begin{itemize}
+        \item[$\vert$] If $A$ is a sort and $v \in \var{A}$ then 
+        $v : A$ is a $\Si$-term.
+        It has typed variables $\tv{v} = \set{v : A}$.
+        \item[$\vert$] If $f \in \func{\Si}$ is a function symbol 
+            $f : A_1 \times \dots \times A_n \to B$ and for each 
+            $1 \leq i \leq n$ we have 
+            $t_i : A_i$.
+            We introduce notation 
+            $t = (t_1,\dots,t_n) : A_1 \times \dots \times A_n$.
+            Then $f(t) : B$ is a $\Si$-term.
+            It has typed variables $\tv{f(t)} = \set{t_i : A_i}_{i=1}^n$.
+    \end{itemize}
+    
+    If there are repeated sorts we might write 
+    $A^n$ instead of $A \times \dots \times A$.
+    Note that given no terms, constant symbols $c : B$ are terms of type $B$.
+\end{dfn}
+
+\begin{eg}
+    \link{terms_as_polys_example}
+    In the signature of rings, 
+    \linkto{terms_in_RNG_are_polynomials}{terms will be multivariable
+        polynomials over $\Z$} 
+    since they are sums and products of constant symbols $0, 1$ and 
+    variable symbols.
+    In the signature of modules, 
+    terms will be finite linear combinations,
+    where the coefficients are polynomials over $\Z$.
+    In the \linkto{sig_just_one_bin_rel}{signature of binary relations} 
+    there are no constant or function symbols so the only terms are variables.
+\end{eg}
+
+\begin{dfn}[Interpretation and structures]
+    Let $\CC$ be a category with finite products\footnote{
+        If you prefer you can just take $\CC$ to be $\SET$
+        the category of sets.}.
+    Given a signature $\Si$, a $\Si$-\textit{structure} $\MM$ 
+    - or an interpretation $\intp{\Si}{\MM}$ 
+    (which we just write as $\mmintp{\star}$ here)
+    of the signature in $\CC$ is the following
+    \begin{itemize}
+        \item Each sort symbol $A \in \sort{\Si}$ 
+        is interpreted as an object $\mmintp{A}$ of $\CC$.
+        \item Each function symbol $f : A_1 \times \dots \times A_n \to B$ 
+        is interpreted as a morphism from the product in $\CC$
+        \[\mmintp{f} : \mmintp{A_1} 
+        \times \dots \times \mmintp{A_n}  \to \mmintp{B}\]
+        \item Each relation symbol $r \hookr A_1 \times \dots \times A_n$
+        is interpreted as a sub-object of the product in $\SET$
+        \[\mmintp{r} \hookr \mmintp{A_1} 
+        \times \dots \times \mmintp{A_n}\]
+    \end{itemize}
+\end{dfn}
+
+The structures in a signature will become the models of theories.
+For example $\Z$ is a structure in the \linkto{dfn_rings}{signature of rings}, 
+a model of the theory of rings but not a model of the theory of fields.
+In the signature of \linkto{sig_just_one_bin_rel}{binary relations}, 
+$\N$ with the usual ordering $\leq$ is a structure that models of 
+the theory of partial orders but not the theory of equivalence relations.
+
+\begin{dfn}[$\Si$-morphism, $\Si$-embedding]
+    \link{category_of_structures}
+    The collection of all $\Si$-structures over a category $\CC$ 
+    forms a category
+    denoted by $\struc{\Si, \CC}$, which has objects
+    as $\Si$-structures and morphisms as $\Si$-morphisms:
+
+    Suppose $\MM, \NN$ are $\Si$-structures in $\CC$ 
+    and for each sort symbol $A$
+    we have $\io_A : \mmintp{A} \to \nnintp{A}$.
+    We say $\io := (\io_A)_{A \in \sort{\Si}}$ is
+    a \textit{$\Si$-morphism} from $\MM$ to $\NN$ when 
+    \begin{itemize}
+        \item For all function symbols $f : A_1 \tdt A_n \to B$ this diagram 
+        commutes:
+        \begin{cd}
+            \mmintp{A_1} \tdt \mmintp{A_n}
+            \ar[r, "\mmintp{f}"] \ar[d, "\io_{A_1} \tdt \io_{A_n}", swap]
+            & \mmintp{B} \ar[d, "\io_B"]\\
+            \nnintp{A_1} \tdt \nnintp{A_n}
+            \ar[r, "\nnintp{f}"] & \nnintp{B}
+        \end{cd}
+        \item For all relation symbols $r \hookr A_1 \tdt A_n$ 
+            there exists a morphism $\io_r : \mmintp{r} \to \nnintp{r}$ 
+            such that
+        \begin{cd}
+            \mmintp{r}
+            \ar[hookrightarrow]{r} \ar[d, "\io_r", swap]
+            & \mmintp{A_1} \tdt \mmintp{A_n}
+            \ar[d, "\io_{A_1} \tdt \io_{A_n}"]\\
+            \nnintp{r}
+            \ar[hookrightarrow]{r} & \nnintp{A_1} \tdt \nnintp{A_n}
+        \end{cd}
+    \end{itemize}
+    $\io$ is called a $\Si$-embedding (and $\NN$ a $\Si$-extension)
+    when each $\io_A$ is a monomorphism 
+    and $\mmintp{r}$ is the pullback of the last diagram.
+    Restricting morphisms between objects to purely $\Si$-embeddings
+    results in a subcategory of $\struc{\Si,C}$.
+\end{dfn}
+The notion of morphisms here will be the same as that of
+morphisms in the algebraic setting.
+For example in the \linkto{dfn_grp}{signature of groups}, 
+preserving interpretation of function symbols says 
+the identity is sent to the identity, multiplication is preserved,
+and inverses are sent to inverses.
+
+\begin{dfn}[Interpretation of terms]
+    \link{interpretation_terms}
+    Given a $\Si$-structure $\MM$ in category $\CC$ and a $\Si$-term 
+    $t : B$ with 
+    $\tv{t} = \set{v_1 : A_1, \dots, v_n : A_n}$.
+    Then we can naturally interpret $t$ in the $\Si$-structure $\MM$ as a 
+    morphism in $\CC$
+    \[
+        \mmintp{t} : \mmintp{A_1} \tdt \mmintp{A_n} \to \mmintp{B}
+    \]
+    that commutes with the interpretation of function symbols
+    (see proof).
+    We then refer to this map as \emph{the} 
+    interpretation of the term $t$.\footnote{
+        In type theory this is can be seen as the function type
+        \[
+            \la v_1 : A_1, \dots \la v_n : A_n, \mmintp{t} : 
+            \mmintp{A_1} \tdt \mmintp{A_n} \to \mmintp{B}
+        \]}
+
+    The following notation will be used for the interpretation of a tuple 
+    of terms (which is the product of their interpretations)
+    \[
+        s = (s_1,\dots,s_n) \text{ gives us a map }\mmintp{s} 
+        := \mmintp{s_1} \tdt \mmintp{s_n}
+    \]
+\end{dfn}
+\begin{proof}
+    We use the inductive definition of $t$:
+    \begin{itemize} 
+        \item If $t$ is a variable $v : A$
+        then $\tv{t} = \set{v : A}$ and $t : A$.
+        Thus it makes sense to define $\mmintp{t} : \mmintp{A} \to \mmintp{A}$ 
+        to be the identity.
+        \item Suppose $t = f(s) : C$ for some function symbol 
+        $f : B_1 \tdt B_n \to C$ and terms
+        $s : B_1 \tdt B_n$. 
+        Since 
+        $\tv{t} = \bigcup_{i=1}^n \tv{s_i}$
+        we must have 
+        $\mmintp{t} : \prod_{x : A \in \tv{t}} \mmintp{A} \to \mmintp{C}$. 
+        Induction gives each $\mmintp{s_i}$, 
+        and there is naturally the map 
+        \[
+            \mmintp{s} := \mmintp{s_1} \tdt \mmintp{s_n} : 
+            \prod_{x : A \in \tv{t}} 
+            \mmintp{A} \to \mmintp{B_1} \tdt \mmintp{B_n}
+        \]
+        so we define the interpretation of $t$
+        to be the composition $\mmintp{t} := \mmintp{f} \circ \mmintp{s}$.
+    \end{itemize}
+\end{proof}
+Note that for constant symbols the interpretation has the empty product 
+- a `singleton' - as its domain hence is a constant map -
+an `element' of the interpreted sort.
+
+\begin{eg}
+    Following the \linkto{terms_as_polys_example}{previous example}, 
+    in the signature of rings
+    \linkto{terms_in_RNG_are_polynomials}{terms will be multivariable
+        integer polynomials} 
+    and then terms interpreted in some structure - say a ring $A$ - 
+    are then multivariable integer polynomial functions
+    $A^n \to A$.
+\end{eg}
+
+The following is exactly what we expect - that terms are well behaved 
+with respect to morphisms.
+\begin{prop}[$\Si$-morphisms commute with interpretation of terms]
+    \link{morph_comm_term_intp}
+    Given a $\Si$-morphism $\io : \MM \to \NN$, 
+    we have that for any $\Si$-term $t$ 
+    with $\tv{t} = \set{v_1 : A_1, \dots, v_n : A_n}$
+    this diagram commutes
+    \begin{cd}
+        \mmintp{A_1} \tdt \mmintp{A_n} \ar[r, "\mmintp{t}"]
+        \ar[d, "\io_{A_1} \tdt \io_{A_n}", swap] & 
+        \mmintp{B} \ar[d, "\io_B"]\\
+        \nnintp{A_1} \tdt \nnintp{A_n} \ar[r, "\nnintp{t}"]
+        &
+        \nnintp{B}
+    \end{cd}
+\end{prop}
+\begin{proof}
+    We case on what $t$ is:
+    \begin{itemize}
+        \item If $t$ is a variable $v : A$ then 
+        $\mmintp{t} = \id{\mmintp{A}}$ and $\nnintp{t} = \id{\nnintp{A}}$
+        hence the following commutes
+        \begin{cd}
+            \mmintp{A}  \ar[r, "\mmintp{t}"]
+            \ar[d, "\io_{A}", swap] & 
+            \mmintp{A} \ar[d, "\io_A"]\\
+            \nnintp{A} \ar[r, "\nnintp{t}"]
+            &
+            \nnintp{A}
+        \end{cd}
+        \item Suppose $t = f(s) : C$ for some function symbol 
+        $f : B_1 \tdt B_n \to C$ and terms
+        $s : B_1 \tdt B_n$. 
+        We consider the diagram
+        \begin{cd}
+            {\prod_{x : A \in \tv{t}}\mmintp{A}} & {} & {\mmintp{B}} \\
+            & {\mmintp{B_1}\tdt \mmintp{B_n}} \\
+            {\prod_{x : A \in \tv{t}}\nnintp{A}} && {\nnintp{B}} \\
+            & {\nnintp{B_1}\tdt \nnintp{B_n}}
+            \ar["{\mmintp{t}}", from=1-1, to=1-3]
+            \ar["{\nnintp{t}}"{description, pos=0.2}, from=3-1, to=3-3]
+            \ar["{\prod\io_A}", from=1-1, to=3-1, swap]
+            \ar[
+                "{\mmintp{s_1}\tdt \mmintp{s_n}}"{description}, 
+                from=1-1, to=2-2]
+            \ar[
+                "{\nnintp{s_1}\tdt \nnintp{s_n}}"{description}, from=3-1, 
+                to=4-2]
+            \ar["{\nnintp{f}}"{description}, from=4-2, to=3-3]
+            \ar["{\mmintp{f}}"{description}, from=2-2, to=1-3]
+            \ar[
+                "{\io_{B_1} \tdt \io_{B_n}}"{description, pos=0.2}, 
+                from=2-2, to=4-2, crossing over]
+            \ar["{\io_B}", from=1-3, to=3-3]
+        \end{cd}
+        Induction gives that the left face commutes and the definition 
+        of interpretation gives us that the top and bottom faces commute.
+        By definition of interpretation of function 
+        symbols the right face commutes.
+        From this we can deduce that the background of the following diagram 
+        commutes, as required. 
+    \end{itemize}
+\end{proof}
+
+\begin{dfn}[Models in different signatures]
+    \link{move_down_mod_0}
+    Given two signatures
+    $\Si \leq \Si^*$ and
+    a $\Si^*$-structure $\MM$ is naturally a $\Si$-structure $\NN$ such that 
+    $\subintp{\Si}{\MM}{\star} = \subintp{\Si^*}{\NN}{\star}$.
+    We will often just write $\MM$ to mean either.
+\end{dfn}
+
+\begin{prop}[Morphisms in different signatures]
+    \link{morph_diff_sigs}
+    Suppose $\Si \leq \Si^*$
+    and we have $\Si^*$-structures $\MM$ and $\NN$ 
+    (\linkto{move_down_mod_0}{naturally $\Si$-structures}).
+    If $\io : \MM \to \NN$ is a morphism in $\CC$ then
+    $\io$ is a $\Si$-morphism if and only if it is a $\Si^*$-morphism, and
+    an embedding in $\Si$ if and only if in $\Si^*$.
+\end{prop}
+\begin{proof}
+    If $f : \prod A \to B$ is a function symbol 
+    then $\prod \subintp{\Si}{\MM}{A} = \prod \subintp{\Si^*}{\MM}{A}$
+    and $\subintp{\Si}{\MM}{B} = \subintp{\Si^*}{\MM}{B}$ 
+    (similarly for $\NN$).
+    Hence the commuting diagram is the same diagram.
+    Similarly the commuting diagram is the same for any relation symbol.
+    Giving us the result.
+\end{proof}
+
+\subsection{Formulas in classical first order logic}
+From this point onwards we will work in classical first order logic.
+
+\begin{dfn}[Atomic formula, quantifier free formula]
+    Given $\Si$ a signature, 
+    its set of atomic $\Si$-formulas along with their 
+    associated set of typed free variables $\tv{\star}$ is defined by
+    \begin{itemize}
+        \item[$\vert$] $\top$ is an atomic $\Si$-formula
+        with no typed free variables $\tv{\top} = \nothing$.
+        \item[$\vert$] 
+        Given $t, s \in \term{\Si}$ of the same type, 
+        the string $t = s$ is an atomic $\Si$-formula.
+        The set of typed free variables is 
+        $\tv{t = s} = \tv{t} \cup \tv{s}$.
+        \item[$\vert$] Given $r \in \rel{\Si}$ such that
+        $r \hookr A_1 \times \dots A_n$ and $t : A_1 \times \dots \times A_n$,
+        the string $r(t)$ is an atomic $\Si$-formula. 
+        The typed free variables are $\tv{r(t)} = \bigcup_{i = 1}^n \tv{t_i}$.
+    \end{itemize}
+    
+    We extend this to the set of quantifier free $\Si$-formulas inductively:
+    \begin{itemize}
+        \item[$\vert$] Given $\phi$ an atomic $\Si$-formula,
+            $\phi$ is a quantifier free $\Si$-formula.
+        \item[$\vert$] Given $\phi$ a quantifier free $\Si$-formula, 
+        the string $\NOT \phi$ is a quantifier free $\Si$-formula with the 
+        same set of typed free variables as $\phi$. 
+        \item[$\vert$] Given $\phi, \psi$ both quantifier free $\Si$-formulas, 
+        the string $\phi \OR \psi$ is a quantifier free $\Si$-formula.
+        The set of typed free variables is 
+        $\tv{\phi \OR \psi} = \tv{\phi} \cup \tv{\psi}$.
+    \end{itemize}
+    
+    The set of all $\Si$-formulas $\form{\Si}$ 
+    is defined by extending the above:
+    \begin{itemize}
+        \item[$\vert$] Given $\phi$ a quantifier free $\Si$-formula,
+        $\phi$ is a $\Si$-formula.
+        \item[$\vert$] Given $\phi \in \form{\Si}$, a sort $A$
+        and a variable $v : A$, we take the string $\forall v : A, \phi$ and
+        replace all occurrences of
+        $v$ with an unused symbol
+        $z \in \var{A}$,
+        producing a new a $\Si$-formula $\psi = \forall z : A, \phi$.
+        The set of typed free variables is 
+        $\tv{\psi} = \tv{\phi} \setminus \set{v : A}$.
+    \end{itemize}
+    Shorthand for some $\Si$-formulas include 
+    \begin{itemize}
+        \item $\bot := \NOT \top$
+        \item $\phi \land \psi := \NOT((\NOT\phi) \lor (\NOT\psi))$
+        \item $\phi \to \psi := (\NOT\phi) \lor \psi$
+        \item $\exists v : A, \phi := \NOT(\forall v : A, \NOT\phi)$
+    \end{itemize}
+    
+    The symbol $z$ is thought of as a `bounded variable' as oppose to 
+    a `free variable', 
+    and will not be considered when we want to evaluate
+    variables in formulas.
+    
+    Often we will be in 1-sorted signatures, 
+    in which case we will just write 
+    \[
+        \forall v, \phi \text{ and } \exists v, \phi
+    \]
+    since the type is obvious.
+\end{dfn}
+\begin{rmk}
+    Formulas should be thought of as propositions with some bits loose, 
+    namely the free variables, since it does not make any sense to ask if 
+    $x = a$ without saying what $x$ you are taking
+    (where $x$ is a variable as $a$ is a constant symbol, say).
+    When there are no free variables we get what intuitively looks like a 
+    proposition, and we will call these particular formulas \linkto{sentences}{sentences}.
+\end{rmk}
+
+\begin{dfn}[Substituting in terms]
+    If a $\Si$-formula $\phi$ has a typed free variable $v : A$ 
+    then to remind ourselves of the variable we can write 
+    $\phi = \phi(v : A) = \phi(v)$ instead.
+
+    If we have term $t : A$ for some typed free variable $v : A$
+    in $\tv{\phi}$, 
+    then we write $\phi(t)$ to mean $\phi(v : A)$ with 
+    $t$ substituted for $v$.
+    By induction on terms and formulas this is still a 
+    $\Si$-formula and has 
+    \[\tv{\phi(t)} = \tv{t} \cup \brkt{\tv{\phi(v)} \setminus \set{v : A}}\]
+\end{dfn}
+
+\subsection{Classical models, theories}
+From now on we will be interpreting only in the category $* / \SET$
+of non-empty sets.
+We require non-emptiness because the classical proof of compactness,
+given by a \linkto{make_wit}{Henkin construction}
+relies on non-emptiness of our models.
+
+\begin{dfn}[Satisfaction]
+    Let $\MM$ be a $\Si$-structure (interpreted in $* / \SET$
+    and $\phi$ a $\Si$-formula.
+    Let $a \in \prod_{x : A \in \tv{\phi}} \mmintp{A}$ be a tuple indexed by
+    the typed free variables of $\phi$.
+    Then we define $\MM \modelsi \phi(a)$ by induction on formulas:
+    \begin{itemize}
+        \item If $\phi$ is $\top$ then $\MM \model{\Si} \phi$.\footnote{
+            We can omit the $a$ when there are no free variables.
+            Formally $a$ is the unique element in the empty product.}
+        \item If $\phi$ is $t = s$ then
+            $\MM \model{\Si} \phi(a)$ when
+            $\modintp{\MM}{t}(a) = \modintp{\MM}{s}(a)$.
+            \item If $\phi$ is $r(t)$,
+            where $r \hookr A_1 \tdt A_n$ is a relation symbol and
+            $t : A_1 \tdt A_n$ are terms,
+            then $\MM \model{\Si} \phi(a)$ when
+            $\modintp{\MM}{t}(a) \in \modintp{\MM}{r}$.\footnote{
+            $\modintp{\MM}{t}$ was the
+            \linkto{interpretation_terms}{product of interpreted terms}.
+            }
+            \vspace{1em}
+        \item If $\phi$ is
+            $\NOT\psi$ for some $\psi \in \form{\Si}$,
+            then $\MM \model{\Si} \phi(a)$ when $\MM \nodel{\Si} \psi(a)$
+        \item If $\phi$ is  $\psi \lor \chi$,
+            then $\MM \model{\Si} \phi(a)$ when
+            $\MM \model{\Si} \psi(a)$ or $\MM \model{\Si} \chi(a)$.
+        \item If $\phi$ is
+            $\forall v : A, \psi$,
+            then $\MM \model{\Si} \phi(a)$
+            if for any $b \in \mmintp{A}$,
+            $\MM \model{\Si} \psi(a,b)$.
+    \end{itemize}
+\end{dfn}
+
+\begin{rmk}
+    Any $\Si$-structure satisfies $\top$
+    and does not satisfy $\bot$.
+    Note that for $c$ a tuple of constant symbols
+    $\MM \model{\Si} \phi(c)$ if and only if
+    $\MM \model{\Si} \phi(\mmintp{c})$.
+\end{rmk}
+
+\begin{dfn}[Sentences and theories]
+    \link{sentences}
+    Let $\Si$ be a signature and $\phi$ a $\Si$-formula.
+    We say $\phi \in \form{\Si}$ is a $\Si$-sentence when
+    it has no free variables, $\tv{\phi} = \nothing$.
+
+    $T$ is an $\Si$-theory when it is a subset of $\form{\Si}$
+    such that all elements of $T$ are $\Si$-sentences.
+    We denote the set of $\Si$-theories as $\theory{\Si}$.
+\end{dfn}
+
+\begin{dfn}[Models]
+    Given an $\Si$-structure $\MM$ and $\Si$-theory $T$,
+    we write $\MM \model{\Si} T$ and say
+    \emph{$\MM$ is a $\Si$-model of $T$} when
+    for all $\phi \in T$ we have $\MM \model{\Si} \phi$.
+\end{dfn}
+
+\begin{eg}
+    In the signature of rings,
+    \linkto{dfn_rings}{the rings axioms} will be the theory
+    of rings and each model of the theory will consist of a single sort - the ring.
+    The %?\linkto{missing_link}{
+    theory of $\ZFC$ %} %? MISSING LINK
+    consists of the $\ZFC$ axioms and a model of $\ZFC$
+    would be a single sort thought of as the `class of all sets'.
+    In the signature of modules,
+    \linkto{dfn_modules}{the theory of modules} will consist of the theory for rings,
+    the theory for commutative groups, and the axioms for modules over a ring.
+    A model of the theory of modules would consist of two sorts,
+    one for the ring and one for the module.
+\end{eg}
+
+\begin{dfn}[Consequence]
+    Given a $\Si$-theory $T$
+    and a $\Si$-sentence $\phi$,
+    we say $\phi$ is a consequence of $T$
+    and say $T \model{\Si} \phi$
+    when for all $\Si$-models $\MM$ of $T$,
+    we have $\MM \model{\Si} \phi$.
+    We also write $T \model{\Si} \De$
+    for $\Si$-theories $T$ and $\De$
+    when for every $\phi \in \De$ we have $T \model{\Si} \phi$.
+\end{dfn}
+
+\begin{ex}[Logical consequence]
+    Let $T$ be a $\Si$-theory and $\phi$ and $\psi$ be $\Si$-sentences.
+    Show that the following are equivalent:
+    \begin{itemize}
+        \item $T \model{\Si} \phi \to \psi$
+        \item $T \model{\Si} \phi$ implies $T \model{\Si} \psi$.
+    \end{itemize}
+\end{ex}
+
+\begin{dfn}[Consistent theory]
+    \link{consistent}
+    A $\Si$-theory $T$ is consistent if either of the following equivalent
+    definitions hold:
+    \begin{itemize}
+        \item
+            There does not exists a
+            $\Si$-sentence $\phi$ such that
+            $T \model{\Si} \phi$ and $T \model{\Si} \NOT \phi$.
+        \item There exists
+            a $\Si$-model of $T$.
+    \end{itemize}
+    Thus the definition of consistent is intuitively
+    `$T$ does not lead to a contradiction'.
+    A theory $T$ is finitely consistent if all
+    finite subsets of $T$ are consistent.
+    This will turn out to be another equivalent definition,
+    given by the \linkto{compactness}{compactness theorem}.
+\end{dfn}
+\begin{proof}
+    We show that the two definitions are equivalent.
+    \begin{forward}
+        Suppose no model exists.
+        Take $\phi$ to be the $\Si$-sentence $\top$.
+        Hence all $\Si$-models of $T$ satisfy $\top$ and $\bot$
+        (there are none) so
+        $T \model{\Si} \top$ and $T \model{\Si} \bot$.
+    \end{forward}
+    \begin{backward}
+        Suppose $T$ has a $\Si$-model $\MM$
+        and $T \model{\Si} \phi$ and $T \model{\Si} \NOT \phi$.
+        This implies $\MM \model{\Si} \phi$ and $\MM \nodel{\Si} \phi$,
+        a contradiction.
+    \end{backward}
+\end{proof}
+
+\begin{dfn}[Elementary equivalence]
+    Let $\MM$, $\NN$ be $\Si$-structures.
+    They are elementarily equivalent if for any $\Si$-sentence $\phi$,
+    $\MM \model{\Si} \phi$ if and only if $\NN \model{\Si} \phi$.
+    We write $\MM \equiv_\Si \NN$.
+\end{dfn}
+
+\begin{dfn}[Maximal and complete theories]
+    \link{equiv_def_completeness_0}
+    A $\Si$-theory $T$ is \textit{maximal} if
+    for any $\Si$-sentence $\phi$,
+    $\phi \in T$ or $\NOT \phi \in T$.
+
+    $T$ is \textit{complete}
+    when either of the following equivalent
+    definitions hold:
+    \begin{itemize}
+        \item For any $\Si$-sentence $\phi$,
+            $T \model{\Si} \phi$ or
+            $T \model{\Si} \NOT \phi$.
+        \item All models of $T$ are elementarily equivalent.
+    \end{itemize}
+    Note that maximal theories are complete.
+\end{dfn}
+\begin{proof}
+    \begin{forward}
+        Let $\MM$ and $\NN$ be models of $T$
+        and $\phi$ be a $\Si$-sentence.
+        If $T \model{\Si} \phi$ then both satisfy $\phi$.
+        Otherwise $\NOT \phi \in T$ and neither satisfy $\phi$.
+    \end{forward}
+
+    \begin{backward}
+        If $\phi$ is a $\Si$-sentence then suppose for a contradiction
+        \[T \nodel{\Si} \phi \text{ and } T \nodel{\Si} \NOT \phi\]
+        Then there exist models of $T$
+        such that $\MM \nodel{\Si} \phi$ and $\NN \nodel{\Si} \NOT \phi$.
+        By assumption they are elementarily equivalent and so
+        $\MM \model{\Si} \NOT \phi$ implies $\NN \model{\Si} \NOT \phi$,
+        a contradiction.
+    \end{backward}
+\end{proof}
+
+\begin{ex}[Not consistent, not complete]
+    \link{not_consequence}
+    Let $T$ be a $\Si$-theory
+    and $\phi$ is a $\Si$-sentence.
+    Show that $T \nodel{\Si} \phi$
+    if and only if $T \cup \set{ \NOT \phi}$ is consistent.
+    Furthermore, $T \nodel{\Si} \NOT \phi$
+    if and only if $T \cup \set{\phi}$ is consistent.
+
+    Note that by definition for $\Si$-structures and
+    $\Si$-formulas we (classically) have that
+    \[
+        \MM \modelsi \NOT \phi(a) \iff \MM \nodelsi \phi(a)
+    \]
+    Find examples of theories that do not satisfy
+    \[
+        T \modelsi \NOT \phi \iff T \nodelsi \phi
+    \]
+\end{ex}

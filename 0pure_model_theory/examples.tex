@@ -1,0 +1,250 @@
+\section{Examples}
+
+
+
+
+
+%Model Theory of Field (Marker)
+%covers:
+%-- categoricity, completeness, decidability of ACF
+%-- weird corollary of above
+%-- Ax - Groth
+%-- ACF has quantifier elimination
+%-- Nullstellensatz
+%-- 
+
+
+%Models of Set Theory
+%covers:
+%-- consistency of other ZF axioms with foundation
+%-- independence of continuum hypothesis with 
+\begin{dfn}[Signature for $\ZFC$ and assosiated notations]
+    Let $\Si_{\ZFC} = \brkt{\nothing, \nothing, n_\star, \set{\in}, m_\star}$.
+    Where $m_\in = 2$ and $n_\star$ is the empty function.
+    Let $x,y,z, P, blahblah$ be variable symobls and %
+    $\phi$ a $\Si_\ZFC$-formula.%
+    Define the following shorthand for formulas:
+    \begin{align*}%%%
+        x \text{ empty} &:= \\
+        \forall x \in y, \phi &:= \forall x, (x \in y \to \phi)\\
+        x \notin y &:=\\
+        y \subs x &:= \\
+        P \text{ is a power set of } x &:= \\
+        f : x \to y &:= 
+        %%?
+    \end{align*}
+\end{dfn}
+
+\begin{eg}[$\ZFC$]
+    Define the $\Si_{\ZFC}$-theory $\ZFC$ inductively,
+    it contains:
+    \begin{itemize}
+        \item[$\vert$] Extensionality
+        \item[$\vert$] Foundation
+        \item[$\vert$] Separation
+        \item[$\vert$] Pairing
+        \item[$\vert$] Union
+        \item[$\vert$] Replacement
+        \item[$\vert$] Infinity
+        \item[$\vert$] Power set
+        \item[$\vert$] Choice 
+    \end{itemize}
+    Note that $\in$ is only symoblic and is not to be confused with 
+    actual membership.
+\end{eg}
+
+%Good example in back and forth chapter of Marker
+\begin{ex}[Dense linear orders without max or min is complete]
+
+\end{ex}
+
+\begin{dfn}[Signature of groups, theory of groups]
+    Let $\Si_\GRP = (\set{e},\set{+,-}, n_\star, \nothing, m_\star)$
+    be the signature of groups, where
+    $n_+ = 2$ and $n_- = 1$ and $m_\star$ is the empty function.
+    We write $a + b := + (a,b)$ and $- x := -(x)$
+    Then the theory of groups is
+    \begin{align*}
+        \GRP &= \brkt{
+        &= \forall x \forall y \forall z, (x + y) + z = x + (y + z)\\
+        &= \forall x, e + x = x + e = x\\
+        &= \forall x, (- x) + x = x + (- x) = e}
+    \end{align*}
+    One can see that $\GRP$ is a universal theory.
+\end{dfn}
+
+\begin{ex}[Quantifier elimination for theory of infinite equivalence relations]
+    Let $\Si_{\ER} = (\nothing,\nothing,n_f,\set{E},m_r)$,
+    where $m_E = 2$.
+    We write for variables $x$ and $y$, 
+    we write $x \sim y$ as notation for $E(x,y)$
+    The theory of equivalence relations $\ER$ 
+    is set set containing the following formulas:
+    \begin{align*}
+        &\text{Reflexivity } \forall x, x \sim x\\
+        &\text{Symmetry } \forall x \forall y, x \sim y \to y \sim x\\
+        &\text{Transitivity } 
+        \forall x \forall y \forall z, (x \sim y \AND y \sim z) \to x \sim z
+    \end{align*}
+    For $n \in \N_{>1}$ define 
+    \begin{align*}
+        &\phi_n := \bigexists{i = 1}{n} x_i, \bigand{i < j}{} x_i \nsim x_j\\
+        &\psi_n := \forall x, \bigexists{i = 1}{n} x_i, 
+            \bigand{i = 1}{n} \brkt{x \sim x_i} \AND 
+            \bigand{i < j}{} \brkt{x_i \ne x_j}
+    \end{align*}
+    Show that the theory $T = \ER \cup {\phi_n, \psi_n}_{1 < i}$ has 
+    quantifier elimination.
+    (You may wonder if it is indeed a theory
+    and what nasty induction must be done to 
+    show that its formulas can be constructed.)
+\end{ex}
+\begin{proof}
+    \emph{First attempt:}
+    \linkto{improved_condition_for_q_e}{It would suffice to show} 
+    that if $\io : \AA \to \MM$ is a $\Si_\ER$-embedding
+    and $\MM \model{\Si_\ER} T$ then for any formula $\phi$ with a 
+    free variable $w$ and any $a \in \carrier{\AA}^S$,
+    \[
+        \MM \model{\Si_\ER} \exists w, \phi(\io(a)) \implies 
+        \AA \model{\Si_\ER} \exists w, \phi(a)
+    \]
+    However this is not true. 
+    Take $\MM = \Q$ with the interpretation of $E$ as 
+    \[\set{(x,y) \in \Q \times \Q \st x - y \in \Z}\]
+    i.e. the equivalence relation induced by the quotient $\Q / \Z$.
+    Each equivalence class is a coset $x + \Z$ and therefore is infinite,
+    and there are infinitely many such classes 
+    (take $\frac{1}{2^n} + \Z$ for each $n$ for example).
+    Take $\AA = \set{0}$ and take $\subs$ as the injection into $\Q$.
+    $\AA$ inherits the same equivalence relation, 
+    which is a single equivalence class with a single element.
+    \[
+        \Q \model{\Si_\ER} \exists w, \NOT (w \sim 0)
+        \quad \text{but} \quad 
+        \AA \model{\Si_\ER} \forall w, w \sim 0
+    \]
+
+    \emph{Second attempt:}
+    We first define an equivalence class:
+    if $\MM \model{\Si_\ER} T$ and $a \in \carrier{\MM}$ then 
+    \[[a]_\MM := \set{b \in \carrier{\MM} \st \MM \model{\Si_\ER} a \sim b}\]
+    Note that this is a definable set.
+    If $A \subs \carrier{\MM}$ we write $[A]$ to be the image
+    \[A = \{b \in \carrier{\MM} \st \exists a \in A, 
+    \MM \model{\Si_\ER} a \sim b\}\]
+    Define the quotient:
+    \[\MM / \sim := \set{[a]_\MM \st a \in \carrier{\MM}}\]
+    
+    By \linkto{vaught_test}{Vaught's test}, to show that $T$ is complete
+    it suffices to show that $T$ is consistent, 
+    not finitely modelled and $\aleph_0$-categorical.
+    A non-empty model of $T$ would be $\Q$ 
+    with the equivalence relation defined in 
+    the first attempt.
+    If $\MM$ is a model of $T$ and $\MM$ is finite,
+    then let $m \in \N$ be the cardinality of $\MM$.
+    Then the formula $\phi_{m+1} \in T$ is not satisfied by $\MM$,
+    a contradiction.
+    We use a `back and forth' argument to show first that 
+    $T$ is $\aleph_0$-categorical. 
+
+    Let $\MM, \NN$ be countable $\Si_\ER$-models of $T$.
+    We can then enumerate each using the naturals:
+    \[\carrier{\MM} = \set{a_i}_{i \in \N}, 
+    \quad \carrier{\NN = \set{b_i}_{i \in \N}}\]
+    We induct on $i \in \N$ in the following statement:
+    For each $i \in \N$ we define 
+    $A_i \subs \carrier{\MM}, B_i \subs \carrier{\NN}$
+    and $\Si_\ER$-isomorphisms $g_i : A_i \to B_i$
+    where the subsets are naturally $\Si_\ER$-structures
+    (as the language only has relation symbols).
+    These will be constructed such that their unions are 
+    $\carrier{\MM}$ and $\carrier{\NN}$ respectively.
+    
+    If $i = 0$ then define both sets to be 
+    $\nothing$ and $g_0$ be the empty function.
+    For the induction step we case on if $i$ is odd or even.
+    If $i + 1 = 2k$ for some $k$ then case on if $a_k \in A_i$.
+    If it is then define $A_{i+1} := A_i$, 
+    $B_{i+1} := B_i$, 
+    and $g_{i+1} := g_i$.
+    If $a_k \notin A_i$ then case on if $[a_k]_\MM \cap A_i$ is empty or not.
+
+    Suppose $[a_k]_\MM \cap A_i$ is empty.
+    We can show that $\NN / \sim$ is infinite whilst 
+    $[B_i]_{\NN}$ is finite, 
+    hence $\NN / \sim \setminus [B_i]_{\NN}$ is non-empty.
+    Thus there exists 
+    $c \in \carrier{\NN}$ such that $[c]_\NN \notin [B_i]$.
+    Then take $A_{i+1} := A_i \cup \set{a_k}$, 
+    $B_{i+1} := B_i \cup \set{c}$, 
+    and $g_{i+1}(a_k) = c$, 
+    agreeing with $g_i$ otherwise.
+    To show that $g_{i+1}$ is an embedding we only need to check that 
+    the relation is preserved and that it is injective.
+    Let $a,b \in A_{i+1}$, by induction if 
+    both are in $A_i$ then we have
+    \[a \modintp{\MM}{\sim} b \implies 
+    g_{i+1} (a) = g_i (a) \modintp{\NN}{\sim} g_i (b) = g_{i+1} (b)\]
+    and 
+    \[g_{i+1} (a) \modintp{\NN}{\sim} g_{i+1} (b)
+    \implies g_i (a) \modintp{\NN}{\sim} g_i (b)
+    \implies a \modintp{\MM}{\sim} b\]
+    If $a = a_k \in A_{i+1}$ and $b \in A_i$ then $a_k \modintp{\MM}{\nsim} b$
+    as $[a_k]_\MM$ is empty.
+    By definition of $g_{i+1}(a_k) = c$ we have that 
+    $g(a_k) \modintp{\NN}{\nsim} g(b)$.
+    If $a = b = a_k$ then both sides are satisfied and we are done.
+    Injectivity is clear and as this these are finite sets
+    of the same cardinality surjectivity also holds.
+
+    Otherwise, suppose there exists $d \in A_i$ such that $d \sim a_k$.
+    $A_i$ is finite and so
+    $[d]_\MM \cap A_i$ is finite and $g_i([d]_\MM \cap A_i)$ is finite.
+    Equivalence classes are infinite thus there exists 
+    \[c \in [g_i(d)]_\NN \setminus g_i([d]_\MM \cap A_i)\]
+    Take $A_{i+1} := A_i \cup \set{a_k}$, 
+    $B_{i+1} := B_i \cup \set{c}$, 
+    and $g_{i+1}(a_k) = c$, 
+    agreeing with $g_i$ otherwise.
+    Again we show that the relation is preserved;
+    let $a,b \in A_{i+1}$. 
+    If $a,b \ne a_k$ by induction we 
+    are done.
+    If $a = a_k, b \ne a_k$ then $a \modintp{\MM}{\sim} b$ implies 
+    $d \modintp{\MM}{\sim} b$ by transitivity and the definition of $d$.
+    Furthermore by induction:
+    $g_{i+1}(a) \modintp{\NN}{\sim} g_{i}(d) 
+    \modintp{\NN}{\sim} g_{i}(b) = g_{i+1}(b)$
+    If $a = a_k, b \ne a_k$ then $a \modintp{\MM}{\nsim} b$ implies 
+    $d \modintp{\MM}{\nsim} b$ and 
+    $g_{i+1}(a) \modintp{\NN}{\sim} g_{i}(d) \modintp{\NN}{\nsim} g_{i}(b)$
+    hence 
+    $g_{i+1}(a) \modintp{\NN}{\sim} g_{i}(d) \modintp{\NN}{\nsim} g_{i+1}(b)$
+    Lastly if both are $a_k$ then both sides are satisfied and we are done.
+    Injectivity and surjectivity are clear.
+
+    If $i + 1 = 2k + 1$ for some $k$ then then case on if $b_k \in B_i$
+    and go through the same construction backwards.
+    We then have that $\bigcup_{i \in \N} A_i = \carrier{\MM}$ as 
+    each $a_i \in A_{2i+2} \subs \carrier{\MM}$, 
+    and similarly $\bigcup_{i \in \N} B_i = \carrier{\NN}$.
+    We check that $g := a_i \mapsto g_{2i+2}(a_i)$ is a well-defined isomorphism
+    $\MM \iso \NN$.
+    Let $a, b \in \carrier{\MM}$ where $a \in A_i, b \in A_j$.
+    If $g(a) = g(b)$ then let $m = \max(i,j)$, 
+    \[g_{m}(a) = g(a) = g(b) = g_{m}(b)\]
+    thus by injectivity of $g_{m}$, 
+    $a = b$. 
+    Thus $g$ is injective.
+    Suppose $b \in B_i \subs \carrier{\MM}$. 
+    By surjectivity of $g_{i}$, there exists $a \in A_i$ such that 
+    $g(a) = g_i(a) = b$.
+
+    Thus $\MM$ is $\Si_\ER$-isomorphic to $\NN$ and $T$ is complete.
+    
+\end{proof} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%5
+

@@ -1,0 +1,206 @@
+\message{ !name(1signature.tex)}
+\message{ !name(1signature.tex) !offset(435) }
+\subsection{Classical models, theories}
+From now on we will be interpreting only in the category $* / \SET$
+of non-empty sets. 
+We require non-emptiness because the classical proof of compactness,
+given by a \linkto{make_wit}{Henkin construction} 
+relies on non-emptiness of our models.
+
+\begin{dfn}[Satisfaction]
+    Let $\MM$ be a $\Si$-structure (interpreted in $* / \SET$ 
+    and $\phi$ a $\Si$-formula. 
+    Let $a \in \prod_{x : A \in \tv{\phi}} \mmintp{A}$ be a tuple indexed by 
+    the typed free variables of $\phi$.
+    Then we define $\MM \modelsi \phi(a)$ by induction on formulas:
+    \begin{itemize}
+        \item If $\phi$ is $\top$ then $\MM \model{\Si} \phi$.\footnote{
+            We can omit the $a$ when there are no free variables.
+            Formally $a$ is the unique element in the empty product.}
+        \item If $\phi$ is $t = s$ then
+            $\MM \model{\Si} \phi(a)$ when 
+            $\modintp{\MM}{t}(a) = \modintp{\MM}{s}(a)$.
+            \item If $\phi$ is $r(t)$, 
+            where $r \hookr A_1 \tdt A_n$ is a relation symbol and  
+            $t : A_1 \tdt A_n$ are terms,
+            then $\MM \model{\Si} \phi(a)$ when 
+            $\modintp{\MM}{t}(a) \in \modintp{\MM}{r}$.\footnote{
+            $\modintp{\MM}{t}$ was the 
+            \linkto{interpretation_terms}{product of interpreted terms}.
+            }
+            \vspace{1em}
+        \item If $\phi$ is 
+            $\NOT\psi$ for some $\psi \in \form{\Si}$, 
+            then $\MM \model{\Si} \phi(a)$ when $\MM \nodel{\Si} \psi(a)$
+        \item If $\phi$ is  $\psi \lor \chi$, 
+            then $\MM \model{\Si} \phi(a)$ when 
+            $\MM \model{\Si} \psi(a)$ or $\MM \model{\Si} \chi(a)$.
+        \item If $\phi$ is 
+            $\forall v : A, \psi$,
+            then $\MM \model{\Si} \phi(a)$ 
+            if for any $b \in \mmintp{A}$,   
+            $\MM \model{\Si} \psi(a,b)$.
+    \end{itemize}
+\end{dfn}
+
+% \begin{rmk}
+%     Any $\Si$-structure satisfies $\top$
+%     and does not satisfy $\bot$.
+%     Note that for $c$ a tuple of constant symbols
+%     $\MM \model{\Si} \phi(c)$ if and only if
+%     $\MM \model{\Si} \phi(\mmintp{c})$.
+% \end{rmk}
+
+% \begin{dfn}[Sentences and theories]
+%     \link{sentences}
+%     Let $\Si$ be a signature and $\phi$ a $\Si$-formula.
+%     We say $\phi \in \form{\Si}$ is a $\Si$-sentence when
+%     it has no free variables, $\tv{\phi} = \nothing$.
+
+%     $T$ is an $\Si$-theory when it is a subset of $\form{\Si}$
+%     such that all elements of $T$ are $\Si$-sentences.
+%     We denote the set of $\Si$-theories as $\theory{\Si}$.
+% \end{dfn}
+
+% \begin{dfn}[Models]
+%     Given an $\Si$-structure $\MM$ and $\Si$-theory $T$,
+%     we write $\MM \model{\Si} T$ and say
+%     \emph{$\MM$ is a $\Si$-model of $T$} when
+%     for all $\phi \in T$ we have $\MM \model{\Si} \phi$.
+% \end{dfn}
+
+% \begin{eg}
+%     In the signature of rings,
+%     \linkto{dfn_rings}{the rings axioms} will be the theory
+%     of rings and each model of the theory will consist of a single sort - the ring.
+%     The \linkto{missing_link}{theory of $\ZFC$} %?$? MISSING LINK
+%     consists of the $\ZFC$ axioms and a model of $\ZFC$
+%     would be a single sort thought of as the `class of all sets'.
+%     In the signature of modules,
+%     \linkto{dfn_modules}{the theory of modules} will consist of the theory for rings,
+%     the theory for commutative groups, and the axioms for modules over a ring.
+%     A model of the theory of modules would consist of two sorts,
+%     one for the ring and one for the module.
+% \end{eg}
+
+% \begin{dfn}[Consequence]
+%     Given a $\Si$-theory $T$
+%     and a $\Si$-sentence $\phi$,
+%     we say $\phi$ is a consequence of $T$
+%     and say $T \model{\Si} \phi$
+%     when for all $\Si$-models $\MM$ of $T$,
+%     we have $\MM \model{\Si} \phi$.
+%     We also write $T \model{\Si} \De$
+%     for $\Si$-theories $T$ and $\De$
+%     when for every $\phi \in \De$ we have $T \model{\Si} \phi$.
+% \end{dfn}
+
+% \begin{ex}[Logical consequence]
+%     Let $T$ be a $\Si$-theory and $\phi$ and $\psi$ be $\Si$-sentences.
+%     Show that the following are equivalent:
+%     \begin{itemize}
+%         \item $T \model{\Si} \phi \to \psi$
+%         \item $T \model{\Si} \phi$ implies $T \model{\Si} \psi$.
+%     \end{itemize}
+% \end{ex}
+
+% \begin{dfn}[Consistent theory]
+%     \link{consistent}
+%     A $\Si$-theory $T$ is consistent if either of the following equivalent
+%     definitions hold:
+%     \begin{itemize}
+%         \item
+%             There does not exists a
+%             $\Si$-sentence $\phi$ such that
+%             $T \model{\Si} \phi$ and $T \model{\Si} \NOT \phi$.
+%         \item There exists
+%             a $\Si$-model of $T$.
+%     \end{itemize}
+%     Thus the definition of consistent is intuitively
+%     `$T$ does not lead to a contradiction'.
+%     A theory $T$ is finitely consistent if all
+%     finite subsets of $T$ are consistent.
+%     This will turn out to be another equivalent definition,
+%     given by the \linkto{compactness}{compactness theorem}.
+% \end{dfn}
+% \begin{proof}
+%     We show that the two definitions are equivalent.
+%     \begin{forward}
+%         Suppose no model exists.
+%         Take $\phi$ to be the $\Si$-sentence $\top$.
+%         Hence all $\Si$-models of $T$ satisfy $\top$ and $\bot$
+%         (there are none) so
+%         $T \model{\Si} \top$ and $T \model{\Si} \bot$.
+%     \end{forward}
+%     \begin{backward}
+%         Suppose $T$ has a $\Si$-model $\MM$
+%         and $T \model{\Si} \phi$ and $T \model{\Si} \NOT \phi$.
+%         This implies $\MM \model{\Si} \phi$ and $\MM \nodel{\Si} \phi$,
+%         a contradiction.
+%     \end{backward}
+% \end{proof}
+
+% \begin{dfn}[Elementary equivalence]
+%     Let $\MM$, $\NN$ be $\Si$-structures.
+%     They are elementarily equivalent if for any $\Si$-sentence $\phi$,
+%     $\MM \model{\Si} \phi$ if and only if $\NN \model{\Si} \phi$.
+%     We write $\MM \equiv_\Si \NN$.
+% \end{dfn}
+
+% \begin{dfn}[Maximal and complete theories]
+%     \link{equiv_def_completeness_0}
+%     A $\Si$-theory $T$ is \textit{maximal} if
+%     for any $\Si$-sentence $\phi$,
+%     $\phi \in T$ or $\NOT \phi \in T$.
+
+%     $T$ is \textit{complete}
+%     when either of the following equivalent
+%     definitions hold:
+%     \begin{itemize}
+%         \item For any $\Si$-sentence $\phi$,
+%             $T \model{\Si} \phi$ or
+%             $T \model{\Si} \NOT \phi$.
+%         \item All models of $T$ are elementarily equivalent.
+%     \end{itemize}
+%     Note that maximal theories are complete.
+% \end{dfn}
+% \begin{proof}
+%     \begin{forward}
+%         Let $\MM$ and $\NN$ be models of $T$
+%         and $\phi$ be a $\Si$-sentence.
+%         If $T \model{\Si} \phi$ then both satisfy $\phi$.
+%         Otherwise $\NOT \phi \in T$ and neither satisfy $\phi$.
+%     \end{forward}
+
+%     \begin{backward}
+%         If $\phi$ is a $\Si$-sentence then suppose for a contradiction
+%         \[T \nodel{\Si} \phi \text{ and } T \nodel{\Si} \NOT \phi\]
+%         Then there exist models of $T$
+%         such that $\MM \nodel{\Si} \phi$ and $\NN \nodel{\Si} \NOT \phi$.
+%         By assumption they are elementarily equivalent and so
+%         $\MM \model{\Si} \NOT \phi$ implies $\NN \model{\Si} \NOT \phi$,
+%         a contradiction.
+%     \end{backward}
+% \end{proof}
+
+\begin{ex}[Not consistent, not complete]
+    \link{not_consequence}
+    Let $T$ be a $\Si$-theory
+    and $\phi$ is a $\Si$-sentence.
+    Show that $T \nodel{\Si} \phi$
+    if and only if $T \cup \set{ \NOT \phi}$ is consistent.
+    Furthermore, $T \nodel{\Si} \NOT \phi$
+    if and only if $T \cup \set{\phi}$ is consistent.
+
+    Note that by definition for $\Si$-structures and
+    $\Si$-formulas we (classically) have that
+    \[
+        \MM \modelsi \NOT \phi(a) \iff \MM \nodelsi \phi(a)
+    \]
+    Find examples of theories that do not satisfy
+    \[
+        T \modelsi \NOT \phi \iff T \nodelsi \phi
+    \]
+\end{ex}
+
+\message{ !name(1signature.tex) !offset(-206) }

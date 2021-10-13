@@ -1,0 +1,341 @@
+\section{Monsters}
+
+\subsection{Properties of the monster model}
+\begin{nttn}
+    We write $\Si(\dots,r)$ to mean the signature 
+    with an extra relation symbol thrown in with the rest.
+\end{nttn}
+
+\begin{dfn}[$\ka$-monster \cite{hodges}]
+    Let $\ka$ be a cardinal and $r$ 
+    a relation symbol not in the signature $\Si$.
+    We say a $\Si$-structure $\MM$ is $\ka$-monsterous
+    (also called big or splendid by Hodges) if it satisfies:
+    for any subset $A \subs \MM$ 
+    of cardinality $< \ka$ and any $\Si(A,r)$ structure $\NN$ that 
+    such that $\NN$ and $\MM$ are elementarily equivalent \emph{in $\Si$}, 
+    there is an interpretation of $\MM$ as a $\Si(A,r)$-structure 
+    such that $\NN$ and $\MM$ are elementarily equivalent \emph{in $\Si(r)$}.
+    \[\MM \equiv_\Si \NN \rightsquigarrow \MM \equiv_{\Si(r)} \NN\]
+
+    We may also say that $\MM$ is a $\ka$-monster.
+\end{dfn}
+
+We want monsters to have the properties of being saturated, 
+homogeneous and universal, 
+which we define soon.
+We show that monsters are 
+saturated and that saturated structures are homogeneous and universal.
+
+\begin{cd}
+    & & \text{homogeneous}\\
+    \text{monsterous} \ar[r]& \text{saturated} \ar[ur] \ar[dr]& \\
+    & & \text{universal}\\
+\end{cd}
+
+\begin{ex}
+    Let $\phi$ be a $\Si$-formula with $n$ free variables.
+    There exists a $\Si$-formula that means 
+    `there exists a unique tuple $x = (x_1,\dots,x_n)$ such that $\phi(x)$'.
+    We write this as 
+    \[\exists ! x, \phi(x)\]
+\end{ex}
+
+\begin{lem}[Monsters are saturated]
+    Let the $\Si$-structure $\MM$ be $\ka$-monsterous.
+    Then it is $\ka$-saturated.
+\end{lem}
+\begin{proof}
+    Let $A$ be a subset of $\MM$ with cardinality $< \ka$.
+    Let $p \in S_n(\Th_\MM(A))$ be a maximal $n$-type.
+    Since \linkto{finite_realisation_and_embeddings}{$p$ 
+        is realised by $b \in \NN^n$ in some elementary 
+        $\Si(A)$-extension $\NN$}
+    we can make $\NN$ a $\Si(A,r)$-structure that interprets 
+    $r$ as the singleton set $\set{b}$.
+    We have $\MM \equiv_\Si \NN$ as $\NN$ is an elementary extension.
+    Since $\MM$ is $\ka$-monsterous and $\MM \equiv_\Si \NN$ 
+    we have an interpretation of $r$ in $\MM$
+    such that $\MM \equiv_{\Si(A,r)} \NN$.
+    Hence 
+    \[\NN \model{\Si(A,r)} \exists ! x, r(x) \implies 
+    \MM \model{\Si(A,r)} \exists ! x, r(x) \]
+    Taking this unique element $a \in \MM^n$ we see that 
+    \[  
+        p = \subintp{A}{\NN}{\tp}(b) = 
+        \subintp{A}{\NN}{\tp}(\io(a)) 
+        = \subintp{A}{\MM}{a}
+    \]
+    The last equality using the fact that $\NN$ is an elementary 
+    $\Si(A)$-extension of $\MM$. 
+    (Note that we might not have that it is an elementary 
+    $\Si(A,r)$-extension)
+    Hence $p$ is realised in $\MM$ and $\MM$ is $\ka$-saturated.
+\end{proof}
+
+\begin{dfn}[$\ka$-saturation (strong $\ka$-homogeneity)]
+    \link{ka_saturation_dfn}
+    Let $\ka$ be a cardinal and $\MM$ be a $\Si$-structure. 
+    $\MM$ is $\ka$-saturated if for subset $A \subs \MM$
+    such that $\abs{A} < \ka$
+    every $n \in \N$ and every $p \in S_n(\Theory_\MM(A))$,
+    $p$ is realised in $\MM$.
+
+    Equivalently $\MM$ is $\ka$-saturated
+    if for any $A \subs \NN$ in any $\Si$-structure $\NN$ 
+    satisfying $\abs{A} < \ka$ either of the equivalent
+    following hold:
+    \begin{itemize}
+        \item For any partial elementary embedding $f : A \to \MM$ and 
+            any $b \in \NN$, 
+            $f$ can be extended to a partial elementary $\Si$-embedding 
+            $A \cup \set{b} \to \MM$.
+        \item If $\MM \equiv_{\Si(A)} \NN$ then for any $b \in \NN$ we have 
+            $\MM \equiv_{\Si(A,c)} \NN$ for some constant symbol $c$ that 
+            is interpreted as $b$ in $\NN$.
+    \end{itemize}
+
+    The latter two definitions are equivalent due to the fact that 
+    $\MM \equiv_{\Si(A)} \NN$ if and only if 
+    there is a way to interpret symbols from $A$ in $\MM$ such that 
+    \[\MM \model{\Si(A)} \phi \iff \NN \model{\Si(A)} \phi\] 
+    for any $\Si(A)$-sentence $\phi$, 
+    which is equivalent to the existance of a partial embedding $A \to \MM$. 
+    The strong version implies the weak version by taking $\NN$ to be 
+    $\MM$. 
+    It remains to prove the equivalence with the first definition:
+\end{dfn}
+\begin{proof}
+    \begin{forward}
+        Let $f : A \to \MM$ be a partial elementary embedding,
+        where $A \subs \NN$ and $\abs{A} < \ka$; let $b \in \NN$.
+        We show that $\MM \equiv_{\Si(A,c)} \NN$
+        for a constant symbol $c$ that is interpreted as $b$ in $\NN$
+        which gives a way to extend $f$ over $A \cup \set{b}$.
+
+        By \linkto{amalgamation}{amalgamation} there exists $\LL$ and 
+        commuting elementary $\Si(A)$-embeddings $\io_\MM,\io_\NN$into 
+        $\LL$ from $\MM$ and $\NN$.
+        First we show that $\subintp{A}{\LL}{\tp}(\io_\NN(b))$ is consistent 
+        with $\Theory_\MM(A)$.
+        It suffices to show \linkto{compactness_for_types}{finite consistency:} 
+        let $\De$ be a finite subset of $\Theory_\MM(A)$. 
+        The formula
+        \[\exists x, \bigand{\psi \in \De}{} \psi(x)\]
+        is satisfied in $\LL$ by taking $\io_\NN(b)$ hence is satisfied in 
+        $\MM$ as $\io_\MM$ is $\Si(A)$-elementary.
+        Thus $\subintp{A}{\LL}{\tp}(\io_\NN(b))$ is consistent 
+        with $\Theory_\MM(A)$.
+
+        Hence, as $\MM$ is $\ka$-saturated we can find $a \in \MM$ such that 
+        \[
+            \subintp{A}{\LL}{\tp}(\io_\NN(b)) = 
+            \subintp{A}{\MM}{\tp}(a)
+        \]
+
+        Add a constant symbol $c$ to the signature such that 
+        $\nnintp{c} = b$ and $\mmintp{c} = a$.
+        Then $x = c$ is in both types and so $\io_\NN(b) = \io_\MM (a)$.
+        Finally we have 
+        \[\NN \equiv_{\Si(A,c)} \LL \equiv_{\Si(A,c)} \MM\]
+        since $\NN \to \LL$ and $\MM \to \MM$ are elementary.
+    \end{forward}
+
+    \begin{backward}
+        If $p \in S_n(\Theory_\MM(A))$ then \linkto{}{it is realised 
+        in some elementary $\Si$-extension} $\io : \MM \to \NN$
+        by $b \in \NN$.
+        Hence we have a partial elementary $\Si$-embedding 
+        $\io^{-1} : \io(\MM) \to \MM$ that can be extended to have domain 
+        $\io^{-1} \cup \set{b}$ by assumption.
+        Hence we have the image of $b$ under this map as the element of $\MM$ 
+        realising the type $p$.
+    \end{backward}
+\end{proof}
+
+A special case of the second definition of 
+saturation comes in the form of homogeneity.
+\begin{dfn}[$\ka$-homogeneity]
+    Let $\ka$ be a cardinal and $\MM$ a $\Si$-structure.
+    $\MM$ is $\ka$-homogeneous 
+    if for any $A \subs \MM$, 
+    any \linkto{partial_morph_dfn}{partial elementary embedding} 
+    $f : A \to \MM$ and any $b \in \MM$, 
+    if $\abs{A} < \ka$ then 
+    $f$ can be extended to a partial elementary embedding 
+    $A \cup \set{b} \to \MM$.
+\end{dfn}
+
+\begin{dfn}[$\ka$-universality]
+    Let $\MM$ be a $\Si$-structure.
+    Then $\MM$ is a $\ka$-universal $\Si$-structure if 
+    any $\Si$-structure $\NN$ such that $\abs{\NN} < \ka$ and 
+    $\NN \equiv_\Si \MM$ has an elementary 
+    embedding into $\MM$.
+\end{dfn}
+
+\begin{nttn}
+    We replace $\ka$ with $\ka^+$ in all the previous definitions
+    when the $<$ is upgraded to $\leq$.
+    Note that if a structure is $\ka^+$-something then it is also 
+    $\ka$-something and if $\la \leq \ka$ and it is $\ka$-something 
+    then the structure is also $\la$-something.
+\end{nttn}
+
+\begin{lem}[Saturated structures are universal \cite{marker}]
+    Let $\MM$ be a $\ka$-saturated $\Si$-structure.
+    Then $\MM$ is a $\ka^+$-universal $\Si$-structure.
+\end{lem}
+\begin{proof}
+    Let $\NN_\be$ be a $\Si$-structure such that 
+    $\abs{\NN_\be} = \be \leq \ka$ and $\NN \equiv_\Si \MM$.
+    Then enumerate $\NN_\be = \set{n_\ga \st \ga \leq \be}$
+    and define nested subsets $\NN_\al := \set{n_\ga \st \ga \leq \al}$
+    for each $\al \leq \be$.
+    We then use \linkto{transfinite_induction}{transfinite induction} to define 
+    partial elementary embeddings $f_\al : \NN_\al \to \MM$ 
+    for $\al \leq \be$ such that they mutually agree upon restriction.
+
+    If $\al$ is a limit ordinal and for each $\ga \leq \al$ we have 
+    a well-defined partial elementary embedding $f_\ga : \NN_\ga \to \MM$ 
+    that agrees upon restriction
+    then $f_\al := \bigcup_{\ga < \al} f_\ga$ is well-defined
+    and agrees with the others upon restriction.
+    In the case that $\ga = 0$ and $f_\ga$ 
+    is the empty map it is a partial elementary embedding 
+    because the only formulas we need to verify are sentences 
+    (the domain is empty).
+    Since $\NN \equiv_\Si \MM$ we immediately have that it is a 
+    partial embedding.
+    In the case where $0 < \ga$, $f_\ga$ is clearly elementary.
+
+    To define $f_{\al+1}$ using $f_\al$ we first define 
+    \[\Ga = \set{\phi(v,f_\al(a)) \in \form{\Si(f_\al(\NN_\al))} \st
+    \exists a \in \NN^\star, \NN \model{\Si} \phi(n_\al,a))}\]
+    $\Ga$ is finitely consistent with $\Theory_\MM(f_\al(\NN_\al))$:
+    for any finite subset $\De \subs \Ga$,
+    we can take the conjuction,
+    \[\exists v, \bigand{\phi(v,f_\al(a)) \in \De}{} \phi(v,a)\]
+    Note that this is satisfied by $\NN$ therefore as 
+    $f_\al$ is a partial elementary $\Si$-embedding:
+    \[\MM \model{\Si} \exists v, 
+    \bigand{\phi(v,f_\al(a)) \in \De}{} \phi(v,f_\al(a))\]
+    Hence $\MM \model{\Si} \De(b)$ for some $b \in \MM$.
+    By \linkto{compactness_for_types}{compactness for types}
+    $\Ga$ is consistent with $\Theory_\MM(f_\al(\NN_\al))$.
+    This implies that it 
+    \linkto{extend_to_maximal_type_zorn}{can be extended} to a maximal $1$-type 
+    $p \in S_1(\Theory_\MM(\NN_\al))$.
+    By $\ka$-saturation, $\Ga(v)$ is realised by some 
+    $b \in \MM$.
+    Define $f_{\al + 1} : n_\al \mapsto b$ and agreeing with $f_\al$ otherwise.
+    By definition $f_{\al + 1}$ is a partial elementary $\Si$-embedding.
+
+    Hence $f_\be : \NN_\be \to \MM$ is an elementary $\Si$-embedding.
+\end{proof}
+
+\subsection{Finite structures are monsters}
+\begin{lem}[Finite structures in a finite signature are 
+        characterised by one formula]
+    \link{finite_struc_sig_are_charac_by_formula}
+    Let $\Si$ be a signature with finitely many constant, 
+    function and relation symbols.
+    If $\MM$ is a finite $\Si$-structure then there exists a `characterising'
+    $\Si$-sentence $\phi$ such that for any $\Si$-structure $\NN$,
+    \[\NN \model{\Si} \phi \iff \NN \iso_\Si \MM\]
+\end{lem}
+\begin{proof}
+    For convenience we write $\const{\Si} = C$, $\form{\Si} = F$
+    and $\rel{\Si} = R$.
+    Let $n \in \N$ be the cardinality of $\MM$ and index it:
+    \[\MM = \set{a_1,\dots,a_n}\]
+
+    We define $\phi$:
+    \begin{align*}
+        \phi := &\bigexists{i = 1}{n} x_i,\\
+        & \bigand{i < j}{} x_i \ne x_j &\text{at least $n$ elements}\\
+        & \AND \forall x, \bigor{i = 1}{n} x = x_i 
+        &\text{at most $n$ elements}\\
+        & \AND \bigand{c \in C, \mmintp{c} = a_i}{} c = x_i
+        &\text{constants interpreted like in $\MM$}\\
+        & \AND \bigand{f \in F, \mmintp{f}(a_{k_1},\dots,a_{k_n}) = a_i}{} 
+        f(x_{k_1},\dots,x_{k_n}) = x_i
+        &\text{functions interpreted like in $\MM$}\\
+        & \AND \bigand{r \in R,
+        (a_{k_1},\dots,a_{k_m}) \in \mmintp{r}}{}
+        r(x_{k_1},\dots,x_{k_n})\\
+        & \AND \bigand{r \in R,
+        (a_{k_1},\dots,a_{k_m}) \notin \mmintp{r}}{}
+        \NOT r(x_{k_1},\dots,x_{k_n}) 
+        &\text{relations interpreted like in $\MM$}
+    \end{align*}
+    This is something we can write down since there the signature and the 
+    structure are both finite.
+    
+    Suppose $\NN \model{\Si} \phi$.
+    Then there exist $b_i \in \NN$ from satisfaction of $\phi$.
+    Then taking the map $a_i \mapsto b_i$ gives a map $\MM \to \NN$.
+    Unfolding the relevant parts of $\phi$ 
+    shows that this is a $\Si$-isomorphism.
+    Conversely if $\NN$ and $\MM$ are isomorphic then taking the images of 
+    each $a_i$ under the isomorphism $\MM \to \NN$ 
+    we obtain elements of $\NN$ that satisfy $\phi$.
+\end{proof}
+
+\begin{cor}[Elementarily equivalence with a finite structure is isomorphism]
+    \link{fin_elem_equiv_imp_iso}
+    If $\MM$ is a finite $\Si$-structure and $\NN$ is another $\Si$-structure
+    such that $\MM \equiv_\Si \NN$, then $\MM \iso_\Si \NN$.
+\end{cor}
+\begin{proof}
+    Suppose $\Si$-structure $\MM$ has cardinality $n \in \N$.
+    Let $\NN$ be another $\Si$-structure such that $\NN \equiv_\Si \MM$.
+    Taking the formula 
+    \begin{align*}
+        &\bigexists{i = 1}{n} x_i,\\
+        & \bigand{i < j}{} x_i \ne x_j &\text{at least $n$ elements}\\
+        & \AND \forall x, \bigor{i = 1}{n} x = x_i 
+        &\text{at most $n$ elements}
+    \end{align*}
+    which is satisfied by $\MM$, 
+    we see that it is also satisfied by $\NN$ by elementary equivalence.
+    Thus $\abs{\NN} = \abs{\MM}$ and so $\NN$ is also finite.
+
+    Since both structures are finite there are only finitely many 
+    bijections $\io : \MM \to \NN$.
+    For a contradiction suppose that none of these are $\Si$-isomorphisms,
+    then for each $\io$ there exists a constant, function, or relation symbol
+    that is not preserved by $\io$.
+    Taking the set of these we have a finite signature $\Si_{\text{fin}}$
+    with $\Si_{\text{fin}}$-structures $\MM$ and $\NN$.
+    Hence we have a 
+    \linkto{finite_struc_sig_are_charac_by_formula}{characterising formula} 
+    $\phi$ for $\MM$ in $\Si_{\text{fin}}$.
+    By elementary equivalence $\NN \model{\Si} \phi$ and so 
+    $\NN \iso_\Si \MM$.
+\end{proof}
+
+\begin{cor}
+    Finite $\Si$-structures are monsters.
+\end{cor}
+\begin{proof}
+    Let $\MM$ be a finite $\Si$-structure.
+    Let $r$ be a relation symbol and suppose $\NN$ is a $\Si(r)$-structure 
+    such that $\NN \equiv_{\Si} \MM$.
+    Since $\MM$ is finite, 
+    this implies \linkto{fin_elem_equiv_imp_iso}{$\NN \iso_\Si \MM$}.
+    Defining $\mmintp{r}$ as the image of $\nnintp{r}$ under the isomorphism
+    makes $\MM$ a $\Si(r)$-structure such that $\NN \iso_\Si(r) \MM$.
+    Since \linkto{iso_imp_elem_equiv}{isomorphisms are elementary embeddings}
+    we have $\MM \equiv_{\Si(r)} \NN$.
+\end{proof}
+
+\subsection{Existence of monsterous extensions}
+\begin{prop}
+    \link{existence_of_monster}
+    If $\MM$ is a $\Si$-structure there exists a $\ka$-monsterous elementary 
+    $\Si$-extension of $\MM$ for any cardinal $\ka$.
+\end{prop}
+\begin{proof}
+    Omitted for now; see \cite{hodges}.
+\end{proof}

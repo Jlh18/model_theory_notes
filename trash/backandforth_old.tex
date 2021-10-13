@@ -1,0 +1,651 @@
+\subsection{Back and Forth}
+\begin{nttn}
+    We write the signature of a single relation symbol $r$ as
+    \[\Si_r := \set{\nothing,\nothing,n_\star,\set{r},m_\star}\]
+\end{nttn}
+
+\begin{dfn}[Local isomorphisms]
+    Let $\MM$ and $\NN$ be $\Si_r$-structures.
+    Let $p \in \N$.
+    We define the sets $\local_p(\modintp{\MM}{r},\modintp{\NN}{r})$
+    inductively.
+    \begin{itemize}
+        \item $\local_0(\modintp{\MM}{r},\modintp{\NN}{r})$ is the set of 
+            all $\Si_r$-isomorphisms $\io : A \to B$, where 
+            $A$ and $B$ are substructures of $\MM$ and $\NN$.
+        \item $\local_{k+1}(\modintp{\MM}{r},\modintp{\NN}{r})$ is the 
+            set of $\io \in \local_{k}(\modintp{\MM}{r},\modintp{\NN}{r})$ 
+            such that ($1.$) for any $a \in \MM$ there exists 
+            $\la \in \local_{k}(\modintp{\MM}{r},\modintp{\NN}{r})$
+            such that $\dom(\io) \cup \set{a} \subs \dom(\la)$
+            and $\res{\la}{\dom(\io)} = \io$;
+            ($2.$) for any $b \in \NN$ there exists 
+            $\la \in \local_{k}(\modintp{\MM}{r},\modintp{\NN}{r})$
+            such that $\codom(\io) \cup \set{b} \subs \codom(\la)$.
+    \end{itemize}
+    The first requirement in the inductive part of the definition is called 
+    `forth' condition and the second is called the `back' condition.
+    The first set $\local_0(\modintp{\MM}{r},\modintp{\NN}{r})$ is called 
+    the set of local isomorphisms on $r$ and elements of 
+    $\local_p(\modintp{\MM}{r},\modintp{\NN}{r})$ are often referred to 
+    as $p$-isomorphisms on $r$.
+
+    Note that as $\Si_r$ has no constant symbols or function symbols,
+    subsets are naturally substructures by taking the interpretation of 
+    the relation symbol to be the intersection.
+\end{dfn}
+
+\begin{prop}[Basic facts about local isomorphisms]
+    \link{basic_facts_local_isomorphisms}
+    Let $\MM$ and $\NN$ be $\Si_r$-structures.
+    The sets of $p$-isomorphisms on $r$ form a chain
+    \[\cdots \subs \local_p(\modintp{\MM}{r},\modintp{\NN}{r}) \subs \cdots 
+    \subs \local_0(\modintp{\MM}{r},\modintp{\NN}{r})\]
+    The following are useful facts:
+    \begin{itemize}
+        \item If $p \leq q \in \N$ then 
+            $\local_q(\modintp{\MM}{r},\modintp{\NN}{r}) \subs
+            \local_p(\modintp{\MM}{r},\modintp{\NN}{r})$.
+        \item $p$-isomorphisms are preserved under substructure:
+            if $\io \in \local_p(\modintp{\MM}{r},\modintp{\NN}{r})$
+            then for any substructure $A \subs \dom(\io)$, 
+            $\res{\io}{A} : A \to \io(A)$ is an element of 
+            $\local_p(\modintp{\MM}{r},\modintp{\NN}{r})$.
+        \item The inverse of a $p$-isomorphims is a $p$-isomporphism:
+            if $\io \in \local_p(\modintp{\MM}{r},\modintp{\NN}{r})$
+            then $\io^{-1} \in \local_p(\modintp{\NN}{r},\modintp{\MM}{r})$.
+        \item The composition of $p$-isomorphisms is a $p$-isomorphism:
+            if $\io \in \local_p(\modintp{\MM_0}{r},\modintp{\MM_1}{r})$,
+            and $\la \in \local_p(\modintp{\MM_1}{r},\modintp{\MM_2}{r})$
+            and $\dom(\la) = \codom(\la)$ then 
+            \[  
+                \la \circ \io \in 
+                \local_p(\modintp{\MM_0}{r},\modintp{\MM_2}{r})
+            \]
+        \item If $\local_p(\modintp{\MM}{r},\modintp{\NN}{r}) = 
+            \local_{p+1}(\modintp{\MM}{r},\modintp{\NN}{r})$
+            then the chain is constant from $p$ onwards:
+            if $p \leq q$ then $\local_p(\modintp{\MM}{r},\modintp{\NN}{r})
+            = \local_q(\modintp{\MM}{r},\modintp{\NN}{r})$.
+        \item If $\MM$ is finite and $\io : \MM \to \NN$ 
+            is a $\Si_r$-isomorphism then $\io$ 
+            is a $p$-isomorphism for any $p$.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    We prove the last claim:
+    Suppose $\MM$ is finite and $\io : \MM \to \NN$ 
+    is a $\Si_r$-isomorphism.
+    Induct on $p \in \N$.
+    If $p = 0$ then $\io \in \local_p$ as 
+    $\io : \MM \to \NN$ is itself a $0$-isomorphism
+    Suppose $\io \in \local_{k}$ then 
+    for any element $a \in \MM$, 
+    $\io$ extends itself with domain containing $a$,
+    since $\dom(\io) = \MM$.
+    Similarly the backwards condition is satisfied.
+    Hence $\io \in \local_{k+1}$.
+\end{proof}
+
+\begin{dfn}[$\om$-isomorphism]
+    Let $\MM$ and $\NN$ be $\Si_r$-structures.
+    The set of $\om$-isomorphisms 
+    \[\local_\om(\modintp{\MM}{r},\modintp{\NN}{r})\]
+    is defined as the projective limit of the chain of $p$-isomorphisms.
+    This is equivalent to it being 
+    \[\bigcap_{p \in \N} \local_p(\modintp{\MM}{r},\modintp{\NN}{r})\]
+\end{dfn}
+\begin{rmk}
+    If for every $p \in \N$, the set of $p$ isomorphisms is non-empty then 
+    each contains the empty set 
+    (\linkto{basic_facts_local_isomorphisms}{by restrction}).
+    Hence
+    $\local_\om(\modintp{\MM}{r},\modintp{\NN}{r})$ contains the empty set.
+\end{rmk}
+
+\begin{prop}[Intuitive property of $p$-isomorphisms]
+    \link{intuitive_prop_of_p_iso}
+    Let $\MM$ and $\NN$ be infinite $\Si_r$-structures.
+    Suppose $a \subs \MM, b \subs \NN$ are finite subsets
+    and $\io : a \to b$ is in $\local_{q}(\mmintp{r},\nnintp{r})$ then 
+    for every finite subset $A \subs \MM$ such that $a \subs A$
+    and $\abs{A \setminus a} = q$
+    there exists an extension $\la : A \to B$ of $\io$ 
+    that is a local isomorphism.
+\end{prop}
+\begin{proof}
+    We show by induction on $p \in \N$ that 
+    for any $p$, for any $\io \in \local_p$, for any subset $A \subs \MM$.
+    such that $\abs{A} = p$,
+    there exists a local isomorphism extending $\io$ 
+    with domain $\dom(\io) \cup A$.
+    Suppose $p = 0$ then we pick the extension 
+    to be $\io$ itself and we are done.
+
+    Suppose $p = k + 1$.
+    Then let $\io \in \local_p$ and $A \subs \MM$ be such that 
+    $\abs{A} = p$.
+    Then as $p \ne 0$, 
+    $A$ is non-empty containing $A_0$.
+    By definition of $\local_p$ there exists $\la \in \local_k$ 
+    extending $\io$ such that $A_0 \in \dom(\la)$.
+    Then by the induction hypothesis 
+    (taking $\la \in \local_k$, 
+    $A \setminus \set{A_0} \subs \MM$)
+    we have $\la' : A \cup \dom(\la) \to B$ a local isomorphism.
+    We can restrict the domain of $\la'$ 
+    to be $A \cup \dom(\io)$ as 
+    \linkto{basic_facts_local_isomorphisms}{local isomorphisms 
+    are preserved under substructure},
+    giving us the extension that we want.
+    Thus we are finished with the induction.
+
+    Let $A \subs \MM$ be finite and containing $a$.
+    Take $p$ to be $q$.
+    By assumption $\io \in \local_{p}(\mmintp{r},\nnintp{r})$.
+    By what we showed above there exists an extension 
+    $\la : A \to B$ of $\io$ 
+    that is a local isomorphism.
+\end{proof}
+
+\begin{prop}[Equivalent characterisation of $\om$-isomorphisms]
+    \link{extending_by_arbitrary_subets_gives_om_iso}
+    Let $\MM$ and $\NN$ be infinite $\Si_r$-structures.
+    Suppose $a \subs \MM, b \subs \NN$ are finite subsets
+    and $\io : a \to b$ is a bijection.
+    Then the following are equivalent:
+    \begin{itemize}
+        \item $\io \in \local_\om(\mmintp{r},\nnintp{r})$
+        \item For every finite subset $A \subs \MM$ such that $a \subs A$,
+            there exists an extension $\la : A \to B$ of $\io$ 
+            that is a local isomorphism.
+    \end{itemize}
+    
+    Note that we only need the `forth' version.
+    A similar `back' version is equivalent as well.
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        Follows from picking $p = \abs{A \setminus a}$ and applying 
+        \linkto{intuitive_prop_of_p_iso}{the previous proposition}.
+    \end{forward}
+
+    \begin{backward}
+    We induct on $p \in \N$ to show that $\io \in \local_p$ for each $p$.
+    For $p = 0$,
+    take $A$ to be $a$,
+    then by assumption there exists $\la : A \to B$ a local isomorphism
+    that agrees with $\io$ upon restriction.
+    Hence $\io = \la \in \local_0$.
+
+    Suppose $p = k + 1$. 
+    By the induction hypothesis $\io \in \local_k$.
+    By the axiom of choice we can 
+    find $A \subs \MM$ such that 
+    $\abs{A \setminus a} = p$.
+    By assumption there exists $\la : A \to B$ a local isomorphism
+    extending $\io$.
+    We have that $p \ne 0$ 
+    hence the well-ordering principle allows us to write $A$ as a disjoint union
+    \[A = a \sqcup \set{A_1,\dots,A_p}\]
+    with $1 \leq r$.
+    Note that \linkto{basic_facts_local_isomorphisms}{by restriction}
+    $\res{\la}{A\setminus \set{A_1}} \in \local_1$.
+    By induction we get that for any $1 \leq s \leq r$,
+    \[\res{\la}{A\setminus \set{A_1,\dots, A_s}} \in \local_s\]
+    In particular 
+    \[\io = \res{\la}{A \setminus \set{A_1,\dots, A_p}} \in \local_p\]
+    \end{backward}
+\end{proof}
+
+\begin{dfn}[Fraïssé rank]
+    Let $\MM$ and $\NN$ be $\Si_r$-structures.
+    Let $\io \in \local_0(\modintp{\MM}{r},\modintp{\NN}{r})$ be a local
+    isomorphism. 
+    We define the Fraïssé rank of $\io$ to be an element of $\N \cup {\om}$.
+    If there exists $p \in \N$ such that
+    \[
+        \io \in \local_p(\modintp{\MM}{r},\modintp{\NN}{r}) 
+        \setminus \local_{p+1}(\modintp{\MM}{r},\modintp{\NN}{r})
+    \]
+    Then it is said to have rank $p$,
+    Otherwise it has rank $\om$.
+\end{dfn}
+
+\begin{dfn}[$p$-equivalence]
+    Let $\MM$ and $\NN$ be $\Si_r$-structures,
+    let $a \in \MM^{m_r}$ and $b \in \NN^{m_r}$.
+    Let $p \in \N$.
+    We say that $a$ and $b$ are $p$-equivalent when 
+    \[\io : \set{a_1,\dots,a_{m_r}} \to \set{b_1,\dots,b_{m_r}}
+    := a_i \mapsto b_i\]
+    is an element of $\local_p(\modintp{\MM}{r},\modintp{\NN}{r})$.
+    We write $(a,\modintp{\MM}{r}) \sim_p (b, \modintp{\NN}{r})$.
+    (From now on we just write $a \in \dom(\io)$ to mean 
+    $a_1,\dots,a_{m_r} \in \dom(\io)$.)
+
+    If for all $p \in \N$ we have 
+    $(a,\modintp{\MM}{r}) \sim_p (b, \modintp{\NN}{r})$
+    then $a$ and $b$ are said to be $\om$-equivalent.
+    For this we write $(a,\modintp{\MM}{r}) \sim_\om (b, \modintp{\NN}{r})$.
+    and we say that $a$ and $b$ have the same type 
+    (this is justified in the following proposition).
+    One should check that these are equivalence relations.    
+\end{dfn}
+
+\begin{ex}
+    Let $\MM$ and $\NN$ be infinite $\Si_r$-structures,
+    with $A \subs \MM$ and $B \subs \NN$.
+    Show by induction on formulas that if $\la : A \to B$ is a local isomorphism
+    then there exists a bijective induced map 
+    $\bar{\la} : \form{\Si_r(A)} \to \form{\Si_r(B)}$
+    such that $\bar{\la} \psi(A) = \psi(\la(A))$.
+\end{ex}
+
+\begin{prop}[Elements having the same type]
+    Let $\MM$ and $\NN$ be infinite $\Si_r$-structures,
+    let $a \in \MM^{m_r}$ and $b \in \NN^{m_r}$.
+    Let $\io : \set{a_1,\dots,a_{m_r}} \to \set{b_1,\dots,b_{m_r}}$
+    be the map $a_i \mapsto b_i$.
+    Then the following are equivalent:
+    \begin{enumerate}
+        \item $(a,\modintp{\MM}{r}) \sim_\om (b, \modintp{\NN}{r})$.
+        \item $\io \in \local_1$ and 
+            \[\subintp{\nothing,m_r}{\MM}{\tp}(a) = 
+            \subintp{\nothing,m_r}{\NN}{\tp}(b)\]
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        Clearly $\io$ is a $1$-isomorphism.
+        Let $\phi \in \subintp{\nothing,m_r}{\MM}{\tp}(a) \subs F(\Si_r,n)$.
+        By definition of $\subintp{\nothing,m_r}{\MM}{\tp}(a)$ we have 
+        \begin{align*}
+            &\phi \in \subintp{\nothing,m_r}{\MM}{\tp}(a) \iff 
+            \MM \model{\Si_r} \phi(a) \\
+            \iff A \model{\Si_r} \psi(A)
+        \end{align*}
+        As $A \subs \MM$ is elementary (similarly $B \subs \NN$).
+        Furthermore, $\io$ being an isomorphism tells us this is if and only if
+        \[
+            \NN \model{\Si_r} (\phi)(b)
+            \iff \phi \in \subintp{\nothing,m_r}{\NN}{\tp}(b)
+        \]
+        Thus 
+        \[
+            \subintp{\nothing,m_r}{\MM}{\tp}(a) = 
+            \subintp{\nothing,m_r}{\NN}{\tp}(b)
+        \]
+    \end{forward}
+
+    \begin{backward}
+        We first show by induction on $p \in \N$
+        that for any $p$ and any local isomorphism $\la \in \local_1$ 
+        extending $\io$, if the induced map 
+        $\bar{\la} : \form{\Si_r(A)} \to \form{\Si_r(B)}$
+        restricts to a bijection
+        \[\subintp{A,m_r}{\MM}{\tp}(a) \to 
+        \subintp{B,m_r}{\NN}{\tp}(b)\]
+        then $\la \in \local_p$.
+        The base case is clear.
+
+        For the induction, 
+        let $\la : A \to B$ be a $1$-isomporphism extending
+        $\io$ such that $\bar{\la} : \form{\Si_r(A)} \to \form{\Si_r(B)}$
+        restricts to a bijection
+        \[\subintp{A,m_r}{\MM}{\tp}(a) \to 
+        \subintp{B,m_r}{\NN}{\tp}(b)\]
+        By the induction hypothesis $\la \in \local_p$ and we show that 
+        it is in the next one.
+        Let $\al \in \MM$.
+        By definition of $\local_p$ there exists $\mu$ a $p - 1$-isomorphism
+        such that $\al \in \dom(\mu)$ and $\res{\mu}{a} = \io$.
+        We show that the induced map 
+        $\bar{\mu} : \form{\Si_r(A)} \to \form{\Si_r(B)}$
+        restricts to a bijection
+        \[\subintp{\dom(\mu),m_r}{\MM}{\tp}(a) \to 
+        \subintp{\im(\mu),m_r}{\NN}{\tp}(b)\]
+        Indeed, let $\phi \in F(\Si_r(\dom(\mu)),n)$
+        (writing it is $\psi(\dom(\mu))$ for $\psi \in \form{\Si_r}$),
+        \begin{align*}
+            &\phi \in \subintp{\dom(\mu),m_r}{\MM}{\tp}(a) \iff 
+            \MM \model{\Si_r(\dom(\mu))} \phi(a) \iff
+            \MM \model{\Si_r} \psi(\dom(\mu))\\
+            \iff & \dom{\mu} \model{\Si_r} \psi(\dom(\mu)) \quad 
+            \text{as subsets are elementary embeddings}\\
+            \iff & \im{\mu} \model{\Si_r} \psi(\im(\mu)) \quad
+            \text{as $\mu$ is a 
+            \linkto{iso_imp_elem_equiv}{$\Si_r$-isomorphism}}\\ 
+            \iff & \NN \model{\Si_r} \psi(\im(\mu)) \iff 
+            \NN \model{\Si_r(\im(\mu))} \bar{\mu}(\phi)(\mu(a))\\
+            \iff & \bar{\mu}(\phi) \in \subintp{\im(\mu),m_r}{\NN}{\tp}(b)
+        \end{align*}
+        Thus by the induction hypothesis $\mu \in \local_p$
+        and the `forth' condition is satisfied.
+        The `back' condition is similar, 
+        hence we have that $\la \in \local_{p+1}$.
+
+        The induction is done and we can conclude that any 
+        $1$-isomorphism $\la$ that extends $\io$ and induces a bijection 
+        on the types of elements is an $\om$-isomorphism.
+        By assumption $\io$ satisfies these conditions and therefore 
+        $\io \in \local_\om$.
+        (Note that the induced map
+        $\bar{\io} : \form{\Si_r} \to \form{\Si_r}$
+        is actually the identity
+        \[\subintp{\nothing,m_r}{\MM}{\tp}(a) \to 
+        \subintp{\nothing,m_r}{\NN}{\tp}(b)\]
+        which is why it is phrased as equality in the statement of the theorem.)
+    \end{backward}
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%second attempt
+\begin{dfn}[Partial isomorphisms]
+    Let $\MM$ and $\NN$ be $\Si$-structures.
+    A partial isomorphism from $\MM$ to $\NN$ is a bijective function $p$
+    with finite domain in $\MM$ and codomain in $\NN$ such that it commutes with 
+    interpretation:
+    \begin{itemize}
+        \item For all constant symbols $c$ such that $\mmintp{c} \in \dom(p)$,
+            $p(\mmintp{c}) = \nnintp{c}$.
+        \item For all function symbols $f$ and $a \in \dom(p)^{n_f}$, 
+            \[p(\mmintp{f}(a)) =
+             \nnintp{f}(p(a))\]
+        \item For all relation symbols $r$ and $a \in \dom(p)^{m_f}$,
+            \[a \in \mmintp{r} \iff p(a) \in \nnintp{r}\]
+    \end{itemize}
+\end{dfn}
+
+\begin{prop}[Basic facts about partial isomorphisms]
+    \link{basic_facts_partial_isomorphisms}
+    Let $\MM$ and $\NN$ be $\Si$-structures.
+    \begin{itemize}
+        \item The inverse of a partial isomorphism is a partial isomorphism.
+        \item The restriction of a partial isomorphism is a partial isomorphism.
+        \item The composition of partial isomorphisms is a partial isomorphism.
+    \end{itemize}
+\end{prop}
+
+\begin{dfn}[Partially isomorphic structures]
+    Let $\MM$ and $\NN$ be $\Si$-structures.
+    $\MM$ and $\NN$ are partially isomorphic via $P$
+    when $P$ is a non-empty set
+    of partial isomorphisms from $\MM$ to $\NN$ such that 
+    \begin{itemize}
+        \item (Forth) For each $p \in P$ and $a \in \MM$
+            there exists $q \in P$ such that 
+            $q$ extends $p$ and $a \in \dom{p}$.
+        \item (Back) For each $p \in I$ and $b \in \NN$
+            there exists $q \in I$ such that 
+            $q$ extends $p$ and $b \in \codom{q}$.
+    \end{itemize}
+    We write $\MM \iso_P \NN$.
+\end{dfn}
+
+\begin{prop}[Countable partially isomorphic structures are isomorphic]
+    Let $\MM$ and $\NN$ be $\Si$-structures with
+    cardinality less than or equal to $\om$.
+    If $\MM$ and $\NN$ are partially isomorphic then 
+    $\MM$ and $\NN$ are isomorphic. 
+\end{prop}
+\begin{proof}
+    Write $\MM = \set{a_i}_{i \in \N}$ and $\NN = \set{b_i}_{i \in \N}$
+    (if $\MM$ and $\NN$ are finite then after some $i$ all the elements are 
+    equal).
+    $\MM \iso_P \NN$ by some non-empty $P$.
+    Inductively define $p_\star : \N \to P$:
+    \begin{itemize}
+        \item Take $p_0$ to be the element of non-empty $P$.
+        \item If $n + 1$ is odd then ensure $a_{n/2}$ 
+            is in the domain:
+            by the `forth' property of $P$ there exists $p_{n+1}$ 
+            extending $p_n$ such that $a_{n/2} \in \dom(p_{n+1})$.
+        \item If $n + 1$ is even then ensure $b_{(n+1)/2}$ is in the codomain:
+            by the `back' property of $P$ there exists $p_{n+1}$ 
+            extending $p_n$ such that $b_{(n-1)/2} \in \codom(p_{n+1})$.
+    \end{itemize}
+    We claim that $p$, the union of the partial isomorphisms 
+    $p_n$ for each $n \in \N$, is an isomorphism.
+    Note that it is well-defined and has image $\NN$ as the $p_i$ are nested and
+    for any $a_i \in \MM$ and $b_i \in \NN$, 
+    $a_i \in \dom(p_{2i+1})$ and $b_i \in \dom(p_{2i+2})$.
+    It is injective: if $a_i, a_j \in \MM$ and $p(a_i) = p(a_j)$ then 
+    $p_{2i+2}(a_i) = p_{2i+2}(a_j)$ and so $a_i = a_j$ as $p_{2i+2}$ is a 
+    partial isomorphism.
+    One can easily show that it is an isomorphism.
+\end{proof}
+
+\begin{dfn}[$p$-equivalence, $P$-equivalence]%??
+    Let $\MM$ and $\NN$ be $\Si_R$-structures.
+    Let $a \in \MM^{n}$ and $b \in \NN^{n}$.
+    We say that $a$ and $b$ are $p$-equivalent when
+    $p$ is a partial isomorphism with domain containing
+    $\set{a_1,\dots,a_n}$ and codomain containing $\set{b_1,\dots,b_n}$
+    and maps $a_i \mapsto b_i$.
+    We write $(a, \MM) \sim_p (b, \NN)$.
+
+    %?If $\MM \iso_P \NN$ and
+    %?for all $p \in P$ we have 
+    %?$(a,\MM) \sim_p (b, \NN)$
+    %?then $a$ and $b$ are said to be $P$-equivalent (usually $\om$-equivalent).
+    %?For this we write $(a,\MM) \sim_P (b, \NN)$.
+    %?and we say that $a$ and $b$ have the same type 
+    %?%?
+    %?One should check that these are equivalence relations.
+\end{dfn}
+
+%\begin{dfn}[Quantifier rank]
+%    The quantifier rank of a $\Si$-formula $\phi$,
+%    $\qr(\phi)$ is defined inductively:
+%    \begin{itemize}
+%        \item If $\phi$ is atomic then it has rank $0$.
+%        \item If $\phi$ is $\psi \OR \chi$ then it has rank 
+%            $\max(\qr(\psi),\qr(\chi))$
+%        \item If $\phi$ is $\forall v, \psi$ then it has rank $\qr(\psi) + 1$
+%            if $v$ is a free-variable of $\psi$.
+%            Otherwise it has rank $\qr(\psi)$.
+%    \end{itemize}
+%\end{dfn}
+
+\begin{nttn}
+    We write
+    \[\Si_R := \set{\nothing,\nothing,n_\star,R,m_\star}\]
+    as a signature with only relation symbols.
+\end{nttn}
+
+\begin{prop}[$p$-equivalent elements have the same type]%??
+    \link{p_equiv_elements_are_same_type}
+    Let $\MM$ and $\NN$ be $\Si_R$-structures.
+    Let $a \in \MM^{n}$ and $b \in \NN^{n}$.
+    If $a$ and $b$ are $p$-equivalent for some $p \in P$ then
+    \[\subintp{\nothing,n}{\MM}{\tp}(a) = 
+    \subintp{\nothing,n}{\NN}{\tp}(b)\]
+    Thus $a$ and $b$ `have the same type'.
+\end{prop}
+\begin{proof}
+    \begin{forward}
+    First note that $\Si_R$ terms can only be variable symbols as there are no 
+    constant symbols or function symbols.
+    Let $\phi$ be a $\Si_R$-formula with up to $n$ variables.
+    We show by induction on $\phi$ that 
+    \[
+        \MM \model{\Si_R} \phi(a)
+        \iff \NN \model{\Si_R} \phi(p(a))
+        \iff \NN \model{\Si_R} \phi(b)
+    \]
+    \begin{itemize}
+        \item If $\phi$ is $\top$ it is trivial.
+        \item If $\phi$ is $t = s$ then they are variable symbols $x,y$
+            and $\phi$ has $2$ free-variables. 
+            \[
+                \mmintp{t}(a_i) = \mmintp{s}(a_j)
+                \iff a_i = a_j \iff p(a_i) = p(a_j) 
+                \iff \nnintp{t}(p(a_i)) = \nnintp{s}(p(a_j))
+            \]
+        \item If $\phi$ is $r(t)$ then again noting that $t$ are all variable
+            symbols
+            \[  
+                (a_{i_1},\dots,a_{i_j}) \in \mmintp{r} \iff 
+                p(a_{i_1},\dots,a_{i_j}) \in \nnintp{r} \iff 
+            \]
+            as $p$ is a partial isomorphisms.
+        \item If $\phi$ is $\NOT \psi$ or it is $\psi \OR \chi$ then it is 
+            clear by induction.
+        \item If $\phi$ is $\forall x, \psi$ 
+            then suppose for every $\al \in \MM$ we have that 
+            $\MM \model{\Si_R} \psi(\al)(a)$.
+            Let $\be \in \NN$. 
+            By the `back' property of $p \in P$, 
+            there exists $q \in P$ such that $q$ extends $p$ and 
+            $\be \in \codom(q)$, thus by the induction hypothesis
+            \[
+                \MM \model{\Si_R} \psi(q^{-1}(\be))(a) 
+                \implies \NN \model{\Si_R} \psi(\be)(q(a))
+                \implies \NN \model{\Si_R} \psi(\be)(p(a))
+            \]
+            thus $\NN \model{\Si_R} \forall x, \phi(a)$.
+            The other direction is similar, 
+            using the `forth' condition.
+    \end{itemize}
+    Hence $\MM \model{\Si_R} \phi(a)\iff \NN \model{\Si_R} \phi(b)$ and
+    \[
+        \subintp{\nothing,n}{\MM}{\tp}(a) = 
+        \subintp{\nothing,n}{\NN}{\tp}(b)
+    \]
+    \end{forward}
+
+    \begin{backward}
+        If
+        \[
+            \subintp{\nothing,n}{\MM}{\tp}(a) = 
+            \subintp{\nothing,n}{\NN}{\tp}(b)
+        \]
+        Then define $p : a \to b$ mapping $a_i \mapsto b_i$.
+        This is a bijection and for any $\phi \in \form{\Si}$,
+        \[\MM \model{\Si} \phi(a,\al) \iff 
+        \phi \in \subintp{\nothing,n}{\MM}{\tp}(a) = 
+        \subintp{\nothing,n}{\NN}{\tp}(b)
+        \iff \NN \model{\Si} \phi(b,\be)\]
+        In particular relation symbols are preserved under $p$,
+        hence $p$ is a local isomorphism.
+    \end{backward}
+\end{proof}%%??
+
+\begin{prop}[Elementary equivalence]
+    Let $\MM$ and $\NN$ be $\Si_R$-structures.
+    Then if $\MM$ and $\NN$ are partially isomorphic via some $P$
+    then they are elementarily equivalent.
+\end{prop}
+\begin{proof}
+    Let $p \in P$.
+    Since \linkto{p_equiv_elements_are_same_type}{$p$-equivalent
+        elements have the same type},
+    we can take $a \in \MM^0,b \in \NN^0$ and
+    note that $a$ and $b$ are trivially $p$-equivalent 
+    (they are both $\nothing$).
+    Hence 
+    \[\Theory_\MM(\nothing) = \subintp{\nothing,n}{\MM}{\tp}(a) = 
+    \subintp{\nothing,n}{\NN}{\tp}(b) = \Theory_\NN(\nothing)\]
+    Thus $\MM \equiv_{\Si_R} \NN$.
+\end{proof}
+
+\begin{dfn}[$\infty$-equivalence]
+    Let $\MM$ and $\NN$ be $\Si$-structures.
+    We say $\MM$ and $\NN$ are $\infty$-equivalent if 
+    for any $a \in \MM^n$ and $b \in \NN^n$ such that 
+    \[\subintp{\nothing,n}{\MM}{\tp}(a) = 
+    \subintp{\nothing,n}{\NN}{\tp}(b)\]
+    we have 
+    \begin{itemize}
+        \item Forth: 
+        For any $\al \in \MM$ there exists a $\be \in \NN$ such that 
+        \[\subintp{\nothing,n+1}{\MM}{\tp}(a,\al) = 
+        \subintp{\nothing,n+1}{\NN}{\tp}(b,\be)\]
+        \item Back:
+        For any $\be \in \NN$ there exists a $\al \in \MM$ such that 
+        \[\subintp{\nothing,n+1}{\MM}{\tp}(a,\al) = 
+        \subintp{\nothing,n+1}{\NN}{\tp}(b,\be)\]
+    \end{itemize}
+\end{dfn}
+
+\begin{prop}
+    Let $\MM$ and $\NN$ be $\Si$-structures.
+    If $\MM$ and $\NN$ are $\om$-saturated %?and elementarily equivalent
+    then they are $\infty$-equivalent.
+\end{prop}
+\begin{proof}
+    We only prove `forth'.
+    Let $a \in \MM^n$ and $b \in \NN^n$ such that 
+    \[\subintp{\nothing,n}{\MM}{\tp}(a) = 
+    \subintp{\nothing,n}{\NN}{\tp}(b)\]
+    Let $\al \in \MM$ and consider 
+    \[p(a,v) := \subintp{a,1}{\MM}{\tp}(\al) \in S_1(\Theory_\MM(a))\]
+    Any formula in $p(a,v)$ can be written as a 
+    $\Si$-formula $\phi(w,v)$ with variables $w$
+    replaced with elements of $a$ 
+    ($v$ represents a single variable to be replaced by $\al$). 
+    Let 
+    \[p(w,v) := \set{\phi(w,v) \st \phi(a,v) \in p(a,v)}\]
+    We claim that 
+    \[p(b,v) := \set{\phi(b,v) \st \phi \in p(w,v)} \in S_1(\Theory_\NN(b))\]
+    To this end, we note that it is indeed a subset of 
+    and it is a maximal subset of it since for any $\phi(b) \in F(\Si(b),1)$
+    \[\phi(a) \in p(a,v) \text{ or } \NOT \phi(a) \in p(a) \implies 
+    \phi(b) \in p(b,v) \text{ or } \NOT \phi(b) \in p(b)\]
+    We just need to show that it is consistent with $\Theory_\NN(b)$.
+
+    By \linkto{compactness_for_types}{compactness for types} 
+    and noting that $\NN$ is a $\Si(b)$-model of $\Theory_\NN(b)$,
+    it suffices to show
+    that for any finite subset $\De(w,v) \subs p(w,v)$ 
+    there exists $\be \in \NN^m$ such that 
+    $\NN \model{\Si(b)} \De(b,\be)$.
+    \begin{align*}
+        &\MM \model{\Si(a)} \bigand{\phi \in \De}{} \phi(a,\al)\\
+        \implies &\MM \model{\Si} \exists v, \bigand{\phi \in \De}{} \phi(a,v)\\
+        \implies &\brkt{\exists v, \bigand{\phi \in \De}{} \phi(a,v)} \in 
+        \subintp{\nothing,n}{\MM}{\tp}(a) = 
+        \subintp{\nothing,n}{\NN}{\tp}(b)\\
+        \implies &\NN \modelsi \exists v, \bigand{\phi \in \De}{} \phi(b,v)\\
+        \implies &\exists \be \in \NN, 
+        \NN \modelsi \bigand{\phi \in \De}{} \phi(b,\be)\\
+        \implies &\exists \be \in \NN, \NN \model{\Si(b)} \De(b,\be)
+    \end{align*}
+    Thus $p(b,v)\in S_1(\Theory_\NN(b))$ and since $\NN$ is $\om$-saturated
+    $p(b,v)$ is realised in $\NN$ by some $\be$.
+    Thus by maximality, $p(b,v) = \subintp{b,1}{\NN}{\tp}(\be)$.
+
+    Finally, for $\phi(v,w) \in F(\Si,n+1)$
+    \begin{align*}
+        &\phi(v,w) \in \subintp{\nothing,n+1}{\MM}{\tp}(a,\al)
+        \iff &\MM \model{\Si} \phi(a,\al) \iff \MM \model{\Si(a)} \phi(a,\al)\\
+        \iff &\phi(a,v) \in \subintp{a,1}{\MM}{\tp}(\al) = p(a,v)\\
+        \iff &\phi(b,v) \in p(b,v) = \subintp{b,1}{\MM}{\tp}(\be)\\
+        \iff &\NN \model{\Si(b)} \phi(b,\be) \iff \NN \modelsi \phi(b,\be)\\
+        \iff &\phi(w,v) \in \subintp{\nothing,n+1}{\NN}{\tp}(b,\be)
+    \end{align*}
+\end{proof}
+
+%\begin{dfn}[Quantifier rank]
+%    The quantifier rank of a $\Si$-formula $\phi$,
+%    $\qr(\phi)$ is defined inductively:
+%    \begin{itemize}
+%        \item If $\phi$ is atomic then it has rank $0$.
+%        \item If $\phi$ is $\psi \OR \chi$ then it has rank 
+%            $\max(\qr(\psi),\qr(\chi))$
+%        \item If $\phi$ is $\forall v, \psi$ then it has rank $\qr(\psi) + 1$
+%            if $v$ is a free-variable of $\psi$.
+%            Otherwise it has rank $\qr(\psi)$.
+%    \end{itemize}
+%\end{dfn}
+
+%\begin{nttn}
+%    We write
+%    \[\Si_R := \set{\nothing,\nothing,n_\star,R,m_\star}\]
+%    as a signature with only relation symbols.
+%\end{nttn}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

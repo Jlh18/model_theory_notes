@@ -1,0 +1,601 @@
+\section{Transcendence degree and characteristic
+determine \texorpdfstring{$\ACF_p$}{TEXT} up to isomorphism}
+%?Ugly appearance of section title in page header
+This part of the appendix mainly follows Hungerford's book \cite{hungerford}.
+\begin{dfn}
+    Suppose $\io: K \to L$ is a field embedding
+    and $S \subs L$.
+    Then $S$ is algebraically independent over $K$
+    when for any $n \in \N$, any $f \in K[x_1,\dots, x_n]$
+    and any distinct elements $s_i \in S$, 
+    \[f(s) = 0 \implies f = 0\]
+\end{dfn}
+
+\begin{rmk}
+    \begin{enumerate}
+        \item If $S$ is algebraically independent then any subset is 
+        algebraically independent over $K$.
+        \item $\nothing$ is algebraically over $K$.
+        \item For the embedding $K \to K$, any non-empty subset is
+            algebraically dependent.
+        \item The concept of algbebraic independence extends that of 
+            linear independence.
+    \end{enumerate}
+\end{rmk}
+
+\begin{dfn}
+    Suppose $K \to L$ is a field embedding.
+    Then $B \subs L$ is a transcendence basis of the extension
+    if $B$ is algebraically independent over $K$ and is maximal
+    with respect to $\subs$.
+\end{dfn}
+\begin{rmk}
+    This is the analogue of a vector space basis.
+\end{rmk}
+
+\begin{prop}[Existence of transcendence basis]
+    \link{existence_of_trans_basis}
+    Suppose $K \to L$ is a field embedding.
+    There there exists a transcendence basis.
+\end{prop}
+\begin{proof}
+    Application of Zorn's lemma on the set of algebraically independent 
+    subsets of $L$ (non-empty due to $\nothing$ being algebraically independent)
+    with respect to inclusion.
+\end{proof}
+
+\begin{prop}[Algebraic elements over $K(S)$]
+    \link{algebraic_elements_over_KS}
+    Let $K \to L$ be a field embedding and let $S \subs L$ be algebraically
+    independent over $K$.
+    Let $u \in L \setminus S$.
+    $S \cup \set{u}$ is algebraically dependent if and only if $u$
+    is algebraic over $K(S)$.
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        Suppose $S \cup \set{u}$ is algebraically dependent.
+        Then there exists non-zero $f \in K[x_0, \dots, x_n]$ 
+        and distinct $s_i \in S$
+        such that $f(u, s_1, \dots, s_n) = 0$.
+        Write \[f = \sum_{i = 0}^m h_i (x_0)^i\]
+        for $h_i \in K[x_1, \dots, x_n]$.
+        Then let 
+        \[g(x_n):= \sum_{i = 0}^m h_i(s_1, \dots, s_n) (x_0)^i \in K(S)[x_0]\]
+        which has the root $u$.
+        Assuming for a contradiction that $u$ is not algebraic over $K(S)$.
+        Since $g(u) = 0$ we must have $g(x_0) = 0$ and so for each $i$,
+        $h_i(s_1, \dots, s_n) = 0$.
+        By algebraic independence of $S$ over $K$ we have that each $h_i = 0$.
+        Thus $f = 0$, a contradiction.
+    \end{forward}
+
+    \begin{backward}
+        Suppose $u$ is algebraic over $K(S)$. 
+        Then there exists non-zero 
+        $f(x) \in K(S)[x]$ such that $f(u) = 0$.
+        We can write 
+        $f(x) = \sum_{i = 1}^n \frac{h_i}{g_i}(s_1, \dots , s_m) x^i$
+        for $s_i \in K(S)$.
+        Then we can factor all the $g_i$ out, 
+        leaving
+        \[f(x) = \frac{1}{\prod_{j = 1}^n g_j}
+        \sum_{i = 1}^n f_i(s_1, \dots , s_m)
+        \prod_{j \ne i} g_j (s_1, \dots , s_m) x^i\]
+        Let \[h = \sum_{i = 1}^n f_i(x_1, \dots , x_m)
+        \prod_{j \ne i} g_j (x_1, \dots , x_m) {x_{m+1}}^i \in 
+        K[x_1, \dots, x_{m+1}]\]
+        We see that $h(s_1, \dots, s_m, u) = 0$ as $g(s_1, \dots, s_m) \ne 0$
+        ($S$ is algebraically independent).
+        Suppose for a contradiction that $S \cup \set{u}$
+        is algebraically independent, then $h = 0$ and so 
+        for each $i$, 
+        \[f_i(x_1, \dots , x_m) \prod_{j \ne i} g_j (x_1, \dots , x_m) = 0\]
+        but $g_i$ were on the bottom of the fractions so
+        they are non-zero,
+        thus $f_i(x_1, \dots , x_m)=0$ as the polynomial ring is an 
+        integral domain.
+        This implies that $f = 0$, a contradiction.
+    \end{backward}
+\end{proof}
+
+\begin{lem}[Composition of algebraic extensions]
+    We use extensively the fact that the composition of 
+    algebraic extensions is algebraic.
+\end{lem}
+
+\begin{prop}[(Key) Identifying transcendence bases]
+    \link{transcendence_bases_algebraic_extensions}
+    Let $K \to L$ be a field embedding.
+    Suppose $S \subs L$ is algebraically independent over $K$.
+    Then $L$ is algebraic over $K(S)$ if and only if 
+    $S$ is a transcendence basis.
+\end{prop}
+\begin{proof}
+    Every $a \in L$ is algebraic over $K(S)$
+    \linkto{algebraic_elements_over_KS}{if and only if }
+    Every $a \in L$ makes $S \cup \set{a}$ algebraically dependent
+    if and only if $S$ is maximally algebraically independent
+    if and only if $S$ is a transcendence basis.
+\end{proof}
+
+\begin{cor}[Subsets containing transcendence bases]
+    Let $K \to L$ be a field embedding and let $X \subs L$.
+    If $K(X) \to L$ is algebraic then $X$ contains a transcendence basis
+    of the extension $K \to L$.
+\end{cor}
+\begin{proof}
+    Using Zorn we have a maximally algebraically independent subset of $X$;
+    call this $S$. 
+    This is a transcendence basis of the extension $K \to K(X)$.
+    Thus by \linkto{transcendence_bases_algebraic_extensions}{
+        the previous proposition} 
+    $K(S) \to K(X)$ is algebraic.
+    The composition of algebraic extensions is algebraic,
+    thus $K(S) \to L$ is algebraic.
+    \linkto{transcendence_bases_algebraic_extensions}{Hence} 
+    $S$ is a transcendence basis.
+\end{proof}
+
+\begin{prop}[Uniqueness of finite transcendence degree]
+    \link{fin_trans_deg}
+    Let $K \to L$ be a field embedding and let $S$ be a 
+    finite transcendence basis of the extension.
+    Then any other transcendence basis has the same cardinality as $S$.
+\end{prop}
+\begin{proof}
+    If $S$ is empty then it is the unique transcendence basis.
+
+    Otherwise, 
+    let $S = \set{s_1 , \dots, s_n}$ and $T$ be another transcendence basis.
+    We show that there exists a $t \in T$ such that 
+    $\set{t, s_2, \dots, s_n}$ is a transcendence basis.
+
+    To find such a $t$, 
+    assume for a contradiction that for any $t \in T$,
+    $\set{t, s_2, \dots, s_n}$ is algebraically dependent.
+    \linkto{algebraic_elements_over_KS}{Then} each
+    $t \in T$ is algebraic over $\set{s_2, \dots, s_n}$ and
+    so $K(\set{s_2, \dots, s_n})(T)$ is algebraic over 
+    $K(\set{s_2, \dots, s_n})$.
+    Furthermore $L$ is algebraic over $K(\set{s_2, \dots, s_n})(T)$
+    hence $L$ is algebraic over $K({s_2, \dots, s_n})$.
+    Hence $s_1$ is algebraic over $K(s_2, \dots, s_n)$,
+    a contradiction.
+
+    Thus there exists such a $t \in T$.
+    It suffices to show that $L$ is algebraic over 
+    $K\brkt{t, s_2, \dots, s_n}$. 
+    This is true if and only if $K(S)$ is algebraic over 
+    $K\brkt{t, s_2, \dots, s_n}$, 
+    if and only if $s_1$ is algebraic over
+    $K\brkt{t, s_2, \dots, s_n}$,
+    if and only if $\set{t, s_1, s_2, \dots, s_n}$
+    is algebraically dependent over $K$,
+    which it is since it is contains $S$ as a proper subset.
+    Thus we have that $\set{t, s_1, s_2, \dots, s_n}$ is a transcendence basis
+    of the same cardinality as $S$.
+
+    By induction, replacing $s_i$ at each step, 
+    we obtain a subset of $T$ that is a transcendence basis of the same
+    cardinality as $S$.
+    By maximality of transcendence bases this subset is $T$,
+    thus $\abs{S} = \abs{T}$.
+\end{proof}
+
+\begin{nttn}[Minimal polynomial]
+    \link{min_poly}
+    If $K \to L$ is a field extension, 
+    let the minimal polynomial of $a \in L$ over $K$ be denoted as
+    $\min(a,K)$
+\end{nttn}
+
+\begin{lem}[Infinite transcendence bases inject into each other]
+    \link{inf_trans_deg_inj}
+    Let field embedding $K \to L$ have infinite transcendence bases $S$
+    and $T$.
+    Then $\abs{T} \leq \abs{S}$.
+\end{lem}
+\begin{proof}
+    $S$ is infinite and hence non-empty;
+    let $s \in S$ and consider $\min(s, K(T)) \in K(T)[x]$.
+    Because polynomials are finite, 
+    there exists $T_s$, a finite subset of $T$ such that 
+    $\min(s, K(T)) \in K(T_s)[x]$.
+    Hence $s$ is algebraic over $K(T_s)$.
+
+    We claim that $\bigcup_{s \in S} T_s$ is a transcendence basis of $K \to L$.
+    Indeed it is a subset of $T$ hence it is algebraically independent;
+    by construction $K(S)$ is algebraic over 
+    $K(\bigcup_{s \in S} T_s)$ and $L$ is algebraic over $K$ and so 
+    $L$ is algebraic over $K(\bigcup_{s \in S} T_s)$.
+    \linkto{transcendence_bases_algebraic_extensions}{Thus} 
+    $\bigcup_{s \in S} T_s$ is a transcendence basis of $K \to L$.
+    By maximality of transcendence bases $T = \bigcup_{s \in S} T_s$.
+
+    We inject $T$ into $S$ 
+    by writing it as a disjoint union of subsets of $T_s$.
+    By the well-ordering principle (choice) we well-order $S$
+    and define
+    \[X_s := T_s \setminus \bigcup_{i < s} T_i\]
+    Since $X_s \subs T_s$ we have 
+    $\bigcup_{s \in S} X_s \subs \bigcup_{s \in S} T_s$.
+    Conversely, if there exist $s \in S$ and $x \in T_s$ then
+    the set of $i \in S$ such that $x \in T_i$ is non-empty and thus has a 
+    minimum element $m$ (by well-ordering).
+    Thus $x \in X_m$ and so 
+    $\bigcup_{s \in S} X_s = \bigcup_{s \in S} T_s = T$.
+
+    Define a map from $\bigcup_{s \in S} X_s \to S \times \N$ by the following:
+    let $s \in S$. 
+    Then since $X_s \subs T_s$ and $T_s$ is finite
+    we can write $X_s = \set{x_0, \dots, x_{n_s}}$.
+    we send $x_i$ to the element $(s,i) \in S \times \N$.
+    This is well-defined because the $X_i$ are disjoint
+    and is clearly injective.
+    Since $S$ is infinite,
+    \[\abs{T} = \abs{\bigcup_{s \in S} X_s} \leq \abs{S \times \N} = \abs{S}\]
+\end{proof}
+
+\begin{prop}[Uniqueness of infinite transcendence degree]
+    \link{inf_trans_deg}
+    Let field embedding $K \to L$ have a transcendence basis.
+    Then any other transcendence basis has the same cardinality.
+\end{prop}
+\begin{proof}
+    Let $S$ and $T$ be two transcendence bases.
+    If one of them were finite then by 
+    \linkto{fin_trans_deg}{uniqueness of finite transcendence degree}
+    $S$ and $T$ have the same cardinality.
+    Otherwise both are infinite and
+    by the \linkto{inf_trans_deg_inj}{previous lemma} 
+    $\abs{T} \leq \abs{S}$
+    and $\abs{S} \leq \abs{T}$.
+    By Schröder–Bernstein $\abs{S} = \abs{T}$.
+\end{proof}
+
+\begin{dfn}[Transcendence degree]
+    \link{transcendence_degree_dfn}
+    If $\io : K \to L$ is a field embedding then the transcendence degree
+    is defined as the cardinality of a transcendence basis.
+    It is well-defined as we showed that 
+    \linkto{existence_of_trans_basis}{a basis exists}
+    and any two bases have the 
+    \linkto{inf_trans_deg}{same cardinality}.
+    We use $\tdeg(\io)$ to denote the degree.
+\end{dfn}
+
+\begin{nttn}
+    $K[x_1,\dots,x_n]$ is the polynomial ring. 
+    $K(x_1,\dots,x_n)$ is the field of fractions of the polynomial ring.
+\end{nttn}
+
+\begin{lem}[Isomorphism with field of polynomial fractions]
+    \link{iso_with_field_of_poly_frac}
+    Suppose $\io: K \to L$ is a field embedding and $S \subs L$ is a finite
+    set algebraically independent over $K$.
+    Then there exists a (non-canonical) field isomorphism 
+    \[K(S) \iso K(x_s)_{s \in S}\]
+\end{lem}
+\begin{proof}
+    From Galois theory we have a (non-canonical) surjective ring morphism 
+    $K[x_s]_{s\in S} \to K[S]$ given by $x_s \mapsto s$.
+    It is injective due to $S$ being algebraically independence.
+    By the \linkto{uni_prop_field_of_fractions}{
+        universal property of field of fractions}
+    there is a unique isomorphism $K(S) \iso K(x_s)_{s \in S}$
+    that commutes with the other isomorphism.
+    \begin{cd}
+        K[S] \ar[r, "\subs"] \ar[d, "\iso"] & K(S) \ar[d, dashed]\\
+        K[x_s]_{s \in S} \ar[r, "\subs"] &K(x_s)_{s \in S}
+    \end{cd}
+\end{proof}
+
+\begin{prop}[Embedding algebraically independent sets]
+    \link{embed_alg_ind_sets}
+    Suppose we have the field embeddings
+    \begin{cd}
+        K_0 \ar[r] \ar[d, "\si"] & F_0\\
+        K_1 \ar[r]  & F_1
+    \end{cd} 
+    and let $S \subs F_0$ be an algebraically independent over $K_0$.
+    Suppose we have an injection $\phi: S \to F_1$ such that the image
+    is algebraically independent over $K_1$.
+    Then there exists a unique field embedding 
+    $\bar{\si} : K_0(S) \to F_1$ such that $\res{\bar{\si}}{S} = \phi$
+    and the following commutes  
+    \begin{cd}
+        K_0 \ar[r] \ar[d, "\si"] & K_0(S) \ar[d, "\bar{\si}"]\\
+        K_1 \ar[r]  & F_1
+    \end{cd} 
+    Furthermore, if $\si$ is an isomorphism then $\bar{\si}$ is an isomorphism
+    $K_0(S) \to K_1(\phi(S))$.
+\end{prop}
+\begin{proof}
+    We define $\bar{\si}: K_0(S) \to F_1$ by 
+    \[
+        \frac{f(s_1, \dots, s_n)}{g(s_1, \dots, s_n)} \mapsto 
+        \frac{\si(f) (\phi s_1, \dots, \phi s_n)}{
+            \si(g) (\phi s_1, \dots, \phi s_n)}
+    \]
+    where $\si$ takes a polynomial over $K_0$ 
+    as an argument (the induced map on the polynomial rings).
+    To check that $\bar{\si}$ is well-defined we just need to check 
+    uniqueness of the image.
+    Suppose $\frac{f}{g}(s_1, \dots, s_n) \in K_0(S)$.
+    Due to the 
+    \linkto{uni_prop_field_of_fractions}{
+        universal property of field of fractions},
+    there is a unique field embedding 
+    $\hat{\si} : K_0(x_i)_{i \leq n} \to K_1(x_i)_{i \leq n}$
+    that commutes with the injective polynomial ring morphism
+    $\si : K_0[x_i]_{i \leq n} \to K_1[x_i]_{i \leq n}$ 
+    (which was induced by $\si$).
+    By \linkto{iso_with_field_of_poly_frac}{
+        the previous lemma}
+    we have an isomorphisms $K_0(s_i)_{i \leq n} \iso K_0(x_i)_{i \leq n}$
+    and $K_1(\phi (s_i))_{i \leq n} \iso K_0(x_i)_{i \leq n}$
+    induced by the (not unique but suitably chosen) isomorphisms 
+    $K_0[s_i]_{i \leq n} \iso K_0[x_i]_{i \leq n}$ and
+    $K_1[\phi(s_i)]_{i \leq n} \iso K_1[x_i]_{i \leq n}$.
+    Hence we have the diagram:
+    \begin{cd}
+        &K_0[s_i]_i \ar[r] \ar[d,"\iso"]       &K_0(s_i)_i \ar[d, "\iso"]  \\
+    K_0 \ar[ru] \ar[r] \ar[d, "\si"]   
+        &K_0[x_i]_i \ar[r] \ar[d, "\si"] &K_0(x_i)_i \ar[d, dashed, "\hat{\si}"] \\
+    K_1 \ar[r] \ar[rd]    
+        &K_1[x_i]_i  \ar[d,"\iso"] \ar[r]        &K_1(x_i)_i \ar[d,"\iso"]  \\
+            &K_1[\phi(s_i)]_i \ar[r]     &K_1(\phi(s_i))_i   
+    \end{cd}
+    The composition of the three maps on the right hand side is $\bar{\si}$
+    restricted to $K_0(s_i)_{i \leq n}$.
+    Note that the composition is a well-defined injective ring morphism 
+    that commutes with everything else. 
+    Thus $\frac{f}{g}(s)$ is sent to a unique element of $F_1$.
+    If $q \in K_0(S)$ maps to the same image under $\bar{\si}$
+    then it lies in the image of the composition so it is $\frac{f}{g}(s)$.
+    The composition commutes with everything and so for anything from $K_0$,
+    going to $F_1$ via $\si$ is the same as going via $\hat{\si}$.
+    
+    Thus it is well-defined, injective and commutes.
+    It is clearly a field embedding.
+    It is unique because the map from $K_0[s_i] \to K_1[\phi(s_i)]$ was unique
+    (though the intermediate isomorphisms were not unique).
+    By definition, $\res{\bar{\si}}{S} = \phi$.
+
+    The above construction shows that if $\si$ is an isomorphism
+    then $\hat{\si}$ is an isomorphism.
+    Hence $\bar{\si}$ restricted to the finite subset is an isomorphism.
+    Since this is for any subset, $\bar{\si}$ is an isomorphism
+    $K_0(S) \to K_1(\phi(S))$.
+\end{proof}
+
+\begin{prop}[Algebraically closed extensions of same transcendence degree
+    are isomorphic]
+    Suppose we have fields $K_0 \iso K_1$ and field extensions $K_0 \to L_0$
+    and $K_1 \to L_1$ of equal transcendence degree such that 
+    $L_0, L_1$ are algebraically closed,
+    then $L_0$ and $L_1$ are (non-canonically) isomorphic.
+\end{prop}
+\begin{proof}
+    Let $\si$ be the isomorphism $K_0 \to K_1$
+    Let $S_0, S_1$ be transcendence bases of $K_0 \to L_0$ and $K_1 \to L_1$.
+    They have the same cardinality thus we can biject $S_0, S_1$
+    and \linkto{embed_alg_ind_sets}{
+      produce a (non-canonical)
+      isomorphism $\bar{\si} : K_0(S_0) \to K_1(S_1)$.}
+    The extensions $K_0(S_0) \to L_0$ and $K_1(S_1) \to L_1$ are 
+    \linkto{transcendence_bases_algebraic_extensions}{algebraic}
+    and $L_0,L_1$ are algebraically closed.
+    Hence they are algebraic closures of isomorphic fields,
+    \linkto{alg_closures_of_iso_are_iso}{
+        which implies they they are (non-canonically) isomorphic}.
+        \begin{cd}
+        K_0 \ar[r] \ar[d, "\si"{swap}, "\sim"]  
+        & K_0(S_0) \ar[r] \ar[d, "\bar{\si}"{swap}, "\sim"]
+        & L_0 \ar[d, dashed]\\
+        K_1 \ar[r] \ar[r]  
+        & K_1(S_1) \ar[r]                    
+        & L_1
+    \end{cd}
+\end{proof}
+
+\begin{cor}[Transcendence degree and characteristic
+    determine algebraically closed fields of characteristic $p$ 
+    up to isomorphism]
+    \link{appendix_trans_deg_and_char_determine_ACF_p}
+    If $K_0,K_1$ are fields of the same characteristic and have the same
+    transcendence degree over their minimal subfield ($\zmo{}$ or $\Q$).
+    Then they are (non-canonically) isomorphic.
+\end{cor}
+\begin{proof}
+    $K_0$ and $K_1$ have the same characteristic $p$ so they are
+    extensions of isomorphic subfields (their minimal subfields).
+    Thye are algebraically closed.
+    They have the same transcendence degree thus by the previous proposition
+    they are (non-canonically) isomorphic.
+\end{proof}
+
+%?Things that are needed for dimension:
+
+\begin{prop}[Tower law of transcendence degree]
+    Suppose $K \map{\io_L}{} L \map{\io_M}{} M$ are field embeddings. 
+    Then 
+    \[\tdeg(\io_L) + \tdeg(\io_M) = \tdeg(\io_M \circ \io_L)\]
+\end{prop}
+\begin{proof}
+    Let $B_L$ and $B_M$ be transcendence bases for the extensions $\io_L$,
+    $\io_M$ respectively.
+    We show that $B_L \cup B_M$ is a transcendence basis for the composition.
+
+    Since $B_L$ is a basis, 
+    $K(B_L) \to L$ is algebraic and hence we can show that 
+    $K(B_L \cup B_M) \to L(B_M)$ is algebraic.
+    $L(B_M) \to M$ is algebraic as $B_M$ is a basis,
+    thus the composition $K(B_L \cup B_M) \to M$ is algebraic.
+
+    To show that it is algebraically independent,
+    we first note that $B_L,B_M$ are disjoint,
+    otherwise there exists $b$ in the intersection, 
+    which is both in $B_M$ and in $L$ causing
+    $B_M$ to be algebraically dependent over $L$.
+    Let $f \in K[x_1, \dots, x_n]$ 
+    and let $l_1,\dots,l_r,m_{r+1} \in B_L$
+    and $m_{r+1}, \dots, m_n \in B_M$ be distinct elements such that
+    \[f(l_1,\dots,l_r,m_{r+1}, \dots, m_n) = 0\]
+    We can find some finite set $I$, $h_i \in K[x_1, \dots, x_r]$ and
+    $k_i \in K[x_{r+1}, \dots, x_n]$ such that 
+    \[f(x_1,\dots,x_n) = 
+    \sum_{i \in I} h_i(x_1, \dots, x_r) k_i(x_{r+1}, \dots, x_{n})\]
+    and each $k_i$ are linearly independent.
+    \[g := \sum_{i \in I} h_i(l_1, \dots, l_r) k_i(x_{r+1}, \dots, x_{n}) \in 
+    L[x_{r+1}, \dots, x_n] \quad \AND \quad g(m_{r+1}, \dots, m_n) = 0\]
+    Since $B_M$ is algebraically independent $g = 0$.
+    Thus (by linear independence) of $k_i$ each 
+    $h_i(l_1, \dots, l_r) = 0$ and hence each 
+    $h_i(x_1, \dots, x_r) = 0$ as $B_L$ is algebraically independent.
+    Thus $f = 0$ and the union forms a transcendental basis and
+    \[\tdeg(\io_M\circ\io_L) = \abs{B_L \cup B_M} 
+    = \abs{B_L} + \abs{B_M} - \abs{B_L \cap B_M} = \tdeg(B_L) + \tdeg(B_M)\]
+\end{proof} 
+
+\begin{lem}[Isomorphic extensions have same transcendence degree]
+    \link{iso_field_ext_same_trans_deg}
+    Suppose $K \to L, K \to M$ are field extensions and 
+    $L \to M$ is a an isomorphism that preserves $K$,
+    then 
+    \[\tdeg(K \to L) = \tdeg(K \to M)\]
+\end{lem}
+\begin{proof}
+    Let $S$ be a transcendence basis for $K \to L$.
+    We claim the image of $S$ under the isomorphism $\si: L \to M$ is 
+    a transcendence basis for $K \to M$.
+
+    Algebraic independence: Let $n \in \N$ and 
+    let $p \in K[x_1,\dots,x_n]$. 
+    Let $a \in \si(S)^n$ and suppose $p(a) = 0$.
+    Then we apply $\si^{-1}$ to both sides, 
+    noting that $p$ has coefficients 
+    from $K$ and therefore commutes with $\si^{-1}$:
+    \[0 = \si^{-1}(p(a)) = p(\si^{-1}(a))\]
+    But $\si^{-1}(a)$ is an element of $S^n$
+    and by algebraic independence of $S$ we have $p = 0$.
+
+    Maximality: let $a \in M \setminus \si(S)$. 
+    We show that $a \cup \si(S)$ is algebraically dependent.
+    Consider $\si^-1(a) \in L$.
+    Since $S$ is a basis 
+    \linkto{transcendence_bases_algebraic_extensions}{$\si^{-1}(a)$
+        is algebraic over $K(S)$}.
+    This we have $p \in K(S)[x_0]$ such that 
+    $p(\si^{-1}(a)) = 0$.
+    We can identify $p$ with a polynomial $q$ in $K[x_0,\dots,x_n]$ 
+    with the remaining $n$ coefficients from $S$,
+    such that 
+    \[p(x_0) = q(x_0,s_1,\dots,s_n)\]
+    Since $\si$ preserves $K$ we have that 
+    \[0 = \si(q(\si^{-1}(a),s_1,\dots,s_n)) = q(a, \si(s_1),\dots,\si(s_n))\]
+    so $a \cup \si(S)$ is algebraically dependent.
+
+    Since $\si$ is a field embedding it is injective and so 
+    $S$ and $\si(S)$ have the same cardinality.
+\end{proof}
+
+\begin{lem}[Cardinality of polynomial rings]
+  \link{card_of_poly_rings}
+  If $A$ is a ring and $S$ is a non-empty set of variables
+  (algebraically independent over $A$)
+  then
+  \[
+    \abs{A[S]} = \abs{A} + \abs{S} + \abs{\aleph_{0}}
+  \]
+\end{lem}
+\begin{proof}
+  Since $S$ is non-empty, the inequality
+  \[
+    \abs{A} + \abs{S} + \abs{\aleph_{0}} \leq \abs{A[S]}
+  \]
+  can easily be constructed.
+  We induct (transfinitely) on $S$ to show the other inequality,
+  which suffices by Schröder–Bernstein.
+  The cases we have are when $S$ is a singleton,
+  when $S = T \sqcup {x}$ and when $S$ bijects with a limit ordinal.
+
+  If $S$ is a singleton $\set{x}$ then we can partition $A[S] = A[x]$
+  by degree:
+  \[
+    A[x] = \bigcup_{d \in \N} \set{f \in A[x] \st \deg f = d}
+  \]
+  For each $d$ the set $\set{f \in A[x] \st \deg f = d}$ bijects with $A^{d}$.
+  When $A$ is finite, $A^{d}$ is also finite and so
+  \[
+    \abs{A[x]} \leq \aleph_{0} \times \aleph_{0} = \aleph_{0} \leq \abs{A} + \abs{S} + \abs{\aleph_{0}}
+  \]
+  When $A$ is infinite we have that $\abs{A^{d}} = \abs{A}$, so
+  \[
+    \abs{A[x]} \leq \aleph_{0} \times \abs{A} \leq \abs{A} + \abs{S} + \abs{\aleph_{0}}
+  \]
+
+  If $S$ is of the form $T \sqcup {x}$ we can apply the above:
+  \[
+    \abs{A[S]} = \abs{A[T][x]} = \abs{A[T]} + \abs{\set{x}} + \aleph_{0}
+  \]
+  By the induction hypothesis on $T$ we have the above has cardinality below
+  \[
+    \abs{A} + \abs{T} + \abs{\set{x}} + \aleph_{0} = \abs{A} + \abs{S} + \aleph_{0}
+  \]
+
+  If $S$ bijects with a limit ordinal we index $S$ by this bijection,
+  which induces a well-ordering $<$ on $S$. We can then write
+  \[
+    A[S] = \bigcup_{x \in S} A[S_{< x}]
+  \]
+  Where the set $S_{<x}$ is the set of elements $s \in S$ such that $s < x$.
+  By induction, for each $x \in S$ we have
+  \[
+    \abs{A[S_{<x}]} \leq \abs{A} + \abs{S_{<x}} + \aleph_{0} \leq \abs{A} + \abs{S} + \aleph_{0}
+  \]
+  Hence
+  \[
+    \abs{A[S]} \leq \abs{S} \times \brkt{\abs{A} + \abs{S} + \aleph_{0}} \leq \abs{A} + \abs{S} + \aleph_{0}
+  \]
+\end{proof}
+
+\begin{lem}[Cardinality of algebraically closed fields]
+    \link{card_of_alg_closed_fields}
+    If $L$ is an algebraically closed field then it has cardinality
+    $\aleph_0 + \tdeg(L)$.
+\end{lem}
+\begin{proof}
+    Let $S$ be a transcendence basis and call the minimal subfield $K$.
+    Since $L$ is algebraically closed it splits the seperable polynomials
+    $x^n - 1$ for each $n$. 
+    Hence $L$ is infinite.
+    Also $S \subs L$ and so $\aleph_0 + \tdeg(L) \leq \abs{L}$.
+    For the other direction, since $L$ is algebraic over $K(S)$ we have
+    \[
+        L = 
+        \bigcup_{f \in I}\set{a \in L \st f = \linkto{min_poly}{\min(a,K(S))}}
+    \]
+    where $I \subs K(S)[x]$ is the set of irreducible monic
+    polynomials over $K(S)$.
+    Applying the following respectively:
+    polynomials have finitely many roots in a field;
+    $I \subs K(S)[x]$;
+    \linkto{card_of_poly_rings}{the cardinality of polynomial rings};
+    $K[S]\times K[S]$ surjects onto $K(S)$;
+    case on whether or not $K[S]$ is infinite;
+    \linkto{card_of_poly_rings}{the cardinality of polynomial rings} again;
+
+    \begin{align*}
+      \abs{L} &\leq \abs{I} \times \aleph_0
+      \leq \abs{K(S)[x]} \times \aleph_0\\
+      &\leq \abs{K(S)} \times \aleph_0
+      \leq \abs{K[S]}\times \abs{K[S]} \times \aleph_0\\
+      &= \abs{K[S]} \times \aleph_0 \\
+      &\leq \abs{K} + \abs{S} + \aleph_{0}
+    \end{align*}
+    Lastly $K = \Q$ or $\F_p$ so $K$ is at most countable.
+    and the whole cardinality is below $\abs{S} + \aleph_{0}$.
+    By Schröder–Bernstein we conclude $\aleph_0 + \tdeg(L) = \abs{L}$.
+\end{proof}

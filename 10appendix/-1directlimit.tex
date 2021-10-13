@@ -1,0 +1,157 @@
+\section{Direct limits}
+\begin{prop}[Direct Limit of Chains \cite{marker}]
+    \link{direct_limit_of_chains}
+    If $M: I \to \Mod{\Si}$ is an embedding chain of 
+    $\Si$-structures then there exists
+    $\NN \in \struc{\Si}$ such that for all 
+    $\al \in I$ there is a $\Si$-embedding $\io_\al : \MM(\al) \to \NN$
+    and for any $\al \leq \be$ in $I$, the diagram
+    \begin{center}
+        \begin{tikzcd}
+            \MM(\al) \ar[r, "\lift{\al}{\be}"] \ar[rd, "\io_\al", swap] 
+            &\MM(\be) \ar[d, "\io_\be"]\\
+            &\NN
+        \end{tikzcd}
+    \end{center}
+    commutes. 
+    Furthermore if $M$ were elementary then each $\io_\al$ 
+    is elementary by the same construction.
+\end{prop}
+\begin{proof}
+    We consider the disjoint union $\bigsqcup_{\al \in I} \MM(\al)$.
+    For $a, b \in \bigsqcup_{\al \in I} \MM(\al)$ we want to define 
+    $a \sim b$.
+    There exist $\al, \be \in I$ such that $a \in \MM(\al)$ and 
+    $b \in \MM(\be)$. 
+    Since $I$ is a linear order, $\al \leq \be$ or vice versa.
+    Then we say $a \sim b$ if $\lift{\al}{\be}(a) = b$ or vice versa.
+    To show that the relation is transitive we use that fact that 
+    $M$ is a functor so any 
+    $\al \leq \be \leq \ga$ in $I$, 
+    $\lift{\be}{\ga} \circ \lift{\al}{\be} = \lift{\al}{\ga}$.
+
+    We define the carrier set as the quotient:
+    \[\carrier{\NN} := \bigsqcup_{\al \in I} \MM(\al) / \sim\]
+    Then for each $\al \in I$ there is an induced map of sets 
+    $\io_\al : {\MM(\al)} \to {\NN}$ sending 
+    $a \mapsto [a]$:
+    \begin{center}
+        \begin{tikzcd}
+            {\MM(\al)} \ar[r, "\subs"] 
+            \ar[rd, "\io_\al", swap] &\bigsqcup \ar[d]\\
+            & \bigsqcup / \sim
+        \end{tikzcd}
+    \end{center}
+    We immeditately have that it commutes with lifts:
+    \begin{center}
+        \begin{tikzcd}
+            {\MM(\al)} \ar[r, "\lift{\al}{\be}"] 
+            \ar[rd, "\io_\al", swap] 
+            &{\MM(\be)} \ar[d, "\io_\be"]\\
+            &{\NN}
+        \end{tikzcd}
+    \end{center}
+    let $\al \leq \be$ in $I$ and let $a \in {\MM(\al)}$,
+    then \[
+        \io_\be \circ \lift{\al}{\be} (a) = 
+        [\lift{\al}{\be} (a)] = [a] = \io_\al (a)
+    \]
+    since $\lift{\al}{\be} \sim a$. 
+    Furthermore, for any $\al \in I$, 
+    $\io_\al$ is injective:
+    let $a, b \in {\MM(\al)}$ such that $\io_\al (a) = \io_\al (b)$,
+    then by definition of $\io_\al$ we have $a \sim b$. 
+    Note that $\lift{\al}{\al}$ is the identity, hence 
+    \[
+        a \sim b \quad \implies \quad a = \, \lift{\al}{\al} (b) = b
+        \]
+
+    We define interpretation for $\NN$ such that it commutes with 
+    $\io_\al$ for each $\al$.
+    We note that $I$ is non-empty and take $\al \in I$.
+    \begin{itemize}
+        \item[$\vert$] For $c \in \const{\Si}$, 
+            $\modintp{\NN}{c} := \io_\al(\modintp{\MM(\al)}{c})$
+        \item[$\vert$] For $f \in \func{\Si}$ define 
+            $\modintp{\NN}{f} : {\NN}^{n_f} \to {\NN}$ 
+            such that for $a \in {\NN}^{n_f}$ there exists a 
+            $\be \in I$ (the maximum element of a finite totally ordered set) and
+            $b \in {\MM(\be)}^{n_f}$ such that $a = \io_\be (b)$.
+            Then have 
+            $\modintp{\NN}{f} : a \mapsto \io_be (\modintp{\MM(\be)}{f}(b))$.
+            To check that $\modintp{\MM}{f}$ is well defined, 
+            let $\ga \in I$ and $c \in \MM(\ga)$ 
+            be such that $a = \io_\ga (c)$.
+            WLOG $\be \leq \ga$. 
+            First note that 
+            $\io_\ga (c) = a = \io_\be (b) = \io_\ga \circ \lift{\be}{\ga} (b)$
+            since we showed that the $\io_\star$ commute with lifts.
+            Since $\io_\ga$ is injective, $c = \lift{\be}{\ga} (c)$.
+            Hence 
+            \begin{align*}
+                & \io_\be \circ \modintp{\MM(\be)}{f}(b) 
+                =& \io_\ga \circ \lift{\be}{\ga} \circ \modintp{\MM(\be)}{f}(b)
+                =& \io_\ga \circ \modintp{\MM(\ga)}{f} \circ \lift{\be}{\ga} (b)
+                =& \io_\ga \circ \modintp{\MM(\ga)}{f}(c)
+            \end{align*}
+            Hence $\modintp{\NN}{f}$ is well defined.
+        \item[$\vert$] For $r \in \rel{\Si}$, define 
+            \[
+                \modintp{\MM}{r} = \bigcup_{\be \in I} 
+                \io_\be (\modintp{\MM(\be)}{r})
+            \]
+    \end{itemize}
+    By the way we define interpretation it is clear that for any $\al$,
+    $\io_\al$ is a $\Si$-morphism.
+    We already have that it is injective.
+    To show that it is an embedding, 
+    take $a \in {\MM(\al)}^{m_r}$ such that 
+    \[
+        io_\al (a) \in \modintp{\MM}{r} = \bigcup_{\be \in I} 
+        \io_\be (\modintp{\MM(\be)}{r})
+    \]
+    There exists a $\be$ and a $b \in \modintp{\MM(\be)}{r}$ such that
+    $\io_\al (a) = \io_\be (b)$.
+    Case on $\al \leq \be$ or $\be \leq \al$:
+    If $\al \leq \be$ then 
+    \[\io_\be \lift{\al}{\be} (a) = \io_\al (a) = \io_\be(b) 
+    \quad \implies \quad \lift{\al}{\be} (a) = b\]
+    by injectivity of $\io_\be$.
+    Hence $\lift{\al}{\be} (a) \in \modintp{\MM(\be)}{r}$ 
+    so $a \in \modintp{\MM(\al)}{r}$ since 
+    $\lift{\al}{\be}$ is a $\Si$-embedding.
+    If $\be \leq \al$ then we obtain $\lift{\be}{\al} (b) = a$ in the same way.
+    Therefore $b \in \modintp{\MM(\be)}{r}$ implies 
+    $a = \lift{\be}{\al}(b) \in \modintp{\MM(\al)}{r}$
+    as $\lift{\be}{\al}$ is a $\Si$-morphism.
+
+    Lastly we show that if the chain $M$ were elementary, 
+    then for all $\al \in I$, $\io_\al$ is elementary.
+    We prove the equivalent statement:
+    for any $\phi \in \form{\Si}$ with free variables indexed by $S$, 
+    given $\al \in I$ and $a \in {\MM(\al)}^S$,
+    \[\MM(\al) \model{\Si} \phi(a) \iff \NN \model{\Si} \phi(\io_\al (a))\]
+    by induction on $\phi$.
+    By the two lemmas \linkto{emb_preserve_sat_of_quan_free}{
+        `embeddings preserve satisfaction of quantifier free formulas'} and 
+    \linkto{emb_preserve_sat_of_forall_down}{
+        `embeddings preserve satisfaction of universal formulas downwards'}
+    we only need to show that under the assumption of the inductive hypothesis,
+    \[\MM(\al) \model{\Si} \forall v, \psi(a,v) \
+    \implies \NN \model{\Si} \forall v, \psi(\io_\al (a),v)\]
+    Suppose $\MM(\al) \model{\Si} \forall v, \psi(a,v)$
+    and let $c \in {\NN}$.
+    There exist $\be \in I$ and $b \in {\MM(\be)}$ such that 
+    $\io_\be(b) = c$.
+    Case on $\al \leq \be$ or $\be \leq \al$.
+    If $\al \leq \be$ then the lift $\lift{\al}{\be}$ is elementary by assumption
+    and so 
+    \begin{align*}
+            & \MM(\be) \model{\Si} \forall v, \psi(\lift{\al}{\be}(a),v)\\
+        \implies & \MM(\be) \model{\Si} \psi(\lift{\al}{\be}(a),b)\\
+        \implies & \NN \model{\Si} \psi(\io_\be \circ \lift{\al}{\be}(a),\io_\be (b))
+                & \text{induction hypothesis}\\
+        \implies &  \NN \model{\Si} \psi(\io_\al (a),c)
+    \end{align*}
+    Thus $\io_\al$ is indeed elementary.
+\end{proof}

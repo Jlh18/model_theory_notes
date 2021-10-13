@@ -1,0 +1,270 @@
+\section{Ordinals}
+\cite{jech}
+
+\begin{dfn}[Linear ordering, well-ordering, transitive]
+    Let $X$ be a set (or class or whatever) 
+    \linkto{partial_ordering}{partially ordered}
+    by $\leq$. 
+    It is a linearly ordered if for each $x, y \in X$, 
+    $x \leq y$ or $y \leq x$.
+    It is a well-ordered if each non-empty subset $S \subs X$ 
+    has a least element,
+    i.e. there exists $s \in S$ such that for any $x \in S$, $s \leq x$.
+
+    A set $X$ is transitive if for any member of $X$ is a subset of $X$.
+    An example of transitive sets are the naturals:
+    \[0 := \nothing, 1 := \set{0}, 2:= \set{0,1}, \dots\]
+
+\end{dfn}
+
+\begin{ex}[Transitive]
+    The reason for the use of the word transitive is due 
+    to its equivalent definition: 
+    $x$ is transitive if for any $y \in x$ and any $z \in y$, $z \in x$.
+\end{ex}
+
+
+\begin{ex}[Well-orderings are linear]
+    \link{well_ord_to_lin}
+    Take two elements and consider
+    the set containing these two elements. 
+    This has a minimum.
+\end{ex}
+
+\begin{dfn}[Ordinal, succesion, limit ordinal]
+    A set in an ordinal if it is transitive and well-ordered by taking 
+    $<$ to be $\in$.
+    The class of ordinals is denoted $\ord$.
+
+    If $\al \in \ord$ then $\al + 1$ is defined to be $\al \cup \set{\al}$,
+    $\al + 1$ is then called a successor ordinal.
+    Check that the successor of an ordinal is an ordinal.
+    If $\al \in \ord$ is not a successor ordinal then 
+    it is called a limit ordinal.
+
+    We endow $\ord$ with an ordering given by 
+    $\al \leq \be$ if and only if $\al \subs \be$.
+\end{dfn}
+
+\begin{lem}[Transitivity of $<$]
+    \link{transitivity_of_less_than}
+    Suppose $\leq$ is a partial order.
+    The relation $<$ (defined by $\al < \be$ if and only if $\al \leq \be$ and 
+    $a \ne b$) is transitive.
+
+    Hence $\al \leq \be < \ga$ implies $\al < \ga$.
+\end{lem}
+\begin{proof}
+    Suppose $a < b$ and $b < c$.
+    Then $a \leq b$ and $b \leq c$ and by transitivity of $\leq$ we have $a \leq c$.
+    It remains to show that $a \ne c$.
+    Suppose $a = c$, 
+    then $a \leq b$ and $b \leq a$ and by antisymmetry $a = b$.
+    This is false since $a < b$ and so $a \ne b$ by definition.
+\end{proof}
+
+\begin{prop}[Basic facts about ordinals]
+    \link{basic_facts_ordinals}
+    Most importantly, we show that $\ord$ is well-ordered.
+    \begin{enumerate}
+        \item $0$ is a limit ordinal.
+        \item Subsets of ordinals are well-ordered by $\in$.
+        \item The intersection of a non-empty subclass of is an ordinal.
+        \item Ordinals are closed under membership: if $\al \in \ord$
+            and $\be \in \al$ then $\be \in \ord$.
+        \item Let $\al \ne \be$ be ordinals. 
+            If $\al \subs \be$ then $\al \in \be$.
+        \item $\ord$ is well-ordered by $\subs$
+        (which is by the fifth part the same thing as $=$ or $\in$).
+    \end{enumerate}
+\end{prop}
+\begin{proof}~
+    \begin{enumerate}
+        \item $0$ is trivially well-ordered and transitive.
+            If $0 = \al \cup \set{\al}$ then $\al \in 0$, 
+            which is a contradiction.
+        \item Let $\al \in \ord$ and $S \subs \al$.
+            By moving elements into $\al$ we see that $S$ 
+            inherits the linear ordering given by $\in$.
+            Any subset of $S$ is a subset of $\al$,
+            hence any subset has a minimal element.
+            Thus $S$ is well-ordered
+        \item Let $S$ be a non-empty class of ordinals, containing $\al$, say.
+            $\bigcap S$ is a subset of $\al$ thus is
+            well-ordered by the second part. 
+            It is transitive: any element in the intersection satisfies 
+            \[\forall \be \in S, x < \be\] 
+            hence for every $\be \in S$, as $\be$ is transitive, $x \subs \be$.
+            Thus $x \subs \bigcap S$.
+        \item Let $\al \in \ord$ and $\be \in \al$.
+            As $\al$ is transitive $\be \subs \al$.
+            By the second part we have that $\be$ is well-ordered by $<$.
+
+            It remains to show that $\be$ is transitive.
+            Let $\ga \in \be$ and suppose for a contradiction that 
+            $\ga \nsubseteq \be$.
+            Then there exists $\de \in \ga$ such that $\de \notin \be$.
+            By \linkto{transitivity_of_less_than}{transitivity of $<$}
+            (in this case $\in$), 
+            $\de \in \ga \in \be \in \al$ implies $\de \in \al$.
+            
+            As $\al$ is linearly-ordered we have that $\be \leq \de$ or 
+            $\de \leq \be$, equivalently three cases
+            $\be \in \de$ or $\be = \de$ or $\de \in \be$.
+            The last case is false by assumption. 
+            Then first case gives $\de \in \ga \in \be \in \de$,
+            hence $\de < \de$ by \linkto{transitivity_of_less_than}{
+                transitivity of $<$}.
+            In the second case $\de \in \ga \in \be  = \de$,
+            hence by transitivity again $\de < \de$.
+            In either case $\de \ne \de$, a contradiction.
+        \item Let $\ga$ be the minimum element of $\be \setminus \al$,
+            using well-ordering of $\be$.
+            Then we claim that $\al = \ga$, which implies $\al \in \be$.
+            Indeed if $x \in \al$ then $x \in \be$ by assumption.
+            By linearity of $\be$, 
+            $\ga \leq x$ or $x < \ga$.
+            In the first case we have by 
+            \linkto{transitivity_of_less_than}{transitivity of $<$} that 
+            $\ga < \al$, which is a contradiction as 
+            $\ga \in \be \setminus \al$.
+            Thus $x \in \ga$ and so $\al \subs \ga$.
+
+            On the other hand suppose $x \in \ga$ and $x \notin \al$.
+            Then $x \in \be \setminus \al$ and so by minimality $\ga \leq x$.
+            This is a contradiction as $\ga \leq x < \ga$ and by transitivity
+            we have $\ga < \ga$.
+
+            We can see $\al$ as the initial segment $\be$ given by $\ga$, 
+            i.e. $\set{x \in \be \st x < \ga}$.
+        \item Reflexivity, antisymmetry and transitivity are clear.
+            It \linkto{well_ord_to_lin}{suffices to show} 
+            that it is a well-ordering.
+            Let $S$ be a non-empty set of ordinals.
+            $\bigcap_{\al \in S} \al$ is an ordinal by the third part.
+            We want to show that there exists $\al \in S$ such that 
+            $\bigcap S = \al$.
+            Suppose not, then by the fifth part we have for any $\al \in S$,
+            $\bigcap S \in \al$.
+            Hence $\bigcap S \in \bigcap S$, which is a contradiction.
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}[Transfinite induction]
+    \link{transfinite_induction}
+    Let $C \subs \ord$ be defined inductively:
+    \begin{itemize}
+        \item If $\al$ is a limit ordinal and $\forall \be < \al, \be \in C$
+        then $\al \in C$. (In particular $0 \in C$.)
+        \item If $\al \in C$ then $\al + 1 \in C$.
+    \end{itemize}
+    Then $C = \ord$. 
+    We have the first constructor as the limit case because 
+    the smallest ordinal $0$ is a limit ordinal.
+
+    (`Strong') Let $D \subs \ord$ be defined with a single constructor:
+    \begin{itemize}
+        \item If $\al \in \ord$ and $\forall \be < \al, \be \in C$
+        then $\al \in C$.
+    \end{itemize}
+    Then $D = \ord$.
+\end{prop}
+\begin{proof}
+    Suppose $C \ne \ord$.
+    Then as \linkto{basic_facts_ordinals}{$\ord$ is well-ordered},
+    there exists $\be \in \ord$ that is the least ordinal such that 
+    $\be \notin C$.
+    If $\be$ is a successor $\al + 1$ then by minimality of $\be$, $\al \in C$ 
+    and applying the first property gives $\be \in C$,
+    which is a contradiction. 
+    Otherwise, $\be$ is a limit ordinal. 
+    Thus by minimality
+    $\forall \al < \be, \al \in C$.
+    Applying the second property of $C$ gives $\be \in C$.
+
+    Check that the $C \subs D$ which implies $D = \ord$.
+\end{proof}
+
+Here is an example of transfinite induction in use:
+\begin{lem}[Less than and the successor]
+    \link{less_than_and_succ_of_ord}
+    If $\al < \be$ are ordinals then $\al + 1 \in \be$ or $\al + 1 = \be$.
+\end{lem}
+\begin{proof}
+    We induct on $\be$.
+    Suppose $\be$ is a limit ordinal.
+    Then $\al + 1 \notin \be$ implies $\be \leq \al + 1$ by $\ord$ being 
+    \linkto{basic_facts_ordinals}{well-ordered}.
+    This implies $\al < \al$ which is a contradiction.
+    Hence in this case $\al + 1 \in \be$.
+
+    Suppose $\be = \ga + 1$.
+    then $\al < \ga$ or $\al = \ga$.
+    In the second case $\al + 1 = \ga + 1 = \be$ and we are done.
+    In the first case, by the induction hypothesis $\al + 1 \in \ga$ or 
+    $\al + 1 = \ga$. 
+    In either case $\al + 1 \in \be$.
+\end{proof}
+
+
+To define a function on $\ord$, it then suffices to define a function on $C$, 
+using the recursor (in Type theory) of $C$ or of $D$.
+For our purposes it means that only need to say what the function does 
+to successor and limit ordinals, 
+or only what it does to ordinals given the images of all smaller ordinals.
+
+\begin{prop}[Transfinite recursion]
+    We denote the class of all sets by $V$.
+    Let $G : V \to V$.
+    Then there exists a unique map $F : \ord \to V$ such that 
+    for each ordinal $\al$, 
+    \[F(\al) = G(\res{F}{\al})\]
+    $F$ can be thought of as a sequence indexed by $\ord$.\footnote{As 
+        we are in set theory it makes 
+        sense to consider $\res{F}{\al}$ as a set.}
+\end{prop}
+\begin{proof}
+    We show by \linkto{transfinite_induction}{transfinite induction}
+    that for each ordinal $\al$ there exists a unique $F_\al : \al \to V$
+    such that for each $\xi < \al$ 
+    \[F_\al(\xi) = G(\res{F_\al}{\xi})\]
+    \begin{itemize}
+        \item If $\al$ is a successor ordinal and there exists a unique 
+            $F_\be : \be \to V$ such that $\forall \xi < \be$,
+            \[F_\be(\xi) = G(\res{F_\be}{\xi})\]
+            Then take $F_\al : \al \to V$ such that it restricts to $F_\be$
+            on $\be$ and maps $\be \mapsto G(F_\be)$.
+            $F_\al$ is the unique map that satisfies 
+            $\forall \xi < \al,F(\xi) = G(\res{F}{\xi})$ since its restriction
+            to $\be$ is the unique. 
+        \item If $\al$ is a limit ordinal and for any $\be < \al$ there exists a
+            unique $F_\be : \be \to V$ satisfying $\forall \xi < \be$
+            \[F_\be(\xi) = G(\res{F_\be}{\xi})\]
+            Define $F_\al : \al \to V$ as the union of all the $F_\be$.
+            $F_\al$ is well-defined since all of the $F_\be$ agree upon restriction
+            by uniqueness.
+            $F_\al$ satisfies $\forall \xi < \al, F_\al(\xi) = G(\res{F}{\xi})$ by 
+            construction.
+            $F_\al$ is the unique map satisfying this: if $H$ satisfies the same
+            then for any $\be \in \al$, 
+            $\res{F_\al}{\be}$ (similarly $\res{H}{\be}$) 
+            is the unique map $f$ satisfying 
+            \[\forall \xi < \be, f(\xi) = G(\res{f}{\xi})\]
+            Thus for any $\be \in \al$, $\res{F_\al}{\be} = \res{H}{\be}$
+            \[F_\al(\be) = G(\res{F_\al}{\be}) = G(\res{H}{\be}) = H(\be)\]
+            and so $F_\al = H$.
+    \end{itemize}
+    We define $F$ to map any ordinal $\al$ to $G(F_\al)$.
+    By \linkto{transfinite_induction}{strong induction} on 
+    $\al$ we show that $F_\al = \res{F}{\al}$:
+    suppose for any $\be < \al$, $F_\be = \res{F}{\be}$,
+    then for any $\be < \al$
+    \[F_\al(\be) = G(\res{F_\al}{\be}) = G(F_\be) = F(\be) = \res{F}{\al}(\be)\]
+    and so $F_\al = \res{F}{\al}$ and for any $\al$,
+    \[F(\al) = G(F_\al) = G(\res{F}{\al})\]
+    Lastly $F$ is unique: if $H$ also satisfies the conditions then suppose
+    $F(\be) = H(\be)$ for all $\be < \al$.
+    This implies $\res{F}{\al} = \res{H}{\al}$ and
+    \[F(\al) = G(\res{F}{\al}) = G(\res{H}{\al}) = H(\al)\]
+    thus again by strong induction on $\al$ we have $F = H$.
+\end{proof}

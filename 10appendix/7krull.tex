@@ -1,0 +1,103 @@
+\section{Krull Dimension}
+
+\begin{lem}[Varieties and prime ideals]
+    \link{ideal_of_variety_prime_ideal}
+    Let $K$ be an algebraically closed field and $X \subs K^n$ 
+    a Zariski closed set.
+    Then $X$ is a variety (i.e. $X$ is irreducible) 
+    if and only if $I(X)$ is prime.
+\end{lem}
+\begin{proof}
+    \begin{forward}
+        Suppose $X$ is irreducible.
+        If $f,g \notin I(X)$ then there exist $a,b \in X$ such that 
+        $f(a) \ne 0$ and $g(b) \ne 0$.
+        Then $X \cap \V(f)$ and $X \cap \V(g)$ are proper subsets of $X$ and 
+        are Zariski closed.
+        Hence 
+        \[X \cap (\V(fg)) = X \cap (\V(f) \cup \V(g)) \subset X\]
+        This is a proper subset since $X$ is irreducible.
+        Thus there exists $c \in X$ such that $fg(a) \ne 0$
+        and so $fg \notin I(X)$.
+    \end{forward}
+
+    \begin{backward}
+        Suppose $X$ is reducible, i.e. there are $U,V \subset X$ Zariski closed 
+        proper subsets such that $U \cup V = X$.
+        \linkto{galois_correspondence_ideals_vanishings}{By 
+            the Galois correspondence between ideals and vanishings}
+        we have $I(X) \subset I(U), I(V)$.
+        Take $f \in I(U) \setminus I(X), g \in I(V) \setminus I(X)$ and note 
+        that for any $a \in X$, 
+        $a \in U$ or $a \in V$ so $f(a) = 0$ or $g(a) = 0$,
+        hence $fg(a) = 0$ and $fg \in I(X)$.
+        Hence $I(X)$ is not prime.
+    \end{backward}
+\end{proof}
+
+\begin{dfn}[Krull dimension]
+    \link{dfn_krull_dimension}
+    Let $K$ be an algebraically closed field and $V \subs K^n$ be a variety.
+    Let $S \subs \N$ be the set of naturals $m$ such that 
+    there exists a chain of closed irreducible subspaces ending with $V$ with 
+    length $m$:
+    \[
+        V_0 \subset V_1 \subset \dots \subset V_m = V
+    \]
+    By the \linkto{galois_correspondence_ideals_vanishings}{Galois
+        correspondence between ideals and vanishings}
+    this is the same as existance of a chain of prime ideals starting with the 
+    \linkto{ideal_of_variety_prime_ideal}{prime ideal} $I(V)$
+    \[  
+        I(V) = \f{p}_m \subset 
+        \dots \subset \f{p}_1 \subset \f{p}_0 \subset K[x_1,\dots,x_n]
+    \]
+    The set $S$ is bounded since $K[x_1,\dots,x_n]$ is 
+    \linkto{hilbert_basis}{Noetherian}.
+    Thus we can define the Krull dimension\footnote{
+        We could define Krull dimension simply for any topological space
+        by not requiring the last closed irreducible subspace to be equial to 
+        the whole space. 
+        However, this may not just be a natural number.
+    } of $V$ 
+    to be the maximum element of $S$.
+    We denote this as $\kdim(V)$.
+\end{dfn}
+\begin{rmk}
+    \link{krull_dim_0}
+    $V$ has Krull dimension $0$ if and only if $I(V)$ is a maximal ideal 
+    if and only if $V$ is a singleton:
+    the first equivalence is clear.
+    If $V$ is a singleton then trivially it has no irreducible subsets 
+    (as irreducible requires non-empty) hence has dimension $0$.
+
+    If $V$ has dimension $0$ firstly note that $V$ is non-empty by definition
+    of irreducible.
+    Then assume for a contradiction there are two distinct points $a, b$ in $V$.
+    The singleton $\set{a}$ is closed as it is the vanishing of the polynomials
+    $x_1 - a_1 \dots, x_n - a_n$.
+    Then $\set{a}$ is a closed and irreducible subset of $V$,
+    so the Krull dimension of $V$ is greater than or equal to $1$,
+    a contradiction.
+\end{rmk}
+
+\begin{dfn}[Function field]
+    Let $K$ be an algebraicaly closed field and $V \subs K^n$ a variety.
+    Then we write $K(V)$ to mean the 
+    \linkto{field_of_fractions}{field of fractions} of 
+    \[K[x_1,\dots,x_n] / I(V)\]
+    noting that this is well-defined since $I(V)$ is a prime ideal
+    and so the quotient is an integral domain.
+    We call $K(V)$ the function field of $V$.
+\end{dfn}
+
+\begin{prop}[Equivalent definition of Krull dimension]
+    \link{transendence_deg_is_krull}
+    Let $K$ be an algebraically closed field and $V \subs K^n$ be a variety.
+    Then the Krull dimension of $V$ is equal to the 
+    \linkto{transcendence_degree_dfn}{transcendence degree} of 
+    the function field $K(V)$ over $K$.
+\end{prop}
+\begin{proof}
+    See \cite{atiyah}. %????????
+\end{proof}

@@ -1,0 +1,704 @@
+\subsection{The Compactness Theorem}
+
+Read ahead for the statement of \linkto{compactness}{the Compactness Theorem}.
+The first two parts of the theorem are easy to prove.
+This chapter focuses on proving the final part.
+Compactness is a useful tool in classical model theory,
+allowing us to reduce a proof of consistency to a 
+proof about finite consistency,
+which is much easier to work with.
+In the finite case we can even just take conjunction of a set of 
+sentences and make it just a question about the validity of one sentence.
+The term `compactness' corresponds to the topological notion when 
+looking at the \linkto{properties_of_stone_space}{Stone space of a theory},
+though it is easier to 
+\linkto{visualisation_of_Stone}{visualise} once the notion of an 
+\linkto{dfn_types_on_theories}{$n$-type} is introduced.
+
+\begin{nttn}
+    Write the `size of a model' to be 
+    \[
+        \abs{\MM} := \abs{\bigcup_{A \in \sort{\Si}} \mmintp{A}}
+    \]
+\end{nttn}
+
+\begin{dfn}[Witness property]
+    Given a signature $\Si$ and a $\Si$-theory $T$, 
+    we say that $T$ has the witness property when
+    for any $\Si$-formula $\phi$ with 
+    exactly one typed free variable $v : A$,
+    there exists a constant symbol $c : A$ such that if
+    $\exists v : A, \phi(v) \in T$ then $\phi(c) \in T$.
+\end{dfn}
+We will try to extend our theory such that it is maximal,
+finitely consistent, and has the witness property
+in what's called a `Henkin construction'.
+The following lemma says once we have such a theory then 
+it is consistent, not just finitely consistent.
+The reason for wanting the witness property is that 
+the $\Si$-structure we build in the lemma will interpret sorts as the 
+sort sets themselves (modulo some equivalence), 
+so we need the language to have enough constant symbols and
+for $T$ to `witness' all existence statements using constant symbols.
+
+\begin{lem}[From finitely consistent to consistent]
+    \link{henkin}
+    Let $\Si$ be a signature.
+    If a $\Si$-theory $T$ is maximal, finitely consistent
+    and has the witness property then it is consistent.
+
+    Furthermore, let $0 < \ka$ be a cardinal such that 
+    $\abs{\const{\Si}} \leq \ka$
+    then we can construct a $\Si$-model $\MM$ such that the 
+    `size of $\MM$' is bounded by $\abs{\MM} \leq \ka$.
+\end{lem}
+\begin{proof}
+    \textbf{The $\Si$-structure}: 
+    For each sort $A$ in $\Si$ we quotient the set $\const{A}$
+    of constant symbols of type $A$ by the equivalence relation
+    $c \sim d$ if and only if $c = d \in T$.
+    Let $\pi_A : \const{A} \to \const{A} / \sim $.
+    This defines a $\Si$-structure $\MM$ in the following way:
+    \begin{enumerate}
+        \item Interpret each sort $A$ as $\pi_A(A)$.
+            Clearly the size of $\MM$ is bounded by $\ka$.
+        \item To interpret functions we must use the witness property.
+        Let $f : \prod A \to B$ be a function symbol and take
+        an element of the interpretation of its domain $\prod \mmintp{A}$.
+        Since each $\pi_A$ is surjective this element is of the form
+        $\mmintp{c} = (\pi_{A}(c_A))_A$ for some
+        constant symbols $c = (c_A)_A : \prod A$.
+        As $T$ is maximal either $\exists v : B, f(c) = v$ 
+        or its negation is in $T$,
+        but the latter would imply $T$ is not finitely consistent:
+        if there exists $\MM \modelsi \forall v : B, f(c) \ne v$ then 
+        the interpretation of $\MM \modelsi f(c) \ne \mmintp{f}\mmintp{c}$,
+        a contradiction.
+        Hence by the witness property there exists $b : B$ such that 
+        $f(c) = b \in T$.
+        We define $\mmintp{f}$ to map $\mmintp{c} \mapsto \mmintp{b}$.
+        
+        To show that $\mmintp{f}$ is well-defined,
+        suppose $\mmintp{c_0} = \mmintp{c_1}$ and
+        $f(c_0) = b_0, f(c_1) = b_1 \in T$.
+        We want that $b_0 = b_1 \in T$.
+        By definition of $\MM$, $c_0 = c_1 \in T$.
+        If $b_0 = b_1 \notin T$ then its negation is, 
+        giving a finitely inconsistent subset 
+        \[\set{c_0 = c_1, f(c_0) = b_0, f(c_1) = b_1, b_0 \ne b_0} \subs T\]
+        which is a contradiction.
+        \item Let $r \hookr A_1 \tdt A_n$. 
+        We define 
+        \[
+            \mmintp{r} := 
+            \set{\mmintp{t} \st \text{ variable free term } 
+            t : \mmintp{A_1} \tdt \mmintp{A_n} 
+            \text{ and }
+            r(t) \in T}
+        \]
+    \end{enumerate}
+    Now that we have a $\Si$-structure
+    we want to show that it is a $\Si$-model of $T$.
+
+    \textbf{Terms}: We first need that terms are represented 
+    by constant symbols: 
+    given term $t : B$ with no typed variables $\tv{t} = \nothing$
+    and constant symbol
+    $d : B$ then $t = d \in T$ 
+    if and only if $\MM \model{\Si} t = d$.
+    Note that since $t$ has no typed variables it is not a variable itself.
+    Hence $t = f(s)$ for some function symbol 
+    $f : \prod_i E_i \to B$ and term $s : \prod_i E_i$ with no typed variables.
+    By induction we assume the statement to be true for each $s_i : E_i$.
+
+        \begin{forward} 
+            If we can find constant symbols
+            $e = (e_i)_i : \prod_i E_i$ 
+            such that each $e_i$ satisfies
+            $s_i = e_i \in T$
+            and $f(e) = d \in T$
+            then by definition 
+            of interpretation of functions 
+            $\mmintp{f}(\mmintp{e}) = \mmintp{d}$
+            and by induction 
+            $\mmintp{s_i}
+            = \mmintp{e_i}$ so
+            \[
+                \mmintp{t} = \mmintp{(f(s))}
+                = \mmintp{f}(\mmintp{s})
+                = \mmintp{f}(\mmintp{e})
+                = \mmintp{(f(e))} 
+                = \mmintp{d}
+            \]
+            Using the witness property for each $i$ 
+            we can construct $e$ inductively.
+            Suppose we have $e_1 : E_1,\dots, e_{i-1} : E_{i-1}$ 
+            such that 
+            \[  
+                \De_i := \set{e_1 = s_1, \dots, e_{i-1} = s_{i-1},
+                \phi_1(e_1),\dots,\phi_{i-1}(e_{i-1})} \subs T
+            \]
+            where each $\phi_j$ is the formula
+            \[
+                \exists x_{j+1}, \dots, \exists x_{n}, 
+                f(e_1, \dots, e_{j-1},v,x_{j+1},\dots, x_{n}) = d
+            \]
+            with a single typed free variable $v : E_i$ and bounded variables 
+            $x_j : E_j$.
+            To complete the induction we find $e_i$ such that 
+            $e_i = s_i, \phi_i(e_i) \in T$.
+            The witness property gives a constant symbol 
+            $e_i : E_i$ such that $\exists v : E_i, \phi_i(v) \in T$ 
+            implies $\phi_i(e_i) \in T$.
+            
+            Suppose for a contradiction $\exists v : E_i, \phi_i(v) \notin T$
+            then we have a finite subset
+            $\De_i \cup {f(s) = d, \forall v : E_i, \NOT \phi_i(v)} \subs T$
+            which we claim is inconsistent.
+            Suppose $\NN$ is a model of the finite set.
+            Then 
+            \[
+                \NN \modelsi \forall v, \forall x_{i+1}, \forall x_{n}, 
+                \NOT \phi_i
+            \]
+            So taking $v = \nnintp{s_i}$ and each $x_j = \nnintp{s_j}$
+            \[
+                \NN \modelsi 
+                f(e_1, \dots, e_{j-1},s_i,s_{i+1},\dots, s_{n}) \ne d
+            \]
+            Now for each $j < i$ we also have $\NN \modelsi e_j = s_j$ and so 
+            $\NN \modelsi f(s) \ne d$, a contradiction.
+            With the induction done, we have the final $\phi_n$ giving 
+            \[f(e_1, \dots, e_{n}) = d \in T \text{ and all } e_i = s_i \in T\]
+        \end{forward}
+
+        \begin{backward} 
+            Note that each $\mmintp{s_i} = \mmintp{e_i}$ 
+            for some $e_i : E_i$ since each $\pi_{E_i}$ is surjective.
+            By the induction hypothesis for each $i$ we have 
+            $s_i = e_i \in T$.
+            Hence 
+            \[
+                \mmintp{f(e)}
+                = \mmintp{f}(\mmintp{e}) 
+                = \mmintp{f}(\mmintp{s}) 
+                = \mmintp{t} = \mmintp{d}
+            \]
+            Hence $f(e) = d \in T$ by induction.
+            To conclude $f(s) = d \in T$ we note that 
+            \[\set{f(s) \ne d, s_1 = e_1,\dots,s_n = e_n, f(e) = d}\]
+            is a finite inconsistent subset of $T$.
+        \end{backward}
+    Thus $t = d \in T \iff \mmintp{t} = \mmintp{d}$.
+
+    \textbf{Formulas}:
+    we now show $\MM \modelsi T$. 
+    It suffices to show a stronger statement
+    which will be needed for the induction:
+    for all $\Si$-sentences $\phi$
+    \[
+        \phi \in T \iff \MM \modelsi \phi
+    \]
+    We case on what $\phi$ is:
+    \begin{itemize}
+        \item Case $\phi$ is $\top$:
+        all $\Si$-structures satisfy $\top$
+        so $\MM \modelsi \top$.
+        If $\bot \in T$ then $T$ wouldn't be finitely consistent, 
+        hence $\top \in T$.
+        \item Case $\phi$ is $t = s$ (note $\phi$ is a sentence so 
+        $\tv{t} = \tv{s} = \nothing$): 
+        first note $\exists v, t = v \in T$,
+        otherwise $\forall v, t \ne v \in T$ so
+        $T$ cannot be finitely consistent 
+        (any model interprets $t$ as something).
+        We apply the witness property to 
+        obtain constant symbol $d$ such that
+        $t = d \in T$.
+        Since terms are represented by constant symbols
+        we also deduce $\mmintp{t} = \mmintp{d}$.
+
+        Note $t = s \in T$ if and only if $s = d \in T$:
+        if $t = s \in T$ then $s \ne d$ cannot be in the theory 
+        by considering finite inconsistent subset $\set{t = d, t = s, s \ne d}$.
+        Hence $s = d \in T$. The converse is similar.
+        Since terms are represented by constant symbols, 
+        \[
+            t = s \in T \quad \iff \quad
+            d = s \in T \quad \iff \quad 
+            \mmintp{d} = \mmintp{s} \quad \iff \quad 
+            \mmintp{t} = \mmintp{s}
+        \]
+
+        \item Case $\phi$ is $r(t_1,\dots,t_n)$ 
+            where $r \hookr A_1 \tdt A_n$ (again $\tv{t_i} = \nothing$):
+            \begin{forward}
+                Suppose $r(t) \in T$.
+                By induction, 
+                apply the witness property 
+                to the formulas
+                \[
+                    \phi_i := \exists x_{i + 1} : A_{i+1}, \dots, 
+                    \exists x_{n} : A_n, r(\dots, e_{i-1}, v , x_{i+1},\dots) 
+                    \AND v = t_i
+                \]
+                each time obtaining $e_i : A_i$ such that $\phi_i(e_i) \in T$.
+                The result is $r(e) \in T$ and each
+                $e_i = t_i \in T$.
+                Using the claim for terms and 
+                how we interpreted relations in $\MM$ this implies
+                $\mmintp{t} = \mmintp{e} \in \mmintp{r}$,
+                and so $\MM \modelsi r(t)$.
+            \end{forward}
+
+            \begin{backward}
+                Suppose $\MM \modelsi r(t)$.
+                Since $\pi_{A_i}$ are all surjective, 
+                there exists $e \in \prod_i A_i$ 
+                such that $\mmintp{e} = \mmintp{t} \in \mmintp{r}$.
+                Using the claim for terms again
+                we obtain $t = e \in T$ and 
+                using how $\MM$ interprets relations,
+                $r(e) \in T$ so
+                $r(t) \in T$.
+            \end{backward}
+        
+        \item Case $\phi$ is $\NOT \chi$:
+            Note that by finite consistency
+            we cannot have the subset 
+            $\set{\chi,\NOT \chi} \subs T$.
+            Hence by maximality
+            \[\NOT \chi \in T \quad \iff \quad \chi \notin T\]
+            Using the induction hypothesis for $\chi$,
+            \[
+                \chi \notin T \quad \iff \quad 
+                \MM \nodel{\Si} \chi \quad \iff \quad
+                \MM \model{\Si} \NOT \chi
+            \]
+
+        \item Case $\phi$ is $\chi_0 \OR \chi_1$: 
+            given the induction hypothesis
+            \[
+                \MM \model{\Si} \chi_0 \OR \chi_1 
+                    \quad \iff \quad \MM \model{\Si} \chi_0
+                    \text{ or } \MM \model{\Si} \chi_1 \\
+                    \quad \iff \quad \chi_0 \in T \text{ or } \chi_1 \in T
+            \]
+            Hence it suffices to show that 
+            \[
+                \chi_0 \in T \text{ or } \chi_1 \in T
+                \quad \iff \quad \chi_0 \OR \chi_1 \in T
+            \]
+            \begin{forward}
+                WLOG suppose $\chi_0$ is in $T$.
+                If $\chi_0 \OR \chi_1 \notin T$ then 
+                $\set{\chi_0, \NOT \chi_0 \AND \NOT \chi_1}$ is a finite
+                inconsistent subset of $T$, a contradiction.
+            \end{forward}
+
+            \begin{backward}
+                Suppose $\chi_0 \OR \chi_1 \in T$.
+                If neither $\chi_0$ nor $\chi_1$ is in $T$ then
+                $\set{\NOT \chi_0, \NOT \chi_1, \chi_0 \OR \chi_1}$
+                is a finite inconsistent subset of $T$.
+            \end{backward}
+
+        \item Case $\phi$ is $\forall v : A, \chi(v)$
+            \begin{forward}
+                Take any element $\mmintp{c} \in \mmintp{A}$
+                (using surjectivity of $\pi_A$ have symbol $c : A$).
+                We see that $\phi(c) \in T$ since otherwise 
+                $\set{\NOT \phi(c), \forall v : A, \chi(v)}$ is a 
+                finitely inconsistent subset of $T$.
+                Hence by induction $\MM \modelsi \phi(c)$ 
+                and we conclude $\MM \modelsi \forall v : A, \chi(v)$.
+            \end{forward}
+
+            \begin{backward}
+                We show the contrapositive.
+                If $\forall v : A, \chi(v) \notin T$, 
+                then by maximality $\exists v : A, \NOT \chi(v) \in T$.
+                Applying the witness property we obtain constant symbol 
+                $c : A$ such that $\NOT \chi(c) \in T$.
+                By induction $\MM \nodelsi \chi(c)$ and so 
+                $\MM \nodelsi \forall v:A, \chi(v)$.
+            \end{backward}
+    \end{itemize}
+    Thus $\phi \in T \iff \MM \modelsi \phi$ and we are done.
+\end{proof}
+
+\begin{nttn}
+    We write $\Si \leq \Si^*$ for two signatures if
+    $\sort{\Si} \subs \sort{\Si^*}$,
+    $\func{\Si} \subs \func{\Si^*}$ and $\rel{\Si} \subs \rel{\Si^*}$.
+\end{nttn}
+
+For the sake of formality we need the following two lemmas, 
+neither of which are particularly exciting,
+but they do allow us to move freely between signatures without worry.
+\begin{lem}[Moving models down signatures]
+    \link{move_down_mod}
+    Given two signatures
+    $\Si \leq \Si^*$ and
+    a $\Si^*$-structure $\NN$ we naturally have
+    a \linkto{move_down_mod_0}{$\Si$-structure $\MM$} such that
+    for each sort, function and relation symbol in $\Si$ has the 
+    same interpration under $\MM$ and $\NN$.
+    Then 
+    \begin{itemize}
+        \item (Preserves satisfaction) For any $\Si$-formula $\phi$ 
+            with $\tv{\phi} = \set{x_i : A_i}_i$ and 
+            $a \in \prod_i \mmintp{A_i}$
+            \[\MM \model{\Si} \phi(a) \iff \NN \model{\Si^*} \phi(a)\]
+        \item (Preserves theories) 
+            If $T$ is a $\Si$-theory and $T^*$ is a $\Si^*$-theory 
+            such that $T \subs T^*$ and $\NN$ a $\Si^*$-model of $T^*$,
+            then $\MM$ is a $\Si$-model of $T$.
+    \end{itemize}
+    From now on we will write 
+    $\NN$ to mean either of the two and let subscripts involving 
+    $\Si$ and $\Si^*$ describe which one we mean.
+\end{lem}
+\begin{proof}
+    We will need that for any $\Si$-term $t$,
+    the interpretation of terms is equal:
+    $\subintp{\Si}{\MM}{t} = \subintp{\Si^*}{\NN}{t}$.
+    Indeed:
+    \begin{itemize}
+        \item If $t$ is a variable $x : A$ then 
+        $\subintp{\Si}{\MM}{t} = \id{\subintp{\Si^*}{\MM}{A}} =
+        \id{\subintp{\Si^*}{\NN}{A}} = \subintp{\Si^*}{\NN}{t}$
+        \item If $t$ is $f(s)$ then 
+        $\subintp{\Si}{\MM}{t} = \subintp{\Si}{\MM}{f}(\subintp{\Si}{\MM}{s}) =
+        \subintp{\Si^*}{\MM}{f}(\subintp{\Si}{\MM}{s})$ which by induction is
+        $\subintp{\Si^*}{\NN}{f}(\subintp{\Si^*}{\NN}{s}) = 
+        \subintp{\Si^*}{\NN}{t}$
+    \end{itemize}
+    
+    Let $\phi$ be a $\Si$-formula with $\tv{\phi} = \set{x_i : A_i}_i$ and 
+    $a \in \prod_i \mmintp{A_i}$.
+    Case on $\phi$ to show that 
+    $\MM \model{\Si} \phi(a) \iff \NN \model{\Si^*} \phi(a)$:
+    \begin{itemize}
+        \item If $\phi$ is $\top$ then both satisfy $\phi$.
+        \item If $\phi$ is $t = s$ then since the interpretation 
+            of terms are equal
+        \[
+            \MM \model{\Si} \phi(a) \iff \subintp{\Si}{\MM}{t} = 
+            \subintp{\Si}{\MM}{s}
+            \iff \subintp{\Si^*}{\MM}{t} = \subintp{\Si^*}{\MM}{s} 
+            \iff \NN \model{\Si^*} \phi(a)
+        \]
+        \item If $\phi$ is $r(t)$ then by definition of
+        $\subintp{\Si}{\MM}{r}$ and since interpretation 
+        of terms are equal
+        \[
+            \MM \model{\Si} \phi(a) \iff \subintp{\Si}{\MM}{t}(a) 
+            \in \subintp{\Si}{\MM}{r}
+            \iff \subintp{\Si^*}{\NN}{t}(a) \in 
+            \subintp{\Si^*}{\NN}{r}
+            \iff \NN \model{\Si^*} \phi(a) 
+        \]
+        \item If $\phi$ is $\NOT \psi$ then using the induction hypothesis
+            \[
+                \MM \model{\Si} \phi(a) \iff \MM \nodel{\Si} \psi(a)
+                \iff \NN \nodel{\Si^*} \psi(a)
+                \iff \NN \model{\Si^*} \phi(a) 
+            \]
+        \item If $\phi$ is $\psi \OR \chi$ then using the induction hypothesis
+            \begin{align*}
+                \MM \model{\Si} \phi(a) \iff \MM \model{\Si} \psi(a) 
+                \text{ or } \MM \model{\Si} \chi(a)
+                \iff \NN \model{\Si^*} \psi(a) \text{ or } 
+                \NN \model{\Si^*} \chi(a)
+                \iff \NN \model{\Si^*} \phi(a) 
+            \end{align*}
+        \item If $\phi$ is $\forall v : B, \psi$ then by induction
+        \begin{align*}
+            \MM \model{\Si} \phi(a) &\iff \forall b \in \mmintp{B}, 
+            \MM \model{\Si} \psi(a,b)\\
+                &\iff \forall b \in \mmintp{B}, \NN \model{\Si^*} \psi(a,b)\\
+                &\iff \forall b \in \nnintp{B}, \NN \model{\Si^*} \psi(a,b)\\
+                & \iff \NN \model{\Si^*} \phi(a) 
+        \end{align*}
+    \end{itemize}
+    Hence $\MM \model{\Si} \phi(a) \iff \NN \model{\Si^*} \phi(a)$.
+    It follows that if $T \subs T^*$ are respectively $\Si$ and $\Si^*$-theories 
+    and $\NN \model{\Si^*} T^*$ then $\MM \model{\Si} T$.
+\end{proof}
+
+\begin{lem}[Moving models and theories up signatures] 
+    \link{move_up_mod}
+    Suppose $\Si \leq \Si^*$.
+    \begin{enumerate}
+        \item Suppose $\MM$ is a $\Si$-structure.
+            Then i
+            whose interpretation agrees with $\MM$
+            on symbols from $\Si$,
+            then for any $\Si$-formula $\phi$ 
+            with $\tv{\phi} = \set{x_i : A_i}_i$ and 
+            $a \in \prod_i \mmintp{A_i}$
+            \[\MM \model{\Si} \phi(a) \iff \NN \model{\Si^*} \phi(a)\]
+            In particular if $\MM$ is a model of $\Si$-theory $T$ then 
+            $\MM^*$ is a $\Si^*$-model of $T$ viewed as a $\Si^*$-theory.
+        \item Suppose $T$ is a $\Si$-theory and $\phi$ is a 
+            $\Si$-sentence such that $T \model{\Si} \phi$.
+            Then $T \model{\Si^*} \phi$.
+    \end{enumerate}
+    Again, if we have constructed such a $\MM^*$ from $\MM$
+    we tend to just refer to it as $\MM$ and let subscripts involving 
+    $\Si$ and $\Si^*$ describe which one we mean.
+\end{lem}
+\begin{proof}~
+    The proof that satisfaction is preserved is exactly the same as for 
+    \linkto{move_down_mod}{moving models down signatures}.
+    Suppose $T \model{\Si} \phi$.
+    If $\MM^* \model{\Si^*} T$ then by 
+    \linkto{move_down_mod}{moving $\MM^*$ down to $\Si$},
+    we have a corresponding $\Si$-structure $\MM \model{\Si} T$.
+    Hence $\MM \model{\Si} \phi$, and
+    since both models agree on interpretation
+    of constants, functions and relations of $\Si$ we have
+    $\MM^* \model{\Si^*} \phi$ by the previous part.
+\end{proof}
+
+\begin{prop}[Henkin (witness)]
+    \link{make_wit}
+    Suppose $\Si(0)$-theory 
+    $T(0)$ is finitely consistent.
+    Then there exists a signature 
+    $\Si^*$ and $\Si^*$-theory $T^*$ such that 
+    \begin{enumerate}
+        \item $\const{\Si(0)} \subs \const{\Si^*}$
+        and otherwise share the same function and relation symbols.
+        \item $|\const{\Si^*}| = |\const{\Si(0)}| + \aleph_0$
+        \item $T(0) \subs T^*$
+        \item $T^*$ is finitely consistent
+        \item Any maximal finitely consistent 
+        $\Si^*$-theory $S$ such that $T^* \subs S$ 
+        has the witness property
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    We want to define $\Si(i),T(i)$, 
+    for each $i \in \N$.    
+    By induction, 
+    we assume we have signature $\Si(i)$ and 
+    $\Si$-theory $T(i)$ such that 
+    \begin{enumerate}
+        \item $\const{\Si(0)} \subs \const{\Si(i)}$
+        and they share the same function and relation symbols.
+        \item $|\const{\Si(i)}| = |\const{\Si(0)}| + \aleph_0$
+        \item $T(0) \subs T(i)$
+        \item $T(i)$ is finitely consistent
+    \end{enumerate}
+    Note that $\Si(0)$ satisfies this.
+    Let 
+    \[
+        W(i) := \set{\phi \in \form{\Si(i)} 
+        \st \abs{\tv{\phi}} = 1}
+    \]
+    We construct $\Si(i+1)$ 
+    by adding constant symbols $c_\phi : A$ for each $\phi \in W(i)$ 
+    with $\tv{\phi} = \set{v : A}$ and 
+    keeping all the other symbols from $\Si(i)$:
+    \[
+        \func{\Si(i+1)} :=
+        \func{\Si(i)} \sqcup \set{c_\phi : A
+        \st \phi \in W(i) \text{ and } \exists v : A, \phi(v) \in T(i)}
+    \]
+    Then add to $T(i)$ a witness formula 
+    for each $\phi \in W(i)$
+    \[
+        T(i+1) := T(i) \cup \set{(\exists v : A, \phi(v)) \to \phi(c_\phi) \st 
+        \phi \in W(i)}
+    \]
+    Certainly
+    $T(i+1)$ is a $\Si(i+1)$-theory such that $T(0) \subs T(i+1)$,
+    $\const{\Si(0)} \subs \const{\Si(i+1)}$ with symbols otherwise unchanged.
+    Since $W(i)$ is countibly infinite, 
+    \[
+        |\const{\Si(i+1)}| = |\const{\Si(i)}| + \aleph_0 = 
+        |\const{\Si(0)}| + \aleph_0
+    \]
+    We need to check that $T(i+1)$ is finitely consistent.
+    Take a finite subset of $T(i+1)$.
+    It is a union of two finite sets 
+    \[
+        \De_T \subs T(i) \text{ and }
+        \De \subs \set{(\exists v : A, \phi(v)) \to \phi(c_\phi) \st \dots}
+    \]
+    Since $T(i)$ is finitely consistent there exists a $\Si(i)$-model
+    $\MM$ of $\De_T$.
+
+    We want $\MM$ to be a $\Si(i+1)$-structure.
+    For any sort, function and relation symbol from $\Si(i)$ 
+    we take the same interpretation as in $\MM$.
+    It remains to interpret the new constant symbols in $\Si(i+1)$, suppose 
+    $c_\phi : A$ and $\exists v : A, \phi(v) \in T(i)$ then
+    if there exists some $a \in \modintp{\MM}{A}$ such that 
+    $\MM \model{\Si(i)} \phi(a)$ then we interpret $c_\phi$ as $a$.
+    Otherwise (since interpretation of sorts are non-empty\footnote{
+        This is the reason we need to interpret into $* / \SET$.
+    }) we take some (any) $a \in \mmintp{A}$ and interpret $c_\phi$ as $a$.    
+
+    We check is is a $\Si(i+1)$-model of $\De_T \cup \De_w$.
+    Since $\MM$ is a $\Si(i)$-model
+    of $\De_T$ \linkto{move_up_mod}{it is a $\Si(i+1)$-model of $\De_T$}.
+    Also for any $(\exists v : A, \phi(v)) \to \phi(c_\phi) \in \De$, 
+    if $\MM \model{\Si(i+1)} \exists v : A, \phi(v)$ 
+    \linkto{move_down_mod}{then} $\MM \model{\Si(i)} \exists v : A, \phi(v)$,
+    hence $\MM$ interprets $c_\phi : A$ as some element 
+    $a \in \modintp{\MM(i)}{A}$ such that 
+    $\MM \model{\Si(i)} \phi(a)$ 
+    \linkto{move_up_mod}{so}
+    $\MM \model{\Si(i+1)} \phi(c_\phi)$. 
+    Hence $T(i+1)$ is finitely consistent.
+
+    Let $\Si^*$ be the signature with its constant symbols 
+    $\const{\Si^*} = \bigcup_{i \in \N} \const{\Si(i)}$
+    and otherwise the same symbols as $\Si(0)$.
+    Then 
+    \[
+        |\const{\Si^*}| = |\bigcup_{i \in \N} \const{\Si(i)}| = 
+        \aleph_0 \times (\aleph_0 + \const{\Si(0)}) = 
+        \aleph_0 + \const{\Si(0)}
+    \]
+
+    Let $T^* = \bigcup_{i \in \N} T(i)$.
+    Any finite subset of $T^*$ is a subset of some $T(i)$, 
+    hence has a $\Si(i)$-model $\MM$.
+    By interpreting the added constant symbols as any
+    element in the corresponding interpreted sort,
+    we \linkto{move_up_mod}{make $\MM^*$ a $\Si^*$-model} of the finite set.
+    Hence $T^*$ is finitely consistent.
+    
+    Suppose $S$ is a maximal finitely consistent 
+    $\Si^*$-theory such that $T^* \subs S$,
+    and $\phi$ is a $\Si^*$-formula of exactly one typed variable.
+    There exists an $i \in \N$ such that $\phi \in \form{\Si(i)}$.
+    Hence $(\exists v : A, \phi(v)) \to \phi(c_\phi)$ is in $T(i+1) \subs S$.
+    We deduce $\phi(c_\phi) \in S$ since $S$ is maximal and finitely consistent,
+    by considering finite inconsistent set
+    \[
+        \set{\exists v : A, \phi(v), 
+        (\exists v : A, \phi(v)) \to \phi(c_\phi), 
+        \NOT \phi(c_\phi)}
+    \]
+\end{proof}
+
+\begin{lem}[Henkin (adding formulas to finitely consistent theories)]
+    \link{adding_formulas}
+    If $T$ is a finitely consistent $\Si$-theory 
+    and $\phi$ is a $\Si$-sentence then at one of
+    $T \cup \set{\phi}$ or $T \cup \set{\NOT \phi}$ is finitely consistent.
+\end{lem}
+\begin{proof}
+    We show that for any finite $\De \subs T \cup \set{\phi}$ and 
+    finite $\De_\NOT \subs T \cup \set{\NOT \phi}$,
+    one of $\De$ or $\De_\NOT$ is consistent. 
+    By finite consistency of $T$ the finite subset
+    \[
+        (\De \setminus \set{\phi}) \cup 
+        (\De_\NOT \setminus \set{\NOT \phi}) \subs T
+    \]
+    is consistent.
+    Let $\MM$ be the model of 
+    $(\De \setminus \set{\phi}) \cup 
+    (\De_\NOT \setminus \set{\NOT \phi})$.
+    If $\MM \model{\Si} \phi$ then $\MM \model{\Si} \De$,
+    otherwise $\MM \model{\Si} \NOT \phi$ so $\MM \model{\Si} \De_\NOT$.
+    Hence $T \cup \set{\phi}$ or $T \cup \set{\NOT \phi}$ 
+    is finitely consistent.
+\end{proof}
+
+\begin{ex}
+    Find a signature $\Si$, a consistent $\Si$-theory $T$
+    and $\Si$-sentence $\phi$ such that  
+    $T \cup \set{\phi}$ and 
+    $T \cup \set{\NOT \phi}$ are both consistent.
+\end{ex}
+    
+\begin{prop}[Extending a finitely consistent theory to a maximal theory (Zorn)]
+    \link{make_max}
+    Given a finitely consistent $\Si$-theory $T(0)$
+    there exists a $\Si$-theory $T^*$ such that 
+    \begin{enumerate}
+        \item $T(0) \subs T^*$
+        \item $T^*$ is finitely consistent.
+        \item $T^*$ is a maximal $\Si^*$-theory.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    We use Zorn's Lemma.
+    Consider
+    \[\set{T \in \theory{\Si} \st T 
+    \text{ finitely consistent and } T(0) \subs T}\]
+    be ordered by inclusion.
+    Let $(T_i)_{i \in I}$ be a chain.
+    Then $\bigcup_{i \in I} T_i$ is a $\Si$-theory
+    such that any finite subset is a subset of some $T_i$,
+    hence is consistent by finite consistency of $T_i$.
+    Zorn's lemma implies there exists a $T^*$ in the set
+    that is maximal (in the order theory sense).
+    
+    To show that it is maximal as a $\Si$-theory, 
+    take a $\Si$-sentence $\phi$, then
+    \linkto{adding_formulas}{either $T^* \cup \set{\phi}$ or 
+    $T^* \cup \set{\NOT \phi}$ is finitely consistent}.
+    Hence $T^* \cup \set{\phi} = T^*$ or 
+    $T^* \cup \set{\NOT \phi} = T^*$ by (order theoretic) maximality,
+    so $\phi \in T^*$ or $\NOT \phi \in T^*$.
+\end{proof}
+
+\begin{nttn}[Cardinalities of signatures and structures]
+    Given a signature $\Si$, 
+    we write
+    $|\Si| := |\const{\Si}| + |\func{\Si}| + |\rel{\Si}|$
+    and call this the size of the signature $\Si$.
+\end{nttn}
+
+\begin{prop}[The compactness theorem]
+    \link{compactness}
+    If $T$ is a $\Si$-theory, 
+    then the following are equivalent:
+    \begin{enumerate}
+        \item $T$ is finitely consistent.
+        \item $T$ is consistent
+        \item For any infinite cardinal $\ka$ 
+        such that $|\Si| \leq \ka$, there exists a $\Si$-model of 
+        $T$ with size $\leq \ka$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    $(3. \implies 2.)$ and $(2. \implies 1.)$ are both obvious. 
+    For $(1. \implies 3.)$
+    suppose $\Si(0)$-theory $T(0)$ is finitely consistent.
+    Let $\ka$ be an infinite cardinal such that 
+    $|\Si(0)| \leq \ka$. Then
+    $|\const{\Si(0)}| \leq |\Si(0)| \leq \ka$.
+    We have shown that \linkto{make_wit}{there exists a signature 
+    $\Si(1)$ and $\Si(1)$-theory $T(1)$} such that 
+    \begin{enumerate}
+        \item $\const{\Si(0)} \subs \const{\Si(1)}$
+        with other symbols unchanged.
+        \item $|\const{\Si(1)}| = |\const{\Si(0)}| + \aleph_0$
+        \item $T(0) \subs T(1)$ is finitely consistent.
+        \item Any maximal $\Si(1)$-theory $T$ such that $T(1) \subs T$ 
+        has the witness property.
+    \end{enumerate}
+    As $T(1)$ is finitely consistent,
+    \linkto{make_max}{there exists a $\Si(1)$-theory $T(2)$} such that 
+    \begin{enumerate}[resume]
+        \item $T(1) \subs T(2)$
+        \item $T(2)$ is finitely consistent.
+        \item $T(2)$ is a maximal $\Si(1)$-theory.
+    \end{enumerate}
+    Furthermore, $T(2)$ has the witness property by design of $T(1)$.
+    Finally is a maximal, finitely consistent $\Si(1)$-theory with 
+    the witness property, \linkto{henkin}{hence has a $\Si(1)$-model $\MM$ 
+    such that $|\MM| \leq \ka$}.
+    $\MM \model{\Si(1)} T(0)$ since $T(0) \subs T(1) \subs T(2)$.
+    \linkto{move_down_mod}{Moving $\MM$ down} we have a $\Si(0)$-model
+    of $T$ of the required size.
+\end{proof}

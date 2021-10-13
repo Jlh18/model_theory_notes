@@ -1,0 +1,53 @@
+
+
+
+%%%% No order
+
+\begin{dfn}
+    Let $T$ be a $\Si$-theory. 
+    Let $\MM \modelsi T$ and let $p$ and $q$ be $n$-types.
+    Then the following equivalent definitions are given for $p$ implies $q$,
+    denoted by $p \modelsi q$.
+    \begin{itemize}
+        \item For each elementary extension $\MM \to \NN \modelsi T$ 
+        we have $p(\NN) \subs q(\NN)$.
+        \item For each maximal $n$-type $r$ containing $p$, $q \subs r$.
+        \item For each $\psi \in q$, 
+        there exists a finite subset $\De \subs p$ such that 
+        $\bigand{}{} \De$ isolates $\set{\psi}$ with respect to $T$.
+        %Each finite subset of q is isolated by some finite subset of p
+    \end{itemize}
+\end{dfn}
+\begin{proof}
+    $(1 \implies 2)$ Suppose $p \subs r$ is maximal. 
+    By definition of $n$-types $r$ is realised in some $\NN \model T$.
+    \linkto{amalgamation}{There exists some pushout $P$} 
+    with elementary embeddings $\MM \to P$ and $\NN \to P$.
+    Since $\NN \to P$ is elementary, 
+    $r$ is realised in $P$ by some tuple $b \in P^n$.
+    Hence $b \in r(P) \subs p(P) \subs q(P)$ and for any $\phi \in q$
+    either $\phi \in r$ or $\not \phi \in r$. 
+    In the latter case we have $P \modelsi \not \phi(b)$,
+    but also $P \modelsi \phi(b)$ since $b \in q(P)$, a contradiction.
+    
+    $(2 \implies 3)$ Let $\phi \in q$ and suppose for a contradiction
+    No such finite set exists. 
+    Hence for any finite $\De \subs p$ there exists $\NN \modelsi T$
+    such that
+    \[
+        \NN \modelsi \exists v, \bigand{}{} \De \AND \NOT \phi
+    \]
+    Hence $p \cup \set{\NOT \phi}$ is finitely consistent 
+    \linkto{compactness_for_types}{so consistent}.
+    Hence any maximal $r$ containing $p$ will contain $\NOT \phi$,
+    so $q \cup \set{\NOT \phi}$ is consistent, a contradiction.
+    
+    $(3 \implies 1)$ Suppose we have $\MM \to \NN \modelsi T$ and
+    $a \in p(\NN)$.
+    We show that for any $\phi \in q$ we have $\NN \modelsi \phi(a)$.
+    By assumption there exists a finite $\De \subs p$ such that 
+    \[
+        N \modelsi \bigand{}{} \De(a) \to \phi(a)
+    \]
+    Lastly note that $a \in p(\NN) \subs \De(\NN)$ and so $N \modelsi \De(a)$.
+\end{proof}

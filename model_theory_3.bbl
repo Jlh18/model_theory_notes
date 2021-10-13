@@ -1,0 +1,68 @@
+\begin{thebibliography}{10}
+
+\bibitem{fandom0}
+Model theory wiki - definable and algebraic closure.
+\newblock
+  \url{https://modeltheory.fandom.com/wiki/Definable_and_algebraic_closure#Dcl_and_acl_are_finitary_closure_operators}.
+
+\bibitem{openlogicproject}
+Open logic project.
+\newblock \url{http://builds.openlogicproject.org/}.
+
+\bibitem{wiki1}
+Proof wiki - könig's tree lemma.
+\newblock \url{https://proofwiki.org/wiki/K%C3%B6nig%27s_Tree_Lemma}.
+
+\bibitem{stack0}
+Stack exchange - locally finite fields.
+\newblock
+  \url{https://math.stackexchange.com/questions/633473/locally-finite-field}.
+
+\bibitem{wiki0}
+Wikipedia - boolean algebras.
+\newblock \url{https://en.wikipedia.org/wiki/Boolean_algebra}.
+
+\bibitem{atiyah}
+M.~Atiyah and I.~Macdonald.
+\newblock {\em Introduction to Commutative Algebra}.
+\newblock CRC Press, 6000 Broken Sound Parkway NW, Suite 300, 2018.
+
+\bibitem{buechler}
+S.~Buechler.
+\newblock {\em Essential Stability Theory}.
+\newblock Springer.
+
+\bibitem{henson}
+W.~Henson.
+
+\bibitem{hungerford}
+T.~W. Hungerford.
+\newblock {\em Algebra}.
+\newblock Springer.
+
+\bibitem{jech}
+T.~Jech.
+\newblock {\em Set Theory}.
+\newblock Springer.
+
+\bibitem{tent}
+M.~Z. K.~Tent.
+\newblock {\em A Course in Model Theory}.
+\newblock Cambridge University Press.
+
+\bibitem{marker}
+D.~Marker.
+\newblock {\em Model Theory - an Introduction}.
+\newblock Springer.
+
+\bibitem{pillay}
+A.~Pillay.
+\newblock Lecture notes - model theory.
+\newblock 2002.
+
+\bibitem{poizat}
+B.~Poizat.
+\newblock {\em A Course in Model Theory}.
+\newblock Springer.
+
+\end{thebibliography}

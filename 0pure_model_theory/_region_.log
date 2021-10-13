@@ -1,0 +1,2189 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.24)  2 JUL 2021 13:14
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**\nonstopmode\nofiles\PassOptionsToPackage{active,tightpage,auctex}{preview}\AtBeginDocument{\ifx\ifPreview\undefined\RequirePackage[displaymath,floats,graphics,textmath,sections,footnotes]{preview}[2004/11/05]\fi} \input \detokenize{ _region_.tex }
+(./_region_.tex  !name(1signature.tex)  !name(1signature.tex) !offset(435) 
+./_region_.tex:3: Undefined control sequence.
+l.3 \subsection
+               {Classical models, theories}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+./_region_.tex:3: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \subsection{C
+                 lassical models, theories}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no C in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no F in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no y in font nullfont!
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 4.
+./_region_.tex:4: Undefined control sequence.
+l.4 ...interpreting only in the category $* / \SET
+                                                  $
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no o in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no W in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no q in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no a in font nullfont!
+./_region_.tex:7: Undefined control sequence.
+l.7 given by a \linkto
+                      {make_wit}{Henkin construction}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no k in font nullfont!
+Missing character: There is no e in font nullfont!
+./_region_.tex:7: Missing $ inserted.
+<inserted text> 
+                $
+l.7 given by a \linkto{make_
+                            wit}{Henkin construction}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./_region_.tex:7: Extra }, or forgotten $.
+l.7 given by a \linkto{make_wit}
+                                {Henkin construction}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./_region_.tex:9: Missing $ inserted.
+<inserted text> 
+                $
+l.9 
+    
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 3--9
+[]
+ []
+
+
+Overfull \hbox (10.00003pt too wide) in paragraph at lines 3--9
+\OMS/cmsy/m/n/10 ^^C\OML/cmm/m/it/10 =$
+ []
+
+
+Overfull \hbox (165.39905pt too wide) in paragraph at lines 3--9
+[]\OML/cmm/m/it/10 it[]reliesonnon \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (105.87253pt too wide) in paragraph at lines 3--9
+\OML/cmm/m/it/10 emptinessofourmodels:$ 
+ []
+
+
+./_region_.tex:10: LaTeX Error: Environment dfn undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 \begin{dfn}
+                [Satisfaction]
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+./_region_.tex:10: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 \begin{dfn}[
+                 Satisfaction]
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no [ in font nullfont!
+Missing character: There is no S in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no ] in font nullfont!
+Missing character: There is no L in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+./_region_.tex:11: Undefined control sequence.
+<recently read> \MM 
+                    
+l.11     Let $\MM
+                 $ be a $\Si$-structure (interpreted in $* / \SET$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no b in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no a in font nullfont!
+./_region_.tex:11: Undefined control sequence.
+<recently read> \Si 
+                    
+l.11     Let $\MM$ be a $\Si
+                            $-structure (interpreted in $* / \SET$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no - in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no ( in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+./_region_.tex:11: Undefined control sequence.
+l.11 ... $\Si$-structure (interpreted in $* / \SET
+                                                  $
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no a in font nullfont!
+./_region_.tex:12: Undefined control sequence.
+<recently read> \Si 
+                    
+l.12     and $\phi$ a $\Si
+                          $-formula.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no - in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no L in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+./_region_.tex:13: Undefined control sequence.
+l.13     Let $a \in \prod_{x : A \in \tv
+                                        {\phi}} \mmintp{A}$ be a tuple index...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:13: Undefined control sequence.
+l.13 ...$a \in \prod_{x : A \in \tv{\phi}} \mmintp
+                                                  {A}$ be a tuple indexed by
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no b in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no x in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no T in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no e in font nullfont!
+./_region_.tex:15: Undefined control sequence.
+<recently read> \MM 
+                    
+l.15     Then we define $\MM
+                             \modelsi \phi(a)$ by induction on formulas:
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:15: Undefined control sequence.
+l.15     Then we define $\MM \modelsi
+                                      \phi(a)$ by induction on formulas:
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no b in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no : in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 10--16
+[]
+ []
+
+
+Overfull \hbox (10.00003pt too wide) in paragraph at lines 10--16
+\OMS/cmsy/m/n/10 ^^C\OML/cmm/m/it/10 =$
+ []
+
+
+Overfull \hbox (5.95834pt too wide) in paragraph at lines 10--16
+\OML/cmm/m/it/10 ^^^$
+ []
+
+
+Overfull \hbox (14.73029pt too wide) in paragraph at lines 10--16
+\OML/cmm/m/it/10 a \OMS/cmsy/m/n/10 2
+ []
+
+
+Overfull \hbox (42.1209pt too wide) in paragraph at lines 10--16
+[][] \OML/cmm/m/it/10 A$
+ []
+
+
+Overfull \hbox (5.95834pt too wide) in paragraph at lines 10--16
+\OML/cmm/m/it/10 ^^^$
+ []
+
+
+Overfull \hbox (19.02203pt too wide) in paragraph at lines 10--16
+\OML/cmm/m/it/10 ^^^\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )$
+ []
+
+Missing character: There is no I in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+./_region_.tex:17: Undefined control sequence.
+<recently read> \MM 
+                    
+l.17         \item If $\phi$ is $\top$ then $\MM
+                                                 \model{\Si} \phi$.\footnote{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:17: Undefined control sequence.
+l.17 ...\item If $\phi$ is $\top$ then $\MM \model
+                                                  {\Si} \phi$.\footnote{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:17: Undefined control sequence.
+l.17 ...m If $\phi$ is $\top$ then $\MM \model{\Si
+                                                  } \phi$.\footnote{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no . in font nullfont!
+./_region_.tex:19: Undefined control sequence.
+\@footnotetext ...tins {\reset@font \footnotesize 
+                                                  \interlinepenalty \interfo...
+l.19 ... the unique element in the empty product.}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:19: Undefined control sequence.
+\@footnotetext ...}\color@begingroup \@makefntext 
+                                                  {\rule \z@ \footnotesep \i...
+l.19 ... the unique element in the empty product.}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (13.8889pt too wide) in paragraph at lines 19--19
+[][]\OT1/cmr/m/n/10 We
+ []
+
+
+Overfull \hbox (15.00003pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 can
+ []
+
+
+Overfull \hbox (20.00006pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 omit
+ []
+
+
+Overfull \hbox (13.88892pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 the
+ []
+
+
+Overfull \hbox (5.28589pt too wide) in paragraph at lines 19--19
+\OML/cmm/m/it/10 a$
+ []
+
+
+Overfull \hbox (22.77782pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 when
+ []
+
+
+Overfull \hbox (22.25003pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 there
+ []
+
+
+Overfull \hbox (13.36113pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 are
+ []
+
+
+Overfull \hbox (10.55559pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 no
+ []
+
+
+Overfull \hbox (15.86113pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 free
+ []
+
+
+Overfull \hbox (19.75005pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 vari-
+ []
+
+
+Overfull \hbox (24.50005pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 ables.
+ []
+
+
+Overfull \hbox (17.94447pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 For-
+ []
+
+
+Overfull \hbox (24.16675pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 mally
+ []
+
+
+Overfull \hbox (5.28589pt too wide) in paragraph at lines 19--19
+\OML/cmm/m/it/10 a$
+ []
+
+
+Overfull \hbox (6.72223pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 is
+ []
+
+
+Overfull \hbox (13.88892pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 the
+ []
+
+
+Overfull \hbox (29.16673pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 unique
+ []
+
+
+Overfull \hbox (10.55556pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 el-
+ []
+
+
+Overfull \hbox (7.77777pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 e-
+ []
+
+
+Overfull \hbox (21.94449pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 ment
+ []
+
+
+Overfull \hbox (8.33336pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 in
+ []
+
+
+Overfull \hbox (13.88892pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 the
+ []
+
+
+Overfull \hbox (27.22229pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 empty
+ []
+
+
+Overfull \hbox (23.63895pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 prod-
+ []
+
+
+Overfull \hbox (16.6667pt too wide) in paragraph at lines 19--19
+\OT1/cmr/m/n/10 uct.| 
+ []
+
+
+Overfull \hbox (5.95834pt too wide) in paragraph at lines 17--20
+\OML/cmm/m/it/10 ^^^$
+ []
+
+
+Overfull \hbox (7.7778pt too wide) in paragraph at lines 17--20
+\OMS/cmsy/m/n/10 >$
+ []
+
+
+Overfull \hbox (10.44447pt too wide) in paragraph at lines 17--20
+[]\OML/cmm/m/it/10 ^^^$[] 
+ []
+
+Missing character: There is no I in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+./_region_.tex:21: Undefined control sequence.
+<recently read> \MM 
+                    
+l.21             $\MM
+                      \model{\Si} \phi(a)$ when
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:21: Undefined control sequence.
+l.21             $\MM \model
+                            {\Si} \phi(a)$ when
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:21: Undefined control sequence.
+l.21             $\MM \model{\Si
+                                } \phi(a)$ when
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no w in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+./_region_.tex:22: Undefined control sequence.
+<recently read> \modintp 
+                         
+l.22             $\modintp
+                          {\MM}{t}(a) = \modintp{\MM}{s}(a)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:22: Undefined control sequence.
+l.22             $\modintp{\MM
+                              }{t}(a) = \modintp{\MM}{s}(a)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:22: Undefined control sequence.
+l.22             $\modintp{\MM}{t}(a) = \modintp
+                                                {\MM}{s}(a)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:22: Undefined control sequence.
+l.22 ...       $\modintp{\MM}{t}(a) = \modintp{\MM
+                                                  }{s}(a)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no . in font nullfont!
+
+Overfull \hbox (5.95834pt too wide) in paragraph at lines 20--23
+\OML/cmm/m/it/10 ^^^$
+ []
+
+
+Overfull \hbox (14.16663pt too wide) in paragraph at lines 20--23
+\OML/cmm/m/it/10 t \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (4.6875pt too wide) in paragraph at lines 20--23
+\OML/cmm/m/it/10 s$
+ []
+
+
+Overfull \hbox (19.02203pt too wide) in paragraph at lines 20--23
+[]\OML/cmm/m/it/10 ^^^\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (27.23032pt too wide) in paragraph at lines 20--23
+[]\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 ) =
+ []
+
+
+Overfull \hbox (17.75119pt too wide) in paragraph at lines 20--23
+[]\OML/cmm/m/it/10 s\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )$ 
+ []
+
+Missing character: There is no I in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+./_region_.tex:24: Undefined control sequence.
+l.24             where $r \hookr
+                                 A_1 \tdt A_n$ is a relation symbol and
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:24: Undefined control sequence.
+l.24             where $r \hookr A_1 \tdt
+                                          A_n$ is a relation symbol and
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+./_region_.tex:25: Undefined control sequence.
+l.25             $t : A_1 \tdt
+                               A_n$ are terms,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+./_region_.tex:26: Undefined control sequence.
+<recently read> \MM 
+                    
+l.26             then $\MM
+                           \model{\Si} \phi(a)$ when
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:26: Undefined control sequence.
+l.26             then $\MM \model
+                                 {\Si} \phi(a)$ when
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:26: Undefined control sequence.
+l.26             then $\MM \model{\Si
+                                     } \phi(a)$ when
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no w in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+./_region_.tex:27: Undefined control sequence.
+<recently read> \modintp 
+                         
+l.27             $\modintp
+                          {\MM}{t}(a) \in \modintp{\MM}{r}$.\footnote{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:27: Undefined control sequence.
+l.27             $\modintp{\MM
+                              }{t}(a) \in \modintp{\MM}{r}$.\footnote{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:27: Undefined control sequence.
+l.27             $\modintp{\MM}{t}(a) \in \modintp
+                                                  {\MM}{r}$.\footnote{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:27: Undefined control sequence.
+l.27 ...     $\modintp{\MM}{t}(a) \in \modintp{\MM
+                                                  }{r}$.\footnote{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no . in font nullfont!
+./_region_.tex:30: Undefined control sequence.
+\@footnotetext ...tins {\reset@font \footnotesize 
+                                                  \interlinepenalty \interfo...
+l.30             }
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:30: Undefined control sequence.
+\@footnotetext ...}\color@begingroup \@makefntext 
+                                                  {\rule \z@ \footnotesep \i...
+l.30             }
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:30: Undefined control sequence.
+<recently read> \modintp 
+                         
+l.30             }
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:30: Undefined control sequence.
+<argument>  $\modintp {\MM 
+                           }{t}$ was the \linkto {interpretation_terms}{prod...
+l.30             }
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:30: Undefined control sequence.
+<argument>  $\modintp {\MM }{t}$ was the \linkto 
+                                                 {interpretation_terms}{prod...
+l.30             }
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:30: Missing $ inserted.
+<inserted text> 
+                $
+l.30             }
+                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./_region_.tex:30: Extra }, or forgotten $.
+<argument> ...s the \linkto {interpretation_terms}
+                                                  {product of interpreted te...
+l.30             }
+                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./_region_.tex:30: Extra }, or forgotten $.
+<recently read> }
+                 
+l.30             }
+                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./_region_.tex:30: Extra }, or forgotten $.
+\@footnotetext ...rut \strutbox }\color@endgroup }
+                                                  
+l.30             }
+                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+./_region_.tex:32: LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32         \item
+                   If $\phi$ is
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+./_region_.tex:32: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32         \item I
+                    f $\phi$ is
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+./_region_.tex:32: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32         \item I
+                    f $\phi$ is
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+./_region_.tex:32: Missing $ inserted.
+<inserted text> 
+                $
+l.32         \item If $\phi
+                           $ is
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./_region_.tex:33: Undefined control sequence.
+<recently read> \NOT 
+                     
+l.33             $\NOT
+                      \psi$ for some $\psi \in \form{\Si}$,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:33: Undefined control sequence.
+l.33 ...       $\NOT\psi$ for some $\psi \in \form
+                                                  {\Si}$,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:33: Undefined control sequence.
+l.33 ...   $\NOT\psi$ for some $\psi \in \form{\Si
+                                                  }$,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:34: Undefined control sequence.
+<recently read> \MM 
+                    
+l.34             then $\MM
+                           \model{\Si} \phi(a)$ when $\MM \nodel{\Si} \psi(a)$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:34: Undefined control sequence.
+l.34             then $\MM \model
+                                 {\Si} \phi(a)$ when $\MM \nodel{\Si} \psi(a)$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:34: Undefined control sequence.
+l.34             then $\MM \model{\Si
+                                     } \phi(a)$ when $\MM \nodel{\Si} \psi(a)$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:34: Undefined control sequence.
+<recently read> \MM 
+                    
+l.34 ...  then $\MM \model{\Si} \phi(a)$ when $\MM
+                                                   \nodel{\Si} \psi(a)$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:34: Undefined control sequence.
+l.34 ...$\MM \model{\Si} \phi(a)$ when $\MM \nodel
+                                                  {\Si} \psi(a)$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:34: Undefined control sequence.
+l.34 ... \model{\Si} \phi(a)$ when $\MM \nodel{\Si
+                                                  } \psi(a)$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (3.61111pt too wide) in paragraph at lines 30--35
+[][]$[]\OML/cmm/m/it/10 t$
+ []
+
+
+Overfull \hbox (15.8889pt too wide) in paragraph at lines 30--35
+\OT1/cmr/m/n/10 was
+ []
+
+
+Overfull \hbox (13.88892pt too wide) in paragraph at lines 30--35
+\OT1/cmr/m/n/10 the
+ []
+
+
+Overfull \hbox (227.9897pt too wide) in paragraph at lines 30--35
+\OT1/cmr/m/n/10 interpretation$[]\OML/cmm/m/it/10 erms[]:|If$$^^^$
+ []
+
+
+Overfull \hbox (6.72223pt too wide) in paragraph at lines 30--35
+\OT1/cmr/m/n/10 is
+ []
+
+
+Overfull \hbox (6.8727pt too wide) in paragraph at lines 30--35
+\OML/cmm/m/it/10  $
+ []
+
+
+Overfull \hbox (11.97226pt too wide) in paragraph at lines 30--35
+\OT1/cmr/m/n/10 for
+ []
+
+
+Overfull \hbox (21.72226pt too wide) in paragraph at lines 30--35
+\OT1/cmr/m/n/10 some
+ []
+
+
+Overfull \hbox (16.3171pt too wide) in paragraph at lines 30--35
+\OML/cmm/m/it/10   \OMS/cmsy/m/n/10 2
+ []
+
+
+Overfull \hbox (2.77779pt too wide) in paragraph at lines 30--35
+[]$\OT1/cmr/m/n/10 ,
+ []
+
+
+Overfull \hbox (19.44449pt too wide) in paragraph at lines 30--35
+\OT1/cmr/m/n/10 then
+ []
+
+
+Overfull \hbox (19.02203pt too wide) in paragraph at lines 30--35
+[]\OML/cmm/m/it/10 ^^^\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (22.77782pt too wide) in paragraph at lines 30--35
+\OT1/cmr/m/n/10 when
+ []
+
+
+Overfull \hbox (19.93639pt too wide) in paragraph at lines 30--35
+[]\OML/cmm/m/it/10  \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )$
+ []
+
+./_region_.tex:36: Undefined control sequence.
+<recently read> \MM 
+                    
+l.36             then $\MM
+                           \model{\Si} \phi(a)$ when
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:36: Undefined control sequence.
+l.36             then $\MM \model
+                                 {\Si} \phi(a)$ when
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:36: Undefined control sequence.
+l.36             then $\MM \model{\Si
+                                     } \phi(a)$ when
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:37: Undefined control sequence.
+<recently read> \MM 
+                    
+l.37             $\MM
+                      \model{\Si} \psi(a)$ or $\MM \model{\Si} \chi(a)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:37: Undefined control sequence.
+l.37             $\MM \model
+                            {\Si} \psi(a)$ or $\MM \model{\Si} \chi(a)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:37: Undefined control sequence.
+l.37             $\MM \model{\Si
+                                } \psi(a)$ or $\MM \model{\Si} \chi(a)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:37: Undefined control sequence.
+<recently read> \MM 
+                    
+l.37             $\MM \model{\Si} \psi(a)$ or $\MM
+                                                   \model{\Si} \chi(a)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:37: Undefined control sequence.
+l.37 ...  $\MM \model{\Si} \psi(a)$ or $\MM \model
+                                                  {\Si} \chi(a)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:37: Undefined control sequence.
+l.37 ...MM \model{\Si} \psi(a)$ or $\MM \model{\Si
+                                                  } \chi(a)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (6.66669pt too wide) in paragraph at lines 35--38
+\OT1/cmr/m/n/10 If
+ []
+
+
+Overfull \hbox (5.95834pt too wide) in paragraph at lines 35--38
+\OML/cmm/m/it/10 ^^^$
+ []
+
+
+Overfull \hbox (6.72223pt too wide) in paragraph at lines 35--38
+\OT1/cmr/m/n/10 is
+ []
+
+
+Overfull \hbox (13.53938pt too wide) in paragraph at lines 35--38
+\OML/cmm/m/it/10   \OMS/cmsy/m/n/10 _
+ []
+
+
+Overfull \hbox (9.0347pt too wide) in paragraph at lines 35--38
+\OML/cmm/m/it/10 ^^_$\OT1/cmr/m/n/10 ,
+ []
+
+
+Overfull \hbox (19.44449pt too wide) in paragraph at lines 35--38
+\OT1/cmr/m/n/10 then
+ []
+
+
+Overfull \hbox (19.02203pt too wide) in paragraph at lines 35--38
+[]\OML/cmm/m/it/10 ^^^\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (22.77782pt too wide) in paragraph at lines 35--38
+\OT1/cmr/m/n/10 when
+ []
+
+
+Overfull \hbox (19.93639pt too wide) in paragraph at lines 35--38
+[]\OML/cmm/m/it/10  \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (8.91669pt too wide) in paragraph at lines 35--38
+\OT1/cmr/m/n/10 or
+ []
+
+
+Overfull \hbox (22.09839pt too wide) in paragraph at lines 35--38
+[]\OML/cmm/m/it/10 ^^_\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )$. 
+ []
+
+./_region_.tex:40: Undefined control sequence.
+<recently read> \MM 
+                    
+l.40             then $\MM
+                           \model{\Si} \phi(a)$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:40: Undefined control sequence.
+l.40             then $\MM \model
+                                 {\Si} \phi(a)$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:40: Undefined control sequence.
+l.40             then $\MM \model{\Si
+                                     } \phi(a)$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:41: Undefined control sequence.
+l.41             if for any $b \in \mmintp
+                                          {A}$,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:42: Undefined control sequence.
+<recently read> \MM 
+                    
+l.42             $\MM
+                      \model{\Si} \psi(a,b)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:42: Undefined control sequence.
+l.42             $\MM \model
+                            {\Si} \psi(a,b)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:42: Undefined control sequence.
+l.42             $\MM \model{\Si
+                                } \psi(a,b)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (6.66669pt too wide) in paragraph at lines 38--43
+\OT1/cmr/m/n/10 If
+ []
+
+
+Overfull \hbox (5.95834pt too wide) in paragraph at lines 38--43
+\OML/cmm/m/it/10 ^^^$
+ []
+
+
+Overfull \hbox (6.72223pt too wide) in paragraph at lines 38--43
+\OT1/cmr/m/n/10 is
+ []
+
+
+Overfull \hbox (16.31708pt too wide) in paragraph at lines 38--43
+\OMS/cmsy/m/n/10 8\OML/cmm/m/it/10 v \OT1/cmr/m/n/10 :
+ []
+
+
+Overfull \hbox (21.59491pt too wide) in paragraph at lines 38--43
+\OML/cmm/m/it/10 A;  $\OT1/cmr/m/n/10 ,
+ []
+
+
+Overfull \hbox (19.44449pt too wide) in paragraph at lines 38--43
+\OT1/cmr/m/n/10 then
+ []
+
+
+Overfull \hbox (19.02203pt too wide) in paragraph at lines 38--43
+[]\OML/cmm/m/it/10 ^^^\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (5.83336pt too wide) in paragraph at lines 38--43
+\OT1/cmr/m/n/10 if
+ []
+
+
+Overfull \hbox (11.97226pt too wide) in paragraph at lines 38--43
+\OT1/cmr/m/n/10 for
+ []
+
+
+Overfull \hbox (15.5556pt too wide) in paragraph at lines 38--43
+\OT1/cmr/m/n/10 any
+ []
+
+
+Overfull \hbox (13.73605pt too wide) in paragraph at lines 38--43
+\OML/cmm/m/it/10 b \OMS/cmsy/m/n/10 2
+ []
+
+
+Overfull \hbox (10.2778pt too wide) in paragraph at lines 38--43
+\OML/cmm/m/it/10 A$\OT1/cmr/m/n/10 ,
+ []
+
+
+Overfull \hbox (31.45024pt too wide) in paragraph at lines 38--43
+[]\OML/cmm/m/it/10  \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a; b\OT1/cmr/m/n/10 )$. 
+ []
+
+./_region_.tex:43: Missing } inserted.
+<inserted text> 
+                }
+l.43     \end{itemize}
+                      
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./_region_.tex:43: Missing } inserted.
+<inserted text> 
+                }
+l.43     \end{itemize}
+                      
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./_region_.tex:43: Missing } inserted.
+<inserted text> 
+                }
+l.43     \end{itemize}
+                      
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+./_region_.tex:44: LaTeX Error: \begin{document} ended by \end{dfn}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.44 \end{dfn}
+              
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (5.95834pt too wide) in paragraph at lines 23--45
+\OML/cmm/m/it/10 ^^^$
+ []
+
+
+Overfull \hbox (16.17828pt too wide) in paragraph at lines 23--45
+\OML/cmm/m/it/10 r\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (29.71886pt too wide) in paragraph at lines 23--45
+\OML/cmm/m/it/10 rA[]A[]$
+ []
+
+
+Overfull \hbox (9.16661pt too wide) in paragraph at lines 23--45
+\OML/cmm/m/it/10 t \OT1/cmr/m/n/10 :
+ []
+
+
+Overfull \hbox (24.92949pt too wide) in paragraph at lines 23--45
+\OML/cmm/m/it/10 A[]A[]$
+ []
+
+
+Overfull \hbox (19.02203pt too wide) in paragraph at lines 23--45
+[]\OML/cmm/m/it/10 ^^^\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (26.1192pt too wide) in paragraph at lines 23--45
+[]\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 2
+ []
+
+
+Overfull \hbox (9.2755pt too wide) in paragraph at lines 23--45
+[]\OML/cmm/m/it/10 r$[]
+ []
+
+
+./_region_.tex:186: LaTeX Error: Environment ex undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.186 \begin{ex}
+                [Not consistent, not complete]
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+Missing character: There is no [ in font nullfont!
+Missing character: There is no N in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no ] in font nullfont!
+./_region_.tex:187: Undefined control sequence.
+l.187     \link
+               {not_consequence}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no n in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no t in font nullfont!
+./_region_.tex:187: Missing $ inserted.
+<inserted text> 
+                $
+l.187     \link{not_
+                    consequence}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./_region_.tex:187: Extra }, or forgotten $.
+l.187     \link{not_consequence}
+                                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+Missing character: There is no T in font nullfont!
+./_region_.tex:188: Undefined control sequence.
+l.188     Let $T$ be a $\Si
+                           $-theory
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:189: Missing $ inserted.
+<inserted text> 
+                $
+l.189     and $\phi
+                   $ is a $\Si$-sentence.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no a in font nullfont!
+./_region_.tex:189: Undefined control sequence.
+<recently read> \Si 
+                    
+l.189     and $\phi$ is a $\Si
+                              $-sentence.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no - in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no S in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+./_region_.tex:190: Undefined control sequence.
+l.190     Show that $T \nodel
+                             {\Si} \phi$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:190: Undefined control sequence.
+l.190     Show that $T \nodel{\Si
+                                 } \phi$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no i in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no f in font nullfont!
+./_region_.tex:191: Undefined control sequence.
+l.191     if and only if $T \cup \set
+                                     { \NOT \phi}$ is consistent.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:191: Undefined control sequence.
+l.191     if and only if $T \cup \set{ \NOT
+                                            \phi}$ is consistent.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no F in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no , in font nullfont!
+./_region_.tex:192: Undefined control sequence.
+l.192     Furthermore, $T \nodel
+                                {\Si} \NOT \phi$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:192: Undefined control sequence.
+l.192     Furthermore, $T \nodel{\Si
+                                    } \NOT \phi$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:192: Undefined control sequence.
+l.192     Furthermore, $T \nodel{\Si} \NOT
+                                           \phi$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no i in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no f in font nullfont!
+./_region_.tex:193: Undefined control sequence.
+l.193     if and only if $T \cup \set
+                                     {\phi}$ is consistent.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no . in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 186--194
+[]
+ []
+
+
+Overfull \hbox (142.92018pt too wide) in paragraph at lines 186--194
+[]\OML/cmm/m/it/10 onsequenceLet$$bea$$\OMS/cmsy/m/n/10 ^^@\OML/cmm/m/it/10 theoryand$$^^^$
+ []
+
+
+Overfull \hbox (13.191pt too wide) in paragraph at lines 186--194
+\OML/cmm/m/it/10 T[]^^^$
+ []
+
+
+Overfull \hbox (13.89934pt too wide) in paragraph at lines 186--194
+\OML/cmm/m/it/10 T \OMS/cmsy/m/n/10 [
+ []
+
+
+Overfull \hbox (5.95834pt too wide) in paragraph at lines 186--194
+\OML/cmm/m/it/10 ^^^$
+ []
+
+
+Overfull \hbox (13.191pt too wide) in paragraph at lines 186--194
+\OML/cmm/m/it/10 T[]^^^$
+ []
+
+
+Overfull \hbox (13.89934pt too wide) in paragraph at lines 186--194
+\OML/cmm/m/it/10 T \OMS/cmsy/m/n/10 [
+ []
+
+
+Overfull \hbox (5.95834pt too wide) in paragraph at lines 186--194
+\OML/cmm/m/it/10 ^^^$
+ []
+
+Missing character: There is no N in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+./_region_.tex:195: Undefined control sequence.
+<recently read> \Si 
+                    
+l.195     Note that by definition for $\Si
+                                          $-structures and
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no - in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+./_region_.tex:196: Undefined control sequence.
+<recently read> \Si 
+                    
+l.196     $\Si
+              $-formulas we (classically) have that
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no - in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no ( in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no ) in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 195--197
+[]
+ []
+
+./_region_.tex:198: Undefined control sequence.
+l.198         \MM
+                  \modelsi \NOT \phi(a) \iff \MM \nodelsi \phi(a)
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:198: Undefined control sequence.
+l.198         \MM \modelsi
+                           \NOT \phi(a) \iff \MM \nodelsi \phi(a)
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:198: Undefined control sequence.
+l.198         \MM \modelsi \NOT
+                                \phi(a) \iff \MM \nodelsi \phi(a)
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:198: Undefined control sequence.
+l.198         \MM \modelsi \NOT \phi(a) \iff \MM
+                                                 \nodelsi \phi(a)
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:198: Undefined control sequence.
+l.198 ...M \modelsi \NOT \phi(a) \iff \MM \nodelsi
+                                                   \phi(a)
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (67.48831pt too wide) detected at line 199
+\OML/cmm/m/it/10 ^^^\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )  \OMS/cmsy/m/n/10 ([])  \OML/cmm/m/it/10 ^^^\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )
+ []
+
+Missing character: There is no F in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no x in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no y in font nullfont!
+./_region_.tex:202: Undefined control sequence.
+l.202         T \modelsi
+                         \NOT \phi \iff T \nodelsi \phi
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:202: Undefined control sequence.
+l.202         T \modelsi \NOT
+                              \phi \iff T \nodelsi \phi
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./_region_.tex:202: Undefined control sequence.
+l.202         T \modelsi \NOT \phi \iff T \nodelsi
+                                                   \phi
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (55.82623pt too wide) detected at line 203
+\OML/cmm/m/it/10 T^^^  \OMS/cmsy/m/n/10 ([])  \OML/cmm/m/it/10 T^^^
+ []
+
+
+./_region_.tex:204: LaTeX Error: \begin{document} ended by \end{ex}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.204 \end{ex}
+              
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+./_region_.tex:204: Missing } inserted.
+<inserted text> 
+                }
+l.204 \end{ex}
+              
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+ !name(1signature.tex) !offset(-206) )
+! Emergency stop.
+<*> .../05]\fi} \input \detokenize{ _region_.tex }
+                                                  
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 31 strings out of 478994
+ 510 string characters out of 5864751
+ 287044 words of memory out of 5000000
+ 17617 multiletter control sequences out of 15000+600000
+ 403430 words of font info for 27 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 26i,5n,34p,352b,170s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!

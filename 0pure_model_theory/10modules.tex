@@ -1,0 +1,126 @@
+\section{Examples}
+
+Here is a compilation of some examples of signatures and theories.
+
+\begin{dfn}[Signature and theory of groups]
+    \link{dfn_grp}
+    Let the following be the signature of groups:
+    \begin{itemize}
+        \item There is only one sort symbol $G$ which stands for the group.
+        \item Function symbols: the constant symbol for the identity 
+        $0 : G$, the symbol for addition $+ : G^2 \to G$ 
+        and the symbol for inverses $- : G \to G$.
+        \item There are no relation symbols.
+    \end{itemize}
+    
+    In the signature of groups we define the theory of (commutative) groups
+    (we write $a + b$ to mean $+(a,b)$ and so on):
+    \begin{itemize}
+        \item[$\vert$] Assosiativity: 
+            $\forall x, y, z : G, (x + y) + z = x + (y + z)$
+        \item[$\vert$] Identity:
+            $\forall x : G, x + 0 = x$ 
+        \item[$\vert$] Inverse: $\forall x : G, x - x = 0$ 
+        \item[$\vert$] (For commutative only): 
+            $\forall x, y : G, x + y = y + x$
+    \end{itemize}
+    Note that we don't have axioms for `closure of functions'
+    and `existence or uniqueness of inverses' as
+    it is encoded by interpretation of 
+    $+, -, \times$ being well-defined.
+    
+    Removing the function symbol $-$ and the sentence `inverse for addition' 
+    we obtain the language and theory of (commutative) monoids.
+\end{dfn}
+
+\begin{dfn}[Signature of monoid actions]
+    \link{dfn_grp_ac}
+    Let the following be the signature of monoid actions:
+    \begin{itemize}
+        \item The sort symbols are: $A$ the sort for the 
+            monoid and $X$ the sort for the $A$-set.
+        \item The functions symbols are $1 : A$ and 
+            $\times: A^2 \to A$ purely for the monoid
+            together with $\rho : A \times X \to X$ 
+            for the action of the monoid on the set.
+        \item There are no relation symbols.
+    \end{itemize}
+    
+    In this signature we define the theory of monoid actions
+    (we write $a x$ to mean $\rho(a,x)$ and so on):
+    \begin{itemize}
+        \item The \linkto{dfn_grp}{theory of monoids} 
+        with $1$ as the identity and $\times$ as symbol for addition.
+        \item Identity: 
+        $\forall x : X, 1 x = x$
+        \item Compatibility: 
+        $\forall a, b : A, \forall x : X, (a b) x = a (b x)$
+    \end{itemize}
+\end{dfn}
+
+\begin{dfn}[Signature and theory of modules]
+    \link{dfn_modules}
+    Let the following be the signature of modules over a ring:
+    \begin{itemize}
+        \item The sort symbols are: $A$ the sort for the ring and 
+            $M$ the sort for the module.
+        \item The function symbols for the ring are constants 
+            $0_A, 1_A : A$, addition and multiplication
+            $+_A, \times_A : A^2 \to A$ and inverse $-_A : A \to A$.
+            For the module we have constant $0_M : M$, 
+            addition $+_M : M^2 \to M$ and inverse $-_M : M \to M$.
+            Lastly we have $\rho : A \times M \to M$ 
+            for the action of the ring on the module.
+        \item There are no relation symbols.
+    \end{itemize}
+    
+    In the signature of modules we define the theory of 
+    modules over a ring as the set containing
+    (we write $a m$ to mean $\rho(a,m)$ and so on):
+    \begin{itemize}
+        \item The \linkto{dfn_rings}{theory of rings} 
+        with the obvious substitutions.
+        \item The \linkto{dfn_grp}{theory of commutative groups} 
+        where $G$ is replaced with $M$,
+        and the function symbols for the group are the function 
+        symbols for the module.
+        \item The \linkto{dfn_grp_ac}{theory of monoid actions} 
+        with the monoid as $A$
+        under multiplication and the $A$-set as $M$.
+        \item Distributivity of $\rho$ over $+_A$:
+        $\forall a , b : A, \forall x: M, (a + b) x = a x + b x$
+        \item Distributivity of $\rho$ over $+_M$: 
+        $\forall a : A, \forall x, y : M, a (x + y) = a x + a y$
+    \end{itemize}
+\end{dfn}
+
+\begin{dfn}[Singature of a single binary relation]
+    \link{sig_just_one_bin_rel}
+    The signature $\Si_{<}$ of a single binary relation is given by 
+    \begin{itemize}
+        \item A sort symbol $P$ for the set.
+        \item No function symbols.
+        \item A relation symbol $< \hookr P^2$
+    \end{itemize}
+    For variables $x$ and $y$ of type $P$, 
+    we write $x < y$ as notation for $<(x,y)$.
+\end{dfn}
+
+\begin{dfn}[Order theories]
+    \link{order_theories}
+    The $\Si_<$-theory of partial orders is given by the two formulas 
+    \begin{itemize}
+        \item Non-reflexivity - $\forall x : P, \NOT (x < x)$
+        \item Transitivity - $\forall x,y,z : P, x < y \AND y < z \to x < z$
+    \end{itemize}
+    The $\Si_<$-theory of linear orders is the theory of partial orders plus 
+    \begin{itemize}
+        \item Linearity - $\forall x,y : P, x < y \OR x = y \OR y < x$
+    \end{itemize}
+    The $\Si_<$-theory of dense linear orders 
+    is the theory of linear orders plus
+    \begin{itemize}
+        \item Density -
+            $\forall x, y : P, x < y \to \exists z : P, x < z \AND z < y$.
+    \end{itemize}
+\end{dfn}

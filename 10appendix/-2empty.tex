@@ -1,0 +1,47 @@
+\section{Empty issues}
+I have chosen to adopt the convension that interpreted sorts 
+are non-empty.
+This is not in fact an issue for a lot of the time, below is an example 
+demonstrating this.
+After a long time of disliking the idea I have decided to adopt the 
+non-empty convension due to my proof of compactness 
+relying on a \linkto{make_wit}{Henkin construction},
+which adds constants the signature, 
+making empty sorts problematic.
+
+\begin{eg}[Empty sort]
+    \link{empty_issues}
+    Here we allow sorts to be interpreted as $\nothing$.
+    Suppose $\Si$ is a signature with 
+    \begin{itemize}
+        \item Sort symbols $A$ and $B$.
+        \item A constant function symbol $b : B$ and a function symbol 
+        $f : A \to B$.
+        \item No relation symbols.
+    \end{itemize} 
+    Then interpreting $\mmintp{A} := \nothing$; 
+    $\mmintp{B}$ as a singleton with $\mmintp{b}$ as its
+    unique element; and $\mmintp{f}$ as the empty function 
+    gives a $\Si$-structure $\MM$.
+    Note that no interpretation of $A$ as the empty set 
+    would exist if $A$ had a constant function symbol 
+    or if there was some function symbol $g : B \to A$.
+    
+    Let $\phi$ be a $\Si$-formula.
+    If it has free variables of type $A$ then we cannot ask if it is satisfied 
+    since there are no elements of $A$.
+    Otherwise, we can have the following:
+    \begin{itemize}
+        \item If $\phi$ is $\top$, $\NOT \psi$, $\psi \OR \chi$ or 
+            $\forall v : B, \psi$ then it is as usual.
+        \item If $\phi$ is $t = s$ then $\tv{t}$ and $\tv{s}$ 
+        cannot have variables 
+            of type $A$. One can show by induction on terms that this means 
+            $t$ and $s$ are built `purely in $B$' (even $f$ can't be involved).
+            \vspace{1em}
+        \item If $\phi$ is of the form
+            $\forall v : A, \psi$, then $\MM \model{\Si} \phi$ 
+            since $A$ is empty.
+            Conversely $\MM \nodelsi \exists v : A, \psi$.
+    \end{itemize}
+\end{eg}

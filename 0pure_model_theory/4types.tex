@@ -1,0 +1,799 @@
+\section{Types}
+This section mainly follows material from Tent and Ziegler's book \cite{tent}.
+There is an unfortunate terminology clash with types in type theory.
+Model theoretic $n$-types have nothing to do with type theoretic 
+types and $n$-types.
+However, the model theoreic notions of `sorts' and `terms of type $A$ a sort' 
+\textit{does} line up with the notion of a term of of type $A$ 
+(usually $A$ would be called a `type' in type theory).
+
+For this chapter we fix a signature $\Si$ and 
+$V_n = {v_1 : A_1, \dots, v_n : A_n}$
+a finite set of typed variables in $\Si$.
+
+\subsection{Types}
+\begin{dfn}[$F(\Si,V_n)$ and $n$-dimensional theories]
+    \link{dfn_types_on_theories}
+    Let $F(\Si,V_n)$ be the set of $\Si$-formulas whose typed free variables
+    are amongst those $n$ variables.
+    We call $p \subs F(\Si,V_n)$ an $n$-dimensional theory, 
+    noting that if $n = 0$ we have the original notion of a $\Si$-theory.
+    We will define $n$-types later as $n$-dimensional theories that have 
+    some notion of consistency.
+    We say $p$ is a maximal if for any $\phi \in F(\Si,V_n)$,
+    $\phi \in p$ or $\NOT \phi \in p$, 
+    generalising the notion of maximality of a theory.
+
+    For any tuple of constant symbols $c : \prod_{i = 1}^n A_i$
+    and $n$-dimensional theory $p \subs F(\Si,V_n)$ we write 
+    \[
+        p(c) = \set{\phi(c) \st \phi \in p}
+    \]
+    and if $\MM$ is a $\Si$-structure with 
+    $a \in \prod_{i=1}^n \mmintp{A_i}$ we write 
+    \[
+        \MM \model{\Si} p(a)
+    \]
+    to mean for every $\phi \in p$, $\MM \model{\Si} \phi(a)$.
+\end{dfn}
+
+\begin{dfn}[Realisation]
+    Let $T$ be a $\Si$-theory.
+    Let $p \subs F(\Si,V_n)$ be an $n$-dimensional theory.
+    Let $\MM$ be a $\Si$-structure.
+    \begin{itemize}
+        \item $p$ is \textit{realised} in $\MM$ by 
+        $a \in \prod_{i = 1}^n \mmintp{A_i}$ over $A$ if
+            \[\MM \modelsi p(a)\]
+            We also just say $p$ is realised in $\MM$.
+            If $p$ is not realised in $\MM$
+            then we say $\MM$ \textit{omits} $p$.
+        \item $p$ is \textit{finitely realised} in $\MM$ 
+            over $A$ if for each finite subset $\De \subs p$ 
+            there exists $a \in \prod_{i = 1}^n \mmintp{A_i}$
+            such that $\De$ is realised in $\MM$ by $a$.
+    \end{itemize}
+\end{dfn}
+
+\begin{eg}
+    We have a notion of \linkto{compactness_for_types}{compactness} 
+    for $n$-dimensional theories,
+    but there is no such notion for realisation.
+    For example, let $\Si$ be the 
+    \linkto{sig_just_one_bin_rel}{signature with just a binary relation $<$}.
+    For the 
+    \linkto{order_theories}{
+        $\Si$-theory of dense linear orders} we have a $\Si$-model 
+    $\Q$ which finitely realises the $1$-dimensional theory
+    \[p = {x < q \st q \in \Q}\]
+    since any finite set has an infemum.
+    However there is no element of $\Q$ realising $p$.
+    We will \linkto{finite_realisation_and_embeddings}{later} 
+    see that finite realisation of $p$ 
+    implies existence of an elementary extension of $\Q$ realising $p$.
+    An example of this would be $\Q \cup {-\infty}$ with the obvious ordering.
+\end{eg}
+
+\begin{dfn}[$n$-types and $n$-dimensional compactness]
+    \link{equiv_def_of_consistent_with_theory}
+    \link{compactness_for_types}
+    Let $T$ be a $\Si$-theory and $p \subs F(\Si,V_n)$ 
+    be an $n$-dimensional $\Si$-theory.
+    Let $\Si(c)$ be the signature with added constant symbols
+    $c_1 : A_1,\dots,c_n : A_n$.
+    The following are equivalent (see proof):
+    \begin{enumerate}
+        \item $T \cup p(c)$ is a consistent $\Si(c)$-theory.
+        \item (Consistent with $T$) There exists 
+            $\MM \model{\Si} T$ such that $p$ is realised in $\MM$. 
+        \item (Finitely consistent with $T$) 
+            For any finite subset $\De \subs p$, there exists 
+            $\MM \model{\Si} T$ such that $p$ is realised in $\MM$.
+    \end{enumerate}
+    If any of the above is true then we say $p$ an \textit{$n$-type 
+    consistent with $T$} 
+    (also called a \textit{partial} $n$-type on $T$).
+    The second and third definitions being equivalent is 
+    the $n$-dimensional \linkto{compactness}{compactness} theorem 
+    (also called \textit{compactness for types}).
+
+    Furthermore if $\MM$ is a $\Si$-structure with subset $X \subs \MM$
+    (noting $X \subs \MM$ is \linkto{theory_of_struc}{notation}), 
+    we say that $p$ is an \textit{$n$-type on $\MM$ over $A$} if 
+    $p$ is an $n$-type consistent with 
+    \linkto{theory_of_struc}{$\Theory_\MM(A)$}.
+\end{dfn}
+\begin{proof}
+    ($1. \iff 2.$) 
+        Suppose we have a $\Si(c)$-structure 
+        $\MM \model{\Si(c)} T \cup p(c)$.
+        Then by taking the images of the interpretation of each $c_i$ in 
+        $\mmintp{A_i}$
+        we obtain $a = \modintp{\MM}{c} \in \prod \mmintp{A_i}$ such that 
+        $\MM \model{\Si(c)} p(a)$.
+        \linkto{move_down_mod}{Moving this down to $\Si$} we have
+        \[\MM \model{\Si} T \cup p(a)\]
+        Conversely suppose we have $\MM \model{\Si} T$ and 
+        $a \in \prod \mmintp{A_i}$ such that $\MM \modelsi p(a)$.
+        We can \linkto{move_up_mod}{make $\MM$ a $\Si(c)$-structure} such that 
+        everything from $\Si$ is interpreted in the same way 
+        and each constant symbol $c_i$ is interpreted as $a_i$.
+        Thus for any $\phi(c) \in p(c)$,
+        \[\MM \model{\Si} \phi(a) \implies \MM \model{\Si(c)} \phi(a)
+        \implies \MM \model{\Si(c)} \phi(c)\]
+        Hence $\MM \model{\Si(c)} T \cup p(c)$ 
+        and $T \cup p(c)$ is consistent in $\Si(c)$.
+
+    ($2. \iff 3.$) 
+    \begin{align*}
+        &\quad p \text{ consistent with } T \\
+        &\iff T \cup p(c) \text{ consistent in } \Si(c) 
+        \quad \text{by (1. $\iff$ 2.)}\\
+        &\iff \text{for any finite } \De(c) \subs p(c), 
+        T \cup \De(c) \text{ consistent in } \Si(c) 
+        \quad \text{by \linkto{compactness}{compactness}}\\
+        &\iff \text{for any finite } \De \subs p, 
+        T \cup \De(c) \text{ consistent in } \Si(c) \\
+        &\iff \text{for any finite } \De \subs p, 
+        \De \text{ consistent with } T
+        \quad \text{by (1. $\iff$ 2.)}
+    \end{align*}
+\end{proof}
+
+\begin{dfn}[Type of an element]
+    Let $\MM$ be a $\Si$-structure and $a \in \prod_{i=1}^n \mmintp{A_i}$
+    Then 
+    \[\subintp{\Si,n}{\MM}{\tp}(a) := 
+    \set{\phi \in F(\Si,V_n) \st \MM \model{\Si} \phi(a)}\]
+    is the type of $a$ in $\MM$ over $A$.
+    One can verify that if $\MM$ is any $\Si$-structure then 
+    $\tp(a)$ (we get rid of superscripts and subscripts when clear) 
+    is a maximal $n$-type consistent with any $\Si$-theory modelled by $\MM$.
+    If \linkto{theory_of_struc}{$X \subs \MM$} 
+    and we want to do the same but with signature $\Si(X)$
+    we write $\subintp{X,n}{\MM}{\tp}(a)$.
+\end{dfn}
+
+\begin{dfn}[Equivalence modulo a theory]
+    \link{dfn_modulo_theory}
+    We say two $\Si$-formulas $\phi$ and $\psi$ in $F(\Si,V_n)$ 
+    are equivalent modulo a $\Si$-theory $T$ if 
+    \[T \model{\Si} \forall v : \prod_{i=1}^n A_i, \brkt{\phi \iff \psi}\]
+\end{dfn}
+
+\begin{dfn}[Stone space of a theory]
+    Let $T$ be a $\Si$-theory.
+    Let the stone space of $T$
+    be the set $S_n(T)$ of all maximal $n$-types on $T$.
+    (The signature of the $n$-types of the on $T$ is implicit, 
+    given by the signature of $T$.)
+    We give a topology on $S_n(T)$ by specifying an open basis,
+    which consists of the subsets
+    \[
+        [\phi]_T := \set{p \in S_n(T) \st \phi \in p}
+    \]
+    for each $\phi \in F(\Si,V_n)$.
+\end{dfn}
+
+\begin{lem}[Extending to maximal $n$-types]
+    \link{extend_to_maximal_type_zorn}
+    \link{elems_of_stone_space_are_types_of_elements}
+    Any $n$-type can be extended to a maximal $n$-type
+    by taking the type of an element.
+    In particular $p$ is a maximal $n$-type consistent with theory $T$ 
+    if and only if $p = \subintp{n}{\MM}{\tp}(a)$ for 
+    a model $\MM$ of $T$ and some $a \in \prod_{i=1}^n \mmintp{A_i}$.
+    Hence elements of the Stone space of a theory are types of elements.
+\end{lem}
+\begin{proof}
+    Let $T$ be a $\Si$-theory and $p$ be a $n$-type.
+    Then by definition $p$ is realised by some 
+    $a \in \prod_{i=1}^n \mmintp{A_i}$, 
+    where $\MM$ is a $\Si$-model of $T$.
+    Taking the type of element $a$ we have 
+    $p \subs \subintp{n}{\MM}{\tp}(a)$ is a maximal $n$-type extending $p$.
+\end{proof}
+
+%Furthermore, if $\MM \to \NN$ is an elementary $\Si$-embedding 
+%    and $a \in \prod_{i=1}^n \mmintp{A_i}$ then
+%    \[
+%        \subintp{\Si,n}{\MM}{\tp}(a) = \subintp{\Si,n}{\NN}{\tp}(a)
+%    \]
+%For the last part note that 
+%    \[
+%        \phi \in \subintp{\Si,n}{\MM}{\tp}(a) \iff \MM \model{\Si(A)} \phi(a)
+%        \iff \NN \model{\Si(A)} \phi(a) \iff 
+%        \phi \in \subintp{A,n}{\NN}{\tp}(a)
+%    \]
+
+\begin{prop}[Elementary properties of the Stone space]
+    \link{basic_facts_basis_elems}
+    Let $T$ be a $\Si$-theory, $p \in S_n(T)$, and $\phi, \psi \in F(\Si,V_n)$.
+    \begin{itemize}
+        \item $(\NOT \phi) \in p$ if and only if $p \notin [\phi]_T$.
+        \item $[\phi]_T = [\psi]_T$ if and only if $\phi$ and $\psi$ are 
+            equivalent modulo $T$; $[\phi]_T \subs [\psi]_T$ if and only if
+            $\phi$ and $\psi$
+            \[
+                T \modelsi \forall v : \prod_{i = 1}^n A, \phi \to \psi
+            \]
+        The basis elements are closed under Boolean operations
+        \item $[\NOT \phi]_T = S_n(T) \setminus [\phi]_T$
+        \item $[\phi \OR \psi]_T = [\phi]_T \cup [\psi]_T$
+        \item $[\phi \AND \psi]_T = [\phi]_T \cap [\psi]_T$
+        \item $[\top]_T = S_n(T)$ and $[\bot]_T = \nothing$ and
+            in particular if $[\phi]_T = S_n(T) = [\top]_T$ then 
+            $\phi$ and $\top$ are equivalent modulo $T$ hence
+            $T \modelsi \forall v, \phi$.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    We will just prove a couple of these.
+    \begin{itemize}
+        \item Suppose $(\NOT \phi) \in p$.
+            If $p \in [\phi]_T$ then $phi, \NOT \phi$ are both in $p$,
+            but $p$ is consistent with $T$ so
+            there exists a model $\MM$ and $a$ from 
+            $\MM$ such that
+            $\MM \modelsi \phi(a)$ and $\MM \nodel{\Si} \phi(a)$, 
+            a contradiction.
+            For the other direction, 
+            $p \notin [\psi]_T$ and so $ \psi \notin p$ and
+            by maximality $\NOT \phi \in p$.
+        \item We show the $\IFF$ statement. 
+            \begin{forward}
+                Let $\MM \model{\Si} T$ and 
+                $a \in \prod_{i=1}^n \mmintp{A_i}$.
+                We want that $\MM \modelsi \phi(a) \IFF \psi(a)$.
+                By symmetry it suffices to assume $\MM \modelsi \phi(a)$ 
+                and show $\MM \modelsi \psi(a)$.
+                Taking the type of element $a$ gives us maximal $n$-type
+                $\subintp{n}{\MM}{\tp}(a) \in [\phi]_T \subs [\psi]_T$.
+                Hence $\MM \modelsi \psi(a)$.
+            \end{forward}
+            \begin{backward}
+                Suppose $T \model{\Si} \forall v, \brkt{\phi \IFF \psi}$.
+                Let $p \in [\phi]_T$; by symmetry it suffices
+                to show that $p \in [\psi]_T$.
+                Since $p$ is consistent with $T$ there exists a $\Si$-structure
+                $\MM \model{\Si} T$ and 
+                $a \in \prod_{i=1}^n \mmintp{A_i}$ such that 
+                $\MM \model{\Si} p(a)$.
+                By assumption $\MM \model{\Si} \brkt{\phi \to \psi}(a)$
+                and $p \in [\phi]_T$ so 
+                $\MM \model{\Si} \psi(a)$.
+                By maximality of $p$ we just need to note that the case
+                $\NOT \psi \in p$ implies $\MM \nodelsi \psi(a)$
+                which is false.
+            \end{backward}
+    \end{itemize}
+\end{proof}
+
+\begin{prop}[Topological properties of the Stone space]
+    \link{properties_of_stone_space}
+    Let $T$ be a theory.
+    \begin{itemize}
+        \item Elements of the basis of $S_n(T)$ are clopen.
+        \item $S_n(T)$ is Hausdorff.
+        \item $S_n(T)$ is compact.
+    \end{itemize}
+\end{prop}
+\begin{proof}~
+\begin{itemize}
+    \item By maximality of each $p$ the complement of $U$ is also 
+        in the open basis:
+        \[  
+            \set{p \in S_n(T) \st \phi \notin p}
+            = \set{p \in S_n(T) \st (\NOT \phi) \in p}
+        \]
+        Hence each element of the basis is clopen.
+    \item Let $p,q \in S_n(T)$ and suppose they share the same neighbourhoods.
+        then for any formula $\phi \in F(\Si,V_n)$ we have 
+        \[ p \in [\phi]_T \iff q \in [\phi]_T\]
+        Hence $\phi \in p$ if and only if $\phi \in q$, so $p = q$.
+    \item We use the
+        \linkto{compactness_for_types}{compactness theorem for types}.
+        Let $C$ be a collection of closed sets with the finite intersection
+        property.
+        Each closed $U \in C$ can be written as a possibly infinite 
+        intersection of a finite union of basis elements.
+        A finite union of closed sets is still a basis element
+        since \linkto{basic_facts_basis_elems}{$[\phi]\cup[\psi]_T = 
+            [\phi \OR \psi]_T$},
+        so for each $U$ there exists $\Ga_U \subs F(\Si,V_n)$ such that
+        \[
+            U = \bigcap_{\phi_U \in \Ga_U}[\phi_U]_T
+        \]
+        Sets of closed sets will correspond (roughly) to sets of formulas, and
+        non-emptiness of the intersection of the closed sets corresponds to 
+        consistency of that set of formulas with $T$:
+        an $n$-type $p$ in the intersection of all the closed sets gives 
+        consistency of the set of formulas with respect to $T$.
+        The right set of formulas (corresponding to $C$) to take is 
+        \[
+            \Ga := \set{\phi_U \in \Ga_U \st U \in C} 
+            \quad \text{ which is the same data as } \quad 
+            [\Ga]_T := \set{[\phi_U]_T \st \phi_U \in \Ga}
+        \]
+        The intersection any finite subset $[\De]_T \subs [\Ga]_T$ 
+        (due to finite $\De \subs \Ga$)
+        is non-empty as it contains a finite intersection of elements in $C$.
+        \[
+            \bigcap_{\phi_U \in \De} [\phi_U]_T \supseteq 
+            \bigcap_{\phi_U \in \De} U
+        \]
+        Thus any finite subset $\De \subs \Ga$ is consistent with $T$.
+        Hence $\Ga$ is finitely consistent with $T$ and so
+        \linkto{compactness_for_types}{$\Ga$ is consistent with $T$}.
+        \linkto{extend_to_maximal_type_zorn}{Extend $\Ga$ to a 
+        maximal $n$-type} $p$.
+        Then for any $U \in C$ we have 
+        \[
+            p \in \bigcap_{\phi_U \in \Ga_U} [\phi_U] = U
+        \]
+\end{itemize}
+\end{proof}
+
+\begin{eg}[A visualisation of the Stone space]
+    \link{visualisation_of_Stone}
+
+    Suppose $\Si$ is the \linkto{dfn_rings}{signature of rings}.
+    Let $K$ be an algebraically closed field, viewed as a $\Si$-structure.
+    Let $T = \eldiag{\Si}{K}$, and $V_n = {x_1 : A, \dots, x_n : A}$ 
+    ($A$ is the only sort in the signature of rings).
+    Then there is a \linkto{cont_bij_stone_to_spec}{continuous bijection} 
+    from the Stone space $S_n(T)$ 
+    to \linkto{prime_spec_zariski_top}{$\spec(K[x_1,\dots,x_n])$} 
+    that is \textit{not} an isomorphism.
+    In other words the Stone space is a finer topology on the affine space
+    $\spec(K[x_1,\dots,x_n]) \iso \A^n$.
+    Notice that there cannot be a isomorphism since the Stone space is 
+    Hausdorff but this particular $\spec$
+    \linkto{spec_not_hausdorff}{cannot be Hausdorff}.
+
+    In this example of the Stone space, an example of a clopen set in the basis 
+    would be given by ($[\star]_T$ of ) the formula 
+    \[
+        f(x_1,\dots,x_n) = 0 \AND g(x_1,\dots,x_n) \ne 0
+    \]
+    where $f$ and $g$ are 
+    \linkto{terms_in_RNG_are_polynomials}{polynomials in $K(x_1,\dots,x_n)$}
+    (noting that we are actually working in $\Si(K)$).
+    In $\spec$, this looks like the intersection of a closed set 
+    $\set{f = 0}$ and an open set $\set{g \ne 0}$.
+\end{eg}
+
+\begin{eg}
+    This is a solution to exercise $4.5.2$ 
+    in Marker's book \cite{marker}. 
+    Let $\Si_s$ be a signature with just a single sort $A$ and just 
+    a single function symbol $s : A \to A$, the `successor function'. 
+    Consider the $\Si_s$-structure $\Z$ with 
+    $\modintp{\Z}{s} : x \mapsto x + 1$.
+    Consider $S_n(\Theory_{\Z}(\Si_s))$, the Stone spaces of the 
+    \linkto{theory_of_struc}{theory of $\Z$} for each list of variables.
+    Let $p \in S_n(\Theory_{\Z})$
+    
+    If $n = 0$ then $p = \Theory_{\Z}$ and 
+    $S_n(\Theory_{\Z})$ is just a single point.
+    This is true in general for any maximal theory $T$: 
+    the list of variables is empty, so $p$ is a maximal $\Si_s$-theory 
+    consistent with $T$. Hence $T \subs p$, 
+    but $T$ is maximal so they are equal.
+
+    Suppose $p$ is $1$-dimensional.
+    \linkto{elems_of_stone_space_are_types_of_elements}{
+        Elements of the Stone space are types of elements} 
+    in \linkto{finite_realisation_and_embeddings}{
+        elementary extensions of $\Z$},
+    so there exists $\Z \to \NN$ and elementary extension 
+    and $a \in \nnintp{A}$ such that $p = \nnintp{\tp}(a)$.
+    If $a$ is in the image of $\Z$ then $p = \mmintp{\tp}(a)$;
+    we claim this implies $p = \mmintp{\tp}(b)$ for \textit{any} $b \in \Z$.
+
+    \begin{proof}
+        WLOG $a \in \Z$. 
+        We show that $+ b - a : \Z \to \Z$ is a $\Si_s$-automorphism.
+        Indeed it commutes with interpretation of $\mmintp{s}$ 
+        (it \textit{is} $\mmintp{s}$ applied $b - a$ times) and
+        has two sided inverse $- b + a$ which is a $\Si_s$-morphism 
+        for the same reason.
+        \linkto{iso_imp_elem_equiv}{Isomorphisms are elementary embeddings}
+        and $a$ is sent to $b$, 
+        so $\phi \in \mmintp{\tp}(a)$ if and only if $\phi \in \mmintp{\tp}(b)$.
+    \end{proof}
+    If $a$ is not in the image of $\Z$ then we need to determine what 
+    the rest of $\NN$ could look like.
+    Noting that $\modintp{\Z}{s}$ is injective - 
+    which can be expressed as a $\Si_s$-sentence, 
+    we have that $\nnintp{s}$ is also injective since 
+    the embedding is elementary.
+    Intuitively the only elementary extensions of $\Z$ can be 
+    disjoint unions of $\Z$ with other injective looking successor 
+    interpretations, for example $Z \sqcup \N$ with the successor on $\N$ 
+    interpreted as usual;
+    moreover $\Z$ and $\N$ are the only (basic) $\Si_s$-structures on which 
+    we have an injective looking successor function.
+    
+    We confirm and formalise this intuition by showing that the only other 
+    cases for $p$ are when $a$ behaves like some $n \in \N$, 
+    characterised by the fact that it has exactly $n - 1$ predecessors.
+    Let $n \in \N$ and suppose 
+    \[
+        p \in 
+        [\forall y : A, s^{n+1}(y) \ne x] \cap [\exists y : A, s^{n}(y) = x]
+    \]
+    Then we claim that $p$ is \linkto{dfn_isolated}{isolated} by 
+    the conjunction of these two formulas, i.e.
+    \[
+        \set{p} = 
+        [\forall y : A, s^{n+1}(y) \ne x] \cap [\exists y : A, s^{n}(y) = x]
+    \]
+    \begin{proof}
+        Suppose $q \in S_1(\Theory)$ is another point in the intersection, 
+        (by embedding into the disjoint union of 
+        $\NN$ and the model realising $q$)
+        WLOG $q = \nnintp{\tp}(b)$ for some $b \in \nnintp{A}$.
+        Define the orbit of an element $x \in \nnintp{A}$ by 
+        \[
+            \Orb(x) = \set{y \in \nnintp{A} \st \exists k, l \in \N, 
+            \NN \model{\Si_s} s^k(x) = s^l(y)}
+        \]
+        First we show that the substructures $\Orb(a)$ and 
+        $\Orb(b)$ are isomorphic 
+        substructures of $\NN$; in fact they are both isomorphic to $\N$
+        with $a \mapsto n \mapsto b$.
+        By symmetry we just construct $\N \to \Orb(a)$.
+        Let $a_0$ be the element of $\Orb(a)$ such that 
+        $\NN \model{\Si_s} s^n(a_0) = a$. Then it follows that 
+        \[\Orb(a) = \Orb(a_0) = \set{s^k(a_0) \st k \in \N}\]
+        and we can define the map $\N \to \Orb(a)$ by $k \mapsto s^k(a_0)$,
+        which is a $\Si_s$-isomorphism.
+
+        These isomorphisms are (possibly distinct) 
+        \linkto{iso_imp_elem_equiv}{elementary embeddings} $\N \to \NN$.
+        Hence $\nnintp{\tp}(a) = \modintp{\N}{n} = \nnintp{\tp}(b)$.
+    \end{proof}
+    Now it remains to consider the case when $p$ is not in any of 
+    the above singleton sets.
+    This says that for each $n \in \N$ 
+    \[
+        p \in [\exists y : A, s^{n+1}(y) = x] 
+        \cup [\forall y : A, s^{n}(y) \ne x]
+    \]
+    By induction, noting that $\forall y : A, s^{0}(y) \ne x \notin p$ for the 
+    base case (take $y$ to be $a$), $p$ is always in the left side of the 
+    union (and never in the right side).
+    Hence 
+    \[
+        p \in \bigcap_{n \in \N} [\exists y : A, s^{n+1}(y) = x]
+    \]
+    This brings us back to the first case, 
+    $p = \nnintp{\tp}(a) = \modintp{\Z}{\tp}(0)$
+    (this \textit{does not} imply $a$ is in the image of $\Z$;
+    we could have two disjoint copies of $\Z$ for example):
+    mapping $\Z$ to $\Orb(a)$ by taking $n \mapsto s^n(a)$ 
+    (we can deal with the negatives using injectivity) 
+    we have an isomorphism, hence an elementary embedding 
+    (maybe not the original elementary embedding into $\NN$)
+    indentifying $\nnintp{\tp}(a)$ with $\modintp{\Z}{\tp}(0)$.
+\end{eg}
+
+\subsection{Types on Structures and Omitting Types}
+
+\begin{lem}[Finite realisation and embeddings \cite{buechler}] 
+    \link{finite_realisation_and_embeddings}
+    Let $\MM$ be a $\Si$-structure, 
+    $\linkto{theory_of_struc}{A \subs \MM}$ and $p \subs F(\Si(A),V_n)$
+    an $n$-dimensional theory.
+    Then the following are equivalent 
+    \begin{itemize}
+        \item $p$ is consistent with $\eldiag{\Si}{\MM}$.
+        \item There exists an elementary embedding $\MM \to \NN$ 
+            such that $p$ is realised in $\NN$.
+        \item There exists an elementary embedding $\MM \to \NN$ 
+            such that $p$ is finitely realised in $\NN$.
+        \item $p$ is finitely realised in $\MM$.
+    \end{itemize}
+    The elementary embeddings can be seen as both $\Si$-embeddings or 
+    $\Si(A)$-embeddings for any subset $A \subs \MM$.
+\end{lem}
+\begin{proof}
+    $(1. \implies 2.)$ There exists $\NN$ and a
+    $b \in \prod_{i = 1}^n \nnintp{A_i}$ such that 
+    $\NN \model{\Si(\MM)} \eldiag{\Si}{\MM}$ and 
+    $\NN \model{\Si(\MM)} p(b)$.
+    Then since \linkto{elem_ext_equiv_eldiag_model}{models of the 
+    elementary diagram correspond to elementary extensions}, 
+    there exists an elementary $\Si(\MM)$-embedding $\MM \to \NN$
+    (which can be moved down to being a $\Si(A)$-embedding for any 
+    subset $A \subs \MM$.) 
+
+    $(2. \implies 3.)$ Clear.
+
+    $(3. \implies 4.)$ Let $\De \subs p$ be finite.
+    Then by assumption there exists an elementary $\Si$-embedding 
+    $\io : \MM \to \NN$ and $b \in \prod_{i = 1}^n \nnintp{A_i}$ 
+    such that  
+    $\NN \model{\Si} \De(b)$. 
+    Hence 
+    \[
+        \NN \modelsi \exists v : \prod_{i = 1}^n A_i, 
+        \bigand{\psi \in \De}{} \psi(v) 
+        \quad \implies \quad 
+        \MM \modelsi \exists v : \prod_{i = 1}^n A_i, 
+        \bigand{\psi \in \De}{} \psi(v)
+    \]
+    by the embedding being elementary. 
+    Hence there exists $a \in \prod_{i = 1}^n \mmintp{A_i}$ 
+    realising $\De$.
+
+    $(4. \implies 1.)$
+        By \linkto{compactness_for_types}{compactness for types},
+        it suffices to show that $p$ 
+        is finitely consistent with the elementary diagram.
+        Let $\De \subs p$ be finite.
+        Then by assumption there is $a \in \prod_{i=1}^n \mmintp{A_i}$ such that 
+        $\MM \model{\Si} \De(a)$ and so $\MM \model{\Si(\MM)} \De(a)$.
+        Clearly $\MM$ is a model of its elementary diagram.
+\end{proof}
+
+We note again that \linkto{fin_realised_not_realised}{finitely realised does 
+not imply realised} in general.
+
+\begin{dfn}[Isolated types]
+    \link{dfn_isolated}
+    Let $p \subs F(\Si,V_n)$ be an $n$-dimensional theory and 
+    $\phi \in F(\Si,V_n)$.
+    Then $\phi$ isolates $p$ with respect to $\Si$-theory $T$ if 
+    \begin{itemize}
+        \item $\phi$ is consistent relative to $T$ and 
+        \item For each $\psi \in p$ 
+        \[
+            T \modelsi \forall v : \prod_{i = 1}^n A, \phi \to \psi
+        \]
+    \end{itemize}
+    We say $p$ is isolated if there exists such a $\phi$ 
+    (some also say $p$ is principal).
+\end{dfn}
+
+\begin{prop}[Isolation topologically]
+    If $p \in S_n(T)$ then $p$ is isolated by $\phi$ if and only if 
+    $\set{p} = [\phi]_T$ - it is an `isolated point'. 
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        By maximality $\phi \in p$ and $p \in [\phi]_T$.
+        Let $q \in [\phi]_T$. For any element $\psi \in p$ 
+        we have 
+        \[T \modelsi \forall v, \phi \to \psi\]
+        \linkto{basic_facts_basis_elems}{hence $q \in [\phi]_T \subs [\psi]_T$}
+        and $\psi \in q$.
+        Hence $p \subs q$ and by maximality $p = q$.
+    \end{forward}
+
+    \begin{backward}
+        Let $\psi \in p$
+        \[
+            [\phi \to \psi] \linkto{basic_facts_basis_elems}{=} 
+            [\NOT \phi] \cup [\psi] \linkto{basic_facts_basis_elems}{=} 
+            \brkt{S_n(T) \setminus \set{p}} \cup [\psi] = S_n(T)
+        \]
+        \linkto{basic_facts_basis_elems}{Hence} 
+        $T \modelsi \forall v, \phi \to \psi$.
+    \end{backward}
+\end{proof}
+
+\begin{prop}[Isolated types are realised in every model of a complete theory]
+    Any finite $n$-type on a 
+    \textit{complete} theory
+    is realised in every model of the theory.
+    Hence any $n$-type is finitely realised in every model of the theory.
+    Hence an $n$-type isolated with respect to a \textit{complete} 
+    theory is realised in every model of the theory.
+\end{prop}
+\begin{proof}
+    By taking the conjunction of formulas 
+    it suffices to show that a single formula $\phi$ consistent with complete
+    $\Si$-theory $T$ is realised in any model $\MM$ of $T$, or equivalently
+    \[T \modelsi \exists v, \phi\]
+    By completeness of $T$ either the above holds or 
+    \[T \modelsi \forall v, \NOT \phi\]
+    By consistency of $\phi$ with $T$ there exists a 
+    model which shows that the latter cannot hold.
+\end{proof}
+\begin{rmk}
+    To demonstrate that completeness of $T$ is required we take the example 
+    of the incomplete \linkto{dfn_rings}{theory of rings} as $T$, 
+    the $1$-type to be $\set{x^2 + 1 = 0}$ and the model in question to be $\Z$.
+    Clearly the $1$-type is realised in $\Z[i]$ but not in $\Z$.
+\end{rmk}
+
+\begin{dfn}[Substructure generated by a subset]
+    \link{substructure_gen_by_subset}
+    Let $\MM$ be a $\Si$-structure.
+    Let \linkto{theory_of_struc}{$X \subs \MM$}.
+    Then the following are equivalent definitions for a substructure $\<A\>$
+    of $\MM$ generated by $X$:
+    \begin{itemize}
+        \item The $\Si$-structure $\<X\>$ defined inductively such that 
+        $X \subs \<X\>$ and if $f : \prod A \to B \in \func{\Si}$ and 
+        $a \in \prod \modintp{\<X\>}{A}$ then 
+        $\mmintp{f}(a) \in \modintp{\<X\>}{B}$.
+        \item $\bigcap \set{\NN \text{ substructure of } \MM \st X \subs \NN}$, 
+            where by the intersection we mean intersecting 
+            in each interpreted sort.
+    \end{itemize}
+    We say a substructure is finitely generated if there exists a finite set 
+    $X$ such that it is equal to $\<X\>$.
+\end{dfn}
+\begin{proof}
+    We fix the first definition as $\<X\>$ and call the second $\cap$
+    with each sort of the intersection as $\cap_A$.
+    We show $\<X\>$ forms a substructure of $\MM$ containing $X$:
+    By definition $\modintp{\<X\>}{f} := \mmintp{f}$ is well defined.
+    Each relation $r \hookr \prod A$ is naturally 
+    interpreted as the pullback 
+    \[ 
+        \mmintp{r} \cap \modintp{\<X\>}{\prod A}
+    \]
+    Hence $\<X\>$ is a substructure of $\MM$ containing $X$.
+    Furthermore the second definition is a contained in $\<X\>$.
+
+    For the other direction note that if $b \in \modintp{\<X\>}{B}$ 
+    was built via the first definition then $b \in X_B$ or
+    $b = \mmintp{f}(a)$ for some tuple $a \in \prod \modintp{\<X\>}{A}$.
+    In the first case it is trivially in any substructure containing $X$.
+    In the second case any substructure $\MM$ containing $X$ 
+    is closed under $\nnintp{f} = \mmintp{f}$ and by induction
+    $a \in \prod \nnintp{A}$ for any substructure $\NN$.
+    Hence $b = \mmintp{f}(a) \in \NN$ for any substructure.
+    Thus $\<A\> \subs \bigcap \NN$ and we are done.
+\end{proof}
+
+\begin{lem}[Proofs are finite]
+    \link{proofs_are_finite}
+    Suppose $T$ is a $\Si$-theory and $\phi$ a $\Si$-sentence such that 
+    $T \model{\Si} \phi$. 
+    Then there exists a finite subset $\De$ of $T$ such that 
+    $\De \model{\Si} \phi$.
+\end{lem}
+\begin{proof}
+    We show the contrapositive.
+    Suppose for all finite subsets $\De$ of $T$, $\De \nodel{\Si} \phi$,
+    then each $\De \cup \set{\NOT \phi}$ is consistent and
+    by \linkto{compactness}{compactness} $T \cup \set{\NOT \phi}$ is consistent.
+    Hence $T \nodel{\Si} \phi$.
+\end{proof}
+
+The omitting types theorem is a kind-of converse to 
+`an $n$-type isolated with respect to a \textit{complete} 
+theory is realised in every model of the theory.'
+
+\begin{prop}[Omitting types]\cite{henson}
+    Let $\Si$ be a countable signature, $T$ a countable $\Si$-theory 
+    and $p$ a non-isolated $n$-type on $T$.
+    Then there exists a countable $\Si$-model of $T$ that omits $p$.
+\end{prop}
+\begin{proof}
+    Write $V_n = \set{x_1 : A_1, \dots, x_n : A_n}$.
+    Let $\Si_C$ be the signature with symbols from $\Si$ 
+    plus a countably infinite set of constant symbols $C_A$ 
+    for each sort $A$.
+    We build a $\Si_C$-theory $T_C$ and a 
+    countable model of $T_C$ that omits $p$. 
+    Our $T_C$ will satisfy the following three conditions
+    \begin{itemize}
+        \item $T \subs T_C$ is maximal and consistent
+        \item (Witness) For any formula $\phi$ with only one free variable 
+        $v : A$ there exists $c \in C_A$ such that if the sentence 
+        $\exists v : A,\phi(v)$ is in the theory $T_C$ then $\phi(c) \in T_C$.
+        \item (Omitting) For any tuple $c \in C_{A_1} \tdt C_{A_n}$ there exists 
+        $\phi \in p$ such that $\NOT \phi(c) \in T_C$.
+    \end{itemize}
+    Given such a $T_C$ we build our omitting model $\NN$.
+    By consistency of $T_C$ we have a model $\MM$, 
+    from which we can take the collection $X$ of interpreted constant symbols:
+    for each $A$ let 
+    \[
+        X_A := \set{\mmintp{c} \in \mmintp{A} \st c \in C_A}
+    \]
+    We show that $\NN := \<X\>$
+    \linkto{substructure_gen_by_subset}{the substructure it generates}
+    has sorts interpreted as $\nnintp{A} = X_A$.
+    Suppose $f : \prod A \to B$ is a function symbol from $\Si$ and 
+    $c \in \prod A$ represents an element of $\prod X_A$
+    then since $T_C$ is maximal either $\exists v : B, f(c) = v$ 
+    or its negation is in $T_C$, 
+    but consistency of $T_C$ implies the latter is false.
+    Hence $\exists v : B, f(c) = v$ is in $T_C$ and so by the witness property 
+    there exists $d \in C_B$ such that $f(c) = d$ is in $T_C$.
+    In particular $\mmintp{f}(\mmintp{c}) \in \NN$.
+    We interpret relation symbols as the pullback and we have a 
+    $\Si_C$-embedding $\NN \to \MM$.
+
+    To show $\NN$ is a $\Si_C$-model of $T_C$ it suffices that the 
+    embedding is elementary, which we show by 
+    \linkto{tarski_vaught}{Tarski-Vaught}:
+    suppose $\phi$ is a $\Si_C$-sentence preserved by the inclusion.
+    If $\exists v : A, \phi$ is a $\Si_C$-sentence satisfied by $\MM$ then 
+    by maximality of $T_C$ we have $\exists v : A, \phi \in T_C$ and so there 
+    exists $c \in C$ such that $\phi(c) \in T_C$.
+    Since $\phi$ is preserved by the inclusion, 
+    $\MM \model{\Si_C} \phi(c)$ if and only if $\NN \model{\Si_C} \phi(c)$,
+    concluding Tarski-Vaught.
+    Furthermore, any tuple of elements in $\prod \nnintp{A_i}$ 
+    are represented by some $c \in \prod C_n$, 
+    hence by the last property of $T_C$
+    we have some $\phi \in p$ such that $\NN \nodel{\Si_C} \phi(c)$. 
+    So $\NN$ is a countable (as $\Si$ and each $C_A$ is countable) 
+    $\Si$-model of $T$ that omits $p$.
+
+    It remains to construct such a theory.
+    Let $T_0 := T$, and we build $\Si_C$-theory $T_{i+1}$
+    from $\Si_C$-theory $T_i$,
+    guaranteeing that at each step 
+    \textit{only finitely many formulas are added}.
+    Enumerate the (countable) set of $\Si_C$-sentences by 
+    $\set{\phi_i}_{i \in \N}$;
+    enumerate the (countable) set of tuples $C_1 \tdt C_n$ 
+    by $\set{c_i}_{i \in \N}$;
+    enumerate the (countable) set of $\Si$-formulas $\psi$ in a single variable 
+    $v : A$ such that $\exists v : A, \psi \in T$ by $\set{\psi_i}_{i \in \N}$.
+
+    \textit{Maximality}:
+    At least one of $T_i \cup \set{\phi_i}$ and $T_i \cup \set{\NOT \phi_i}$ 
+    is a consistent $\Si_C$-theory
+    (since $T_i$ is consistent)
+    so we take the consistent one to be $T^1$.
+    If the added formula is equivalent to $\exists v : A, \psi(v)$ 
+    where $\psi$ has exactly one
+    free variable $v : A$ then we take $T^2 := T' \cup \set{\psi(c)}$ 
+    for some $c \in C_A$ that has not appeared yet in $T^1$,
+    otherwise leaving $T^2 := T^1$.  
+
+    \textit{Witness}: We want the witness property for $\psi_i$.
+    We pick a constant symbol $c \in C_A$ that has not appeared in 
+    $T^2$ and let $T^3 = T^2 \cup \set{\psi_i(c)}$. 
+    This is still consistent since $T^2$ has a model, which is also a model of 
+    $T$, hence $c$ can be interpreted in a sensible way.
+    
+    \textit{Omitting}: We wish find $\de \in p$ such that 
+    $T^3 \cup \set{\NOT \de(c_i)}$ is consistent, which
+    (by chucking $\de(c_i)$ in at each step) 
+    allows us to omit $p$ once the induction is complete.
+    Since $T^3$ is an extension of $T$ by finitely many formulas we can 
+    take their conjunction to find $\Si_C$-sentence $\chi(d) \in \Si_C$ 
+    where $\chi$ is a $\Si$-formula and $d$ represents all the constant symbols 
+    from $C$ appearing in the conjunction.
+    Assume for a contradiction for every $\de \in p$ we have 
+    $T^3 \cup \set{\NOT \de(c_i)}$ is inconsistent.
+    Then for each $\de$,
+    \[
+        T^3 \model{\Si_C} \de(c_i) \quad \implies \quad
+        T \model{\Si_C} \chi(d) \to \de(c_i)
+    \]
+    By the \linkto{lemma_on_const}{lemma on constants} this implies
+    for every $\de \in p$
+    \[
+        T \modelsi \forall x : \prod A_i, \forall v, \chi(x,v) \to \de(x)
+        \quad \implies \quad
+        T \modelsi \forall x : \prod A_i, (\exists v, \chi (x,v)) \to \de(x)
+    \]
+    where $x$ are variables corresponding to $c_i$ and $v$ makes up to the rest
+    appearing in $d$.
+    This implies that $p$ is isolated by $\exists v, \chi (x,v)$,
+    which is a contradiction.
+    Hence we can extend $T_{i+1} := T^3 \cup \set{\NOT \de(c_i)}$
+    for some $\de \in p$. 
+    Again, if the added formula is equivalent to $\exists v : A, \psi(v)$ 
+    where $\psi$ has exactly one free variable $v : A$ then we 
+    add in a formula to compensate for this.
+
+    Now we take $T_C := \bigcup_{i \in \N} T_i$.
+    It is maximal and it is finitely consistent 
+    (each finite subset is in some $T_i$, which is consistent)
+    \linkto{compactness}{hence} consistent.
+    The construction guaranteed $T_C$ having the witness property and 
+    omitting $p$.
+\end{proof}

@@ -1,0 +1,570 @@
+\section{Boolean Algebras, Ultrafilters and the Stone Space}
+\subsection{Boolean Algebras}
+There is a very detailed wikipedia page \cite{wiki0} on Boolean algebras,
+which can be used as references for elementary proofs.
+
+\begin{dfn}[Partially ordered set]
+    \link{partial_ordering}
+    The signature of partially ordred sets $\Si_\PO$ consists of 
+    $(\nothing,\nothing ,n_f,\set{\leq},m_f)$,
+    where $n_\leq = 2$.
+    The theory of partially ordered sets $\PO$ consists of 
+    \begin{itemize}
+        \item[$\vert$] Reflexivity: 
+            $\forall x, 
+            x \leq x$ (this is just notation for $\leq(x,x)$)
+        \item[$\vert$] Antisymmetry: 
+            $\forall x \forall y, 
+            (x \leq y \AND y \leq x) \to x = y$
+        \item[$\vert$] Transitivity:
+            $\forall x \forall y \forall z, 
+            (x \leq y \AND y \leq z) \to x \leq z$
+    \end{itemize}
+\end{dfn}
+
+\begin{dfn}[Boolean algebra]
+    \link{dfn_boolean_algebra}
+    The signature of Boolean algebras $\Si_\BLN$ consists of 
+    $(\set{1,0},\set{\leq,\sqcap,\sqcup,-},n_f,\nothing,m_f)$,
+    where $n_\leq = 2$, $n_\sqcap = n_\sqcup = 2$ and $n_- = 1$.
+    The theory of Boolean algebras $\BLN$ consists of the theory of 
+    partially ordered sets\footnote{Often 
+        the ordering is defined afterwards as 
+        $a \leq b$ if and only if $a = a \sqcap b$.} 
+    $\PO$ together with the formulas
+    \begin{itemize}
+        \item[$\vert$] Assosiativity of conjunction: 
+            $\forall x \forall y \forall z, 
+            (x \sqcap y) \sqcap z = x \sqcap (y \sqcap z)$
+        \item[$\vert$] Assosiativity of disjunction: 
+            $\forall x \forall y \forall z, 
+            (x \sqcup y) \sqcup z = x \sqcup (y \sqcup z)$
+        \item[$\vert$] Identity for conjunction:
+            $\forall x, x \sqcap 1 = x$ 
+        \item[$\vert$] Identity for disjunction:
+            $\forall x, x \sqcup 0 = x$ 
+        \item[$\vert$] Commutativity of conjunction: 
+            $\forall x \forall y, x \sqcap y = y \sqcap x$
+        \item[$\vert$] Commutativity of disjunction: 
+            $\forall x \forall y, x \sqcup y = y \sqcup x$
+        \item[$\vert$] Distributivity of conjunction:
+            $\forall x \forall y \forall z, 
+            x \sqcap (y \sqcup z) = (x \sqcap y) \sqcup (x \sqcap z)$
+        \item[$\vert$] Distributivity of disjunction:
+            $\forall x \forall y \forall z, 
+            x \sqcup (y \sqcap z) = (x \sqcup y) \sqcap (x \sqcup z)$
+        \item[$\vert$] Negation on conjunction: 
+            $\forall x, x \sqcap - x = 0$ 
+        \item[$\vert$] Negation on disjunction: 
+            $\forall x, x \sqcup - x = 1$ 
+        \item[$\vert$] Order on conjunction:
+            $\forall x \forall y, (x \sqcap y) \leq x$
+        \item[$\vert$] Maximal property of conjunction:
+            $\forall x \forall y \forall z, 
+            (x \leq y) \AND (x \leq z) \to (x \leq y \sqcap z)$ 
+        \item[$\vert$] Order on disjunction:
+            $\forall x \forall y, x \leq (x \sqcup y)$ 
+        \item[$\vert$] Minimal property of disjunction:
+            $\forall x \forall y \forall z, 
+            (x \leq z) \AND (y \leq z) \to (x \sqcup y \leq z)$ 
+        \end{itemize}
+    Often `absorption' is also included, 
+    but it can be deduced from the other axioms.
+    I have not used the usual logical symbols due to obvious clashes with 
+    our notation, 
+    and we will be using this in the context of sets anyway.
+    If $B$ is a $\Si_\BLN$-model of $\BLN$ we call it a Boolean algebra.
+\end{dfn}
+
+\begin{dfn}[Filters and ultrafilters on Boolean algebras]
+    \link{dfn_filter_on_bool_alg}
+    Let $P$ be a partial order.
+    A subset $\FF$ of $P$ is an filter on $P$ if
+    \begin{itemize}
+        \item $\FF$ is non-empty.
+        \item Closure under `superset': if $a \in \FF$ then any $b \in P$ 
+            such that $a \leq b$ is also a member of $\FF$. %?Analogy between filters and prime ideals?
+        \item Closure under `finite intersection':
+            for any two members $a,b \in P$ there is a common smaller 
+            $c \in P$: $c \leq a$ and $c \leq b$. For 
+            Boolean algebras this is equivalent to the conjunction
+            $a \sqcap b$ being in $\FF$.
+    \end{itemize}
+    We say a filter on $P$ is proper if it is not equal to $P$
+    - for Boolean algebras this is equivalent to not containing $0$.
+    A proper filter $\FF$ on $P$ is an ultrafilter (maximal filter) when
+    for any filter $\GG$ on $P$ such that $\FF \subs \GG$ we have $\GG = \FF$ 
+    or $\GG = P$.
+\end{dfn}
+
+\begin{lem}[Facts about Boolean algebras]
+    \link{bare_boolean_facts}
+    Let $B$ be a Boolean algebra, let $\FF$ be an ultrafilter
+    on $B$, let $a,b \in B$ and let $f : B \to C$ be a morphism.
+    \begin{itemize}
+        \item $a \sqcap a = a$ and $a \sqcup a = a$.
+        \item $a \sqcup 1 = 1$ and $a \sqcap 0 = 0$.
+        \item If $a \sqcap b = 0$ and $a \sqcup b = 1$ then $a = - b$
+            (negations are unique.)
+        \item $- (a \sqcup b) = (- a) \sqcap (- b)$ and its dual. 
+            (De Morgan)
+        \item ($a \in \FF$ or $b \in \FF$) if and only if $a \sqcup b \in \FF$.
+        \item Morphisms are order preserving.
+        \item Morphisms commute with negation.
+        \item $a \sqcap b = 1$ if and only if $a = 1$ and $b = 1$.
+            Similarly for $\sqcup$ with $0$.
+        \item If $a \sqcap b = 0$ then $b \leq - a$.
+    \end{itemize}
+\end{lem}
+%\begin{proof}~
+%    \begin{itemize}
+%        \item We prove only $a \sqcap a = a$ as the other has the same proof.
+%            \[a \sqcap a = (a \sqcap a) \sqcup 0 = (a \sqcap a) \sqcup (a \sqcap - a)
+%            = a \sqcap (a \sqcup - a) = a \sqcap 1 = a\]
+%        \item Again, we prove only $a \sqcup 1 = 1$. Using the previous part,
+%            \[a \sqcup 1 = a \sqcup (a \sqcup - a) = (a \sqcup a) \sqcup - a
+%            = a \sqcup - a = 1\]
+%        \item \begin{align*}
+%            a &= a \sqcup 0 = a \sqcup (b \sqcap - b) = 
+%            (a \sqcup b) \sqcap (a \sqcup - b) = 1 \sqcap (a \sqcup - b)\\
+%            &= 0 \sqcup (a \sqcup - b) = (b \sqcap - b) \sqcup (a \sqcup - b)
+%            = (b \sqcup a) \sqcup - b = 0 \sqcup - b \\
+%            &= - b
+%        \end{align*} 
+%        \item By the previous part it suffices to show that 
+%            \[\brkt{(- a) \sqcap (- b)} \sqcap (a \sqcup b) = 0 \text{ and }
+%            \brkt{(- a) \sqcup (- b) } \sqcup (a \sqcup b) = 1\]
+%            These are clear.
+%        \item \begin{forward}
+%            In the case that $a \in \FF$ we have $a \leq a \sqcup b \in \FF$ 
+%            as $\FF$ is under superset. 
+%            The other case is the same.
+%        \end{forward}
+%        \begin{backward}
+%            Suppose $a \notin \FF$ and $b \notin \FF$ then
+%            \linkto{negation_is_in_ultrafilter}{$- a \in \FF$ and 
+%                $- b \in \FF$} hence $- a \sqcap - b \in \FF$
+%                by closure under intersection. 
+%                By the previous part this is equal to $- (a \sqcup b)$,
+%                which implies $(a \sqcup b) \notin \FF$ as $\FF$ 
+%                is an \linkto{negation_is_in_ultrafilter}{ultrafilter}.
+%        \end{backward}
+%        \item Suppose $b \leq a$. 
+%            We show that $f(a) \leq f(b)$.
+%            By the minimal property of disjunction,
+%            \[b \leq a \AND a \leq a \implies b \sqcup a \leq a\]
+%            Clearly $a \leq b \sqcup a$ and so $a = b \sqcup a$
+%            Hence $f(b) \leq f(b) \sqcup f(a) = f(b \sqcup a) = f(a)$.
+%        \item Suppose $f(a) = b$.
+%            Then $f(a) \AND f(- a) = f(a \AND - a) = f(0) = 0$
+%            and $f(a) \OR f(- a) = f(a \OR - a) = f(1) = 1$.
+%            As negations are unique (shown above) 
+%            this gives us that $f(- a) = - f(a)$.
+%        \item Suppose $a \sqcap b = 1$ then $1 \leq a \sqcap b \leq a$ hence $1 = a$
+%            and similarly $1 = b$.
+%        \item\begin{align*}
+%                &a \sqcup - a = 1\\
+%                \implies & b \sqcap (a \sqcup - a) = b \sqcap 1 = b\\
+%                \implies & (b \sqcap a) \sqcup (b \sqcap - a) = b\\
+%                \implies & 0 \sqcup (b \sqcap - a) = b\\
+%                \implies & b = b \sqcap - a \leq - a
+%            \end{align*}
+%    \end{itemize}
+%\end{proof}
+
+\begin{prop}[Equivalent definition of ultrafilter for Boolean algebras]
+    \link{negation_is_in_ultrafilter}
+    Let $B$ be a boolean algebra. 
+    Let $\FF$ be a proper filter on $B$.
+    The following are equivalent:
+    \begin{enumerate}
+        \item $\FF$ is an ultrafilter over $B$.
+        \item If $a \sqcup b \in \FF$ then $a \in \FF$ or $b \in \FF$.
+            `$\FF$ is prime'.
+        \item For any $a$ of $B$, 
+            $a \in \FF$ or $(- a) \in \FF$.
+    \end{enumerate}
+    For $2.$ the or is in fact `exclusive or' since if both $a$ 
+    and its negation were in $\FF$ then $\FF$ would not be proper.
+\end{prop}
+\begin{proof}
+    $(1. \implies 2.)$
+        Suppose $a_0 \sqcup a_1 \in \FF$.
+        \[\GG_{a_0} = \set{b \in B \st \exists c \in \FF, c \sqcap a_0 \leq b}\]
+        Then clearly $\GG_{a_0}$ is a filter containing $\FF$ and $a_0$.
+        Similarly have $\GG_{a_1}$.
+        Since $\FF$ is an ultrafilter, 
+        we can case on whether $\GG_{a_i}$ is $\FF$ or $B$.
+        If either is $\FF$ then $a_i \in \FF$ and we are done.
+        If $\GG_{a_0} = \GG_{a_1} = B$ then both contain $0$ and so 
+        there exist $c_i \in \FF$ such that 
+        $c_i \sqcap a_i = 0$.
+        \linkto{bare_boolean_facts}{Hence $c_i \leq - a_i$,}
+        and so $(- a_i) \in \FF$.
+        Thus $- (a_0 \sqcup a_1) = - a_0 \sqcap - a_1 \in \FF$,
+        and so $0 \in \FF$,
+        a contradiction.
+
+    $(2. \implies 3.)$ 
+        Let $a \in \FF$.
+        Then we have that $a \sqcup - a = 1$, 
+        which is by definition a member of $\FF$.
+        By assumption this implies that $a \in \FF$ or $- a \in \FF$.
+    
+    $(3. \implies 1.)$
+        Let $\GG$ be a proper filter such that $\FF \subs \GG$.
+        It suffices to show that $\GG = \FF$.
+        Then let $a \in \GG$.
+        Suppose $a \notin \FF$.
+        Then $- a \in \FF$ and so $- a \in \GG$.
+        Thus $0 = (a \sqcap - a) \in \GG$ 
+        thus $\GG$ is not proper, a contradiction.
+        Hence $\GG = \FF$.
+\end{proof}
+
+\begin{prop}[Extending filters to ultrafilters on Boolean algebras]
+    \link{zorn_ultrafilter}
+    Any Boolean algebra 
+    can be extended to an ultrafilter.
+\end{prop}
+\begin{proof}
+    Let $\FF$ be a proper filter on $B$ a Boolean algebra. 
+    The set of proper filters on $B$ that contain $\FF$ is a non-empty set 
+    ordered by inclusion.
+    Any chain of proper filters is a proper filter 
+    so by Zorn we have a 
+    maximal element.
+\end{proof}
+
+\begin{dfn}
+    The category of Boolean algebras consists of Boolean algebras as the objects
+    and for any two Boolean algebras $B, C$ morphisms $f:B \to C$ such that
+    for any $a,b \in B$
+    \begin{align*}
+        f(0) = 0\\
+        f(1) = 1\\
+        f(a \sqcup b) = f(a) \sqcup f(b)\\
+        f(a \sqcap b) = f(a) \sqcap f(b)\\
+    \end{align*}
+\end{dfn}
+
+\begin{dfn}[Stone space]
+    A topological space is $0$-dimensional if it has a clopen basis.
+
+    The category of Stone spaces has
+    $0$-dimensional, 
+    compact and Hausdorff topological spaces as objects and 
+    continuous maps as morphisms.
+\end{dfn}
+
+\begin{prop}[Contravariant functor from Boolean algebras to Stone spaces
+        \cite{tent}]
+    \link{bool_alg_to_stone_functor}
+    Given $B$ a Boolean algebra, 
+    the following topological spaces are isomorphic:
+    \begin{itemize}
+        \item $S(B)$, 
+            the set of ultrafilters on $B$ with a clopen basis given by 
+            collections of ultrafilters containing some element of $B$.
+        \item $\mor{B}{2}{}$, 
+            the set of Boolean algebra morphisms from $B \to 2$ 
+            with the subspace topology from $2^B$, where $2$ is given the 
+            discrete topology and $2^B = \prod_{b \in B} 2$ 
+            inherits a product topology.
+    \end{itemize}
+    This is a Stone space and there is a 
+    contravariant functor from the category of 
+    Boolean algebras to the category of Stone spaces taking each 
+    $B$ to $S(B)$
+    and each Boolean algebra morphism
+    $f: A \to B$ to a continuous map of Stone spaces:
+    \[S(f) := f^{-1}(\star) : S(B) \to S(A)\]
+
+    Note:
+    In the second definition the functor would take $f$ to the precomposition 
+    map $\star \circ f : \mor{B}{2}{} \to \mor{A}{2}{}$.
+\end{prop}
+\begin{proof}
+    We first show that the spaces are isomorphic.
+    In fact their isomorphism is the restriction of a larger isomorphism between 
+    $2^B$ and the power set of $B$.
+    We take the bijection
+    \[2^B \to \PP(B) := f \mapsto f^{-1}(1)\]
+    inducing a topology on the power set of $B$.
+    We must show that $S(B)$ is the image of $\mor{B}{2}{}$
+    under this isomorphism and that the subspace topology on $S(B)$
+    from $\PP(B)$ is the topology defined by the basis given.
+
+    \textbf{$S(B)$ is the image of 
+    $\mor{B}{2}{}$}: Let $f : B \to 2$ be a Boolean algebra morphism. 
+    We must show that $\FF := f^{-1}(1)$ is an ultrafilter.
+    Since $f(1) = 1$, $1 \in \FF$. 
+    If $a,b \in \FF$ then $f(a) = f(b) = 1$ so 
+    $f(a \sqcap b) = f(a) \sqcap f(b) = 1$ thus 
+    $\FF$ is closed under intersection.
+    If $a \leq b$ and $a \in \FF$ then as $f$ is 
+    \linkto{bare_boolean_facts}{order preserving} $f(a) \leq f(b)$.
+    It is a proper filter as $f(0) = 0 \ne 1$.
+    To show it is an ultrafilter we use the
+    \linkto{negation_is_in_ultrafilter}{equivalent definition}:
+    let $a \in \PP(B)$. 
+    If $f(a) = 1$ then we are done,
+    otherwise
+    \[f(- a) = - f(a) = - 0 = 1 \implies - a \in \FF\]
+    and we are done.
+    To show that this is a surjection we use the inverse:
+    \[\FF \mapsto \brkt{a \to \begin{cases}
+        1, a \in \FF\\
+        0, a \notin \FF
+    \end{cases}}\] 
+    To show that this is a morphism we note that $\FF$ 
+    is proper and contains $1$ thus $f(0) = 0$ and $f(1) = 1$. 
+    Also 
+    \begin{align*}
+        & f(a \sqcap b) = 1 \iff a \sqcap b \in \FF\\ 
+        &\iff a \in \FF \text{ and } b \in \FF 
+        \quad \text{ by closure under finite intersection and superset}\\
+        &\iff f(a) = 1 \text{ and } f(b) = 1 \\
+        &\iff f(a) \sqcap f(b) = 1 
+        \quad \text{ \linkto{bare_boolean_facts}{ as proven before}}
+    \end{align*}
+    Hence $f(a \sqcap b) = f(a) \sqcap f(b)$.
+    Lastly since 
+    \[- f(a) = 1 \iff f(a) = 0 \iff a \notin \FF \iff - a \in \FF 
+    \iff f(- a) = 1\]
+    thus by \linkto{bare_boolean_facts}{De Morgan} and 
+    \linkto{bare_boolean_facts}{uniqueness of negations} we have
+    \[f(a \sqcup b) = f(-(- a \sqcap - b)) = 
+    - \sqbrkt{- f(a) \sqcap - f(b)} = 
+    \brkt{- - f(a)} \sqcup - - f(b) = f(a) \sqcup f(b)\]
+    Thus the inverse map gives back a Boolean algebra morphism and 
+    so the image of $\mor{B}{2}{}$ is $S(B)$ under the isomorphism.
+
+    \textbf{The topologies agree}:
+    It suffices that any open set in the basis of each can be written 
+    as a open set in the other.
+    For each $b$ we let $\pi_b$ be 
+    the continuous projection/evaluation maps from $2^B \to 2$
+    mapping $f \mapsto f(b)$.
+    \begin{forward}
+        Let $[b]$ be an element of the 
+        basis for $S(B)$ under the Stone topology.
+        Then this is the image of the open subset 
+        $\pi_b^{-1}\set{1}$ under the isomorphism:
+        \[
+            \pi_b^{-1}\set{1} = \set{f \in 2^B \st f(b) = 1} 
+            \IFF \set{f^{-1}(1) \st f(b) = 1}
+            = \set{\FF \text{ ultrafilter} \st b \in \FF}
+        \]
+    \end{forward}
+    \begin{backward}
+        Conversely, 
+        any open in $\mor{B}{2}{}$ is of the form 
+        $\pi_b^{-1}X$ where $b \in B$ and $X \subs 2$.
+        When $X$ is empty or $2$ then $\pi_b^{-1}X$ is empty or the whole space
+        so it is open in $S(B)$.
+        Otherwise if $X = \set{1}$ we have the case above again.
+        The case $X = \set{0}$ is also covered by taking the clopen complement.
+    \end{backward}
+    Thus the topologies are the same under this isomorphism.
+
+    We now show that the equivalent topologies are Stone spaces.
+    $S(B)$ is $0$-dimensional:
+    an element of the open basis is given by
+    \[[b] := \set{\FF \subs B \st b \in \FF}\]
+    for some $b \in B$.
+    The complement of each open in the basis
+    $S(B) \setminus [b] = [-b]$ is again in the open basis.
+    $S(B)$ is Hausdorff: if $\FF, \GG \in S(B)$ are not equal then 
+    without loss of generality there exists $b \in \FF$ such that 
+    $b \notin \GG$. 
+    Then the points $\FF$ and $\GG$ 
+    are separated $\FF \in [b]$ and $\GG \in [-b]$.
+    %? Analogy between filters and prime ideals?
+
+    $\mor{B}{2}{}$ is compact: 
+    note that $2 = \set{0,1}$ with the discrete topology is compact and
+    so $2^B = \prod_{a \in B} 2$ with the product topology is also
+    compact by Tychonoff.
+    Closed in compact is compact, so it remains to show that $\mor{B}{2}{}$
+    is closed in $2^B$:
+    \[
+        \mor{B}{2}{} = \set{f \st f(0) = 0} \cap \set{f \st f(1) = 1}
+        \cap \set{f \st f \text{ commutes with $\sqcap$}} \cap 
+        \set{f \st f \text{ commutes with $\sqcup$}}
+    \]
+    It suffices that these four sets are closed.
+    The first is $\pi_0^{-1}(0)$ and the second $\pi_1^{-1}(1)$,
+    which are both closed (and open).
+    For the third 
+    \[
+        \set{f \st f \text{ commutes with $\sqcap$}}=
+        \bigcap_{a,b \in B} \set{f \in 2^B \st f(a \sqcap b) = f(a) \sqcap f(b)}
+    \]
+    So it suffices that each set in the intersection is closed:
+    \begin{align*}
+        2^B \setminus \set{f \st f(a \sqcap b) = f(a) \sqcap f(b)}\\
+        = &\set{f \st f(a \sqcap b) = 0 \text{ and } f(a) \sqcap f(b) = 1}
+        \cup \set{f \st f(a \sqcap b) = 1 \text{ and } f(a) \sqcap f(b) = 0}\\
+        = &\brkt{\pi_{a \sqcap b}^{-1}\set{0} \cap \pi_a^{-1}\set{1}
+        \cap \pi_b^{-1}\set{1}} \cup 
+        \brkt{\pi_{a \sqcap b}^{-1}
+        \cap (\pi_a^{-1}\set{0}) \cup \pi_b^{-1}\set{0}}
+    \end{align*}
+    Each projection map's preimage is open so this whole complement is open.
+    Hence $\set{f \st f \text{ commutes with $\sqcap$}}$ is closed.
+    Similarly for $\set{f \st f \text{ commutes with $\sqcup$}}$ so we 
+    have shown that $S(B) \iso \mor{B}{2}{}$ is compact.
+
+    To show that $S(\star)$ 
+    is a contravariant functor we need to check that the morphism map
+    \[S(f) := f^-1(\star) : S(B) \to S(A)\]
+    is a well-defined, respects the identity and composition. 
+    We show that $S(f)$ is continuous: 
+    it suffices that preimages of clopen elements are clopen.
+    Let $[b] \subs S(A)$ be clopen. 
+    \begin{align*}
+        & S(f)^{-1}[b]\\
+        =& \set{\FF \in S(B) \st f^{-1}(\FF) \in [b]}\\
+        =& \set{\FF \in S(B) \st f(b) \in \FF}\\
+        =& [f(b)]
+    \end{align*}
+    which is clopen.
+\end{proof}
+
+\begin{prop}[Stone Duality]%?Incomplete
+    There is an equivalence between the category of Stone
+    spaces and the category of Boolean algebras.
+    Given by the functor $\BB_\star$ 
+    sending any Stone space $X$ to the set of 
+    its clopen subsets (this is a basis of $X$ as it is $0$-dimensional):
+    \begin{cd}
+        \text{ Boolean algebras }  \ar[r, shift left, "S(\star)"] 
+        & \text{ Stone spaces } \ar[l, shift left, "\BB_\star"]
+    \end{cd}
+    and its inverse \linkto{bool_alg_to_stone_functor}{$S(\star)$}.
+\end{prop}
+\begin{proof}
+    Let $X$ be a $0$-dimensional compact Hausdorff topological space.
+    There is an obvious Boolean algebra to take on 
+    \[\BB_X := \set{a \subs X \st a \text{ is clopen}}\]
+    which is interpreting $0$ to be $\nothing$, $1$ to be $X$, 
+    $\leq$ as $\subs$,
+    conjunction as intersection, disjunction as union and negation to be 
+    taking the complement in $X$.
+    One can check that this is a Boolean algebra.
+
+    We make this a contravariant functor by taking any continuous map 
+    $f : X \to Y$
+    to an induced map $f^{\diamond}:= f^{-1}(\star):\BB_Y \to \BB_X$.
+    One can check that this is a well-defined functor.
+
+    It remains to show the equivalence of categories by giving 
+    natural transformations $S(\BB_{\star}) \to \id{\star}$ in
+    the category of topological spaces
+    and $\id{\star} \to \BB_{S(\star)}$ in the category of Stone spaces.
+    This is omitted.
+\end{proof}
+
+\subsection{Isolated points of the Stone space}
+\begin{dfn}[Isolated point]
+    \link{dfn_isolated_point}
+    Let $X$ be a topological space and $x \in X$. 
+    We say $x$ is isolated if $\set{x}$ is open.
+\end{dfn}
+
+\begin{dfn}[Derived set]
+    \link{dfn_derived_set}
+    Let $X$ be a topological space. 
+    The derived set of $X$ is defined as
+    \[X' : = X \setminus \set{x \in X \st x \text{ isolated}}\]
+\end{dfn}
+
+\begin{ex}[Equivalent definition of derived set]
+    Let $U$ be a subspace of $X$ a topological space.
+    $x \in U$ is not isolated (in the subspace topology) if and only if 
+    for any open set $O_x$ containing $x$, 
+    $O_x \cap U \setminus \set{x}$ is non-empty. 
+    (it is a limit point of $U$.)
+\end{ex}
+
+\begin{dfn}[Atom]
+    Let $B$ be a Boolean algebra. 
+    We say $a \in B$ is an atom if it is non-zero and for any $b \in B$
+    if $b \leq a$ then $b = a$ or $b = 0$.
+\end{dfn}
+
+\begin{dfn}[Principle filter]
+    Let $B$ be a Boolean algebra and $a \in B$.
+    Suppose $a$ is non-zero.
+    Then principle filter of $a$ is defined as 
+    \[\upa{a} := \set{b \in B \st a \leq b}\]
+    One should check that this is a proper filter.
+\end{dfn}
+
+\begin{prop}
+    Let $a \in B$ a Boolean algebra.
+    Then $\upa{a}$ is an ultrafilter if and only if $a$ is atomic. 
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        Suppose $b \leq a$.
+        As $\upa{a}$ is \linkto{negation_is_in_ultrafilter}{ultrafilter} 
+        either $b \in \upa{a}$ or $- b \in \upa{a}$.
+        In the first case $a \leq b$ hence $a = b$.
+        If $- b \in \upa{a}$ then $b \leq a \leq - b$ and so 
+        \[1 = b \sqcup - b \leq - b \sqcup - b = - b\]
+        and so $1 = - b$ and $b = 0$.
+    \end{forward}
+
+    \begin{backward}
+        Suppose $a$ is an atom. 
+        We show that for any $b \in B$, 
+        it is in $\upa{a}$ or its negation is in $\upa{a}$
+        Since $1 \in \upa{a}$, 
+        $b \sqcup - b \in \upa{a}$ and so $a \leq b \sqcup - b$.
+        Thus
+        \[a = a \sqcap (b \sqcup - b) = (a \sqcap b) \sqcup (a \sqcap - b)\]
+        Since $a$ is non-zero, either $a \sqcap b$ or $a \sqcap - b$ is non-zero.
+        If $a \sqcap b \ne 0$ then together with the fact that $a \sqcap b \leq a$
+        we conclude that $a \sqcap b = a$ as $a$ is atomic.
+        Hence $a \leq b$ and $b \in \upa{a}$.
+        Similarly the other case results in $- b \in \upa{a}$.
+    \end{backward}
+\end{proof}
+
+\begin{prop}[Correspondence between atoms and isolated points]
+    Let $a \in B$ a Boolean algebra.
+    If $a$ is an atom if and only if $[a]$ is a singleton in $S(B)$.
+    Hence $\upa{a}$ is an isolated point in $S(B)$.
+\end{prop}
+\begin{proof}
+    \begin{forward}
+        If $a$ is an atom then $[a] = \set{\upa{a}}$ is the only ultrafilter 
+        containing $a$ is the principle filter of $a$:
+        Let $\FF$ be an ultrafilter containing $a$.
+        Then for any $b \in \FF$, 
+        $a \sqcap b \in \FF$ and non-zero.
+        Therefore $a \sqcap b = a$ as $a$ is an atom and $a \leq b$.
+        Hence $b \in \upa{a}$.
+        By maximality $\FF = \upa{a}$.
+        Hence $[a]$ is a singleton.
+    \end{forward}
+
+    \begin{backward}
+        Suppose $a$ is not atomic. 
+        Then there exists $b \leq a$ such that $b \ne 0$ and $b \ne a$.
+        \begin{align*}
+            & b \sqcup (a \sqcap - b)
+            = (a \sqcap b) \sqcup (a \sqcap - b)\\
+            = & a \sqcup (b \sqcap - b) = a \sqcup 0 = a
+        \end{align*}
+        There exist \linkto{zorn_ultrafilter}{ultrafilters} 
+        extending the principle filters of $b$ and 
+        $a \sqcap - b$.
+        These are not equal since $b$ and $- b$ cannot be in the same 
+        proper filter.
+        Both filters contain $a$. 
+        Hence $[a]$ is not a singleton.
+    \end{backward}
+\end{proof}

@@ -1,0 +1,319 @@
+\subsection{Ultraproducts and Łos's Theorem}
+This section introduces ultrafilters and ultraproducts and uses Łos's Theorem
+to prove the compactness theorem.
+Łos's theorem appears as an exercise in Tent and Ziegler's book \cite{tent}.
+
+\begin{dfn}[Filters on sets]
+    Let $X$ be a set. 
+    The power set of $X$ is a \linkto{dfn_boolean_algebra}{Boolean algebra} 
+    with $0$ interpreted as 
+    $\nothing$, 
+    $1$ interpreted as $X$ and $\leq$ interpreted as $\subs$.
+    We say $\FF$ is a filter on $X$ if it is a 
+    \linkto{dfn_filter_on_bool_alg}{filter} on the power set.
+    The definition translates to:
+    \begin{itemize}
+        \item $X \in \FF$.
+        \item For any two members of $\FF$ their intersection is in $\FF$.
+        \item If $a \in \FF$ then any $b$ in the power set of $X$ 
+            such that $a \subs b$ is also a member of $\FF$.
+    \end{itemize}
+    Translating definitions over we have that 
+    a filter on $X$ is proper if and only if it does not contain the empty set,
+    if and only if the filter is not equal to the power set.
+    Furthermore a proper filter $\FF$ is an ultrafilter if and only if
+    for any filter $\GG$, 
+    if $\FF \subs \GG$ then $\FF = \GG$ 
+    or $\GG$ is the power set of $X$.
+\end{dfn}
+
+\begin{dfn}[Ultraproduct]
+    Let $\FF$ be an ultrafilter on $X$.
+    We define a relation on $\prod_{x \in X} x$ by 
+    \[
+        (a_x)_{x \in X} \sim (b_x)_{x \in X} 
+        := \set{x \in X \st a_x = b_x} \in \FF
+    \]
+    This is an equivalence relation as 
+    \begin{itemize}
+        \item $(a_x)_{x \in X} \sim (a_x)_{x \in X} \iff 
+            \set{x \in X \st a_x = a_x} = X \in \FF$ 
+        \item Symmetry is due to symmetry of $=$.
+        \item If $\set{x \in X \st a_x = b_x} \in \FF$ and 
+            $\set{x \in X \st b_x = c_x} \in \FF$ then 
+            $\set{x \in X \st a_x = b_x = c_x}$ is their intersection
+            and so is in $\FF$.
+            Thus its superset $\set{x \in X \st a_x = c_x}$ is in $\FF$.
+    \end{itemize}
+    We define the ultraproduct of $X$ over $\FF$:
+    \[\prod X / \FF := \prod_{x \in X} x / \sim\]
+\end{dfn}
+
+\begin{prop}[Equivalent definition of ultrafilter (translated to the power set)]
+    \link{complement_is_in_ultrafilter}
+    Let $X$ be a set. 
+    Let $\FF$ be a proper filter on $X$.
+    $\FF$ is an ultrafilter over $X$ if and only if for every subset 
+    $U \subs X$, 
+    \emph{either} $U \in \FF$ or $X \setminus U \in \FF$.
+\end{prop}
+\begin{proof}
+    Follows immediately from \linkto{negation_is_in_ultrafilter}{the 
+    equivalent definition of an ultrafilter}.
+\end{proof}
+
+\begin{prop}[Łos's Theorem]
+    \link{los_theorem}
+    Let $\f{M} \subs \struc{\Si}$ where $\Si$ is a signature
+    such that each carrier set is non-empty.
+    Suppose $\FF$ is an ultrafilter on $\f{M}$ 
+    (i.e. an ultrafilter on the Boolean algebra $P(\f{M})$).
+    Then we want to make $\NN := \prod \f{M} / \FF$ into a $\Si$-structure.
+    Let $\pi$ be the natural surjection 
+    $\prod_{\MM \in \f{M}} \MM \to \prod \f{M} / \FF$.
+    If $a = (a_1, \dots, a_n) \in \prod_{\MM \in \f{M}} \MM$ then
+    write $a_\MM := ((a_1)_\MM, \dots, (a_n)_\MM)$.
+    \begin{itemize}
+        \item Constant symbols $c \in \const{\Si}$ are interpreted as 
+            \[\modintp{\NN}{c} := \pi(\modintp{\MM}{c})_{\MM \in \f{M}}\]
+        \item Any function symbol $f \in \func{\Si}$ is interpreted as the 
+            function
+            \[\modintp{\NN}{f} : 
+            \brkt{\prod \f{M} / \FF}^n \to \prod \f{M} / \FF
+            := \pi\brkt{(a_\MM)_{\MM \in \f{M}}} \mapsto 
+            \pi(f^\MM (a_\MM))_{\MM \in \f{M}}\]
+            where $\pi\brkt{(a_\MM)_{\MM \in \f{M}}} = 
+            \brkt{\pi((a_i)_\MM)_{\MM \in \f{M}}}_{i=1}^n$.
+        \item Any relation symbols 
+            $r \in \rel{\Si}$ is interpreted as the subset such that 
+            \[\pi(a) \in \modintp{\NN}{r}
+            \iff \set{\MM \in \f{M} \st 
+            a_\MM \in \modintp{\MM}{r}} \in \FF\]
+            where $a = a_1,\dots, a_m$ and $\pi(a) = \brkt{\pi(a_i)}_{i=1}^m$.
+    \end{itemize}
+    Then for any $\Si$-formula $\phi$ with free variables indexed by $S$,
+    If $a = (a_1, \dots, a_n) \in \prod_{\MM \in \f{M}} \MM$ then 
+    \[\NN \model{\Si} \phi(\pi(a)) \iff 
+    \set{\MM \in \f{M} \st \MM \model{\Si} \phi(a_\MM)} \in \FF\]
+\end{prop}
+\begin{proof}
+    We show that the interpretation of functions is well defined.
+    Let $a, b \in \brkt{\prod_{\MM \in \f{M}}}^{n_f}$.
+    Suppose for each $i \in \set{1,\dots,n_f}$, 
+    $a_i \sim b_i \in \prod_{\MM \in \f{M}} \MM$.
+    Then 
+    \begin{align*}
+        &\text{for each } i, 
+        \set{\MM \in \f{M} \st (a_i)_\MM = (b_i)_\MM} \in \FF \\
+        &\implies
+        \set{\MM \in \f{M} \st \bigand{i = 1}{n} (a_i)_\MM = (b_i)_\MM} \in \FF
+        \text{ by closure under finite conjunction}\\
+        &\implies
+        \set{\MM \in \f{M} \st a_\MM = b_\MM} \in \FF\\
+        &\implies
+        \set{\MM \in \f{M} \st 
+            \modintp{\MM}{f}(a_\MM) = \modintp{\MM}{f}(b_\MM)} \in \FF
+        \text{ by closure under superset}\\
+        &\implies \pi(\mmintp{f}(a_\MM)) = \pi(\mmintp{f}(b_\MM))
+        \text{ by definition of the quotient}
+    \end{align*}
+
+    We use the following claim:
+    If $t$ is a term with variables $S$ and 
+    $a \in (\prod_{\MM \in \f{M}} \MM)^S$
+    then there exists $b \in \prod_{\MM \in \f{M}} \MM$ such that 
+    \[\modintp{\NN}{t}\circ \pi(a) = \pi(b) \text{ and } 
+    \forall \MM \in \f{M}, \modintp{\MM}{t}(a_\MM) = b_\MM\]
+    We prove this by induction on $t$:
+    \begin{itemize}
+        \item If $t$ is a constant symbol $c$ then pick 
+            $b := (\modintp{\MM}{c})_{\MM \in \f{M}}$.
+        \item If $t$ is a variable then let 
+            $a \in \prod_{\MM \in \f{M}} \MM$ (only one varible), 
+            pick $b := a$.
+        \item If $t$ is a $f(s)$ then let $a \in (\prod_{\MM \in \f{M}} \MM)^S$
+            by the inducition hypothesis there exists 
+            $c \in \prod_{\MM \in \f{M}} \MM$ such that 
+            \[\modintp{\NN}{s} \circ \pi(a) = \pi(c) \text{ and } 
+            \forall \MM \in \f{M}, \modintp{\MM}{s}(a_\MM) = c_\MM\]
+            Then we can take 
+            $b = \brkt{\modintp{\MM}{f}(c_\MM)}_{\MM \in \f{M}}$. 
+            Thus 
+            \[\nnintp{t}\circ \pi(a) = \nnintp{f}(\nnintp{s}\circ (\pi(a)))
+            = \nnintp{f}(\pi(c)) = \pi(\mmintp{f}(c_\MM))_{\MM \in \f{M}}
+            = \pi(b)\]
+            and for any $\MM \in \f{M}$,
+            \[\mmintp{t}(a_\MM) = \mmintp{f} \circ \mmintp{s} (a_\MM)
+            = \mmintp{f}(c_\MM) = b_\MM\]
+    \end{itemize}
+    We now induct on $\phi$ to show that for any appropriate $a$,
+    \[\NN \model{\Si} \phi(\pi(a)) \iff 
+    \set{\MM \in \f{M} \st \MM \model{\Si} \phi(a_\MM)} \in \FF\]
+    \begin{itemize}
+        \item The case where $\phi$ is $\top$ is trivial 
+            (noting that anything models $\top$ and $\f{M} \in \FF$).
+        \item If $\phi$ is $s = t$ then it suffices to show that 
+        \[  
+            \modintp{\NN}{s}\circ \pi(a) = \modintp{\NN}{t}\circ \pi(a)
+            \iff 
+            \set{\MM \in \f{M} \st \MM \model{\Si} \modintp{\MM}{t}(a_\MM) = 
+            \modintp{\MM}{s}(a_\MM)} \in \FF
+        \]
+        \begin{forward}
+            If for two terms $s,t$ we have
+            $\modintp{\NN}{s}\circ \pi(a) = \modintp{\NN}{t}\circ \pi(a)$
+            then by the claim
+            there exists $b \in \prod_{\MM \in \f{M}} \MM$ such that
+            \[  
+                \f{M} = 
+                \set{\MM \in \f{M} \st 
+                \modintp{\MM}{s}(a_\MM) = b_\MM = \modintp{\MM}{t}(a_\MM)} 
+                = 
+                \set{\MM \in \f{M} \st 
+                    \modintp{\MM}{t}(a_\MM) = \modintp{\MM}{s}(a_\MM)} 
+            \]
+            which is therefore in the filter $\FF$.
+        \end{forward}
+        \begin{backward}
+            If for two terms $s,t$ we have
+            $\modintp{\NN}{s}\circ \pi(a) \ne \modintp{\NN}{t}\circ \pi(a)$
+            then by the claim there exist 
+            $b \ne c \in \prod_{\MM \in \f{M}} \MM$ such that
+            \[  
+                \set{\MM \in \f{M} \st 
+                    \modintp{\MM}{t}(a_\MM) = \modintp{\MM}{s}(a_\MM)} =
+                \set{\MM \in \f{M} \st b_\MM = c_\MM} = 
+                \nothing
+            \]
+            which is not in the filter $\FF$ as it is proper.
+        \end{backward}
+        \item If $\phi$ is $r(t)$ then by the claim we have 
+            $b \in \prod_{\MM \in \f{M}} \MM$ with the desired properties.
+            It suffices to show that 
+            \[\pi(b) \in \nnintp{r} \iff 
+            \set{\MM \in \f{\MM} \st b_\MM \in \mmintp{r}} \in \FF\]
+            This follows from our definition of 
+            interpretation of relation symbols.
+        \item If $\phi$ is $\NOT \psi$ then 
+            $\NN \model{\Si} \phi(\pi(a))$ if and only if 
+            $\set{\MM \in \f{M} \st \MM \model{\Si} \psi(a_\MM)} \notin \FF$
+            by induction.
+            This holds if and only if its 
+            \linkto{complement_is_in_ultrafilter}{complement is in the filter}:
+            $\set{\MM \in \f{M} \st \MM \nodel{\Si} \psi(a_\MM)} \in \FF$
+            which is if and only if 
+            $\set{\MM \in \f{M} \st \MM \model{\Si} \phi(a_\MM)} \notin \FF$
+        \item Without loss of generality we can use $\AND$ instead of $\OR$
+            to make things simpler 
+            (replacing this comes down to dealing with a couple of $\NOT$
+            statements).
+            If $\phi$ is $\psi \AND \chi$ then one direction 
+            follows filters being closed under intersection:
+            \begin{align*}
+                &\NN \model{\Si} \phi(\pi(a))\\
+                &\iff 
+                \set{\MM \in \f{M} \st \MM \model{\Si} \psi(a_\MM)} \in \FF
+                \text{ and }
+                \set{\MM \in \f{M} \st \MM \model{\Si} \chi(a_\MM)}\in \FF\\
+                &\implies 
+                \set{\MM \in \f{M} \st \MM \model{\Si} \psi(a_\MM)}
+                \cap 
+                \set{\MM \in \f{M} \st \MM \model{\Si} \chi(a_\MM)}\in \FF\\
+                &\iff
+                \set{\MM \in \f{M} \st \MM \model{\Si} 
+                \psi(a_\MM) \AND \chi(a_\MM)}\in \FF
+            \end{align*}
+            To make second implication a double implication we note that 
+            each of the two sets 
+            \[\set{\MM \in \f{M} \st \MM \model{\Si} \psi(a_\MM)} \in \FF
+            \text{ and }
+            \set{\MM \in \f{M} \st \MM \model{\Si} \chi(a_\MM)}\in \FF\]
+            are supersets of the intersection which is in $\FF$.
+        \item Without loss of generality we can use $\exists$ instead of 
+            $\forall$ to make things simpler.
+            \begin{forward}
+                Suppose $\NN \model{\Si} \exists v, \psi(\pi(a),v)$.
+                Then there exists $b \in \prod_{\MM \in \f{M}} \MM$ such that 
+                $\NN \model{\Si} \psi(\pi(a),\pi(b))$.
+                Then by induction 
+                \[\set{\MM \in \f{M} \st \MM \model{\Si} \psi(a_\MM,b_\MM)}
+                \in \FF\]
+                This is a subset of 
+                \[  
+                    \set{\MM \in \f{M} \st \exists c \in \MM, \MM \model{\Si} 
+                    \psi(a_\MM,c)} = 
+                    \set{\MM \in \f{M} \st \MM \model{\Si} 
+                    \exists v, \psi(a_\MM,v)}
+                \]
+            \end{forward}
+            \begin{backward}
+                Suppose $Y:=\set{\MM \in \f{M} \st \MM \model{\Si} 
+                \exists v, \psi(a_\MM,v)} \in \FF$.
+                Then by the axiom of choice we have for each $\MM$
+                \[\begin{cases}
+                    b_\MM \in \MM, \MM \model{\Si} &\text{if } \MM \in Y\\
+                    b_\MM \in \MM   &\MM \notin Y
+                \end{cases}\]
+                since each $\MM$ is non-empty.
+                By induction we have 
+                $\NN \model{\Si} \psi(\pi(a),\pi(b))$
+                and so $\NN \model{\Si} \exists v, \psi(\pi(a),v)$
+            \end{backward}
+    \end{itemize}
+\end{proof}
+
+\begin{cor}[The Compactness Theorem]
+    A $\Si$-theory is consistent if and only if it is finitely consistent.
+\end{cor}
+\begin{proof}
+    Suppose $T$ is finitely consistent.
+    For each finite subset $\De \subs T$ we let $\MM_\De$ be the given 
+    non-empty model of $\De$,
+    which exists by finite consistency.
+    We generate an ultrafilter $\FF$ on 
+    $\f{M} := \set{\MM_\De \st \De \in I}$ and use 
+    \linkto{los_theorem}{Łos's Theorem} to show that
+    $\prod \f{M} / \FF$ is a model of $T$.
+    Let
+    \[I = \set{\De \subs T \st \De \text{ finite}}
+    \quad \text{ and } [\star] : I \to \PP(I) := 
+    \De \mapsto \set{\Ga \in I \st \De \subs \Ga}\]
+    Writing $[I]$ for the image of I,
+    we claim that $\FF := \set{U \in \PP(I) \st \exists V \in [I], V \subs U}$
+    forms an ultrafilter on $I$ 
+    (i.e. an ultrafilter on the Boolean algebra $\PP(I)$).
+    Indeed 
+    \begin{itemize}
+        \item $\nothing \in I$ thus $I = \set{[\nothing]  \in [I] \subs \FF}$.
+        \item Suppose $\nothing \in \FF$ then $\nothing \in [I]$ and so there 
+            exists $\De \in I$ such that $[\De] = \nothing$.
+            This is a contradiction as $\De \in [\De]$.
+        \item If $U, V \in \FF$ then there exist $\De_U, \De_V \in I$ 
+            such that $[\De_U] \subs U$ and $[\De_V] \subs V$. 
+            \begin{align*}
+                [\De_U] \cap [\De_V] &
+                = \set{\Ga \in I \st \De_0 \subs \Ga 
+                \text{ and } \De_1 \subs \Ga}\\
+                &= \set{\Ga \in I \st \De_0 \cup \De_1 \subs \Ga}\\
+                &= [\De_0 \cup \De_1] \in [I] \subs \FF
+            \end{align*}
+        \item Closure under superset is clear.
+    \end{itemize}
+    We identify each $\MM_\De \in \f{M}$ with $\De \in I$ and generate
+    the same filter (which we will still call $\FF$) on $\f{M}$ 
+    (this is okay as the power sets are isomorphic as Boolean algebras.)
+    By \linkto{los_theorem}{Łos's Theorem} $\prod \f{M} / \FF$ is 
+    a well-defined $\Si$-structure such that for any $\Si$-sentence $\phi$
+    \[\prod \f{M} / \FF \model{\Si} \phi \iff 
+    \set{\MM \in \f{M} \st \MM \model{\Si} \phi} \in \FF\]
+    Let $\phi \in T$, 
+    then $\set{\De \in I \st \set{\phi} \subs \De} \in \FF$ and so
+    \[
+        \set{\De \in I \st \set{\phi} \subs \De} \subs 
+        \set{\De \in I \st \phi \in \De} \subs
+        \set{\De \in I \st \MM \model{\Si} \phi} \in \FF
+    \]
+    The image of this under the isomorphism is 
+    $\set{\MM_\De \in X \st \MM \model{\Si} \phi}$ thus is in $\FF$ and so 
+    $\prod \f{M} / \FF \model{\Si} \phi$.
+\end{proof}

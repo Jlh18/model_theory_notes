@@ -1,0 +1,338 @@
+\subsection{Pregeometries}
+This subsection walks through the basics of pregeometries,
+leading to the theorem on bases having the same cardinality, 
+allowing us to define dimension.
+It follows the lecture notes by Prof. C. Ward Henson \cite{henson}.
+
+\begin{dfn}[Pregeometry]
+    \link{pregeometry_dfn}
+    Let $X$ be a set and $\cl$ be a map from the power set of $X$ to itself,
+    called the `closure map'.
+    $(X,\cl)$ is a pregeometry the following hold
+    \begin{enumerate}
+        \item $\cl$ is a morphism of ordered sets: 
+            for any $U \subs V \subs X$, $\cl(U) \subs \cl(V)$.
+        \item Idempotence: for any $U \subs X$, $\cl(\cl(U)) = \cl(U)$.
+        \item Finite character: if $U \subs X$ and $a \in \cl(U)$ then 
+            there exists a finite subset $F \subs U$ such that $a \in \cl(F)$.
+        \item Exchange: if $a \in \cl(U \cup \set{b})$
+            then $a \in \cl(U)$ or $b \in \cl(U \cup \set{a})$.
+    \end{enumerate}
+\end{dfn}
+
+\begin{dfn}[Span, independence, basis]
+    Let $(X,\cl)$ be a pregeometry.
+    Let $U,V \subs X$.
+    \begin{itemize}
+        \item $U$ spans $V$ if $U \subs V$ and $\cl(U) = \cl(V)$.
+        \item $U$ is independent if for any $a \in U$, 
+            $a \notin \cl(U \setminus \set{a})$.
+        \item $U$ is a basis of $V$ if $U$ spans $V$ and is independent.
+    \end{itemize}
+\end{dfn}
+
+\begin{prop}[Independence and span]
+    \link{independence_and_span_basic}
+    Let $(X,\cl)$ be a pregeometry, $a \in X$ and $U,V \subs X$.
+    \begin{itemize}
+      \item
+        If $U$ is independent then any subset of $U$ is independent.
+      \item
+        If $U$ is independent and $a \notin \cl(U)$ then then
+        $U \cup \set{a}$ is independent.
+      \item \textit{Finite character and independence:}
+        $U$ is independent if and only if every finite subset of $U$ is
+        independent.
+      \item \textit{Characterization of bases:}
+        $U$ is a basis of $V$ if and only if $U$
+        is a maximally independent subset of $V$
+        if and only if $U$ is a minimally spanning subset of $V$.
+        (i.e. for any independent $W \subs V$, $U \not \subset W$;
+        for any spanning $W \subs V$, $W \not \subset U$)
+      \item \textit{Any pregeometry has a basis:}
+        Suppose $U \subs V \subs W \subs X$,
+        where $U$ is linearly independent
+        and $V$ spans $W$.
+        Then there exists a basis $U \subs B \subs V$ of $W$ in between.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    \begin{itemize}
+        \item Let $a \in A \subs U$. 
+        Suppose for a contradiction 
+        $a \in \cl(A \setminus \set{a})$ then as $\cl$ is a morphism of 
+        ordered sets $a \in \cl(U \setminus \set{a})$, 
+        which is false as $U$ is independent.
+        Hence $A$ is independent.
+        \item The forward direction follows from the part $1$. 
+        
+        \begin{backward}
+            Let $a \in U$ and suppose for a contradiction 
+            $a \in \cl(U \setminus \set{a})$. 
+            As $\cl$ has `finite character' there exists a finite subset 
+            $F \subs U \setminus \set{a}$ such that $a \in \cl(F)$.
+            This is a contradiction as every subset of $U$ is independent
+            so $F$ is independent.
+        \end{backward}
+
+        \item Let $x \in U \cup \set{a}$.
+        Suppose for a contradiction that 
+        $x \in \cl(U \cup \set{a} \setminus \set{x})$.
+        We will show that $a \in \cl(U)$, which is false.
+        If $x = a$ then $a \in \cl(U \cup \set{a} \setminus \set{a}) = \cl(U)$
+        and we are done.
+        Otherwise $x \in U$ then by the exchange property
+        we have $x \in \cl(U \setminus \set{x})$ or $a \in \cl(U)$.
+        The first case is false since $U$ is independent,
+        hence we are done.
+
+        \item We show that $U$ is basis of $V$ if and only if it is a
+            maximally independent subset of $V$.
+
+            \begin{forward}
+                Suppose for a contradiction that
+                $U \subset W$ and $W$ is independent.
+                Let $a \in W \setminus U$.
+                Since $U$ is a basis
+                $a \in \cl(U) \subs \cl(W \setminus \set{a})$,
+                contradicting independence of $W$.
+            \end{forward}
+
+            \begin{backward}
+                Suppose $U$ is maximally independent.
+                Then to show $U$ is also spanning we show that $V \subs \cl(U)$.
+                Let $a \in V$.
+                If $a \in U$ then we are done.
+                If $a \notin U$ then $U \cup \set{a}$ is dependent by maximality
+                and so there exists $b \in U \cup \set{a}$ such that
+                $b \in \cl(U \cup \set{a} \setminus \set{b})$.
+                In the case that $b \in U$ by independence of $U$ and the
+                exchange property
+                \[b \in \cl(U \setminus {b} \cup \set{a}) \AND
+                b \notin \cl(U \setminus \set{b}) \implies
+                a \in \cl(U)\]
+                In the case that $b = a$ then
+                \[a \in \cl(U \cup \set{a} \setminus \set{a}) = \cl(U)\]
+            \end{backward}
+
+            Now we show that $U$ is a basis of $V$ if and only if it is a
+            minimally spanning subset of $V$.
+
+            \begin{forward}
+                Suppose for a contradiction we have $W \subset U$ such that
+                $W$ spans $V$.
+                Then let $a \in U \setminus W$.
+                Since $W$ is spanning we have
+                \[a \in \cl(W) \subs \cl(U \setminus \set{a})\]
+                contradicting independence of $U$.
+            \end{forward}
+
+            \begin{backward}
+                Let $U$ be a minimally spanning subset.
+                To show it is independent,
+                let $a \in U$ and suppose for a contradiction
+                $a \in \cl(U \setminus \set{a})$.
+                Then $U \subs \cl(U \setminus \set{a})$ and so
+                \[V \subs \cl(U) \subs \cl(U \setminus \set{a})\]
+                and $U \setminus \set{a}$ spans $V$
+                which contradicts the minimality of $U$.
+            \end{backward}
+        \item
+        Suppose $U \subs V \subs W$, $U$ is independent and
+        $V$ spans $W$.
+        We apply Zorn's lemma on the set
+        \[
+            \set{Y \st U \subs Y \subs V \text{ and }
+            Y \text{ is independent}}
+        \]
+        This set is non-empty since it contains $U$.
+        Let $C$ be a chain in the set.
+        Then $\bigcup C$ is a subset of $U$.
+        It is independent because every finite subset of it is independent
+        by part $3$.
+        Hence it is a maximal element and there exists an upper bound $B$.
+        Applying the characterization of bases we have that $B$ is a basis.
+    \end{itemize}
+\end{proof}
+
+\begin{lem}[Support of an element]
+    \link{support_pregeometry}
+    Let $(X,\cl)$ be a pregeometry and let $U$ be a basis of $V \subs X$.
+    Then for any $a \in \cl(V)$ there exists a unique finite subset $F \subs U$
+    - the `support' of $a$ in basis $U$ - such that 
+    \begin{itemize}
+        \item It spans $a$: $a \in \cl(F)$
+        \item It is minimal: 
+        if $a \in \cl(G)$ for some $G \subs V$ then $F \subs G$
+    \end{itemize}
+\end{lem}
+\begin{proof}
+    Since $\cl$ has finite character we have that there exists a finite subset 
+    of $U$ containing $a$ in its closure, 
+    and by well ordering of the naturals (and choice) we can take one such 
+    subset $F$ with minimal cardinality.
+
+    For minimality (which gives uniqueness),
+    let $G$ be another subset containing $a$ in its closure.
+    Suppose for a contradiction there exists $b \in F \setminus G$.
+    Then $a \in \cl(G) \subs \cl(U \setminus \set{b})$.
+    Hence 
+    \[
+        U \setminus \set{b} \cup \set{a} \subs \cl(U \setminus \set{b})
+        \implies 
+        \cl(U \setminus \set{b} \cup \set{a}) = \cl(U \setminus \set{b})
+    \]
+    We show that this contradicts the independence of $U$.
+    Since $b \in F$ and $F$ is minimal,
+    $a \notin \cl(F \setminus \set{b})$ and by exchange 
+    \[
+        b \in \cl(F \setminus \set{b} \cup \set{a}) 
+        \subs \cl(U \setminus \set{b} \cup \set{a}) 
+        = \cl(U \setminus \set{b})
+    \]
+    contradicting the independence of $U$.
+\end{proof}
+
+\begin{prop}[Existence of dimension]
+    \link{existence_of_dim}
+    Let $(X,\cl)$ be a pregeometry.
+    Then for any $U$ there exists a basis of $U$.
+\end{prop}
+\begin{proof}
+    We apply Zorn's lemma.
+    The set $\set{W \subs U \st W \text{ is independent}}$
+    contains the empty set so is non-empty.
+    Let $C$ be a chain in there.
+    Then $\bigcup C$ is a subset of $U$.
+    $\bigcup C$ is independent 
+    \linkto{independence_and_span_basic}{if and only if} 
+    every finite subset of it is independent, 
+    which is true since any part of the chain is independent.
+    Hence there exists a maximally independent subset of $U$,
+    \linkto{independence_and_span_basic}{i.e. a basis of $U$}.
+\end{proof}
+
+\begin{prop}[Uniqueness of dimension]
+    \link{uniqueness_of_dim}
+    Let $(X,\cl)$ be a pregeometry.
+    Then if $U$ and $V$ are bases of $Y \subs X$ then $\abs{U} = \abs{V}$.
+\end{prop}
+\begin{proof}
+    Without loss of generality $\abs{U} \leq \abs{V}$.
+    It suffices to show that $\abs{V} \leq \abs{U}$.
+    We case on whether $V$ is finite or not.
+
+    If $V$ is infinite then we reconstruct $V$ in the following way:
+    for each $a \in U$ there exists a finite subset $F_a$ of $V$ such that 
+    $a \in \cl(F_a)$.
+    By choice we can construct $(F_a)_{a \in U}$ and take the union 
+    $\bigcup_{a \in U} F_a$.
+    For any $a \in U$, the union satisfies 
+    $a \in \cl(F_a) \subs \cl(\bigcup F_a)$
+    thus $U \subs \cl(\bigcup F_a)$ and
+    \[Y \subs \cl(U) \subs \cl(\bigcup F_a)\]
+    Since $\bigcup F_a$ is a subset of $V$ that spans $Y$, 
+    and bases are \linkto{independence_and_span_basic}{minimally spanning sets}, 
+    we have $V = \bigcup F_a$.
+
+    Suppose for a contradiction $U$ is finite. 
+    Then $V = \bigcup_{a \in U} F_a$ would be a finite union of finite sets 
+    which is finite,
+    contradicting our assumption about $V$.
+    Hence 
+    \[
+        \abs{V}  = \abs{\bigcup_{a \in U} F_a} 
+        \leq \abs{U}
+    \]
+    Thus we are done.
+
+    If $V$ is finite then we use induction on $n \in \N$ to show that 
+    if $V_0$ is a independent set of cardinality $n$ then there exists 
+    $W \subs U$ such that $V_0$ and $W$ are disjoint, 
+    $V_0 \cup W$ is a basis of $Y$ 
+    and $\abs{V_0 \cup W} = \abs{U}$.
+    This will imply the existance of such a $W$ for $V$ such that 
+    \[\abs{V} \leq \abs{V \cup W} = \abs{U},\]
+    completing the proof.
+
+    For the base case we take $W = U$.
+    For the induction step we suppose $V_0$ is non-empty (containing $a$) and 
+    obtain via the induction hypothesis 
+    $W \subs U$ such that $V_0 \setminus \set{a}$ and $W$ are disjoint, 
+    $V_0 \setminus \set{a} \cup W$ is a basis of $Y$ 
+    and $\abs{V_0 \setminus \set{a} \cup W} = \abs{U}$.
+    If $a \in W$ then we can take our new $W$ to be $W \setminus \set{a}$
+    and see that $V_0$ and $W \setminus \set{a}$ are disjoint, 
+    $V_0 \cup W \setminus \set{a}$ is a basis of $Y$ 
+    and $\abs{V_0 \cup W \setminus \set{a}} = \abs{U}$.
+    
+    Otherwise, take $F$ the 
+    \linkto{support_pregeometry}{support of $a$ in the basis 
+        $V_0 \setminus \set{a} \cup W$}.
+    Supposing for a contradiction that $F \cap W$ were empty,
+    we get $F \subs V_0 \setminus \set{a}$, which implies 
+    $a \in \cl(F) \subs \cl(V_0 \setminus \set{a})$, 
+    contradicting independence of $V_0$.
+    Hence there exists $b \in F \cap W$.
+
+    We claim $W \setminus \set{b}$ is our new $W$.
+    They are disjoint: since $V_0 \setminus \set{a} \cap W$ is empty 
+    and we are in the case where $a \notin W$, we have $V_0 \cap W$ is empty
+    and so $V_0 \cap W \setminus \set{b}$ is empty.
+
+    To show that their union is independent:
+    we first note that as subsets of independent sets are independent
+    \[(V_0 \setminus \set{a}) \cup (W \setminus \set{b})
+    = (V_0 \cup W \setminus \set{b}) \setminus \set{a}\]
+    is independent.
+    \linkto{independence_and_span_basic}{It suffices to show that}
+    \[a \notin \cl((V_0 \setminus \set{a}) \cup (W \setminus \set{b}))\]
+    Suppose for a contradiction 
+    $a \in \cl((V_0 \setminus \set{a}) \cup (W \setminus \set{b}))$.
+    Then by minimality of $F$ we have 
+    \[
+        b \in F \subs (V_0 \setminus \set{a}) \cup (W \setminus \set{b})
+        \implies 
+        b \in V_0 \setminus \set{a}
+        \implies
+        V_0 \setminus \set{a} \cap W \ne \nothing
+    \]
+    The last of which is a contradiction.
+
+    To show that their union is spanning it suffices to show that 
+    $b \in \cl(V_0 \cup W \setminus \set{b})$ since this implies 
+    \[V_0 \setminus \set{a} \cup W \subs V_0 \cup W 
+    \subs \cl(V_0 \cup W \setminus \set{b})\]
+    and so $Y \subs \cl(V_0 \setminus \set{a} \cup W)
+    \subs \cl(V_0 \cup W \setminus \set{b})$.
+    Suppose $b \in V_0$, 
+    then $b \in \cl(V_0 \cup W \setminus \set{b})$ and we are done.
+    Otherwise 
+    \[
+        (V_0 \cup W  \setminus \set{b}) \setminus \set{a} =
+        (V_0 \setminus \set{a}) \cup (W \setminus \set{b}) = 
+        (V_0 \setminus \set{a} \cup W) \setminus \set{b}
+    \]
+    Since $V_0 \cup W \setminus \set{b}$ is independent
+    $a \notin \cl(V_0 \setminus \set{a} \cup W \setminus \set{b})$. 
+    Thus by the exchange principle
+    \[a \in \cl((V_0 \setminus \set{a}) \cup (W \setminus \set{b}) \cup \set{b}) 
+    \implies 
+    b \in \cl(V_0 \cup W \setminus \set{b})\]
+    and so the union is spanning.
+
+    Finally we note that 
+    \[\abs{V_0 \cup W \setminus \set{b}} = \abs{V_0} + \abs{W} - 1 = 
+    \abs{V_0 \setminus \set{a} \cup W} = \abs{U}\]
+    and the proof is complete.
+\end{proof}
+
+\begin{dfn}[Dimension]
+    \link{dimension_dfn}
+    Let $U$ be a subset of $(X,\cl)$ a pregeometry.
+    Then the dimension of $U$ is defined to be the cardinality of any basis of 
+    $U$.
+    The \linkto{existence_of_dim}{existence} and 
+    \linkto{uniqueness_of_dim}{uniqueness} 
+    of dimension are given by the previous two theorems.
+\end{dfn}
